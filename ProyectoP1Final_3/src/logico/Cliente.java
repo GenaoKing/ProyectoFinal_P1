@@ -1,6 +1,7 @@
 package logico;
 
 public class Cliente {
+	//probando.
 	protected String nombre;
 	protected String cedula;
 	protected String telefono;
