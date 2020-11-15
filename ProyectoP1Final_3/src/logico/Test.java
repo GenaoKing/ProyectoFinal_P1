@@ -6,5 +6,8 @@ public class Test {
 	int z =2;
 	int funciona = 0;
 	int t =2;
+	int w = 10;
+	
+	
 	
 }
