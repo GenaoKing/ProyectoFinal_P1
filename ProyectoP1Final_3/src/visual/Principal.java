@@ -1,0 +1,92 @@
+package visual;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.UIManager;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+
+public class Principal extends JFrame {
+
+	private JPanel contentPane;
+	private Dimension din;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Principal frame = new Principal();
+				    Fondo d = new Fondo ("visual/TECNO.jpg");
+				    frame.getContentPane().add(d);
+					frame.setVisible(true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Principal() {
+		setTitle("PRODACOM");
+		
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\PC\\Desktop\\Motherboard-icon.png"));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 564, 411);
+		din = getToolkit().getScreenSize();  
+		super.setSize(din.width,din.height-45);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(SystemColor.textHighlight);
+		menuBar.setForeground(Color.DARK_GRAY);
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Componentes");
+		mnNewMenu.setIcon(new ImageIcon("C:\\Users\\PC\\Desktop\\Home-Server-icon.png"));
+		mnNewMenu.setBackground(UIManager.getColor("Button.focus"));
+		mnNewMenu.setForeground(Color.BLUE);
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Ingreso");
+		mntmNewMenuItem.setIcon(new ImageIcon("C:\\Users\\PC\\Desktop\\Paper-icon.png"));
+		mntmNewMenuItem.setForeground(Color.BLUE);
+		mntmNewMenuItem.setBackground(UIManager.getColor("Button.focus"));
+		
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		mnNewMenu.add(mntmNewMenuItem);
+		contentPane = new JPanel();
+		contentPane.setForeground(SystemColor.windowBorder);
+		contentPane.setBackground(SystemColor.textHighlight);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		setLocationRelativeTo(null);
+		
+	}
+
+}
