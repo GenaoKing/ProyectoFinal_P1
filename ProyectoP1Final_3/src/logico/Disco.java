@@ -2,15 +2,16 @@ package logico;
 
 public class Disco extends Componente {
 
+	
 	private float almacenamiento;
 	private boolean Gb;
 	private String conexion;
 	
-	public Disco(String serie, String modelo, String marca, int cantidad, float precio, float almacenamiento,
-			boolean gb, String conexion) {
-		super(serie, modelo, marca, cantidad, precio);
+	public Disco(String serie, String modelo, String marca, int cantidad, float precioVenta, float precioCompra,
+			int cantMinima, int cantMaxima, int cantReal, float almacenamiento, boolean gb, String conexion) {
+		super(serie, modelo, marca, cantidad, precioVenta, precioCompra, cantMinima, cantMaxima, cantReal);
 		this.almacenamiento = almacenamiento;
-		this.Gb = gb;
+		Gb = gb;
 		this.conexion = conexion;
 	}
 
