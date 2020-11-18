@@ -6,12 +6,12 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class Fondo extends JPanel {
-
+public class fondito extends JPanel{
+	
 	ImageIcon imagen;
 	String nombre;
 	
-	public Fondo(String nombre) {
+	public fondito (String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -23,5 +23,6 @@ public class Fondo extends JPanel {
 	setOpaque(false);
 	super.paint(g);
 	}
+		
 
 }
