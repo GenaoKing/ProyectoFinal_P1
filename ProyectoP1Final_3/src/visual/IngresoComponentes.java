@@ -273,7 +273,7 @@ public class IngresoComponentes extends JDialog {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				table_1.clearSelection();
 				int seleccion = table.getSelectedRow();
 				int modelrow = table.convertRowIndexToModel(seleccion);
 				if(seleccion!=-1){
@@ -303,6 +303,7 @@ public class IngresoComponentes extends JDialog {
 		table_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				table.clearSelection();
 				int seleccion = table_1.getSelectedRow();
 				int modelrow = table_1.convertRowIndexToModel(seleccion);
 				if(seleccion!=-1){
