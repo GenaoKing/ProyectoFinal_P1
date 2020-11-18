@@ -1,23 +1,21 @@
 package logico;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class Prodacom {
 	
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
-	private ArrayList<Cliente>clientes;
-	private ArrayList<Usuario>usuarios;
+	private ArrayList<Persona>personas;
 	private static Prodacom prodacom = null;
 	private Prodacom() {
 		super();
 		this.combos = new ArrayList<>();
 		this.componentes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
-		this.clientes = new ArrayList<>();
-		this.usuarios = new ArrayList<>();
+		this.personas = new ArrayList<>();
 	}
 	
 	public static Prodacom getInstance() {
@@ -51,30 +49,26 @@ public class Prodacom {
 		this.facturas.add(factura); 
 	}
 
-	public ArrayList<Cliente> getClientes() {
-		return clientes;
+	public ArrayList<Persona> getPersonas() {
+		return personas;
 	}
 
-	public void insertarCliente(Cliente cliente) {
-		this.clientes.add(cliente);
+	public void insertarPersona(Persona persona) {
+		this.personas.add(persona);
 	}
 
-	public ArrayList<Usuario> getUsuarios() {
-		return usuarios;
-	}
 
-	public void insertarUsuario(Usuario usuario) {
-		this.usuarios.add(usuario);
-	}
+
+
 	
-	public Cliente buscarCliente(String cedula) {
-		Cliente cliente = null;
+	public Persona buscarCliente(String cedula) {
+		Persona cliente = null;
 		int i = 0;
 		boolean encontrado = false;
-		while (i<clientes.size() && !encontrado) {
-			if(clientes.get(i).getCedula().equalsIgnoreCase(cedula)) {
+		while (i<personas.size() && !encontrado) {
+			if(personas.get(i).getCedula().equalsIgnoreCase(cedula) && personas.get(i) instanceof Cliente) {
 				encontrado = true;
-				cliente = clientes.get(i);
+				cliente =(Cliente) personas.get(i);
 			}
 			i++;
 		}

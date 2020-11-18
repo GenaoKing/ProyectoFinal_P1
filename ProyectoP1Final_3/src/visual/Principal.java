@@ -57,7 +57,7 @@ public class Principal extends JFrame {
 		super.setSize(din.width,din.height-45);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(Color.BLACK);
+		menuBar.setBackground(Color.WHITE);
 		menuBar.setForeground(Color.DARK_GRAY);
 		setJMenuBar(menuBar);
 		

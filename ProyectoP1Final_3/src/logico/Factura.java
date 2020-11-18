@@ -8,11 +8,11 @@ public class Factura {
 	private Date fecha;
 	private ArrayList<Componente>componentes;
 	private float total;
-	private Cliente cliente;
-	private Usuario vendedor;
+	private Persona cliente;
+	private Vendedor vendedor;
 	
-	public Factura(String cod, Date fecha, float total, Cliente cliente,
-			Usuario vendedor) {
+	public Factura(String cod, Date fecha, float total, Persona cliente,
+			Vendedor vendedor) {
 		super();
 		this.cod = cod;
 		this.fecha = fecha;
@@ -54,19 +54,19 @@ public class Factura {
 		this.total = total;
 	}
 
-	public Cliente getCliente() {
+	public Persona getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(Persona cliente) {
 		this.cliente = cliente;
 	}
 
-	public Usuario getVendedor() {
+	public Vendedor getVendedor() {
 		return vendedor;
 	}
 
-	public void setVendedor(Usuario vendedor) {
+	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
 	}
 
