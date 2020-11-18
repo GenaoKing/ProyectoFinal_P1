@@ -5,13 +5,13 @@ public class MemoriaRam extends Componente {
 	private float cantidadMem;
 	private String tipo;
 	private boolean Gb;
-	
-	public MemoriaRam(String serie, String modelo, String marca, int cantidad, float precio, float cantidadMem,
-			String tipo, boolean gb) {
-		super(serie, modelo, marca, cantidad, precio);
+		
+	public MemoriaRam(String serie, String modelo, String marca, int cantidad, float precioVenta, float precioCompra,
+			int cantMinima, int cantMaxima, int cantReal, float cantidadMem, String tipo, boolean gb) {
+		super(serie, modelo, marca, cantidad, precioVenta, precioCompra, cantMinima, cantMaxima, cantReal);
 		this.cantidadMem = cantidadMem;
 		this.tipo = tipo;
-		this.Gb = gb;
+		Gb = gb;
 	}
 	
 	public float getCantidadMem() {
