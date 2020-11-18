@@ -7,6 +7,7 @@ public class Factura {
 	private String cod;
 	private Date fecha;
 	private ArrayList<Componente>componentes;
+	private ArrayList<Combo>combo;
 	private float total;
 	private Cliente cliente;
 	private Usuario vendedor;
@@ -16,10 +17,19 @@ public class Factura {
 		super();
 		this.cod = cod;
 		this.fecha = fecha;
+		this.combo = new ArrayList<>();
 		this.componentes = new ArrayList<>();
 		this.total = total;
 		this.cliente = cliente;
 		this.vendedor = vendedor;
+	}
+
+	public ArrayList<Combo> getCombo() {
+		return combo;
+	}
+
+	public void setCombo(ArrayList<Combo> combo) {
+		this.combo = combo;
 	}
 
 	public String getCod() {
