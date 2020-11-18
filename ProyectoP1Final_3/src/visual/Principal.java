@@ -31,8 +31,8 @@ public class Principal extends JFrame {
 			public void run() {
 				try {
 					Principal frame = new Principal();
-				    Fondo d = new Fondo ("visual/TECNO.jpg");
-				    frame.getContentPane().add(d);
+					fondito d = new fondito ("/visual/ty.jpg");
+					frame.getContentPane().add(d);
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -63,14 +63,14 @@ public class Principal extends JFrame {
 		
 		JMenu mnNewMenu = new JMenu("Componentes");
 		mnNewMenu.setIcon(new ImageIcon("C:\\Users\\PC\\Desktop\\Home-Server-icon.png"));
-		mnNewMenu.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu.setForeground(Color.BLUE);
+		mnNewMenu.setBackground(Color.WHITE);
+		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Ingreso");
 		mntmNewMenuItem.setIcon(new ImageIcon("C:\\Users\\PC\\Desktop\\Paper-icon.png"));
 		mntmNewMenuItem.setForeground(Color.BLUE);
-		mntmNewMenuItem.setBackground(UIManager.getColor("Button.focus"));
+		mntmNewMenuItem.setBackground(Color.WHITE);
 		
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
