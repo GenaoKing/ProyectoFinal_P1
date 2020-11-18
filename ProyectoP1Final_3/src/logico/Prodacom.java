@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Prodacom {
-	
+	//probando.
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
