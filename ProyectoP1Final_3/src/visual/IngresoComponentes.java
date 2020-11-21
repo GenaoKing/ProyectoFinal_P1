@@ -39,19 +39,19 @@ public class IngresoComponentes extends JDialog {
 	private JTextField txtSerie;
 	private JTextField txtModelo;
 	private JTextField txtMarca;
-	private JTextField txtConexion;
-	private JTextField txtTipoRam;
+	private JTextField txtConexion_MotherBoard;
+	private JTextField txtTipoRam_MotherBoard;
 	private JSpinner spnCantMaxima;
 	private JSpinner spnCantReal;
 	private JSpinner spnCantMinima;
 	private JSpinner spnCompra;
 	private JLabel lblPrecioVenta;
-	private JLabel lblConector;
+	private JLabel lblConector_MotherBoard;
 	private JTable table;
 	private JTable table_1;
 	private JButton btnAgregar;
 	private JButton btnQuitar;
-	private JLabel lblTipoRam;
+	private JLabel lblTipoRam_MotherBoard;
 	public static DefaultTableModel modelo;
 	public static DefaultTableModel modelo_1;
 	public static Object[] fila;
@@ -60,6 +60,20 @@ public class IngresoComponentes extends JDialog {
 	private ArrayList<String>agregados = new ArrayList<String>();
 	private int cont = 0;
 	private JButton okButton;
+	private JPanel panel_Disponibles;
+	private JPanel panel_Agregados;
+	private JPanel panel_MotherBoard;
+	private JLabel lblCantidadDeMemoria_MemoriaRam;
+	private JLabel lblTipoDeMemoria;
+	private JLabel lblMemoria;
+	private JSpinner spnCantidadDeMemoria;
+	private JComboBox cbxTipoDeMemoria;
+	private JComboBox cbxMemoria;
+	private JPanel panel_Microprocesadores;
+	private JLabel lblTipoDeconexion_Microprocesadores;
+	private JLabel lblVelocidad_Microprocesadores;
+	private JLabel lblTipo_Microprocesadores;
+	private JTextField txtTipoDeConexion_Microprocesadores;
 
 	/**
 	 * Launch the application.
@@ -162,62 +176,62 @@ public class IngresoComponentes extends JDialog {
 		spnCantMaxima.setBounds(604, 72, 127, 20);
 		panel.add(spnCantMaxima);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Seleccione", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 139, 753, 57);
-		contentPanel.add(panel_1);
-		panel_1.setLayout(null);
+		panel_Microprocesadores = new JPanel();
+		panel_Microprocesadores.setBorder(new TitledBorder(null, "Informacion Adicional:", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_Microprocesadores.setBounds(10, 207, 753, 261);
+		contentPanel.add(panel_Microprocesadores);
+		panel_Microprocesadores.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("MemoriaRam");
-		rdbtnNewRadioButton.setBounds(245, 23, 109, 23);
-		panel_1.add(rdbtnNewRadioButton);
+		lblTipoDeconexion_Microprocesadores = new JLabel("Tipo de conexion o socket:");
+		lblTipoDeconexion_Microprocesadores.setBounds(10, 58, 171, 14);
+		panel_Microprocesadores.add(lblTipoDeconexion_Microprocesadores);
 		
-		JRadioButton rdbtnDisco = new JRadioButton("Disco");
-		rdbtnDisco.setBounds(589, 23, 109, 23);
-		panel_1.add(rdbtnDisco);
+		lblVelocidad_Microprocesadores = new JLabel("Velocidad:");
+		lblVelocidad_Microprocesadores.setBounds(10, 135, 171, 14);
+		panel_Microprocesadores.add(lblVelocidad_Microprocesadores);
 		
-		JRadioButton rdbtnMicroprocesadores = new JRadioButton("Microprocesadores");
-		rdbtnMicroprocesadores.setBounds(407, 23, 147, 23);
-		panel_1.add(rdbtnMicroprocesadores);
+		lblTipo_Microprocesadores = new JLabel("Tipo de procesamiento:");
+		lblTipo_Microprocesadores.setBounds(10, 201, 171, 14);
+		panel_Microprocesadores.add(lblTipo_Microprocesadores);
 		
-		JRadioButton rdbtnMotherboard = new JRadioButton("MotherBoard");
-		rdbtnMotherboard.setSelected(true);
-		rdbtnMotherboard.setBounds(53, 23, 139, 23);
-		panel_1.add(rdbtnMotherboard);
+		txtTipoDeConexion_Microprocesadores = new JTextField();
+		txtTipoDeConexion_Microprocesadores.setBounds(191, 55, 199, 20);
+		panel_Microprocesadores.add(txtTipoDeConexion_Microprocesadores);
+		txtTipoDeConexion_Microprocesadores.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion Adicional", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(10, 207, 753, 261);
-		contentPanel.add(panel_2);
-		panel_2.setLayout(null);
+		JSpinner spnVelocidad_Microprocesadores = new JSpinner();
+		spnVelocidad_Microprocesadores.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spnVelocidad_Microprocesadores.setBounds(191, 132, 199, 20);
+		panel_Microprocesadores.add(spnVelocidad_Microprocesadores);
 		
-		modelo_1 = new DefaultTableModel();
-		String []columns2 = {"Nombre"};
-		modelo_1.setColumnIdentifiers(columns2);
+		JComboBox cbxTipo_Microprocesadores = new JComboBox();
+		cbxTipo_Microprocesadores.setModel(new DefaultComboBoxModel(new String[] {"MHz", "GHz"}));
+		cbxTipo_Microprocesadores.setBounds(191, 198, 199, 20);
+		panel_Microprocesadores.add(cbxTipo_Microprocesadores);
 		
-		modelo = new DefaultTableModel();
-		String array[]={"USB-C","USB-A","Jack 3.5 mm","SATA","PCIe","I/O","HDMI","Ethernet","VGA","Micro-SD","SD"};
-		conexiones =new ArrayList<String>( Arrays.asList(array));
-		String []columns = {"Nombre"};
-		modelo.setColumnIdentifiers(columns);
+		panel_MotherBoard = new JPanel();
+		panel_MotherBoard.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion Adicional", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_MotherBoard.setBounds(10, 207, 753, 261);
+		contentPanel.add(panel_MotherBoard);
+		panel_MotherBoard.setLayout(null);
 		
-		lblConector = new JLabel("Conexion:");
-		lblConector.setBounds(10, 49, 64, 14);
-		panel_2.add(lblConector);
+		lblConector_MotherBoard = new JLabel("Conexion:");
+		lblConector_MotherBoard.setBounds(10, 49, 64, 14);
+		panel_MotherBoard.add(lblConector_MotherBoard);
 		
-		lblTipoRam = new JLabel("TipoRam:");
-		lblTipoRam.setBounds(10, 112, 64, 14);
-		panel_2.add(lblTipoRam);
+		lblTipoRam_MotherBoard = new JLabel("TipoRam:");
+		lblTipoRam_MotherBoard.setBounds(10, 112, 64, 14);
+		panel_MotherBoard.add(lblTipoRam_MotherBoard);
 		
-		txtConexion = new JTextField();
-		txtConexion.setBounds(87, 46, 125, 20);
-		panel_2.add(txtConexion);
-		txtConexion.setColumns(10);
+		txtConexion_MotherBoard = new JTextField();
+		txtConexion_MotherBoard.setBounds(87, 46, 125, 20);
+		panel_MotherBoard.add(txtConexion_MotherBoard);
+		txtConexion_MotherBoard.setColumns(10);
 		
-		txtTipoRam = new JTextField();
-		txtTipoRam.setColumns(10);
-		txtTipoRam.setBounds(87, 109, 125, 20);
-		panel_2.add(txtTipoRam);
+		txtTipoRam_MotherBoard = new JTextField();
+		txtTipoRam_MotherBoard.setColumns(10);
+		txtTipoRam_MotherBoard.setBounds(87, 109, 125, 20);
+		panel_MotherBoard.add(txtTipoRam_MotherBoard);
 		
 		btnAgregar = new JButton(">>");
 		btnAgregar.setEnabled(false);
@@ -238,7 +252,7 @@ public class IngresoComponentes extends JDialog {
 			}
 		});
 		btnAgregar.setBounds(445, 66, 80, 25);
-		panel_2.add(btnAgregar);
+		panel_MotherBoard.add(btnAgregar);
 		
 		btnQuitar = new JButton("<<");
 		btnQuitar.setEnabled(false);
@@ -259,15 +273,15 @@ public class IngresoComponentes extends JDialog {
 			}
 		});
 		btnQuitar.setBounds(445, 175, 80, 25);
-		panel_2.add(btnQuitar);
+		panel_MotherBoard.add(btnQuitar);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(227, 37, 192, 211);
-		panel_2.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		panel_Disponibles = new JPanel();
+		panel_Disponibles.setBounds(227, 37, 192, 211);
+		panel_MotherBoard.add(panel_Disponibles);
+		panel_Disponibles.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		panel_3.add(scrollPane_1, BorderLayout.CENTER);
+		panel_Disponibles.add(scrollPane_1, BorderLayout.CENTER);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
@@ -291,13 +305,13 @@ public class IngresoComponentes extends JDialog {
 		table.setModel(modelo);
 		scrollPane_1.setViewportView(table);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(549, 37, 192, 211);
-		panel_2.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		panel_Agregados = new JPanel();
+		panel_Agregados.setBounds(549, 37, 192, 211);
+		panel_MotherBoard.add(panel_Agregados);
+		panel_Agregados.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		panel_4.add(scrollPane, BorderLayout.CENTER);
+		panel_Agregados.add(scrollPane, BorderLayout.CENTER);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		table_1 = new JTable();
 		table_1.addMouseListener(new MouseAdapter() {
@@ -322,10 +336,75 @@ public class IngresoComponentes extends JDialog {
 		table_1.setModel(modelo_1);
 		scrollPane.setViewportView(table_1);
 		
-		JPanel panel_disponibles = new JPanel();
-		panel_disponibles.setBounds(0, 0, 10, 10);
-		contentPanel.add(panel_disponibles);
-		panel_disponibles.setLayout(new BorderLayout(0, 0));
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Seleccione", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 139, 753, 57);
+		contentPanel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("MemoriaRam");
+		rdbtnNewRadioButton.setBounds(245, 23, 109, 23);
+		panel_1.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnDisco = new JRadioButton("Disco");
+		rdbtnDisco.setBounds(589, 23, 109, 23);
+		panel_1.add(rdbtnDisco);
+		
+		JRadioButton rdbtnMicroprocesadores = new JRadioButton("Microprocesadores");
+		rdbtnMicroprocesadores.setBounds(407, 23, 147, 23);
+		panel_1.add(rdbtnMicroprocesadores);
+		
+		JRadioButton rdbtnMotherboard = new JRadioButton("MotherBoard");
+		rdbtnMotherboard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		rdbtnMotherboard.setSelected(true);
+		rdbtnMotherboard.setBounds(53, 23, 139, 23);
+		panel_1.add(rdbtnMotherboard);
+		
+		JPanel panel_MemoriaRam = new JPanel();
+		panel_MemoriaRam.setBorder(new TitledBorder(null, "Informacion Adicional", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_MemoriaRam.setBounds(10, 207, 753, 261);
+		contentPanel.add(panel_MemoriaRam);
+		panel_MemoriaRam.setLayout(null);
+		
+		lblCantidadDeMemoria_MemoriaRam = new JLabel("Cantidad de memoria:");
+		lblCantidadDeMemoria_MemoriaRam.setBounds(10, 54, 111, 14);
+		panel_MemoriaRam.add(lblCantidadDeMemoria_MemoriaRam);
+		
+		lblTipoDeMemoria = new JLabel("Tipo de memoria:");
+		lblTipoDeMemoria.setBounds(10, 122, 97, 14);
+		panel_MemoriaRam.add(lblTipoDeMemoria);
+		
+		lblMemoria = new JLabel("Memoria:");
+		lblMemoria.setBounds(10, 190, 86, 14);
+		panel_MemoriaRam.add(lblMemoria);
+		
+		spnCantidadDeMemoria = new JSpinner();
+		spnCantidadDeMemoria.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spnCantidadDeMemoria.setBounds(131, 51, 111, 20);
+		panel_MemoriaRam.add(spnCantidadDeMemoria);
+		
+		cbxTipoDeMemoria = new JComboBox();
+		cbxTipoDeMemoria.setModel(new DefaultComboBoxModel(new String[] {"DDR", "DDR-2", "DDR-3 "}));
+		cbxTipoDeMemoria.setBounds(131, 119, 111, 20);
+		panel_MemoriaRam.add(cbxTipoDeMemoria);
+		
+		cbxMemoria = new JComboBox();
+		cbxMemoria.setModel(new DefaultComboBoxModel(new String[] {"Gb", "Mb"}));
+		cbxMemoria.setBounds(131, 187, 111, 20);
+		panel_MemoriaRam.add(cbxMemoria);
+		
+		modelo_1 = new DefaultTableModel();
+		String []columns2 = {"Nombre"};
+		modelo_1.setColumnIdentifiers(columns2);
+		
+		modelo = new DefaultTableModel();
+		String array[]={"USB-C","USB-A","Jack 3.5 mm","SATA","PCIe","I/O","HDMI","Ethernet","VGA","Micro-SD","SD"};
+		conexiones =new ArrayList<String>( Arrays.asList(array));
+		String []columns = {"Nombre"};
+		modelo.setColumnIdentifiers(columns);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
