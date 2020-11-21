@@ -11,10 +11,10 @@ public class Proveedor {
 	private String direccion;
 	private float LimCredito;
 	
-	public Proveedor(ArrayList<Componente> componentes, String nombre, String codigo, String telefono, String direccion,
+	public Proveedor(String nombre, String codigo, String telefono, String direccion,
 			float limCredito) {
 		super();
-		this.componentes = componentes;
+		this.componentes = new ArrayList<Componente>();
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.telefono = telefono;

@@ -9,13 +9,16 @@ public class Prodacom {
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
 	private ArrayList<Persona>personas;
+	private ArrayList<Proveedor>proveedores;
 	private static Prodacom prodacom = null;
+	
 	private Prodacom() {
 		super();
-		this.combos = new ArrayList<>();
-		this.componentes = new ArrayList<>();
-		this.facturas = new ArrayList<>();
-		this.personas = new ArrayList<>();
+		this.combos = new ArrayList<Combo>();
+		this.componentes = new ArrayList<Componente>();
+		this.facturas = new ArrayList<Factura>();
+		this.personas = new ArrayList<Persona>();
+		this.proveedores = new ArrayList<Proveedor>();
 	}
 	
 	public static Prodacom getInstance() {
@@ -53,12 +56,30 @@ public class Prodacom {
 		return personas;
 	}
 
+	public ArrayList<Proveedor> getProveedores() {
+		return proveedores;
+	}
+
+	public void setProveedores(Proveedor proveedor) {
+		this.proveedores.add(proveedor);
+	}
+
 	public void insertarPersona(Persona persona) {
 		this.personas.add(persona);
 	}
 
 
-
+	public boolean HacerPedido(String serie) {
+		boolean res = false;
+		Componente componente = buscarComponente(serie);
+		if(componente!=null) {
+			Proveedor proveedor = buscarProveedores(serie);
+			if(proveedor!=null) {
+				res = componente.chequearpedido();
+			}
+		}
+		return res;
+	}
 
 	
 	public Persona buscarCliente(String cedula) {
@@ -88,6 +109,29 @@ public class Prodacom {
 		}
 		return factura;
 	}
+	
+
+	public Proveedor buscarProveedores(String serie) {
+		Proveedor proveedor = null;
+		int i = 0;
+		int j = 0;
+		boolean encontrado1 = false;
+		boolean encontrado = false;
+		while (i<proveedores.size() && !encontrado) {
+			j=0;
+			while(j<proveedores.get(i).getComponentes().size() && !encontrado1) {
+				if(proveedores.get(i).getComponentes().get(j).getSerie().equalsIgnoreCase(serie)) {
+					encontrado = true;
+					encontrado1 = true;
+					proveedor = proveedores.get(i);
+				}
+				j++;
+			}
+			i++;
+		}
+		return proveedor;
+	}
+	
 	
 	public Componente buscarComponente(String serie) {
 		Componente componente = null;

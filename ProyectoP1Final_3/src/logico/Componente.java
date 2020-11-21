@@ -5,7 +5,6 @@ public abstract class Componente {
 	protected String serie;
 	protected String modelo;
 	protected String marca;
-	protected int cantidad;
 	protected float precioVenta;
 	protected float precioCompra;
 	protected int cantMinima;
@@ -18,7 +17,6 @@ public abstract class Componente {
 		this.serie = serie;
 		this.modelo = modelo;
 		this.marca = marca;
-		this.cantidad = cantidad;
 		this.precioVenta = precioVenta;
 		this.precioCompra = precioCompra;
 		this.cantMinima = cantMinima;
@@ -48,14 +46,6 @@ public abstract class Componente {
 
 	public void setMarca(String marca) {
 		this.marca = marca;
-	}
-
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
 	}
 
 	public float getPrecioVenta() {
@@ -96,6 +86,15 @@ public abstract class Componente {
 
 	public void setCantReal(int cantReal) {
 		this.cantReal = cantReal;
+	}
+
+	public boolean chequearpedido() {
+		boolean res = false;
+		if(cantReal<cantMinima) {
+			res = true;
+		}
+		
+		return res;
 	}
 	
 

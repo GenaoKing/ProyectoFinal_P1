@@ -31,6 +31,13 @@ public class Combo {
 		this.cod = cod;
 	}
 	
+	public float calcularprecio() {
+		float res = 0.0f;
+		for(Componente c : componentes) {
+			res+=c.getPrecioVenta();
+		}
+		return (res-(res*0.1f));
+	}
 
 	
 	
