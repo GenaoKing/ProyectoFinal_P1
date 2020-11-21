@@ -14,6 +14,8 @@ import javafx.scene.text.Font;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -35,6 +37,7 @@ public class Facturacion extends JDialog {
 	private JButton btnAgregar;
 	private JButton btnCredito;
 	private JButton btnListarComponentes;
+	private Dimension din;
 
 	/**
 	 * Launch the application.
@@ -53,9 +56,14 @@ public class Facturacion extends JDialog {
 	 * Create the dialog.
 	 */
 	public Facturacion() {
+		setModal(true);
+		setResizable(false);
 		setBounds(100, 100, 1054, 1027);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		din = getToolkit().getScreenSize();  
+		super.setSize(1054,din.height-45);
+		setLocationRelativeTo(null);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
@@ -89,7 +97,7 @@ public class Facturacion extends JDialog {
 			
 			JLabel lblDireccion = new JLabel("");
 			lblDireccion.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
-			lblDireccion.setBounds(12, 185, 974, 31);
+			lblDireccion.setBounds(12, 185, 501, 31);
 			panel_2.add(lblDireccion);
 			
 			JLabel lblLimiteCredito = new JLabel("");
