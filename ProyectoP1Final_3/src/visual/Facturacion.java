@@ -27,6 +27,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Facturacion extends JDialog {
 
@@ -38,6 +40,7 @@ public class Facturacion extends JDialog {
 	private JButton btnCredito;
 	private JButton btnListarComponentes;
 	private Dimension din;
+	private JButton btnSeleccionarCliente;
 
 	/**
 	 * Launch the application.
@@ -120,8 +123,24 @@ public class Facturacion extends JDialog {
 			panel_2.add(lblFecha);
 			
 			JComboBox cbxVendedores = new JComboBox();
-			cbxVendedores.setBounds(601, 185, 385, 31);
+			cbxVendedores.setBounds(674, 185, 312, 31);
 			panel_2.add(cbxVendedores);
+			
+			btnSeleccionarCliente = new JButton("Seleccionar Cliente");
+			btnSeleccionarCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			btnSeleccionarCliente.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 26));
+			btnSeleccionarCliente.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnAgregarClienteIcono.png")));
+			btnSeleccionarCliente.setBounds(22, 23, 446, 180);
+			panel_2.add(btnSeleccionarCliente);
+			
+			JLabel lblVendedor = new JLabel("Vendedor:");
+			lblVendedor.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
+			lblVendedor.setBounds(523, 185, 139, 31);
+			panel_2.add(lblVendedor);
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBackground(new Color(255, 255, 255));
