@@ -58,11 +58,11 @@ public class Facturacion extends JDialog {
 	public Facturacion() {
 		setModal(true);
 		setResizable(false);
-		setBounds(100, 100, 1054, 1027);
+		setBounds(100, 100, 1036, 842);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		din = getToolkit().getScreenSize();  
-		super.setSize(1054,din.height-45);
+		//super.setSize(1054,din.height-45);
 		setLocationRelativeTo(null);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
@@ -126,7 +126,7 @@ public class Facturacion extends JDialog {
 			JPanel panel_1 = new JPanel();
 			panel_1.setBackground(new Color(255, 255, 255));
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Carrito", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_1.setBounds(13, 256, 1001, 465);
+			panel_1.setBounds(12, 256, 1002, 309);
 			panel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
 			
@@ -141,7 +141,7 @@ public class Facturacion extends JDialog {
 			JPanel panel_3 = new JPanel();
 			panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
 			panel_3.setBackground(new Color(255, 255, 255));
-			panel_3.setBounds(16, 723, 998, 182);
+			panel_3.setBounds(12, 578, 998, 182);
 			panel.add(panel_3);
 			panel_3.setLayout(null);
 			
