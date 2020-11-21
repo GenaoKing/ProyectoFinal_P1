@@ -82,8 +82,8 @@ public class Prodacom {
 	}
 
 	
-	public Persona buscarCliente(String cedula) {
-		Persona cliente = null;
+	public Cliente buscarCliente(String cedula) {
+		Cliente cliente = null;
 		int i = 0;
 		boolean encontrado = false;
 		while (i<personas.size() && !encontrado) {
@@ -145,6 +145,17 @@ public class Prodacom {
 			i++;
 		}
 		return componente;
+	}
+
+	public float CreditCliente(Cliente c) {
+		float res = 0;
+		for(Factura f : facturas) {
+			if(f.getCliente().cedula.equalsIgnoreCase(c.cedula) && f.isEstado()) {
+				res+=f.getTotal();
+			}
+		}
+		
+		return c.getCredito()-res;
 	}
 	
 }

@@ -11,9 +11,10 @@ public class Factura {
 	private float total;
 	private Persona cliente;
 	private Vendedor vendedor;
+	private boolean estado;
 	
 	public Factura(String cod, Date fecha, float total, Persona cliente,
-			Vendedor vendedor) {
+			Vendedor vendedor,boolean estado) {
 		super();
 		this.cod = cod;
 		this.fecha = fecha;
@@ -22,6 +23,7 @@ public class Factura {
 		this.total = total;
 		this.cliente = cliente;
 		this.vendedor = vendedor;
+		this.estado=estado;
 	}
 
 	public ArrayList<Combo> getCombo() {
@@ -78,6 +80,14 @@ public class Factura {
 
 	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	

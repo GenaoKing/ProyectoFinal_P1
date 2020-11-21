@@ -11,6 +11,8 @@ import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
 
 import javafx.scene.text.Font;
+import logico.Cliente;
+import logico.Prodacom;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -40,7 +42,17 @@ public class Facturacion extends JDialog {
 	private JButton btnCredito;
 	private JButton btnListarComponentes;
 	private Dimension din;
-	private JButton btnSeleccionarCliente;
+	private static JButton btnSeleccionarCliente;
+	private static JLabel lblNombre;
+	private static JLabel lblCedula;
+	private static JLabel lblTelefono;
+	private static JLabel lblDireccion;
+	private static JLabel lblLimiteCredito;
+	private static JLabel lblCreditoDisponible;
+	private JLabel lblCodigo;
+	private JLabel lblFecha;
+	private JComboBox cbxVendedores;
+	private JLabel lblVendedor;
 
 	/**
 	 * Launch the application.
@@ -83,53 +95,54 @@ public class Facturacion extends JDialog {
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			
-			JLabel lblNombre = new JLabel("");
+			lblNombre = new JLabel("");
 			lblNombre.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
 			lblNombre.setBounds(12, 23, 345, 31);
 			panel_2.add(lblNombre);
 			
-			JLabel lblCedula = new JLabel("");
+			lblCedula = new JLabel("");
 			lblCedula.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
 			lblCedula.setBounds(12, 77, 345, 31);
 			panel_2.add(lblCedula);
 			
-			JLabel lblTelefono = new JLabel("");
+			lblTelefono = new JLabel("");
 			lblTelefono.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
 			lblTelefono.setBounds(12, 131, 345, 31);
 			panel_2.add(lblTelefono);
 			
-			JLabel lblDireccion = new JLabel("");
+			lblDireccion = new JLabel("");
 			lblDireccion.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
 			lblDireccion.setBounds(12, 185, 501, 31);
 			panel_2.add(lblDireccion);
 			
-			JLabel lblLimiteCredito = new JLabel("");
+			lblLimiteCredito = new JLabel("");
 			lblLimiteCredito.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 21));
 			lblLimiteCredito.setBounds(422, 23, 285, 31);
 			panel_2.add(lblLimiteCredito);
 			
-			JLabel lblCreditoDisponible = new JLabel("");
+			lblCreditoDisponible = new JLabel("");
 			lblCreditoDisponible.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 21));
 			lblCreditoDisponible.setBounds(423, 115, 272, 31);
 			panel_2.add(lblCreditoDisponible);
 			
-			JLabel lblCodigo = new JLabel("Factura #");
+			lblCodigo = new JLabel("Factura #");
 			lblCodigo.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
 			lblCodigo.setBounds(758, 23, 228, 31);
 			panel_2.add(lblCodigo);
 			
-			JLabel lblFecha = new JLabel("");
+			lblFecha = new JLabel("");
 			lblFecha.setBounds(758, 115, 228, 31);
 			panel_2.add(lblFecha);
 			
-			JComboBox cbxVendedores = new JComboBox();
+			cbxVendedores = new JComboBox();
 			cbxVendedores.setBounds(674, 185, 312, 31);
 			panel_2.add(cbxVendedores);
 			
 			btnSeleccionarCliente = new JButton("Seleccionar Cliente");
 			btnSeleccionarCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					RegCliente a = new RegCliente();
+					a.setVisible(true);
 				}
 			});
 			btnSeleccionarCliente.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 26));
@@ -137,7 +150,7 @@ public class Facturacion extends JDialog {
 			btnSeleccionarCliente.setBounds(22, 23, 446, 180);
 			panel_2.add(btnSeleccionarCliente);
 			
-			JLabel lblVendedor = new JLabel("Vendedor:");
+			lblVendedor = new JLabel("Vendedor:");
 			lblVendedor.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
 			lblVendedor.setBounds(523, 185, 139, 31);
 			panel_2.add(lblVendedor);
@@ -227,9 +240,25 @@ public class Facturacion extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	public static void CargarCliente(Cliente c) {
+		lblNombre.setText(c.getNombre());
+		lblCedula.setText(c.getCedula());
+		lblDireccion.setText(c.getDireccion());
+		lblTelefono.setText(c.getTelefono());
+		lblCreditoDisponible.setText("Credito Disponible: "+Prodacom.getInstance().CreditCliente(c));
+		lblLimiteCredito.setText("Limite de Credito: "+c.getCredito());
+		btnSeleccionarCliente.setVisible(false);
+		
 	}
 }
