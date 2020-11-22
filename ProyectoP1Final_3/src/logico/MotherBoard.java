@@ -8,10 +8,9 @@ public class MotherBoard extends Componente {
 	private String tipoRam;
 	private ArrayList<String>conexiones;
 		
-	public MotherBoard(String serie, String modelo, String marca, int cantidad, float precioVenta, float precioCompra,
-			int cantMinima, int cantMaxima, int cantReal, String conector, String tipoRam,
-			ArrayList<String> conexiones) {
-		super(serie, modelo, marca, cantidad, precioVenta, precioCompra, cantMinima, cantMaxima, cantReal);
+	public MotherBoard(String serie, String modelo, String marca, float precioVenta, float precioCompra, int cantMinima,
+			int cantMaxima, int cantReal, String conector, String tipoRam, ArrayList<String> conexiones) {
+		super(serie, modelo, marca, precioVenta, precioCompra, cantMinima, cantMaxima, cantReal);
 		this.conector = conector;
 		this.tipoRam = tipoRam;
 		this.conexiones = conexiones;

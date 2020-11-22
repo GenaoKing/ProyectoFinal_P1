@@ -7,13 +7,15 @@ public class Disco extends Componente {
 	private boolean Gb;
 	private String conexion;
 	
-	public Disco(String serie, String modelo, String marca, int cantidad, float precioVenta, float precioCompra,
-			int cantMinima, int cantMaxima, int cantReal, float almacenamiento, boolean gb, String conexion) {
-		super(serie, modelo, marca, cantidad, precioVenta, precioCompra, cantMinima, cantMaxima, cantReal);
+	
+	public Disco(String serie, String modelo, String marca, float precioVenta, float precioCompra, int cantMinima,
+			int cantMaxima, int cantReal, float almacenamiento, boolean gb, String conexion) {
+		super(serie, modelo, marca, precioVenta, precioCompra, cantMinima, cantMaxima, cantReal);
 		this.almacenamiento = almacenamiento;
 		Gb = gb;
 		this.conexion = conexion;
 	}
+
 
 	public float getAlmacenamiento() {
 		return almacenamiento;

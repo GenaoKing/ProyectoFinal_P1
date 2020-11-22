@@ -11,7 +11,7 @@ public abstract class Componente {
 	protected int cantMaxima;
 	protected int cantReal;
 	
-	public Componente(String serie, String modelo, String marca, int cantidad, float precioVenta, float precioCompra,
+	public Componente(String serie, String modelo, String marca, /*int cantidad,*/ float precioVenta, float precioCompra,
 			int cantMinima, int cantMaxima, int cantReal) {
 		super();
 		this.serie = serie;
