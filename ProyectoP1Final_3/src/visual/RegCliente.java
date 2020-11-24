@@ -13,6 +13,7 @@ import logico.Persona;
 import logico.Prodacom;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JRadioButton;
@@ -179,6 +180,7 @@ public class RegCliente extends JDialog {
 						}
 						Prodacom.getInstance().insertarPersona(c);
 						Facturacion.CargarCliente((Cliente)c);
+						JOptionPane.showMessageDialog(null, "Se ha registrado correctamente el cliente");
 						dispose();
 					}
 				});

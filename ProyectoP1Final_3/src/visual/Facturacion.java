@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 
 import javafx.scene.text.Font;
 import logico.Cliente;
+import logico.Combo;
 import logico.Prodacom;
 
 import javax.swing.border.LineBorder;
@@ -53,6 +54,7 @@ public class Facturacion extends JDialog {
 	private JLabel lblFecha;
 	private JComboBox cbxVendedores;
 	private JLabel lblVendedor;
+	private static Combo combo = null;
 
 	/**
 	 * Launch the application.
@@ -186,6 +188,7 @@ public class Facturacion extends JDialog {
 			panel_3.add(btnAgregar);
 			
 			btnModificar = new JButton("Modificar");
+			btnModificar.setEnabled(false);
 			btnModificar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
 			btnModificar.setBackground(new Color(30, 144, 255));
 			btnModificar.setForeground(new Color(255, 255, 255));
@@ -194,6 +197,7 @@ public class Facturacion extends JDialog {
 			panel_3.add(btnModificar);
 			
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setEnabled(false);
 			btnEliminar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnEliminarIcono.png")));
 			btnEliminar.setForeground(new Color(255, 255, 255));
 			btnEliminar.setBackground(new Color(255, 0, 0));
@@ -202,6 +206,13 @@ public class Facturacion extends JDialog {
 			panel_3.add(btnEliminar);
 			
 			btnListarComponentes = new JButton("Listar Componentes Combo");
+			btnListarComponentes.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				
+					
+				}
+			});
+			btnListarComponentes.setEnabled(false);
 			btnListarComponentes.setBackground(new Color(30, 144, 255));
 			btnListarComponentes.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnListarComponentes.png")));
 			btnListarComponentes.setForeground(new Color(255, 255, 255));

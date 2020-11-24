@@ -43,6 +43,7 @@ public class ListadoClientes extends JDialog {
 	private JButton btnCrear;
 	private JButton btnSeleccionar;
 	private int boton = 1;
+	public static int cantidad=0;
 
 	/**
 	 * Launch the application.
@@ -135,6 +136,7 @@ public class ListadoClientes extends JDialog {
 									btnSeleccionar.setEnabled(true);
 									btnCrear.setEnabled(false);
 									aux = Prodacom.getInstance().buscarCliente((String)modelo.getValueAt(modelrow, 0));
+									
 									
 								}else{	
 									btnSeleccionar.setEnabled(false);
