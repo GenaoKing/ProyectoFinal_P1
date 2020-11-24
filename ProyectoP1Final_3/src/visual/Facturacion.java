@@ -73,10 +73,14 @@ public class Facturacion extends JDialog {
 	 * Create the dialog.
 	 */
 	public Facturacion() {
+		setForeground(UIManager.getColor("Button.focus"));
+		setBackground(UIManager.getColor("Button.focus"));
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 1057, 716);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setForeground(new Color(184, 134, 11));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		din = getToolkit().getScreenSize();  
 		//super.setSize(1054,din.height-45);
@@ -85,14 +89,16 @@ public class Facturacion extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 255, 255));
+			panel.setForeground(new Color(184, 134, 11));
+			panel.setBackground(UIManager.getColor("Button.focus"));
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBackground(new Color(255, 255, 255));
-			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Informacion", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 120, 215)));
+			panel_2.setForeground(Color.RED);
+			panel_2.setBackground(UIManager.getColor("Button.focus"));
+			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Informacion", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 			panel_2.setBounds(12, 6, 1002, 239);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
@@ -103,6 +109,8 @@ public class Facturacion extends JDialog {
 			panel_2.add(lblNombre);
 			
 			lblCedula = new JLabel("");
+			lblCedula.setBackground(UIManager.getColor("Button.focus"));
+			lblCedula.setForeground(new Color(0, 0, 128));
 			lblCedula.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
 			lblCedula.setBounds(12, 77, 345, 31);
 			panel_2.add(lblCedula);
@@ -113,21 +121,29 @@ public class Facturacion extends JDialog {
 			panel_2.add(lblTelefono);
 			
 			lblDireccion = new JLabel("");
+			lblDireccion.setForeground(UIManager.getColor("Button.focus"));
+			lblDireccion.setBackground(Color.BLACK);
 			lblDireccion.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
 			lblDireccion.setBounds(12, 185, 501, 31);
 			panel_2.add(lblDireccion);
 			
 			lblLimiteCredito = new JLabel("");
+			lblLimiteCredito.setBackground(UIManager.getColor("Button.focus"));
+			lblLimiteCredito.setForeground(SystemColor.textHighlight);
 			lblLimiteCredito.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 21));
 			lblLimiteCredito.setBounds(422, 23, 285, 31);
 			panel_2.add(lblLimiteCredito);
 			
 			lblCreditoDisponible = new JLabel("");
+			lblCreditoDisponible.setBackground(UIManager.getColor("Button.focus"));
+			lblCreditoDisponible.setForeground(SystemColor.textHighlight);
 			lblCreditoDisponible.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 21));
 			lblCreditoDisponible.setBounds(423, 115, 272, 31);
 			panel_2.add(lblCreditoDisponible);
 			
 			lblCodigo = new JLabel("Factura #");
+			lblCodigo.setBackground(UIManager.getColor("Button.focus"));
+			lblCodigo.setForeground(SystemColor.textHighlight);
 			lblCodigo.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
 			lblCodigo.setBounds(758, 23, 228, 31);
 			panel_2.add(lblCodigo);
@@ -137,10 +153,14 @@ public class Facturacion extends JDialog {
 			panel_2.add(lblFecha);
 			
 			cbxVendedores = new JComboBox();
+			cbxVendedores.setBackground(UIManager.getColor("Button.focus"));
+			cbxVendedores.setForeground(SystemColor.textHighlight);
 			cbxVendedores.setBounds(674, 185, 312, 31);
 			panel_2.add(cbxVendedores);
 			
 			btnSeleccionarCliente = new JButton("Seleccionar Cliente");
+			btnSeleccionarCliente.setBackground(UIManager.getColor("Button.focus"));
+			btnSeleccionarCliente.setForeground(new Color(184, 134, 11));
 			btnSeleccionarCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					RegCliente a = new RegCliente();
@@ -153,12 +173,15 @@ public class Facturacion extends JDialog {
 			panel_2.add(btnSeleccionarCliente);
 			
 			lblVendedor = new JLabel("Vendedor:");
+			lblVendedor.setForeground(SystemColor.textHighlight);
+			lblVendedor.setBackground(UIManager.getColor("Button.focus"));
 			lblVendedor.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
 			lblVendedor.setBounds(523, 185, 139, 31);
 			panel_2.add(lblVendedor);
 			
 			JPanel panel_1 = new JPanel();
-			panel_1.setBackground(new Color(255, 255, 255));
+			panel_1.setForeground(Color.RED);
+			panel_1.setBackground(UIManager.getColor("Button.focus"));
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Carrito", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_1.setBounds(12, 244, 1002, 211);
 			panel.add(panel_1);
@@ -173,14 +196,15 @@ public class Facturacion extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			JPanel panel_3 = new JPanel();
+			panel_3.setForeground(Color.RED);
 			panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-			panel_3.setBackground(new Color(255, 255, 255));
+			panel_3.setBackground(UIManager.getColor("Button.focus"));
 			panel_3.setBounds(12, 459, 1002, 157);
 			panel.add(panel_3);
 			panel_3.setLayout(null);
 			
 			btnAgregar = new JButton("Agregar Articulo");
-			btnAgregar.setForeground(new Color(255, 255, 255));
+			btnAgregar.setForeground(new Color(184, 134, 11));
 			btnAgregar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnAgregarIcono.png")));
 			btnAgregar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 22));
 			btnAgregar.setBackground(new Color(50, 205, 50));
@@ -190,8 +214,8 @@ public class Facturacion extends JDialog {
 			btnModificar = new JButton("Modificar");
 			btnModificar.setEnabled(false);
 			btnModificar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
-			btnModificar.setBackground(new Color(30, 144, 255));
-			btnModificar.setForeground(new Color(255, 255, 255));
+			btnModificar.setBackground(new Color(184, 134, 11));
+			btnModificar.setForeground(Color.BLACK);
 			btnModificar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnModificarIcono.png")));
 			btnModificar.setBounds(12, 14, 158, 52);
 			panel_3.add(btnModificar);
@@ -199,8 +223,8 @@ public class Facturacion extends JDialog {
 			btnEliminar = new JButton("Eliminar");
 			btnEliminar.setEnabled(false);
 			btnEliminar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnEliminarIcono.png")));
-			btnEliminar.setForeground(new Color(255, 255, 255));
-			btnEliminar.setBackground(new Color(255, 0, 0));
+			btnEliminar.setForeground(Color.BLACK);
+			btnEliminar.setBackground(new Color(128, 0, 0));
 			btnEliminar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
 			btnEliminar.setBounds(198, 15, 158, 52);
 			panel_3.add(btnEliminar);
@@ -213,44 +237,58 @@ public class Facturacion extends JDialog {
 				}
 			});
 			btnListarComponentes.setEnabled(false);
-			btnListarComponentes.setBackground(new Color(30, 144, 255));
+			btnListarComponentes.setBackground(new Color(0, 128, 128));
 			btnListarComponentes.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnListarComponentes.png")));
-			btnListarComponentes.setForeground(new Color(255, 255, 255));
+			btnListarComponentes.setForeground(new Color(0, 128, 0));
 			btnListarComponentes.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
 			btnListarComponentes.setBounds(12, 85, 344, 52);
 			panel_3.add(btnListarComponentes);
 			
 			JLabel lblSubTotal = new JLabel("Sub-Total:");
+			lblSubTotal.setForeground(SystemColor.textHighlight);
+			lblSubTotal.setBackground(UIManager.getColor("Button.focus"));
 			lblSubTotal.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
 			lblSubTotal.setBounds(704, 13, 282, 39);
 			panel_3.add(lblSubTotal);
 			
 			JLabel lblImpuestos = new JLabel("ITBIS (18%):");
+			lblImpuestos.setBackground(UIManager.getColor("Button.focus"));
+			lblImpuestos.setForeground(SystemColor.textHighlight);
 			lblImpuestos.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
 			lblImpuestos.setBounds(704, 70, 282, 39);
 			panel_3.add(lblImpuestos);
 			
 			JLabel lblTotal = new JLabel("Total:");
+			lblTotal.setBackground(UIManager.getColor("Button.focus"));
+			lblTotal.setForeground(SystemColor.textHighlight);
 			lblTotal.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
 			lblTotal.setBounds(704, 122, 282, 39);
 			panel_3.add(lblTotal);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
+			buttonPane.setBackground(new Color(184, 134, 11));
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnCredito = new JButton("Pagar A Credito");
+			btnCredito.setBackground(UIManager.getColor("Button.focus"));
+			btnCredito.setForeground(SystemColor.textHighlight);
 			buttonPane.add(btnCredito);
 			{
 				JButton btnPagar = new JButton("Pagar Ahora");
+				btnPagar.setBackground(UIManager.getColor("Button.focus"));
+				btnPagar.setForeground(SystemColor.textHighlight);
 				btnPagar.setActionCommand("OK");
 				buttonPane.add(btnPagar);
 				getRootPane().setDefaultButton(btnPagar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setForeground(SystemColor.textHighlight);
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
