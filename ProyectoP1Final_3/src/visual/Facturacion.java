@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import javafx.scene.text.Font;
 import logico.Cliente;
 import logico.Combo;
+import logico.Componente;
 import logico.Prodacom;
 
 import javax.swing.border.LineBorder;
@@ -31,7 +33,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Facturacion extends JDialog {
 
@@ -55,6 +60,15 @@ public class Facturacion extends JDialog {
 	private JComboBox cbxVendedores;
 	private JLabel lblVendedor;
 	private static Combo combo = null;
+	private static Componente componente = null;
+	private ArrayList<Combo>combos = new ArrayList<Combo>(); 
+	private ArrayList<Componente>componentes = new ArrayList<Componente>(); 
+	private static int cantidad = 0;
+	private JLabel lblTotal;
+	private JLabel lblImpuestos;
+	private JLabel lblSubTotal;
+	public static DefaultTableModel modelo;
+	public static Object[] fila;
 
 	/**
 	 * Launch the application.
@@ -168,8 +182,39 @@ public class Facturacion extends JDialog {
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			panel_1.add(scrollPane, BorderLayout.CENTER);
 			
+			modelo = new DefaultTableModel();
+			String[] columns = {"Codigo","Articulo","Cantidad","Precio","Importe"}; 
+			modelo.setColumnIdentifiers(columns);
 			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int seleccion = table.getSelectedRow();
+					int modelrow = table.convertRowIndexToModel(seleccion);
+					if(seleccion!=-1){
+						if('C'==(char)modelo.getValueAt(modelrow, 0)) {
+							btnListarComponentes.setEnabled(true);
+							btnEliminar.setEnabled(true);
+							btnModificar.setEnabled(false);
+							componente = null;
+							//combo = Prodacom.getInstance().buscarCombos((String)modelo.getValueAt(modelrow, 0));
+						}else {
+							btnListarComponentes.setEnabled(false);
+							btnEliminar.setEnabled(true);
+							btnModificar.setEnabled(true);
+							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));;
+							combo = null;
+						}
+						
+					}else{	
+						btnListarComponentes.setEnabled(false);
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
+						}
+				}
+			});
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setModel(modelo);
 			scrollPane.setViewportView(table);
 			
 			JPanel panel_3 = new JPanel();
@@ -197,6 +242,19 @@ public class Facturacion extends JDialog {
 			panel_3.add(btnModificar);
 			
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(combo!=null) {
+						combos.remove(combo);
+						Prodacom.getInstance().insertarCombo(combo);
+					}else {
+						componentes.remove(componente);
+						//Prodacom.getInstance().SumarComponente(componente,cantidad);
+					}
+					CargarTabla();
+				}
+
+			});
 			btnEliminar.setEnabled(false);
 			btnEliminar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnEliminarIcono.png")));
 			btnEliminar.setForeground(new Color(255, 255, 255));
@@ -220,17 +278,17 @@ public class Facturacion extends JDialog {
 			btnListarComponentes.setBounds(12, 85, 344, 52);
 			panel_3.add(btnListarComponentes);
 			
-			JLabel lblSubTotal = new JLabel("Sub-Total:");
+			lblSubTotal = new JLabel("Sub-Total:");
 			lblSubTotal.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
 			lblSubTotal.setBounds(704, 13, 282, 39);
 			panel_3.add(lblSubTotal);
 			
-			JLabel lblImpuestos = new JLabel("ITBIS (18%):");
+			lblImpuestos = new JLabel("ITBIS (18%):");
 			lblImpuestos.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
 			lblImpuestos.setBounds(704, 70, 282, 39);
 			panel_3.add(lblImpuestos);
 			
-			JLabel lblTotal = new JLabel("Total:");
+			lblTotal = new JLabel("Total:");
 			lblTotal.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
 			lblTotal.setBounds(704, 122, 282, 39);
 			panel_3.add(lblTotal);
@@ -271,5 +329,21 @@ public class Facturacion extends JDialog {
 		lblLimiteCredito.setText("Limite de Credito: "+c.getCredito());
 		btnSeleccionarCliente.setVisible(false);
 		
+	}
+	
+	private void CargarTabla() {
+		
+		
+		CargarTotal();
+	}
+
+	private void CargarTotal() {
+		float subtotal = 0;
+		for(int i = 0;i<table.getRowCount();i++) {
+			subtotal+=(float)modelo.getValueAt(i, 4);
+		}
+		lblSubTotal.setText("Sub-Total: "+subtotal);
+		lblImpuestos.setText("ITBIS (18%): "+(subtotal*0.18));
+		lblTotal.setText("Total: "+(subtotal+(subtotal*0.18)));
 	}
 }
