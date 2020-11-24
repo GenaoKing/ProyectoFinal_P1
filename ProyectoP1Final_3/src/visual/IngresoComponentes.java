@@ -122,7 +122,7 @@ public class IngresoComponentes extends JDialog {
 		setBounds(100, 100, 789, 563);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(UIManager.getColor("Button.focus"));
-		contentPanel.setBackground(new Color(0, 204, 0));
+		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
