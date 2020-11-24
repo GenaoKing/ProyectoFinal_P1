@@ -20,6 +20,7 @@ import logico.Disco;
 import logico.MemoriaRam;
 import logico.Microprocesadores;
 import logico.MotherBoard;
+import logico.Prodacom;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -140,7 +141,9 @@ public class IngresoComponentes extends JDialog {
 		panel.add(lblMarca);
 		
 		txtSerie = new JTextField();
+		txtSerie.setEnabled(false);
 		txtSerie.setBounds(50, 22, 86, 20);
+		txtSerie.setText("S-"+Prodacom.cod_componente);
 		panel.add(txtSerie);
 		txtSerie.setColumns(10);
 		
@@ -694,7 +697,8 @@ public class IngresoComponentes extends JDialog {
 							if(cbxUnidadDeAlmacenamiento_DiscoDuro.getSelectedItem().toString() == "Tb") {
 								Gb = false;
 							}
-							aux = new Disco(serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, almacenamiento, Gb, conexion);
+							aux = new Disco("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, almacenamiento, Gb, conexion);
+							Prodacom.getInstance().insertarComponente(aux);
 						}
 						if(rdbtnMemoriaRam.isSelected()) {
 							float cantidadMem = Float.parseFloat(spnCantidadDeMemoria_MemoriaRam.getValue().toString());
@@ -703,7 +707,8 @@ public class IngresoComponentes extends JDialog {
 							if(cbxMemoria_MemoriaRam.getSelectedItem().toString() == "Mb") {
 								Gb = false;
 							}
-							aux = new MemoriaRam(serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, cantidadMem, tipo, Gb);
+							aux = new MemoriaRam("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, cantidadMem, tipo, Gb);
+							Prodacom.getInstance().insertarComponente(aux);
 						}
 						if(rdbtnMicroprocesadores.isSelected()) {
 							String conector = txtTipoDeConexion_Microprocesadores.getText();
@@ -712,13 +717,15 @@ public class IngresoComponentes extends JDialog {
 							if(cbxTipo_Microprocesadores.getSelectedItem().toString() == "MHz") {
 								GHz = false;
 							}
-								aux = new Microprocesadores(serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, velocidad, GHz);
+								aux = new Microprocesadores("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, velocidad, GHz);
+								Prodacom.getInstance().insertarComponente(aux);
 						}
 						if(rdbtnMotherboard.isSelected()) {
 							String conector = txtConexion_MotherBoard.getText();
 							String tipoRam = txtTipoRam_MotherBoard.getText();
 							
-							aux = new MotherBoard(serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, tipoRam, conexiones);
+							aux = new MotherBoard("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, tipoRam, conexiones);
+							Prodacom.getInstance().insertarComponente(aux);
 						}
 						JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	
 						LIMPIAR();

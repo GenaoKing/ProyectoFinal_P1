@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Prodacom {
 	//probando.
+	public static int cod_componente = 1;
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
@@ -42,6 +43,7 @@ public class Prodacom {
 
 	public void insertarComponente(Componente componente) {
 		this.componentes.add(componente); 
+		cod_componente++;
 	}
 
 	public ArrayList<Factura> getFacturas() {
@@ -67,6 +69,8 @@ public class Prodacom {
 	public void insertarPersona(Persona persona) {
 		this.personas.add(persona);
 	}
+	
+
 
 
 	public boolean HacerPedido(String serie) {
