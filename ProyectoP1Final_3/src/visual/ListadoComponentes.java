@@ -31,6 +31,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class ListadoComponentes extends JDialog {
 	
@@ -60,14 +63,20 @@ public class ListadoComponentes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoComponentes() {
+		setForeground(Color.RED);
+		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 813, 418);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setForeground(SystemColor.textHighlight);
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Listado", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel.setForeground(UIManager.getColor("Button.focus"));
+			panel.setBackground(UIManager.getColor("Button.focus"));
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Listado", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
@@ -99,10 +108,14 @@ public class ListadoComponentes extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			JLabel lblNewLabel = new JLabel("Filtro");
+			lblNewLabel.setForeground(SystemColor.textHighlight);
+			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
 			lblNewLabel.setBounds(605, 9, 50, 22);
 			panel.add(lblNewLabel);
 			
 			cbxFiltro = new JComboBox();
+			cbxFiltro.setBackground(UIManager.getColor("Button.focus"));
+			cbxFiltro.setForeground(SystemColor.textHighlight);
 			cbxFiltro.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					loadTable(cbxFiltro.getSelectedIndex());
@@ -197,10 +210,14 @@ public class ListadoComponentes extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setForeground(UIManager.getColor("Button.focus"));
+				btnEliminar.setBackground(Color.RED);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(auxiliar!=null) {
@@ -221,6 +238,8 @@ public class ListadoComponentes extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(new Color(178, 34, 34));
+				cancelButton.setForeground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
