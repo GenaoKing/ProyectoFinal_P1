@@ -175,5 +175,14 @@ public class Prodacom {
 		
 		return c.getCredito()-res;
 	}
+
+	public void SumarComponente(Componente componente, int cantidad) {
+		for(Componente c : componentes) {
+			if(c.equals(componente)) {
+				c.cantReal+=cantidad;
+			}
+		}
+		
+	}
 	
 }

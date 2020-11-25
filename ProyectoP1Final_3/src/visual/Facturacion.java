@@ -61,8 +61,8 @@ public class Facturacion extends JDialog {
 	private JLabel lblVendedor;
 	private static Combo combo = null;
 	private static Componente componente = null;
-	private ArrayList<Combo>combos = new ArrayList<Combo>(); 
-	private ArrayList<Componente>componentes = new ArrayList<Componente>(); 
+	private static ArrayList<Combo>combos = new ArrayList<Combo>(); 
+	private static ArrayList<Componente>componentes = new ArrayList<Componente>(); 
 	private static int cantidad = 0;
 	private static JLabel lblTotal;
 	private static JLabel lblImpuestos;
@@ -74,15 +74,7 @@ public class Facturacion extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			Facturacion dialog = new Facturacion();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
@@ -216,17 +208,18 @@ public class Facturacion extends JDialog {
 					seleccion = table.getSelectedRow();
 					int modelrow = table.convertRowIndexToModel(seleccion);
 					if(seleccion!=-1){
-						if('C'==(char)modelo.getValueAt(modelrow, 0)) {
+						if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
 							btnListarComponentes.setEnabled(true);
 							btnEliminar.setEnabled(true);
 							btnModificar.setEnabled(false);
 							componente = null;
-							//combo = Prodacom.getInstance().buscarCombos((String)modelo.getValueAt(modelrow, 0));
+							combo = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
 						}else {
 							btnListarComponentes.setEnabled(false);
 							btnEliminar.setEnabled(true);
 							btnModificar.setEnabled(true);
 							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
+							cantidad = Integer.parseInt((String)modelo.getValueAt(modelrow, 2));
 							combo = null;
 						}
 						
@@ -252,8 +245,8 @@ public class Facturacion extends JDialog {
 			btnAgregar = new JButton("Agregar Articulo");
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					//ListadoComponentes a = new ListadoComponentes(true);
-					//a.setVisible(true);
+					ListadoComponentes a = new ListadoComponentes();
+					a.setVisible(true);
 				}
 			});
 			btnAgregar.setForeground(new Color(184, 134, 11));
@@ -277,12 +270,14 @@ public class Facturacion extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					if(combo!=null) {
 						combos.remove(combo);
-						Prodacom.getInstance().insertarCombo(combo);
+						combo = null;
 					}else {
 						componentes.remove(componente);
-						//Prodacom.getInstance().SumarComponente(componente,cantidad);
+						Prodacom.getInstance().SumarComponente(componente,cantidad);
+						componente = null;
 					}
 					modelo.removeRow(seleccion);
+					CargarTotal();
 					seleccion = -1;
 				}
 
@@ -342,6 +337,10 @@ public class Facturacion extends JDialog {
 			buttonPane.add(btnCredito);
 			{
 				JButton btnPagar = new JButton("Pagar Ahora");
+				btnPagar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				btnPagar.setBackground(UIManager.getColor("Button.focus"));
 				btnPagar.setForeground(SystemColor.textHighlight);
 				btnPagar.setActionCommand("OK");
@@ -375,8 +374,14 @@ public class Facturacion extends JDialog {
 	}
 	
 	public static void CargarTabla(Object[] fila) {
+		if('C'==fila[0].toString().charAt(0)) {
+			Combo c = Prodacom.getInstance().buscarCombo(fila[0].toString());
+			combos.add(c);
+		}else {
+			Componente c = Prodacom.getInstance().buscarComponente(fila[0].toString());
+			componentes.add(c);
+		}
 		modelo.addRow(fila);
-		
 		CargarTotal();
 	}
 
@@ -385,8 +390,10 @@ public class Facturacion extends JDialog {
 		for(int i = 0;i<table.getRowCount();i++) {
 			subtotal+=(float)modelo.getValueAt(i, 4);
 		}
-		lblSubTotal.setText("Sub-Total: "+subtotal);
+		System.out.println(subtotal);
+		/*lblSubTotal.setText("Sub-Total: "+subtotal);
 		lblImpuestos.setText("ITBIS (18%): "+(subtotal*0.18));
 		lblTotal.setText("Total: "+(subtotal+(subtotal*0.18)));
+	*/
 	}
 }

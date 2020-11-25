@@ -101,25 +101,20 @@ public class IngresoComponentes extends JDialog {
 	 * Launch the application.
 	 */
 	
-	public static void main(String[] args) {
-		try {
-			IngresoComponentes dialog = new IngresoComponentes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 
 
 	/**
 	 * Create the dialog.
 	 */
 	public IngresoComponentes() {
+		setTitle("Ingreso de componentes");
+		setModal(true);
+		setResizable(false);
 		setForeground(Color.DARK_GRAY);
 		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 789, 563);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(UIManager.getColor("Button.focus"));
 		contentPanel.setBackground(Color.DARK_GRAY);
@@ -492,7 +487,7 @@ public class IngresoComponentes extends JDialog {
 					btnAgregar.setEnabled(false);
 					btnQuitar.setEnabled(true);
 					
-					q = agregados.get(seleccion);
+					q = agregados.get(modelrow);
 				}else{
 					btnAgregar.setEnabled(false);
 					btnQuitar.setEnabled(false);
@@ -804,7 +799,7 @@ public class IngresoComponentes extends JDialog {
 							if(cbxUnidadDeAlmacenamiento_DiscoDuro.getSelectedItem().toString() == "Tb") {
 								Gb = false;
 							}
-							aux = new Disco("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, almacenamiento, Gb, conexion);
+							aux = new Disco(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, almacenamiento, Gb, conexion);
 							Prodacom.getInstance().insertarComponente(aux);
 						}
 						if(rdbtnMemoriaRam.isSelected()) {
@@ -814,7 +809,7 @@ public class IngresoComponentes extends JDialog {
 							if(cbxMemoria_MemoriaRam.getSelectedItem().toString() == "Mb") {
 								Gb = false;
 							}
-							aux = new MemoriaRam("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, cantidadMem, tipo, Gb);
+							aux = new MemoriaRam(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, cantidadMem, tipo, Gb);
 							Prodacom.getInstance().insertarComponente(aux);
 						}
 						if(rdbtnMicroprocesadores.isSelected()) {
@@ -824,14 +819,14 @@ public class IngresoComponentes extends JDialog {
 							if(cbxTipo_Microprocesadores.getSelectedItem().toString() == "MHz") {
 								GHz = false;
 							}
-								aux = new Microprocesadores("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, velocidad, GHz);
+								aux = new Microprocesadores(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, velocidad, GHz);
 								Prodacom.getInstance().insertarComponente(aux);
 						}
 						if(rdbtnMotherboard.isSelected()) {
 							String conector = txtConexion_MotherBoard.getText();
 							String tipoRam = txtTipoRam_MotherBoard.getText();
 							
-							aux = new MotherBoard("S-"+serie, modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, tipoRam, conexiones);
+							aux = new MotherBoard(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, tipoRam, conexiones);
 							Prodacom.getInstance().insertarComponente(aux);
 						}
 						JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	

@@ -69,10 +69,13 @@ public class ListadoComponentes extends JDialog {
 	 * @param b 
 	 */
 	public ListadoComponentes() {
-		
+		setTitle("Listado de componentes");
+		setModal(true);
+		setResizable(false);
 		setForeground(Color.RED);
 		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 854, 466);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(SystemColor.textHighlight);
 		contentPanel.setBackground(UIManager.getColor("Button.focus"));
@@ -102,6 +105,7 @@ public class ListadoComponentes extends JDialog {
 					seleccion = table.getSelectedRow();
 					modelrow = table.convertRowIndexToModel(seleccion);
 					if(seleccion!=-1) {
+						System.out.println(modelrow);
 						btnEliminar.setEnabled(true);
 						btnSeleccionar.setEnabled(true);
 						auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
@@ -281,16 +285,16 @@ public class ListadoComponentes extends JDialog {
 				btnSeleccionar.setEnabled(false);
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if('C'==(char)modelo.getValueAt(modelrow, 0)) {
+						if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
 							Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
-							//Ventas a = new Ventas(c.getNombre(),c.calcularprecio(),100);
+							Ventas a = new Ventas(c.getCod(),c.getNombre(),c.calcularprecio(),100);
 							dispose();
-							//a.setVisible(true);
+							a.setVisible(true);
 						}else {
 							Componente c = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
-							//Ventas a = new Ventas(c.getMarca()+" "+c.get,c.calcularprecio(),100);
+							Ventas a = new Ventas(c.getSerie(),c.getMarca()+" "+c.getModelo(),c.getPrecioVenta(),c.getCantReal());
 							dispose();
-							//a.setVisible(true);
+							a.setVisible(true);
 						}
 					}
 				});

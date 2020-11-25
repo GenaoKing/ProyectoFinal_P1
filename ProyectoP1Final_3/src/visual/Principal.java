@@ -74,11 +74,21 @@ public class Principal extends JFrame {
 		
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				IngresoComponentes a = new IngresoComponentes();
+				a.setVisible(true);
 			}
 		});
 		
 		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Facturacion");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Facturacion a = new Facturacion();
+				a.setVisible(true);
+			}
+		});
+		menuBar.add(mntmNewMenuItem_1);
 		contentPane = new JPanel();
 		contentPane.setForeground(SystemColor.windowBorder);
 		contentPane.setBackground(SystemColor.textHighlight);
