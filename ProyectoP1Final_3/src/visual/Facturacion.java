@@ -41,7 +41,7 @@ import java.awt.event.MouseEvent;
 public class Facturacion extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
+	private static JTable table;
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnAgregar;
@@ -64,11 +64,12 @@ public class Facturacion extends JDialog {
 	private ArrayList<Combo>combos = new ArrayList<Combo>(); 
 	private ArrayList<Componente>componentes = new ArrayList<Componente>(); 
 	private static int cantidad = 0;
-	private JLabel lblTotal;
-	private JLabel lblImpuestos;
-	private JLabel lblSubTotal;
+	private static JLabel lblTotal;
+	private static JLabel lblImpuestos;
+	private static JLabel lblSubTotal;
 	public static DefaultTableModel modelo;
 	public static Object[] fila;
+	private int seleccion = -1;
 
 	/**
 	 * Launch the application.
@@ -212,7 +213,7 @@ public class Facturacion extends JDialog {
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int seleccion = table.getSelectedRow();
+					seleccion = table.getSelectedRow();
 					int modelrow = table.convertRowIndexToModel(seleccion);
 					if(seleccion!=-1){
 						if('C'==(char)modelo.getValueAt(modelrow, 0)) {
@@ -225,7 +226,7 @@ public class Facturacion extends JDialog {
 							btnListarComponentes.setEnabled(false);
 							btnEliminar.setEnabled(true);
 							btnModificar.setEnabled(true);
-							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));;
+							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
 							combo = null;
 						}
 						
@@ -249,6 +250,12 @@ public class Facturacion extends JDialog {
 			panel_3.setLayout(null);
 			
 			btnAgregar = new JButton("Agregar Articulo");
+			btnAgregar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//ListadoComponentes a = new ListadoComponentes(true);
+					//a.setVisible(true);
+				}
+			});
 			btnAgregar.setForeground(new Color(184, 134, 11));
 			btnAgregar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnAgregarIcono.png")));
 			btnAgregar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 22));
@@ -275,7 +282,8 @@ public class Facturacion extends JDialog {
 						componentes.remove(componente);
 						//Prodacom.getInstance().SumarComponente(componente,cantidad);
 					}
-					CargarTabla();
+					modelo.removeRow(seleccion);
+					seleccion = -1;
 				}
 
 			});
@@ -366,13 +374,13 @@ public class Facturacion extends JDialog {
 		
 	}
 	
-	private void CargarTabla() {
-		
+	public static void CargarTabla(Object[] fila) {
+		modelo.addRow(fila);
 		
 		CargarTotal();
 	}
 
-	private void CargarTotal() {
+	private static void CargarTotal() {
 		float subtotal = 0;
 		for(int i = 0;i<table.getRowCount();i++) {
 			subtotal+=(float)modelo.getValueAt(i, 4);

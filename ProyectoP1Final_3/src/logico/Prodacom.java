@@ -150,6 +150,20 @@ public class Prodacom {
 		}
 		return componente;
 	}
+	
+	public Combo buscarCombo(String codigo) {
+		Combo combo = null;
+		int i = 0;
+		boolean encontrado = false;
+		while (i<combos.size() && !encontrado) {
+			if(combos.get(i).getCod().equalsIgnoreCase(codigo)) {
+				encontrado = true;
+				combo = combos.get(i);
+			}
+			i++;
+		}
+		return combo;
+	}
 
 	public float CreditCliente(Cliente c) {
 		float res = 0;

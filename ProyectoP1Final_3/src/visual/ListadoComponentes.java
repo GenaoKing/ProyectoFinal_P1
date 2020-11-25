@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
+import logico.Combo;
 import logico.Componente;
 import logico.Disco;
 
@@ -24,6 +26,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +38,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ListadoComponentes extends JDialog {
 	
@@ -45,27 +53,26 @@ public class ListadoComponentes extends JDialog {
 	public static Object[] fila;
 	private JButton btnEliminar;
 	private JComboBox cbxFiltro;
+	private JTextField txtBusqueda;
+	private JButton btnSeleccionar;
+	private int seleccion = -1;
+	private int modelrow = -1;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListadoComponentes dialog = new ListadoComponentes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
+	 * @param b 
 	 */
 	public ListadoComponentes() {
+		
 		setForeground(Color.RED);
 		setBackground(UIManager.getColor("Button.focus"));
-		setBounds(100, 100, 813, 418);
+		setBounds(100, 100, 854, 466);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(SystemColor.textHighlight);
 		contentPanel.setBackground(UIManager.getColor("Button.focus"));
@@ -81,7 +88,7 @@ public class ListadoComponentes extends JDialog {
 			panel.setLayout(null);
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(6, 34, 775, 295);
+			scrollPane.setBounds(6, 47, 808, 314);
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			panel.add(scrollPane);
 			
@@ -92,14 +99,16 @@ public class ListadoComponentes extends JDialog {
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					int seleccion = table.getSelectedRow();
+					seleccion = table.getSelectedRow();
+					modelrow = table.convertRowIndexToModel(seleccion);
 					if(seleccion!=-1) {
 						btnEliminar.setEnabled(true);
-					
-						auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(seleccion, 0));
+						btnSeleccionar.setEnabled(true);
+						auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
 						
 					}else {
 						btnEliminar.setEnabled(false);
+						btnSeleccionar.setEnabled(false);
 					}
 				}
 			});
@@ -108,12 +117,14 @@ public class ListadoComponentes extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			JLabel lblNewLabel = new JLabel("Filtro");
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblNewLabel.setForeground(SystemColor.textHighlight);
 			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
-			lblNewLabel.setBounds(605, 9, 50, 22);
+			lblNewLabel.setBounds(611, 14, 58, 25);
 			panel.add(lblNewLabel);
 			
 			cbxFiltro = new JComboBox();
+			cbxFiltro.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			cbxFiltro.setBackground(UIManager.getColor("Button.focus"));
 			cbxFiltro.setForeground(SystemColor.textHighlight);
 			cbxFiltro.addActionListener(new ActionListener() {
@@ -142,8 +153,8 @@ public class ListadoComponentes extends JDialog {
 							fila[2] = comp.getCantReal();
 							fila[3] = comp.getPrecioVenta();
 							fila[4] = comp.getModelo();
-							fila[4] = comp.getSerie();
-							fila[4] = comp.getMarca();
+							fila[5] = comp.getSerie();
+							fila[6] = comp.getMarca();
 							
 							modelo.addRow(fila);
 						}
@@ -159,8 +170,8 @@ public class ListadoComponentes extends JDialog {
 								fila[2] = comp.getCantReal();
 								fila[3] = comp.getPrecioVenta();
 								fila[4] = comp.getModelo();
-								fila[4] = comp.getSerie();
-								fila[4] = comp.getMarca();
+								fila[5] = comp.getSerie();
+								fila[6] = comp.getMarca();
 								
 								modelo.addRow(fila);
 								
@@ -177,8 +188,8 @@ public class ListadoComponentes extends JDialog {
 							fila[2] = comp.getCantReal();
 							fila[3] = comp.getPrecioVenta();
 							fila[4] = comp.getModelo();
-							fila[4] = comp.getSerie();
-							fila[4] = comp.getMarca();
+							fila[5] = comp.getSerie();
+							fila[6] = comp.getMarca();
 							
 							modelo.addRow(fila);
 							}
@@ -194,19 +205,52 @@ public class ListadoComponentes extends JDialog {
 								fila[2] = comp.getCantReal();
 								fila[3] = comp.getPrecioVenta();
 								fila[4] = comp.getModelo();
-								fila[4] = comp.getSerie();
-								fila[4] = comp.getMarca();
+								fila[5] = comp.getSerie();
+								fila[6] = comp.getMarca();
 								
 								modelo.addRow(fila);
 							}
 						}
 					}
+					else if(seleccionado == 5 ) {
+						for(Combo c : Prodacom.getInstance().getCombos()) {
+							fila[0] = c.getCod();
+							fila[1] = "Combo";
+							fila[2] = "Hasta Agotar Existencias";
+							fila[3] = c.calcularprecio();
+							fila[4] = c.getNombre();
+							fila[5] = "Unbranded";
+							fila[6] = "Unbranded";
+							modelo.addRow(fila);
+						}
+					}
 				}
 
 			});
-			cbxFiltro.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Disco Duro", "Memoria Ram", "Microprocesador", "MotherBoard"}));
-			cbxFiltro.setBounds(676, 9, 101, 22);
+			cbxFiltro.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Disco Duro", "Memoria Ram", "Microprocesador", "MotherBoard","Combos"}));
+			cbxFiltro.setBounds(691, 12, 123, 30);
 			panel.add(cbxFiltro);
+			
+			JLabel lblBuscador = new JLabel("Buscador:");
+			lblBuscador.setForeground(SystemColor.textHighlight);
+			lblBuscador.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblBuscador.setBackground(Color.BLACK);
+			lblBuscador.setBounds(6, 14, 94, 25);
+			panel.add(lblBuscador);
+			
+			txtBusqueda = new JTextField();
+			txtBusqueda.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					DefaultTableModel mode = (DefaultTableModel)table.getModel();
+					TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(mode);
+					table.setRowSorter(tr);
+					tr.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText().trim()));
+				}
+			});
+			txtBusqueda.setBounds(106, 12, 261, 30);
+			panel.add(txtBusqueda);
+			txtBusqueda.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -232,6 +276,25 @@ public class ListadoComponentes extends JDialog {
 						}
 					}
 				});
+				
+				btnSeleccionar = new JButton("Seleccionar");
+				btnSeleccionar.setEnabled(false);
+				btnSeleccionar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if('C'==(char)modelo.getValueAt(modelrow, 0)) {
+							Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
+							//Ventas a = new Ventas(c.getNombre(),c.calcularprecio(),100);
+							dispose();
+							//a.setVisible(true);
+						}else {
+							Componente c = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
+							//Ventas a = new Ventas(c.getMarca()+" "+c.get,c.calcularprecio(),100);
+							dispose();
+							//a.setVisible(true);
+						}
+					}
+				});
+				buttonPane.add(btnSeleccionar);
 				btnEliminar.setActionCommand("OK");
 				buttonPane.add(btnEliminar);
 				getRootPane().setDefaultButton(btnEliminar);
@@ -257,7 +320,6 @@ public class ListadoComponentes extends JDialog {
 	
 	
 	private void cargarTabla() {
-		
 		modelo.setRowCount(0); 
 		fila = new Object [modelo.getColumnCount()];
 		
@@ -278,12 +340,21 @@ public class ListadoComponentes extends JDialog {
 			fila[2] = comp.getCantReal();
 			fila[3] = comp.getPrecioVenta();
 			fila[4] = comp.getModelo();
-			fila[4] = comp.getSerie();
-			fila[4] = comp.getMarca();
-			
+			fila[5] = comp.getSerie();
+			fila[6] = comp.getMarca();
 			modelo.addRow(fila);
+		}
+			for(Combo c : Prodacom.getInstance().getCombos()) {
+				fila[0] = c.getCod();
+				fila[1] = "Combo";
+				fila[2] = "Hasta Agotar Existencias";
+				fila[3] = c.calcularprecio();
+				fila[4] = c.getNombre();
+				fila[5] = "Unbranded";
+				fila[6] = "Unbranded";
+				modelo.addRow(fila);
+			}
+			
 
 		}
-		
-	}
 }
