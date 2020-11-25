@@ -91,7 +91,6 @@ public class Ventas extends JDialog {
 			  public void stateChanged(ChangeEvent e) {
 			   subtotal = (precio*Integer.parseInt(spnCantidad.getValue().toString()));
 			   float desc = Integer.parseInt(spnDescuento.getValue().toString())/100.0f;
-			   System.out.println("Descuento: "+desc);
 			   subtotal = subtotal-(subtotal*desc);
 			   lblSubTotal.setText("SubTotal: "+subtotal);
 			  }
@@ -111,7 +110,6 @@ public class Ventas extends JDialog {
 				  public void stateChanged(ChangeEvent e) {
 				   subtotal = (precio*Integer.parseInt(spnCantidad.getValue().toString()));
 				   float desc = Integer.parseInt(spnDescuento.getValue().toString())/100.0f;
-				   System.out.println("Descuento: "+desc);
 				   subtotal = subtotal-(subtotal*desc);
 				   lblSubTotal.setText("SubTotal: "+subtotal);
 				  }
@@ -122,7 +120,7 @@ public class Ventas extends JDialog {
 		}
 		{
 			subtotal = (precio*Integer.parseInt(spnCantidad.getValue().toString()));
-			lblSubTotal = new JLabel("Subtotal: "+(subtotal-(subtotal*(Integer.parseInt(spnDescuento.getValue().toString())/100.0f))));
+			lblSubTotal = new JLabel("SubTotal: "+(subtotal-(subtotal*(Integer.parseInt(spnDescuento.getValue().toString())/100.0f))));
 			lblSubTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblSubTotal.setBounds(12, 254, 222, 31);
 			contentPanel.add(lblSubTotal);
