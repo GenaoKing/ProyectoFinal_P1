@@ -26,6 +26,9 @@ import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
@@ -310,17 +313,18 @@ public class RegCombo extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						
 						Combo aux  =  new Combo(txtNombre.getText(), txtCodigo.getText());
-						Prodacom.getInstance().insertarCombo(aux);
+					
 						for(Componente c : agregados) {
 							aux.insertarcomponentes(c);
 						}
+						Prodacom.getInstance().insertarCombo(aux);
 						clear();
 						registrarButton.setEnabled(false);
 						saber = new int[4];
 						contador  =0;
 					}
 
-					
+				
 				});
 				registrarButton.setActionCommand("OK");
 				buttonPane.add(registrarButton);

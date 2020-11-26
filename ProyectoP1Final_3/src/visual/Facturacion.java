@@ -64,12 +64,12 @@ public class Facturacion extends JDialog {
 	private static ArrayList<Combo>combos = new ArrayList<Combo>(); 
 	private static ArrayList<Componente>componentes = new ArrayList<Componente>(); 
 	private static int cantidad = 0;
-	private static JLabel lblTotal;
-	private static JLabel lblImpuestos;
-	private static JLabel lblSubTotal;
 	public static DefaultTableModel modelo;
 	public static Object[] fila;
 	private int seleccion = -1;
+	private static JLabel lblSubTotal;
+	private static JLabel lblImpuestos;
+	private static JLabel lblTotal;
 
 	/**
 	 * Launch the application.
@@ -128,9 +128,9 @@ public class Facturacion extends JDialog {
 			panel_2.add(lblTelefono);
 			
 			lblDireccion = new JLabel("");
-			lblDireccion.setForeground(UIManager.getColor("Button.focus"));
-			lblDireccion.setBackground(Color.BLACK);
-			lblDireccion.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20));
+			lblDireccion.setBackground(UIManager.getColor("Button.focus"));
+			lblDireccion.setForeground(SystemColor.textHighlight);
+			lblDireccion.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 21));
 			lblDireccion.setBounds(12, 185, 501, 31);
 			panel_2.add(lblDireccion);
 			
@@ -148,12 +148,12 @@ public class Facturacion extends JDialog {
 			lblCreditoDisponible.setBounds(423, 115, 272, 31);
 			panel_2.add(lblCreditoDisponible);
 			
-			lblCodigo = new JLabel("Factura #");
+			lblCodigo = new JLabel("Factura #"+Prodacom.getInstance().cod_facturas);
 			lblCodigo.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/factura.png")));
 			lblCodigo.setBackground(UIManager.getColor("Button.focus"));
 			lblCodigo.setForeground(SystemColor.textHighlight);
 			lblCodigo.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
-			lblCodigo.setBounds(523, 23, 234, 31);
+			lblCodigo.setBounds(752, 23, 234, 31);
 			panel_2.add(lblCodigo);
 			
 			lblFecha = new JLabel("");
@@ -310,22 +310,23 @@ public class Facturacion extends JDialog {
 			btnListarComponentes.setBounds(12, 85, 344, 52);
 			panel_3.add(btnListarComponentes);
 			
-
-			JLabel lblSubTotal = new JLabel("Sub-Total:");
-			lblSubTotal.setForeground(SystemColor.textHighlight);
-			lblSubTotal.setBackground(UIManager.getColor("Button.focus"));
-
+			lblSubTotal = new JLabel("SubTotal:");
+			lblSubTotal.setForeground(Color.BLUE);
+			lblSubTotal.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 26));
+			lblSubTotal.setBounds(668, 14, 322, 33);
+			panel_3.add(lblSubTotal);
 			
-
-			JLabel lblImpuestos = new JLabel("ITBIS (18%):");
-			lblImpuestos.setBackground(UIManager.getColor("Button.focus"));
-			lblImpuestos.setForeground(SystemColor.textHighlight);
-
+			lblImpuestos = new JLabel("ITBIS (18%):");
+			lblImpuestos.setForeground(Color.BLUE);
+			lblImpuestos.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 26));
+			lblImpuestos.setBounds(668, 61, 322, 33);
+			panel_3.add(lblImpuestos);
 			
-
-			JLabel lblTotal = new JLabel("Total:");
-			lblTotal.setBackground(UIManager.getColor("Button.focus"));
-			lblTotal.setForeground(SystemColor.textHighlight);
+			lblTotal = new JLabel("Total:");
+			lblTotal.setForeground(Color.BLUE);
+			lblTotal.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 26));
+			lblTotal.setBounds(668, 108, 322, 33);
+			panel_3.add(lblTotal);
 
 		}
 		{
@@ -398,10 +399,10 @@ public class Facturacion extends JDialog {
 		for(int i = 0;i<table.getRowCount();i++) {
 			subtotal+=(float)modelo.getValueAt(i, 4);
 		}
-		System.out.println(subtotal);
-		/*lblSubTotal.setText("Sub-Total: "+subtotal);
-		lblImpuestos.setText("ITBIS (18%): "+(subtotal*0.18));
-		lblTotal.setText("Total: "+(subtotal+(subtotal*0.18)));
-	*/
+	
+		lblSubTotal.setText("Sub-Total: "+subtotal);
+		lblImpuestos.setText("ITBIS (18%): "+(subtotal*0.18f));
+		lblTotal.setText("Total: "+(subtotal+(subtotal*0.18f)));
+	
 	}
 }

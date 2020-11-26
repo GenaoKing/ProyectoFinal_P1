@@ -8,6 +8,7 @@ public class Prodacom {
 	public static int cod_componente = 1;
 	public static int cod_proveedores = 1;
 	public static int cod_combos = 1;
+	public static int cod_facturas = 1;
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
@@ -55,6 +56,7 @@ public class Prodacom {
 
 	public void insertarFactura(Factura factura) {
 		this.facturas.add(factura); 
+		cod_facturas++;
 	}
 
 	public ArrayList<Persona> getPersonas() {

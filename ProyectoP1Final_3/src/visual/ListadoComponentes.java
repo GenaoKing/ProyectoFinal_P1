@@ -80,7 +80,7 @@ public class ListadoComponentes extends JDialog {
 		if(cargar==null) {
 			if(mode==1) {
 				setTitle("Listado de combos");
-				loadTable(5);
+				
 			}else {	
 			setTitle("Listado de componentes");
 			}
@@ -269,6 +269,9 @@ public class ListadoComponentes extends JDialog {
 		}
 		if(mode==0) {
 			cargarTabla();
+		}
+		if(mode==1) {
+			loadTable(5);
 		}
 	}
 
