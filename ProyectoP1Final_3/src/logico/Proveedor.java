@@ -3,7 +3,7 @@ package logico;
 import java.util.ArrayList;
 
 public class Proveedor {
-	
+	//
 	private ArrayList<Componente>componentes;
 	private String nombre;
 	private String codigo;
