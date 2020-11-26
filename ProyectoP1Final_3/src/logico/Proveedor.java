@@ -4,17 +4,19 @@ import java.util.ArrayList;
 
 public class Proveedor {
 	//
-	private ArrayList<Componente>componentes;
+	private ArrayList<Componente>componentes = new ArrayList<Componente>();
 	private String nombre;
 	private String codigo;
 	private String telefono;
 	private String direccion;
 	private float LimCredito;
 	
-	public Proveedor(String nombre, String codigo, String telefono, String direccion,
+
+
+	public Proveedor(ArrayList<Componente> componentes, String nombre, String codigo, String telefono, String direccion,
 			float limCredito) {
 		super();
-		this.componentes = new ArrayList<Componente>();
+		this.componentes = componentes;
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.telefono = telefono;

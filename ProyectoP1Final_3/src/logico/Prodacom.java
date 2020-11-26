@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Prodacom {
 	//probando.
 	public static int cod_componente = 1;
+	public static int cod_proveedores = 1;
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
@@ -182,6 +183,12 @@ public class Prodacom {
 				c.cantReal+=cantidad;
 			}
 		}
+		
+	}
+
+	public void insertarProveedor(Proveedor p) {
+		proveedores.add(p);
+		cod_proveedores++;
 		
 	}
 	
