@@ -39,6 +39,9 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class IngresoComponentes extends JDialog {
 
@@ -108,49 +111,53 @@ public class IngresoComponentes extends JDialog {
 	 * Create the dialog.
 	 */
 	public IngresoComponentes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IngresoComponentes.class.getResource("/iconos/ingreso.png")));
 		setTitle("Ingreso de componentes");
 		setModal(true);
 		setResizable(false);
-		setForeground(Color.DARK_GRAY);
+		setForeground(new Color(0, 128, 128));
 		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 789, 563);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(UIManager.getColor("Button.focus"));
-		contentPanel.setBackground(Color.DARK_GRAY);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(new Color(0, 139, 139));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setForeground(UIManager.getColor("Button.focus"));
+		panel.setForeground(Color.DARK_GRAY);
 		panel.setBackground(Color.BLACK);
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(218, 165, 32)));
+		panel.setBorder(new LineBorder(new Color(139, 0, 0)));
 		panel.setBounds(10, 11, 753, 117);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Serie:");
+		lblNewLabel.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/se.png")));
 		lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
-		lblNewLabel.setForeground(SystemColor.textHighlight);
-		lblNewLabel.setBounds(10, 25, 46, 14);
+		lblNewLabel.setForeground(new Color(250, 250, 210));
+		lblNewLabel.setBounds(10, 25, 61, 14);
 		panel.add(lblNewLabel);
 		
 		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/model.png")));
 		lblModelo.setBackground(UIManager.getColor("Button.focus"));
-		lblModelo.setForeground(SystemColor.textHighlight);
-		lblModelo.setBounds(146, 25, 46, 14);
+		lblModelo.setForeground(new Color(250, 250, 210));
+		lblModelo.setBounds(146, 25, 74, 14);
 		panel.add(lblModelo);
 		
 		JLabel lblMarca = new JLabel("Marca:");
+		lblMarca.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/marca.png")));
 		lblMarca.setBackground(UIManager.getColor("Button.focus"));
-		lblMarca.setForeground(SystemColor.textHighlight);
-		lblMarca.setBounds(306, 25, 46, 14);
+		lblMarca.setForeground(new Color(250, 250, 210));
+		lblMarca.setBounds(306, 25, 66, 14);
 		panel.add(lblMarca);
 		
 		txtSerie = new JTextField();
 		txtSerie.setEnabled(false);
-		txtSerie.setBounds(50, 22, 86, 20);
+		txtSerie.setBounds(81, 22, 58, 20);
 		txtSerie.setText("S-"+Prodacom.cod_componente);
 		panel.add(txtSerie);
 		txtSerie.setColumns(10);
@@ -159,107 +166,115 @@ public class IngresoComponentes extends JDialog {
 		txtModelo.setBackground(UIManager.getColor("Button.focus"));
 		txtModelo.setForeground(new Color(102, 0, 0));
 		txtModelo.setColumns(10);
-		txtModelo.setBounds(202, 22, 86, 20);
+		txtModelo.setBounds(230, 22, 66, 20);
 		panel.add(txtModelo);
 		
 		txtMarca = new JTextField();
 		txtMarca.setForeground(new Color(102, 0, 0));
 		txtMarca.setBackground(UIManager.getColor("Button.focus"));
 		txtMarca.setColumns(10);
-		txtMarca.setBounds(354, 22, 86, 20);
+		txtMarca.setBounds(366, 22, 74, 20);
 		panel.add(txtMarca);
 		
 		JLabel lblPrecio = new JLabel("Compra:");
+		lblPrecio.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/compras.png")));
 		lblPrecio.setBackground(UIManager.getColor("Button.focus"));
-		lblPrecio.setForeground(SystemColor.textHighlight);
-		lblPrecio.setBounds(450, 25, 58, 14);
+		lblPrecio.setForeground(new Color(250, 250, 210));
+		lblPrecio.setBounds(450, 25, 82, 14);
 		panel.add(lblPrecio);
 		
 		JLabel lblCantidad = new JLabel("Cantidad M\u00EDnima:");
+		lblCantidad.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/dollar.png")));
 		lblCantidad.setBackground(UIManager.getColor("Button.focus"));
-		lblCantidad.setForeground(SystemColor.textHighlight);
-		lblCantidad.setBounds(7, 75, 99, 14);
+		lblCantidad.setForeground(new Color(250, 250, 210));
+		lblCantidad.setBounds(7, 75, 132, 14);
 		panel.add(lblCantidad);
 		
 		spnCompra = new JSpinner();
 		spnCompra.setBackground(UIManager.getColor("Button.focus"));
 		spnCompra.setForeground(new Color(102, 0, 0));
 		spnCompra.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
-		spnCompra.setBounds(500, 22, 89, 20);
+		spnCompra.setBounds(523, 22, 66, 20);
 		panel.add(spnCompra);
 		
 		spnCantMinima = new JSpinner();
 		spnCantMinima.setForeground(new Color(102, 0, 0));
 		spnCantMinima.setBackground(UIManager.getColor("Button.focus"));
 		spnCantMinima.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCantMinima.setBounds(116, 72, 127, 20);
+		spnCantMinima.setBounds(157, 72, 86, 20);
 		panel.add(spnCantMinima);
 		
 		lblPrecioVenta = new JLabel("Venta:");
-		lblPrecioVenta.setForeground(SystemColor.textHighlight);
+		lblPrecioVenta.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/ventas.png")));
+		lblPrecioVenta.setForeground(new Color(250, 250, 210));
 		lblPrecioVenta.setBackground(UIManager.getColor("Button.focus"));
-		lblPrecioVenta.setBounds(600, 25, 76, 14);
+		lblPrecioVenta.setBounds(599, 25, 66, 14);
 		panel.add(lblPrecioVenta);
 		
 		spnVenta = new JSpinner();
 		spnVenta.setForeground(new Color(102, 0, 0));
 		spnVenta.setBackground(UIManager.getColor("Button.focus"));
 		spnVenta.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
-		spnVenta.setBounds(642, 22, 89, 20);
+		spnVenta.setBounds(670, 22, 61, 20);
 		panel.add(spnVenta);
 		
 		JLabel lblCantidadReal = new JLabel("Cantidad Real:");
-		lblCantidadReal.setForeground(SystemColor.textHighlight);
+		lblCantidadReal.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/dinero.png")));
+		lblCantidadReal.setForeground(new Color(250, 250, 210));
 		lblCantidadReal.setBackground(UIManager.getColor("Button.focus"));
-		lblCantidadReal.setBounds(253, 75, 99, 14);
+		lblCantidadReal.setBounds(253, 75, 130, 14);
 		panel.add(lblCantidadReal);
 		
 		spnCantReal = new JSpinner();
 		spnCantReal.setBackground(UIManager.getColor("Button.focus"));
 		spnCantReal.setForeground(new Color(102, 0, 0));
 		spnCantReal.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCantReal.setBounds(352, 72, 127, 20);
+		spnCantReal.setBounds(366, 72, 86, 20);
 		panel.add(spnCantReal);
 		
 		JLabel lblCantidadMxima = new JLabel("Cantidad M\u00E1xima:");
+		lblCantidadMxima.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/money.png")));
 		lblCantidadMxima.setBackground(UIManager.getColor("Button.focus"));
-		lblCantidadMxima.setForeground(SystemColor.textHighlight);
-		lblCantidadMxima.setBounds(489, 75, 127, 14);
+		lblCantidadMxima.setForeground(new Color(250, 250, 210));
+		lblCantidadMxima.setBounds(489, 75, 146, 14);
 		panel.add(lblCantidadMxima);
 		
 		spnCantMaxima = new JSpinner();
 		spnCantMaxima.setForeground(new Color(102, 0, 0));
 		spnCantMaxima.setBackground(UIManager.getColor("Button.focus"));
 		spnCantMaxima.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCantMaxima.setBounds(604, 72, 127, 20);
+		spnCantMaxima.setBounds(616, 72, 86, 20);
 		panel.add(spnCantMaxima);
 		
 		panel_DiscoDuro = new JPanel();
-		panel_DiscoDuro.setForeground(UIManager.getColor("Button.focus"));
+		panel_DiscoDuro.setForeground(Color.DARK_GRAY);
 		panel_DiscoDuro.setBackground(Color.BLACK);
-		panel_DiscoDuro.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion Adicional:", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
+		panel_DiscoDuro.setBorder(new LineBorder(new Color(128, 0, 0)));
 		panel_DiscoDuro.setBounds(10, 207, 753, 261);
 		contentPanel.add(panel_DiscoDuro);
 		panel_DiscoDuro.setLayout(null);
 		
 		lblCantAlmacenamiento_DiscoDuro = new JLabel("Cantidad de almacenamiento:");
+		lblCantAlmacenamiento_DiscoDuro.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/alma.png")));
 		lblCantAlmacenamiento_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
-		lblCantAlmacenamiento_DiscoDuro.setForeground(SystemColor.textHighlight);
-		lblCantAlmacenamiento_DiscoDuro.setBounds(10, 54, 176, 14);
+		lblCantAlmacenamiento_DiscoDuro.setForeground(new Color(250, 250, 210));
+		lblCantAlmacenamiento_DiscoDuro.setBounds(10, 54, 202, 14);
 		//lblCantAlmacenamiento_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(lblCantAlmacenamiento_DiscoDuro);
 		
 		lblUnidadDeAlmacenamiento_DiscoDuro = new JLabel("Unidad de almacenamiento:");
+		lblUnidadDeAlmacenamiento_DiscoDuro.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/disco.png")));
 		lblUnidadDeAlmacenamiento_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
-		lblUnidadDeAlmacenamiento_DiscoDuro.setForeground(SystemColor.textHighlight);
-		lblUnidadDeAlmacenamiento_DiscoDuro.setBounds(10, 122, 176, 14);
+		lblUnidadDeAlmacenamiento_DiscoDuro.setForeground(new Color(250, 250, 210));
+		lblUnidadDeAlmacenamiento_DiscoDuro.setBounds(10, 122, 202, 14);
 		//lblUnidadDeAlmacenamiento_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(lblUnidadDeAlmacenamiento_DiscoDuro);
 		
 		lblTipoDeConexion_DiscoDuro = new JLabel("Tipo de conexion:");
-		lblTipoDeConexion_DiscoDuro.setForeground(SystemColor.textHighlight);
+		lblTipoDeConexion_DiscoDuro.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/compo.png")));
+		lblTipoDeConexion_DiscoDuro.setForeground(new Color(250, 250, 210));
 		lblTipoDeConexion_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
-		lblTipoDeConexion_DiscoDuro.setBounds(10, 190, 154, 14);
+		lblTipoDeConexion_DiscoDuro.setBounds(10, 190, 202, 14);
 		//lblTipoDeConexion_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(lblTipoDeConexion_DiscoDuro);
 		
@@ -267,7 +282,7 @@ public class IngresoComponentes extends JDialog {
 		spnCantAlmacenamiento_DiscoDuro.setForeground(SystemColor.textHighlight);
 		spnCantAlmacenamiento_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
 		spnCantAlmacenamiento_DiscoDuro.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCantAlmacenamiento_DiscoDuro.setBounds(183, 51, 131, 20);
+		spnCantAlmacenamiento_DiscoDuro.setBounds(222, 51, 131, 20);
 		//spnCantAlmacenamiento_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(spnCantAlmacenamiento_DiscoDuro);
 		
@@ -275,7 +290,7 @@ public class IngresoComponentes extends JDialog {
 		cbxUnidadDeAlmacenamiento_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
 		cbxUnidadDeAlmacenamiento_DiscoDuro.setForeground(SystemColor.textHighlight);
 		cbxUnidadDeAlmacenamiento_DiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"Gb", "Tb"}));
-		cbxUnidadDeAlmacenamiento_DiscoDuro.setBounds(183, 119, 131, 20);
+		cbxUnidadDeAlmacenamiento_DiscoDuro.setBounds(222, 119, 131, 20);
 		//cbxUnidadDeAlmacenamiento_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(cbxUnidadDeAlmacenamiento_DiscoDuro);
 		
@@ -283,36 +298,39 @@ public class IngresoComponentes extends JDialog {
 		cbxTipoDeConexion_DiscoDuro.setForeground(SystemColor.textHighlight);
 		cbxTipoDeConexion_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
 		cbxTipoDeConexion_DiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"IDE", "SATA ", "SATA-2 ", "SATA-3"}));
-		cbxTipoDeConexion_DiscoDuro.setBounds(183, 187, 131, 20);
+		cbxTipoDeConexion_DiscoDuro.setBounds(222, 187, 131, 20);
 		//cbxTipoDeConexion_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(cbxTipoDeConexion_DiscoDuro);
 		
 		panel_Microprocesadores = new JPanel();
 		panel_Microprocesadores.setBackground(Color.BLACK);
-		panel_Microprocesadores.setForeground(UIManager.getColor("Button.focus"));
+		panel_Microprocesadores.setForeground(Color.DARK_GRAY);
 		panel_Microprocesadores.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion Adicional:", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 		panel_Microprocesadores.setBounds(10, 207, 753, 261);
 		contentPanel.add(panel_Microprocesadores);
 		panel_Microprocesadores.setLayout(null);
 		
 		lblTipoDeconexion_Microprocesadores = new JLabel("Tipo de conexion o socket:");
-		lblTipoDeconexion_Microprocesadores.setForeground(SystemColor.textHighlight);
+		lblTipoDeconexion_Microprocesadores.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/compo.png")));
+		lblTipoDeconexion_Microprocesadores.setForeground(new Color(250, 250, 210));
 		lblTipoDeconexion_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
-		lblTipoDeconexion_Microprocesadores.setBounds(10, 58, 171, 14);
+		lblTipoDeconexion_Microprocesadores.setBounds(10, 58, 207, 14);
 		lblTipoDeconexion_Microprocesadores.setVisible(false);
 		panel_Microprocesadores.add(lblTipoDeconexion_Microprocesadores);
 		
 		lblVelocidad_Microprocesadores = new JLabel("Velocidad:");
-		lblVelocidad_Microprocesadores.setForeground(SystemColor.textHighlight);
+		lblVelocidad_Microprocesadores.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/disco.png")));
+		lblVelocidad_Microprocesadores.setForeground(new Color(250, 250, 210));
 		lblVelocidad_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
-		lblVelocidad_Microprocesadores.setBounds(10, 135, 171, 14);
+		lblVelocidad_Microprocesadores.setBounds(10, 135, 207, 14);
 		lblVelocidad_Microprocesadores.setVisible(false);
 		panel_Microprocesadores.add(lblVelocidad_Microprocesadores);
 		
 		lblTipo_Microprocesadores = new JLabel("Tipo de procesamiento:");
-		lblTipo_Microprocesadores.setForeground(SystemColor.textHighlight);
+		lblTipo_Microprocesadores.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/ll.png")));
+		lblTipo_Microprocesadores.setForeground(new Color(250, 250, 210));
 		lblTipo_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
-		lblTipo_Microprocesadores.setBounds(10, 201, 171, 14);
+		lblTipo_Microprocesadores.setBounds(10, 201, 207, 14);
 		lblTipo_Microprocesadores.setVisible(false);
 		panel_Microprocesadores.add(lblTipo_Microprocesadores);
 		
@@ -334,14 +352,14 @@ public class IngresoComponentes extends JDialog {
 		
 		cbxTipo_Microprocesadores = new JComboBox();
 		cbxTipo_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
-		cbxTipo_Microprocesadores.setForeground(SystemColor.textHighlight);
+		cbxTipo_Microprocesadores.setForeground(new Color(250, 250, 210));
 		cbxTipo_Microprocesadores.setModel(new DefaultComboBoxModel(new String[] {"MHz", "GHz"}));
 		cbxTipo_Microprocesadores.setBounds(191, 198, 199, 20);
 		cbxTipo_Microprocesadores.setVisible(false);
 		panel_Microprocesadores.add(cbxTipo_Microprocesadores);
 		
 		panel_MotherBoard = new JPanel();
-		panel_MotherBoard.setForeground(UIManager.getColor("Button.focus"));
+		panel_MotherBoard.setForeground(Color.DARK_GRAY);
 		panel_MotherBoard.setBackground(Color.BLACK);
 		panel_MotherBoard.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion Adicional", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 		panel_MotherBoard.setBounds(10, 207, 753, 261);
@@ -349,16 +367,18 @@ public class IngresoComponentes extends JDialog {
 		panel_MotherBoard.setLayout(null);
 		
 		lblConector_MotherBoard = new JLabel("Conexion:");
-		lblConector_MotherBoard.setForeground(SystemColor.textHighlight);
+		lblConector_MotherBoard.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/se.png")));
+		lblConector_MotherBoard.setForeground(new Color(250, 250, 210));
 		lblConector_MotherBoard.setBackground(UIManager.getColor("Button.focus"));
-		lblConector_MotherBoard.setBounds(10, 49, 64, 14);
+		lblConector_MotherBoard.setBounds(10, 49, 113, 14);
 		lblConector_MotherBoard.setVisible(true);
 		panel_MotherBoard.add(lblConector_MotherBoard);
 		
 		lblTipoRam_MotherBoard = new JLabel("TipoRam:");
-		lblTipoRam_MotherBoard.setForeground(SystemColor.textHighlight);
+		lblTipoRam_MotherBoard.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/model.png")));
+		lblTipoRam_MotherBoard.setForeground(new Color(250, 250, 210));
 		lblTipoRam_MotherBoard.setBackground(UIManager.getColor("Button.focus"));
-		lblTipoRam_MotherBoard.setBounds(10, 112, 64, 14);
+		lblTipoRam_MotherBoard.setBounds(10, 112, 113, 14);
 		panel_MotherBoard.add(lblTipoRam_MotherBoard);
 		
 		txtConexion_MotherBoard = new JTextField();
@@ -377,9 +397,11 @@ public class IngresoComponentes extends JDialog {
 		txtTipoRam_MotherBoard.setVisible(false);
 		panel_MotherBoard.add(txtTipoRam_MotherBoard);
 		
-		btnAgregar = new JButton(">>");
+		btnAgregar = new JButton("");
+		btnAgregar.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/derecha.png")));
+		btnAgregar.setSelectedIcon(null);
 		btnAgregar.setBackground(UIManager.getColor("Button.focus"));
-		btnAgregar.setForeground(SystemColor.textHighlight);
+		btnAgregar.setForeground(UIManager.getColor("Button.focus"));
 		btnAgregar.setEnabled(false);
 		btnAgregar.setVisible(false);
 		btnAgregar.addActionListener(new ActionListener() {
@@ -401,8 +423,9 @@ public class IngresoComponentes extends JDialog {
 		btnAgregar.setBounds(445, 66, 80, 25);
 		panel_MotherBoard.add(btnAgregar);
 		
-		btnQuitar = new JButton("<<");
-		btnQuitar.setForeground(SystemColor.textHighlight);
+		btnQuitar = new JButton("");
+		btnQuitar.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/izquierda.png")));
+		btnQuitar.setForeground(UIManager.getColor("Button.focus"));
 		btnQuitar.setBackground(UIManager.getColor("Button.focus"));
 		btnQuitar.setEnabled(false);
 		btnQuitar.setVisible(false);
@@ -426,6 +449,8 @@ public class IngresoComponentes extends JDialog {
 		panel_MotherBoard.add(btnQuitar);
 		
 		panel_Disponibles = new JPanel();
+		panel_Disponibles.setForeground(Color.DARK_GRAY);
+		panel_Disponibles.setBackground(UIManager.getColor("Button.focus"));
 		panel_Disponibles.setBounds(227, 37, 192, 211);
 		panel_Disponibles.setVisible(false);
 		panel_MotherBoard.add(panel_Disponibles);
@@ -464,6 +489,8 @@ public class IngresoComponentes extends JDialog {
 		scrollPane_1.setViewportView(table);
 		
 		panel_Agregados = new JPanel();
+		panel_Agregados.setForeground(Color.DARK_GRAY);
+		panel_Agregados.setBackground(UIManager.getColor("Button.focus"));
 		panel_Agregados.setBounds(549, 37, 192, 211);
 		panel_Agregados.setVisible(false);
 		panel_MotherBoard.add(panel_Agregados);
@@ -508,23 +535,26 @@ public class IngresoComponentes extends JDialog {
 		panel_MemoriaRam.setLayout(null);
 		
 		lblCantidadDeMemoria_MemoriaRam = new JLabel("Cantidad de memoria:");
+		lblCantidadDeMemoria_MemoriaRam.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/compo.png")));
 		lblCantidadDeMemoria_MemoriaRam.setBackground(UIManager.getColor("Button.focus"));
-		lblCantidadDeMemoria_MemoriaRam.setForeground(SystemColor.textHighlight);
-		lblCantidadDeMemoria_MemoriaRam.setBounds(10, 54, 150, 14);
+		lblCantidadDeMemoria_MemoriaRam.setForeground(new Color(250, 250, 210));
+		lblCantidadDeMemoria_MemoriaRam.setBounds(10, 54, 186, 14);
 		lblCantidadDeMemoria_MemoriaRam.setVisible(false);
 		panel_MemoriaRam.add(lblCantidadDeMemoria_MemoriaRam);
 		
 		lblTipoDeMemoria_MemoriaRam = new JLabel("Tipo de memoria:");
+		lblTipoDeMemoria_MemoriaRam.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/ll.png")));
 		lblTipoDeMemoria_MemoriaRam.setBackground(UIManager.getColor("Button.focus"));
-		lblTipoDeMemoria_MemoriaRam.setForeground(SystemColor.textHighlight);
-		lblTipoDeMemoria_MemoriaRam.setBounds(10, 122, 150, 14);
+		lblTipoDeMemoria_MemoriaRam.setForeground(new Color(250, 250, 210));
+		lblTipoDeMemoria_MemoriaRam.setBounds(10, 122, 186, 14);
 		lblTipoDeMemoria_MemoriaRam.setVisible(false);
 		panel_MemoriaRam.add(lblTipoDeMemoria_MemoriaRam);
 		
 		lblMemoria_MemoriaRam = new JLabel("Memoria:");
-		lblMemoria_MemoriaRam.setForeground(SystemColor.textHighlight);
+		lblMemoria_MemoriaRam.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/ll.png")));
+		lblMemoria_MemoriaRam.setForeground(new Color(250, 250, 210));
 		lblMemoria_MemoriaRam.setBackground(UIManager.getColor("Button.focus"));
-		lblMemoria_MemoriaRam.setBounds(10, 190, 86, 14);
+		lblMemoria_MemoriaRam.setBounds(10, 190, 186, 14);
 		lblMemoria_MemoriaRam.setVisible(false);
 		panel_MemoriaRam.add(lblMemoria_MemoriaRam);
 		
@@ -553,15 +583,15 @@ public class IngresoComponentes extends JDialog {
 		panel_MemoriaRam.add(cbxMemoria_MemoriaRam);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setForeground(UIManager.getColor("Button.focus"));
+		panel_1.setForeground(Color.DARK_GRAY);
 		panel_1.setBackground(Color.BLACK);
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seleccione", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
+		panel_1.setBorder(new LineBorder(new Color(128, 0, 0)));
 		panel_1.setBounds(10, 139, 753, 57);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		rdbtnMemoriaRam = new JRadioButton("MemoriaRam");
-		rdbtnMemoriaRam.setForeground(SystemColor.textHighlight);
+		rdbtnMemoriaRam.setForeground(new Color(250, 250, 210));
 		rdbtnMemoriaRam.setBackground(UIManager.getColor("Button.focus"));
 		rdbtnMemoriaRam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -614,7 +644,7 @@ public class IngresoComponentes extends JDialog {
 		
 		rdbtnDisco = new JRadioButton("Disco");
 		rdbtnDisco.setBackground(UIManager.getColor("Button.focus"));
-		rdbtnDisco.setForeground(SystemColor.textHighlight);
+		rdbtnDisco.setForeground(new Color(250, 250, 210));
 		rdbtnDisco.setSelected(true);
 		rdbtnDisco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -666,7 +696,7 @@ public class IngresoComponentes extends JDialog {
 		
 		rdbtnMicroprocesadores = new JRadioButton("Microprocesadores");
 		rdbtnMicroprocesadores.setBackground(UIManager.getColor("Button.focus"));
-		rdbtnMicroprocesadores.setForeground(SystemColor.textHighlight);
+		rdbtnMicroprocesadores.setForeground(new Color(250, 250, 210));
 		rdbtnMicroprocesadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -716,7 +746,7 @@ public class IngresoComponentes extends JDialog {
 		panel_1.add(rdbtnMicroprocesadores);
 		
 		rdbtnMotherboard = new JRadioButton("MotherBoard");
-		rdbtnMotherboard.setForeground(SystemColor.textHighlight);
+		rdbtnMotherboard.setForeground(new Color(250, 250, 210));
 		rdbtnMotherboard.setBackground(UIManager.getColor("Button.focus"));
 		rdbtnMotherboard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -772,12 +802,14 @@ public class IngresoComponentes extends JDialog {
 		
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.DARK_GRAY);
+			buttonPane.setBorder(new LineBorder(new Color(128, 0, 0)));
+			buttonPane.setBackground(new Color(0, 128, 128));
 			buttonPane.setForeground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("Registrar");
+				okButton.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/registrer.png")));
 				okButton.setForeground(new Color(51, 51, 51));
 				okButton.setBackground(new Color(0, 153, 0));
 				okButton.addActionListener(new ActionListener() {
@@ -841,6 +873,7 @@ public class IngresoComponentes extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/delete.png")));
 				cancelButton.setForeground(new Color(51, 51, 51));
 				cancelButton.setBackground(Color.RED);
 				cancelButton.addActionListener(new ActionListener() {

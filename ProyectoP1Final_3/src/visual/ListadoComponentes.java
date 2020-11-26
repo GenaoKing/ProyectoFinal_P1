@@ -43,6 +43,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class ListadoComponentes extends JDialog {
 	
@@ -71,6 +73,8 @@ public class ListadoComponentes extends JDialog {
 	 * @param b 
 	 */
 	public ListadoComponentes(Combo aux,int mode) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoComponentes.class.getResource("/iconos/tecno.png")));
+		setTitle("Listado de Componentes\r\n");
 		this.cargar=aux;
 		this.mode=mode;
 		if(cargar==null) {
@@ -103,7 +107,7 @@ public class ListadoComponentes extends JDialog {
 			JPanel panel = new JPanel();
 			panel.setForeground(UIManager.getColor("Button.focus"));
 			panel.setBackground(UIManager.getColor("Button.focus"));
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Listado", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Listado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
@@ -141,10 +145,11 @@ public class ListadoComponentes extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			JLabel lblNewLabel = new JLabel("Filtro");
+			lblNewLabel.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/ll.png")));
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblNewLabel.setForeground(SystemColor.textHighlight);
 			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
-			lblNewLabel.setBounds(611, 14, 58, 25);
+			lblNewLabel.setBounds(576, 14, 93, 25);
 			panel.add(lblNewLabel);
 			
 			cbxFiltro = new JComboBox();
@@ -173,13 +178,16 @@ public class ListadoComponentes extends JDialog {
 			panel.add(cbxFiltro);
 			
 			JLabel lblBuscador = new JLabel("Buscador:");
+			lblBuscador.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/busca.png")));
 			lblBuscador.setForeground(SystemColor.textHighlight);
 			lblBuscador.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblBuscador.setBackground(Color.BLACK);
-			lblBuscador.setBounds(6, 14, 94, 25);
+			lblBuscador.setBounds(6, 14, 134, 25);
 			panel.add(lblBuscador);
 			
 			txtBusqueda = new JTextField();
+			txtBusqueda.setBackground(UIManager.getColor("Button.focus"));
+			txtBusqueda.setForeground(new Color(0, 0, 255));
 			txtBusqueda.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
@@ -189,7 +197,7 @@ public class ListadoComponentes extends JDialog {
 					tr.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText().trim()));
 				}
 			});
-			txtBusqueda.setBounds(106, 12, 261, 30);
+			txtBusqueda.setBounds(150, 13, 236, 30);
 			panel.add(txtBusqueda);
 			txtBusqueda.setColumns(10);
 		}
@@ -201,6 +209,7 @@ public class ListadoComponentes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/delete.png")));
 				btnEliminar.setEnabled(false);
 				btnEliminar.setForeground(UIManager.getColor("Button.focus"));
 				btnEliminar.setBackground(Color.RED);
@@ -221,6 +230,8 @@ public class ListadoComponentes extends JDialog {
 				});
 				
 				btnSeleccionar = new JButton("Seleccionar");
+				btnSeleccionar.setForeground(new Color(0, 128, 0));
+				btnSeleccionar.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/select.png")));
 				btnSeleccionar.setEnabled(false);
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -244,6 +255,7 @@ public class ListadoComponentes extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/cancel.png")));
 				cancelButton.setBackground(new Color(178, 34, 34));
 				cancelButton.setForeground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {

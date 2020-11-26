@@ -31,6 +31,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
 
 public class ListadoFacturas extends JDialog {
 
@@ -60,14 +64,20 @@ public class ListadoFacturas extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoFacturas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoFacturas.class.getResource("/iconos/factura.png")));
+		setTitle("Listado de Facturas\r\n");
 		setBounds(100, 100, 854, 466);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Listado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setForeground(UIManager.getColor("Button.focus"));
+			panel.setBackground(UIManager.getColor("Button.focus"));
+			panel.setBorder(new LineBorder(new Color(0, 255, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
@@ -105,11 +115,16 @@ public class ListadoFacturas extends JDialog {
 			}
 			{
 				JLabel lblNewLabel = new JLabel("Filtro:");
-				lblNewLabel.setBounds(10, 14, 46, 14);
+				lblNewLabel.setForeground(SystemColor.textHighlight);
+				lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
+				lblNewLabel.setIcon(new ImageIcon(ListadoFacturas.class.getResource("/iconos/ll.png")));
+				lblNewLabel.setBounds(10, 14, 63, 14);
 				panel.add(lblNewLabel);
 			}
 			{
 				txtFiltro = new JTextField();
+				txtFiltro.setBackground(UIManager.getColor("Button.focus"));
+				txtFiltro.setForeground(new Color(128, 0, 0));
 				txtFiltro.addKeyListener(new KeyAdapter() {
 					@Override
 					public void keyPressed(KeyEvent arg0) {
@@ -119,13 +134,16 @@ public class ListadoFacturas extends JDialog {
 						tr.setRowFilter(RowFilter.regexFilter(txtFiltro.getText().trim()));
 					}
 				});
-				txtFiltro.setBounds(66, 11, 160, 20);
+				txtFiltro.setBounds(83, 11, 176, 20);
 				panel.add(txtFiltro);
 				txtFiltro.setColumns(10);
 			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -135,7 +153,10 @@ public class ListadoFacturas extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListadoFacturas.class.getResource("/iconos/cancel.png")));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(102, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

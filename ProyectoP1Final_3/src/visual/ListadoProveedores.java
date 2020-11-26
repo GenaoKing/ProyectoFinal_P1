@@ -36,6 +36,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
+import java.awt.SystemColor;
+import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
 
 public class ListadoProveedores extends JDialog {
 
@@ -59,18 +63,25 @@ public class ListadoProveedores extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoProveedores() {
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoProveedores.class.getResource("/iconos/ventas.png")));
 		setModal(true);
 		setResizable(false);
-		setTitle("Listado Proveedores");
+		setTitle("Listado de  Proveedores");
 		setBounds(100, 100, 854, 466);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setBorder(new LineBorder(new Color(218, 165, 32)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Listado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setForeground(UIManager.getColor("Button.focus"));
+			panel.setBackground(UIManager.getColor("Button.focus"));
+			panel.setBorder(new LineBorder(new Color(50, 205, 50)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
@@ -109,10 +120,15 @@ public class ListadoProveedores extends JDialog {
 			}
 			
 			JLabel lblNewLabel = new JLabel("Filtro:");
-			lblNewLabel.setBounds(10, 13, 46, 14);
+			lblNewLabel.setIcon(new ImageIcon(ListadoProveedores.class.getResource("/iconos/ll.png")));
+			lblNewLabel.setForeground(SystemColor.textHighlight);
+			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel.setBounds(10, 13, 56, 14);
 			panel.add(lblNewLabel);
 			
 			txtFiltro = new JTextField();
+			txtFiltro.setForeground(new Color(0, 0, 255));
+			txtFiltro.setBackground(UIManager.getColor("Button.focus"));
 			txtFiltro.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent arg0) {
@@ -122,16 +138,22 @@ public class ListadoProveedores extends JDialog {
 					tr.setRowFilter(RowFilter.regexFilter(txtFiltro.getText().trim()));
 				}
 			});
-			txtFiltro.setBounds(52, 11, 141, 20);
+			txtFiltro.setBounds(76, 11, 117, 20);
 			panel.add(txtFiltro);
 			txtFiltro.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				informacionButton = new JButton("Informaci\u00F3n");
+				informacionButton.setIcon(new ImageIcon(ListadoProveedores.class.getResource("/iconos/name.png")));
+				informacionButton.setBackground(UIManager.getColor("Button.focus"));
+				informacionButton.setForeground(new Color(0, 0, 255));
 				informacionButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -152,6 +174,9 @@ public class ListadoProveedores extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListadoProveedores.class.getResource("/iconos/cancel.png")));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(128, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

@@ -30,6 +30,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
+import javax.swing.UIManager;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class ListadoClientes extends JDialog {
 
@@ -54,26 +58,38 @@ public class ListadoClientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoClientes() {
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoClientes.class.getResource("/iconos/btnAgregarClienteIcono.png")));
 		setTitle("Listado Clientes");
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 622, 413);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBorder(new LineBorder(new Color(184, 134, 11)));
+			panel.setBackground(UIManager.getColor("Button.focus"));
+			panel.setForeground(UIManager.getColor("Button.focus"));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new LineBorder(new Color(184, 134, 11)));
+				panel_1.setForeground(UIManager.getColor("Button.focus"));
+				panel_1.setBackground(UIManager.getColor("Button.focus"));
 				panel_1.setBounds(0, 0, 594, 47);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
 					btnBuscar = new JButton("Buscar");
+					btnBuscar.setForeground(SystemColor.textHighlight);
 					btnBuscar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if(boton==1) {
@@ -92,12 +108,14 @@ public class ListadoClientes extends JDialog {
 						}
 					});
 					btnBuscar.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/btnBuscar.png")));
-					btnBuscar.setBackground(SystemColor.control);
+					btnBuscar.setBackground(UIManager.getColor("Button.focus"));
 					btnBuscar.setBounds(403, 3, 128, 34);
 					panel_1.add(btnBuscar);
 				}
 				{
 					txtBusqueda = new JTextField();
+					txtBusqueda.setForeground(UIManager.getColor("Button.focus"));
+					txtBusqueda.setBackground(Color.WHITE);
 					txtBusqueda.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
@@ -154,10 +172,16 @@ public class ListadoClientes extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnCrear = new JButton("Nuevo Cliente");
+				btnCrear.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/name.png")));
+				btnCrear.setBackground(UIManager.getColor("Button.focus"));
+				btnCrear.setForeground(new Color(0, 0, 255));
 				btnCrear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -170,6 +194,9 @@ public class ListadoClientes extends JDialog {
 			}
 			{
 				btnSeleccionar = new JButton("Seleccionar");
+				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
+				btnSeleccionar.setForeground(new Color(0, 102, 0));
+				btnSeleccionar.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/select.png")));
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Facturacion.CargarCliente(aux);
@@ -183,6 +210,9 @@ public class ListadoClientes extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/cancel.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

@@ -18,6 +18,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
 
 public class Ventas extends JDialog {
 
@@ -44,6 +48,9 @@ public class Ventas extends JDialog {
 	 * @param string 
 	 */
 	public Ventas(String cod, String string, float f, int i) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventas.class.getResource("/iconos/se.png")));
+		setForeground(UIManager.getColor("Button.focus"));
+		setBackground(UIManager.getColor("Button.focus"));
 		this.disponibles=i;
 		this.nombre=string;
 		this.precio=f;
@@ -54,38 +61,55 @@ public class Ventas extends JDialog {
 		setBounds(100, 100, 388, 388);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.BLACK);
+		contentPanel.setForeground(Color.DARK_GRAY);
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("Nombre:");
-			lblNewLabel.setBounds(12, 13, 101, 31);
+			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel.setForeground(new Color(250, 250, 210));
+			lblNewLabel.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/nombre.png")));
+			lblNewLabel.setBounds(12, 13, 133, 31);
 			contentPanel.add(lblNewLabel);
 		}
 		{
 			JLabel lblNombre = new JLabel(nombre);
-			lblNombre.setBackground(Color.WHITE);
+			lblNombre.setForeground(new Color(250, 250, 210));
+			lblNombre.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/model.png")));
+			lblNombre.setBackground(UIManager.getColor("Button.focus"));
 			lblNombre.setBounds(12, 57, 346, 31);
 			contentPanel.add(lblNombre);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Precio:");
-			lblNewLabel_2.setBounds(12, 101, 56, 16);
+			lblNewLabel_2.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel_2.setForeground(new Color(250, 250, 210));
+			lblNewLabel_2.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/money.png")));
+			lblNewLabel_2.setBounds(12, 101, 73, 16);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			lblPrecio = new JLabel(""+precio);
-			lblPrecio.setBackground(Color.WHITE);
+			lblPrecio.setForeground(new Color(250, 250, 210));
+			lblPrecio.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/dollar.png")));
+			lblPrecio.setBackground(UIManager.getColor("Button.focus"));
 			lblPrecio.setBounds(12, 130, 346, 31);
 			contentPanel.add(lblPrecio);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("Cantidad:");
-			lblNewLabel_1.setBounds(12, 174, 56, 16);
+			lblNewLabel_1.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel_1.setForeground(new Color(250, 250, 210));
+			lblNewLabel_1.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/iu.png")));
+			lblNewLabel_1.setBounds(12, 174, 101, 16);
 			contentPanel.add(lblNewLabel_1);
 		}
 		
 		spnCantidad = new JSpinner();
+		spnCantidad.setForeground(new Color(128, 0, 0));
+		spnCantidad.setBackground(UIManager.getColor("Button.focus"));
 		spnCantidad.addChangeListener(new ChangeListener() {
 			  @Override
 			  public void stateChanged(ChangeEvent e) {
@@ -100,11 +124,16 @@ public class Ventas extends JDialog {
 		contentPanel.add(spnCantidad);
 		{
 			JLabel lblNewLabel_3 = new JLabel("Descuento:");
-			lblNewLabel_3.setBounds(250, 174, 73, 16);
+			lblNewLabel_3.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel_3.setForeground(new Color(250, 250, 210));
+			lblNewLabel_3.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/dinero.png")));
+			lblNewLabel_3.setBounds(250, 174, 100, 16);
 			contentPanel.add(lblNewLabel_3);
 		}
 		{
 			spnDescuento = new JSpinner();
+			spnDescuento.setBackground(UIManager.getColor("Button.focus"));
+			spnDescuento.setForeground(new Color(128, 0, 0));
 			spnDescuento.addChangeListener(new ChangeListener() {
 				  @Override
 				  public void stateChanged(ChangeEvent e) {
@@ -121,16 +150,25 @@ public class Ventas extends JDialog {
 		{
 			subtotal = (precio*Integer.parseInt(spnCantidad.getValue().toString()));
 			lblSubTotal = new JLabel("SubTotal: "+(subtotal-(subtotal*(Integer.parseInt(spnDescuento.getValue().toString())/100.0f))));
+			lblSubTotal.setForeground(new Color(250, 250, 210));
+			lblSubTotal.setBackground(UIManager.getColor("Button.focus"));
+			lblSubTotal.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/money.png")));
 			lblSubTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblSubTotal.setBounds(12, 254, 222, 31);
 			contentPanel.add(lblSubTotal);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setForeground(Color.DARK_GRAY);
+			buttonPane.setBackground(Color.BLACK);
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Agregar");
+				okButton.setBackground(UIManager.getColor("Button.focus"));
+				okButton.setForeground(new Color(0, 102, 0));
+				okButton.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/registrer.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						fila[0]=codigo;
@@ -148,7 +186,10 @@ public class Ventas extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/cancel.png")));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

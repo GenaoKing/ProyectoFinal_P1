@@ -31,6 +31,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class RegCombo extends JDialog {
 
@@ -63,6 +66,8 @@ public class RegCombo extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegCombo() {
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(new Color(70, 130, 180));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegCombo.class.getResource("/iconos/list.png")));
 		setModal(true);
 		setResizable(false);
@@ -70,17 +75,23 @@ public class RegCombo extends JDialog {
 		setBounds(100, 100, 631, 446);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setForeground(new Color(0, 128, 128));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setForeground(new Color(70, 130, 180));
+			panel.setBackground(UIManager.getColor("Button.focus"));
 			panel.setBorder(new TitledBorder(null, "Registrar", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
 			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(null, "Disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_1.setBackground(UIManager.getColor("Button.focus"));
+			panel_1.setForeground(new Color(0, 128, 128));
+			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(128, 0, 0)));
 			panel_1.setBounds(10, 96, 248, 234);
 			panel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
@@ -118,7 +129,9 @@ public class RegCombo extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(null, "Agregados", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_2.setForeground(new Color(0, 128, 128));
+			panel_2.setBackground(UIManager.getColor("Button.focus"));
+			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Agregados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(128, 0, 0)));
 			panel_2.setBounds(336, 96, 248, 234);
 			panel.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
@@ -155,7 +168,10 @@ public class RegCombo extends JDialog {
 			table_1.setModel(modelo_1);
 			scrollPane_1.setViewportView(table_1);
 			
-			btnAgregar = new JButton(">>");
+			btnAgregar = new JButton("");
+			btnAgregar.setBackground(UIManager.getColor("Button.focus"));
+			btnAgregar.setForeground(new Color(0, 0, 255));
+			btnAgregar.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/derecha.png")));
 			btnAgregar.setEnabled(false);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -195,7 +211,10 @@ public class RegCombo extends JDialog {
 			btnAgregar.setBounds(268, 147, 58, 23);
 			panel.add(btnAgregar);
 			
-			btnQuitar = new JButton("<<");
+			btnQuitar = new JButton("");
+			btnQuitar.setForeground(new Color(0, 0, 255));
+			btnQuitar.setBackground(UIManager.getColor("Button.focus"));
+			btnQuitar.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/izquierda.png")));
 			btnQuitar.setEnabled(false);
 			btnQuitar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -233,39 +252,59 @@ public class RegCombo extends JDialog {
 			panel.add(btnQuitar);
 			
 			JLabel lblNewLabel = new JLabel("Filtro");
-			lblNewLabel.setBounds(10, 71, 46, 14);
+			lblNewLabel.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/ll.png")));
+			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel.setForeground(new Color(184, 134, 11));
+			lblNewLabel.setBounds(10, 71, 88, 14);
 			panel.add(lblNewLabel);
 			
 			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(66, 68, 192, 20);
+			comboBox.setForeground(new Color(0, 0, 255));
+			comboBox.setBackground(UIManager.getColor("Button.focus"));
+			comboBox.setBounds(108, 68, 150, 20);
 			panel.add(comboBox);
 			
 			lblNombre = new JLabel("Nombre:");
-			lblNombre.setBounds(10, 21, 46, 14);
+			lblNombre.setBackground(UIManager.getColor("Button.focus"));
+			lblNombre.setForeground(new Color(184, 134, 11));
+			lblNombre.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/name.png")));
+			lblNombre.setBounds(10, 21, 90, 14);
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(66, 18, 192, 20);
+			txtNombre.setForeground(new Color(0, 0, 255));
+			txtNombre.setBackground(UIManager.getColor("Button.focus"));
+			txtNombre.setBounds(108, 18, 150, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
 			JLabel lblCod = new JLabel("C\u00F3digo:");
-			lblCod.setBounds(336, 21, 46, 14);
+			lblCod.setForeground(new Color(184, 134, 11));
+			lblCod.setBackground(UIManager.getColor("Button.focus"));
+			lblCod.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/code.png")));
+			lblCod.setBounds(336, 21, 90, 14);
 			panel.add(lblCod);
 			
 			txtCodigo = new JTextField();
+			txtCodigo.setBackground(UIManager.getColor("Button.focus"));
+			txtCodigo.setForeground(new Color(0, 0, 255));
 			txtCodigo.setEditable(false);
 			txtCodigo.setColumns(10);
 			txtCodigo.setText("C-"+Prodacom.cod_combos);
-			txtCodigo.setBounds(392, 18, 185, 20);
+			txtCodigo.setBounds(436, 18, 141, 20);
 			panel.add(txtCodigo);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setForeground(new Color(0, 128, 128));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				registrarButton = new JButton("Registrar");
+				registrarButton.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/registrer.png")));
+				registrarButton.setBackground(new Color(0, 128, 0));
+				registrarButton.setForeground(new Color(184, 134, 11));
 				registrarButton.setEnabled(false);
 				registrarButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -289,6 +328,9 @@ public class RegCombo extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/delete.png")));
+				cancelButton.setBackground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(184, 134, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
