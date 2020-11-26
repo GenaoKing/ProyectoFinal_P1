@@ -861,7 +861,7 @@ public class IngresoComponentes extends JDialog {
 	
 	private void LIMPIAR() {
 		
-		txtSerie.setText("");
+		txtSerie.setText("S-"+Prodacom.cod_componente);
 		txtModelo.setText("");
 		txtMarca.setText("");
 		spnCompra.setValue(new Integer(1));

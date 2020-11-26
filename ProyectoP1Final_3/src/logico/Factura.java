@@ -13,11 +13,11 @@ public class Factura {
 	private Vendedor vendedor;
 	private boolean estado;
 	
-	public Factura(String cod, Date fecha, float total, Persona cliente,
+	public Factura(String cod, float total, Persona cliente,
 			Vendedor vendedor,boolean estado) {
 		super();
 		this.cod = cod;
-		this.fecha = fecha;
+		this.fecha = new Date();
 		this.combo = new ArrayList<>();
 		this.componentes = new ArrayList<>();
 		this.total = total;

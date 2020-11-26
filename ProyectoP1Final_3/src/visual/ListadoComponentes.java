@@ -96,7 +96,7 @@ public class ListadoComponentes extends JDialog {
 			panel.add(scrollPane);
 			
 			modelo = new DefaultTableModel();
-			String columns[] = {"Código","Tipo","Cant. en almacen","Precio Unitario","modelo","Serie","Marca"};
+			String columns[] = {"Código","Tipo","Cant. en almacen","Precio Unitario","modelo","Marca"};
 			modelo.setColumnIdentifiers(columns);
 			table = new JTable();
 			table.addMouseListener(new MouseAdapter() {
@@ -153,12 +153,10 @@ public class ListadoComponentes extends JDialog {
 							
 							fila[0] = comp.getSerie();
 							fila[1] = "Disco Duro";
-
 							fila[2] = comp.getCantReal();
 							fila[3] = comp.getPrecioVenta();
 							fila[4] = comp.getModelo();
-							fila[5] = comp.getSerie();
-							fila[6] = comp.getMarca();
+							fila[5] = comp.getMarca();
 							
 							modelo.addRow(fila);
 						}
@@ -168,14 +166,11 @@ public class ListadoComponentes extends JDialog {
 							if(comp instanceof MemoriaRam) {
 								
 								fila[0] = comp.getSerie();
-								
-								fila[1] = "Memoria Ram";
-								
+								fila[1] = "Memoria Ram";	
 								fila[2] = comp.getCantReal();
 								fila[3] = comp.getPrecioVenta();
 								fila[4] = comp.getModelo();
-								fila[5] = comp.getSerie();
-								fila[6] = comp.getMarca();
+								fila[5] = comp.getMarca();
 								
 								modelo.addRow(fila);
 								
@@ -185,15 +180,12 @@ public class ListadoComponentes extends JDialog {
 					else if(seleccionado == 3) {
 						for (Componente comp : Prodacom.getInstance().getComponentes()) {
 							if(comp instanceof Microprocesadores){
-							fila[0] = comp.getSerie();
-							
-							fila[1] = "Microprocesador";
-							
+							fila[0] = comp.getSerie();							
+							fila[1] = "Microprocesador";							
 							fila[2] = comp.getCantReal();
 							fila[3] = comp.getPrecioVenta();
 							fila[4] = comp.getModelo();
-							fila[5] = comp.getSerie();
-							fila[6] = comp.getMarca();
+							fila[5] = comp.getMarca();
 							
 							modelo.addRow(fila);
 							}
@@ -209,8 +201,7 @@ public class ListadoComponentes extends JDialog {
 								fila[2] = comp.getCantReal();
 								fila[3] = comp.getPrecioVenta();
 								fila[4] = comp.getModelo();
-								fila[5] = comp.getSerie();
-								fila[6] = comp.getMarca();
+								fila[5] = comp.getMarca();
 								
 								modelo.addRow(fila);
 							}
@@ -224,7 +215,6 @@ public class ListadoComponentes extends JDialog {
 							fila[3] = c.calcularprecio();
 							fila[4] = c.getNombre();
 							fila[5] = "Unbranded";
-							fila[6] = "Unbranded";
 							modelo.addRow(fila);
 						}
 					}
@@ -264,6 +254,7 @@ public class ListadoComponentes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setEnabled(false);
 				btnEliminar.setForeground(UIManager.getColor("Button.focus"));
 				btnEliminar.setBackground(Color.RED);
 				btnEliminar.addActionListener(new ActionListener() {
@@ -275,8 +266,9 @@ public class ListadoComponentes extends JDialog {
 								cargarTabla();
 								btnEliminar.setEnabled(false);
 								auxiliar = null;
+								JOptionPane.showMessageDialog(null, "Se ha eliminado con exito el componente.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
 							}
-							JOptionPane.showConfirmDialog(null, "Se ha eliminado con exito el componente.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				});
@@ -337,15 +329,15 @@ public class ListadoComponentes extends JDialog {
 			}
 			if(comp instanceof Microprocesadores) {
 				fila[1] = "Microprocesadores";
-			}else {
+			}
+			if(comp instanceof MemoriaRam) {
 				fila[1] = "Memoria Ram";
 			}
 			
 			fila[2] = comp.getCantReal();
 			fila[3] = comp.getPrecioVenta();
 			fila[4] = comp.getModelo();
-			fila[5] = comp.getSerie();
-			fila[6] = comp.getMarca();
+			fila[5] = comp.getMarca();
 			modelo.addRow(fila);
 		}
 			for(Combo c : Prodacom.getInstance().getCombos()) {
@@ -355,7 +347,6 @@ public class ListadoComponentes extends JDialog {
 				fila[3] = c.calcularprecio();
 				fila[4] = c.getNombre();
 				fila[5] = "Unbranded";
-				fila[6] = "Unbranded";
 				modelo.addRow(fila);
 			}
 			
