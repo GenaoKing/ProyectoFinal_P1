@@ -66,7 +66,11 @@ public class ListadoProveedores extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoProveedores() {
+		setModal(true);
+		setResizable(false);
+		setTitle("Listado Proveedores");
 		setBounds(100, 100, 854, 466);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

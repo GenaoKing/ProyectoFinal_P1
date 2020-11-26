@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Combo;
 import logico.Componente;
 import logico.Disco;
 import logico.MemoriaRam;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
+import javax.swing.JTextField;
 
 public class RegCombo extends JDialog {
 
@@ -36,9 +38,10 @@ public class RegCombo extends JDialog {
 	public static DefaultTableModel modelo;
 	public static DefaultTableModel modelo_1;
 	public static Object[] fila;
-	public int [] saber = new int[4];
-	public Componente q = null;
-	public int cont = 0;
+	private int [] saber = new int[4];
+	private Componente q = null;
+	private int cont = 0;
+	private int contador = 0;
 	private JTable table;
 	private JTable table_1;
 	private JButton btnQuitar;
@@ -46,26 +49,24 @@ public class RegCombo extends JDialog {
 	
 	private ArrayList<Componente>agregados = new ArrayList<Componente>();
 	private JButton registrarButton;
+	private JLabel lblNombre;
+	private JTextField txtNombre;
+	private JTextField txtCodigo;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			RegCombo dialog = new RegCombo();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
 	 */
 	public RegCombo() {
+		setModal(true);
+		setResizable(false);
 		setTitle("Registro de combo");
 		setBounds(100, 100, 631, 446);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -77,6 +78,7 @@ public class RegCombo extends JDialog {
 			panel.setLayout(null);
 			
 			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new TitledBorder(null, "Disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 			panel_1.setBounds(10, 96, 248, 234);
 			panel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
@@ -114,6 +116,7 @@ public class RegCombo extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			JPanel panel_2 = new JPanel();
+			panel_2.setBorder(new TitledBorder(null, "Agregados", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 			panel_2.setBounds(336, 96, 248, 234);
 			panel.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
@@ -151,13 +154,12 @@ public class RegCombo extends JDialog {
 			scrollPane_1.setViewportView(table_1);
 			
 			btnAgregar = new JButton(">>");
+			btnAgregar.setEnabled(false);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
-					//conexiones.remove(q);
 					agregados.add(q);
-					cargarTabla();
-					CargarTablaAgregados();
+					cont++;
 					
 					if(q instanceof Disco) {
 						saber[0] = 1;
@@ -167,10 +169,12 @@ public class RegCombo extends JDialog {
 					}
 					if(q instanceof Microprocesadores) {
 						saber[2] = 1;
-					}else {
+					}
+					if(q instanceof MemoriaRam){
 						//Memoria ram
 						saber[3] = 1;
 					}
+					CargarTablaAgregados();
 					cargarTablaExceptuando();
 					btnAgregar.setEnabled(false);
 					if(cont>=2) {
@@ -190,24 +194,25 @@ public class RegCombo extends JDialog {
 			panel.add(btnAgregar);
 			
 			btnQuitar = new JButton("<<");
+			btnQuitar.setEnabled(false);
 			btnQuitar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
 					cont--;
-					//conexiones.add(q);
 					agregados.remove(q);
 					
 					if(q instanceof Disco) {
-						saber[0]--;
+						saber[0] = 0;
 					}
 					if(q instanceof MotherBoard) {
-						saber[1]--;
+						saber[1]= 0;
 					}
 					if(q instanceof Microprocesadores) {
-						saber[2]--;
-					}else {
+						saber[2]= 0;
+					}
+					if(q instanceof MemoriaRam){
 						//Memoria ram
-						saber[3]--;
+						saber[3]= 0;
 					}
 					
 					cargarTablaExceptuando();
@@ -232,6 +237,26 @@ public class RegCombo extends JDialog {
 			JComboBox comboBox = new JComboBox();
 			comboBox.setBounds(66, 68, 192, 20);
 			panel.add(comboBox);
+			
+			lblNombre = new JLabel("Nombre:");
+			lblNombre.setBounds(10, 21, 46, 14);
+			panel.add(lblNombre);
+			
+			txtNombre = new JTextField();
+			txtNombre.setBounds(66, 18, 192, 20);
+			panel.add(txtNombre);
+			txtNombre.setColumns(10);
+			
+			JLabel lblCod = new JLabel("C\u00F3digo:");
+			lblCod.setBounds(336, 21, 46, 14);
+			panel.add(lblCod);
+			
+			txtCodigo = new JTextField();
+			txtCodigo.setEditable(false);
+			txtCodigo.setColumns(10);
+			txtCodigo.setText("C-"+Prodacom.cod_combos);
+			txtCodigo.setBounds(392, 18, 185, 20);
+			panel.add(txtCodigo);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -239,6 +264,20 @@ public class RegCombo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				registrarButton = new JButton("Registrar");
+				registrarButton.setEnabled(false);
+				registrarButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Combo aux  =  new Combo(txtNombre.getText(), txtCodigo.getText(),agregados);
+						Prodacom.getInstance().insertarCombo(aux);
+						clear();
+						registrarButton.setEnabled(false);
+						saber = new int[4];
+						contador  =0;
+					}
+
+					
+				});
 				registrarButton.setActionCommand("OK");
 				buttonPane.add(registrarButton);
 				getRootPane().setDefaultButton(registrarButton);
@@ -254,7 +293,11 @@ public class RegCombo extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+
+		if(contador==0) {
 		cargarTabla();
+		}
+		contador++;
 	}
 	
 	private void CargarTablaAgregados() {
@@ -284,15 +327,23 @@ public class RegCombo extends JDialog {
 		
 	}
 }
+	private void clear() {
+		txtCodigo.setText("C-"+Prodacom.cod_combos);
+		txtNombre.setText("");
+		
+		agregados.removeAll(agregados);
+		cargarTabla();
+		modelo_1.setRowCount(0);
+		
+	}
 	
 	private void cargarTablaExceptuando() {
 		modelo.setRowCount(0); 
 		fila = new Object [modelo.getColumnCount()];
-		
+			
 		if(saber[0] > 0) {
-			
 			for(Componente comp : Prodacom.getInstance().getComponentes()){
-				if(!(comp instanceof Disco)) {
+				if(!(comp instanceof Disco && saber[0] > 0)) {
 				fila[0] = comp.getSerie();
 				fila[1] = comp.getMarca();
 				fila[2] = comp.getModelo();
@@ -301,11 +352,11 @@ public class RegCombo extends JDialog {
 				modelo.addRow(fila);
 				}
 		}
-		}
-		if(saber[1] > 0){
-			
+	}
+			if(saber[1] > 0) {
 			for(Componente comp : Prodacom.getInstance().getComponentes()){
-				if(!(comp instanceof MotherBoard)) {
+				if(!(comp instanceof MotherBoard) && saber[1] > 0) {
+					
 				fila[0] = comp.getSerie();
 				fila[1] = comp.getMarca();
 				fila[2] = comp.getModelo();
@@ -314,12 +365,12 @@ public class RegCombo extends JDialog {
 				modelo.addRow(fila);
 				}
 		}
-			
-		}
-		if(saber[2] > 0) {
-			
+	}	
+
+
+			if(saber[2] > 0) {
 			for(Componente comp : Prodacom.getInstance().getComponentes()){
-				if(!(comp instanceof Microprocesadores)) {
+				if(!(comp instanceof Microprocesadores && saber[2] > 0)) {
 				fila[0] = comp.getSerie();
 				fila[1] = comp.getMarca();
 				fila[2] = comp.getModelo();
@@ -328,12 +379,11 @@ public class RegCombo extends JDialog {
 				modelo.addRow(fila);
 				}
 		}
-		}
+	}
 		
-		if(saber[3] > 0 ) {
-			
+			if(saber[3] > 0) {
 			for(Componente comp : Prodacom.getInstance().getComponentes()){
-				if(!(comp instanceof MemoriaRam)) {
+				if(!(comp instanceof MemoriaRam && saber[3] > 0)) {
 				fila[0] = comp.getSerie();
 				fila[1] = comp.getMarca();
 				fila[2] = comp.getModelo();
@@ -342,7 +392,7 @@ public class RegCombo extends JDialog {
 				modelo.addRow(fila);
 				}
 		}
-		}
+	}
 		
 		
 	}

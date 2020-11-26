@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class RegProveedores extends JDialog {
 
@@ -62,7 +63,11 @@ public class RegProveedores extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegProveedores() {
-		setBounds(100, 100, 651, 602);
+		setModal(true);
+		setResizable(false);
+		setTitle("Registro Proveedor");
+		setBounds(100, 100, 730, 606);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -91,7 +96,7 @@ public class RegProveedores extends JDialog {
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(220, 42, 390, 26);
+			txtNombre.setBounds(220, 42, 474, 26);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
@@ -100,7 +105,7 @@ public class RegProveedores extends JDialog {
 			panel.add(lblTelefono);
 			
 			txtTelefono = new JTextField();
-			txtTelefono.setBounds(220, 114, 390, 26);
+			txtTelefono.setBounds(220, 114, 474, 26);
 			panel.add(txtTelefono);
 			txtTelefono.setColumns(10);
 			
@@ -118,12 +123,13 @@ public class RegProveedores extends JDialog {
 			panel.add(lblDireccion);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(12, 178, 598, 26);
+			txtDireccion.setBounds(12, 178, 682, 26);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
 			JPanel panel_1 = new JPanel();
-			panel_1.setBounds(12, 296, 212, 197);
+			panel_1.setBorder(new TitledBorder(null, "Disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_1.setBounds(12, 296, 297, 197);
 			panel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
 			
@@ -175,7 +181,7 @@ public class RegProveedores extends JDialog {
 				}
 			});
 			btnAgregar.setEnabled(false);
-			btnAgregar.setBounds(265, 337, 97, 25);
+			btnAgregar.setBounds(319, 329, 68, 25);
 			panel.add(btnAgregar);
 			
 			btnQuitar = new JButton("<<");
@@ -195,11 +201,12 @@ public class RegProveedores extends JDialog {
 				}			
 			});
 			btnQuitar.setEnabled(false);
-			btnQuitar.setBounds(265, 434, 97, 25);
+			btnQuitar.setBounds(319, 435, 68, 25);
 			panel.add(btnQuitar);
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBounds(399, 296, 212, 197);
+			panel_2.setBorder(new TitledBorder(null, "Agregados", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_2.setBounds(397, 296, 297, 197);
 			panel.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
 			

@@ -3,12 +3,12 @@ package logico;
 import java.util.ArrayList;
 
 public class Combo {
-	private ArrayList<Componente>componentes;
+	private ArrayList<Componente>componentes = new ArrayList<Componente>();
 	private String nombre;
 	private String cod;
-	public Combo(String nombre, String cod) {
+	public Combo(String nombre, String cod,ArrayList<Componente>componentes) {
 		super();
-		this.componentes = new ArrayList<>();
+		this.componentes = componentes;
 		this.nombre = nombre;
 		this.cod = cod;
 	}
