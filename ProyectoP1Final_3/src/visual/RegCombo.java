@@ -268,8 +268,11 @@ public class RegCombo extends JDialog {
 				registrarButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						Combo aux  =  new Combo(txtNombre.getText(), txtCodigo.getText(),agregados);
+						Combo aux  =  new Combo(txtNombre.getText(), txtCodigo.getText());
 						Prodacom.getInstance().insertarCombo(aux);
+						for(Componente c : agregados) {
+							aux.insertarcomponentes(c);
+						}
 						clear();
 						registrarButton.setEnabled(false);
 						saber = new int[4];

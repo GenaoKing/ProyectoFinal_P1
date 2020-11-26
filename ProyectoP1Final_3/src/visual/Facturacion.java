@@ -246,7 +246,7 @@ public class Facturacion extends JDialog {
 			btnAgregar = new JButton("Agregar Articulo");
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ListadoComponentes a = new ListadoComponentes();
+					ListadoComponentes a = new ListadoComponentes(null,0);
 					a.setVisible(true);
 				}
 			});

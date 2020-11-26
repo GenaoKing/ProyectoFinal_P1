@@ -48,19 +48,12 @@ public class ListadoProveedores extends JDialog {
 	public static Object [] fila; 
 	private JButton informacionButton;
 	private JTextField txtFiltro;
+	private Proveedor p  = null; 
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListadoProveedores dialog = new ListadoProveedores();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -97,10 +90,10 @@ public class ListadoProveedores extends JDialog {
 							seleccion = table.getSelectedRow();
 							modelrow = table.convertRowIndexToModel(seleccion);
 							if(seleccion!=-1) {
-								System.out.println(modelrow);
+								
 								informacionButton.setEnabled(true);
 								
-								//auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
+								p = Prodacom.getInstance().buscarProveedor((String)modelo.getValueAt(modelrow, 0));
 								
 							}else {
 								informacionButton.setEnabled(false);
@@ -139,6 +132,20 @@ public class ListadoProveedores extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				informacionButton = new JButton("Informaci\u00F3n");
+				informacionButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Combo c = new Combo("Componentes que trae: "+p.getNombre(), "aux");
+						for(Componente a : p.getComponentes()) {
+							c.insertarcomponentes(a);
+						}
+						ListadoComponentes a = new ListadoComponentes(c, 0);
+						a.setVisible(true);
+						
+		
+					}
+				});
+				informacionButton.setEnabled(false);
 				informacionButton.setActionCommand("OK");
 				buttonPane.add(informacionButton);
 				getRootPane().setDefaultButton(informacionButton);

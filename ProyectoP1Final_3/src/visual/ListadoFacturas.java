@@ -88,7 +88,7 @@ public class ListadoFacturas extends JDialog {
 							seleccion = table.getSelectedRow();
 							modelrow = table.convertRowIndexToModel(seleccion);
 							if(seleccion!=-1) {
-								System.out.println(modelrow);
+							
 								//informacionButton.setEnabled(true);
 								//auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
 								

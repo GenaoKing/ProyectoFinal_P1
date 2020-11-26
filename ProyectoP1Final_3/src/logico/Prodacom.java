@@ -193,5 +193,19 @@ public class Prodacom {
 		cod_proveedores++;
 		
 	}
+
+	public Proveedor buscarProveedor(String valueAt) {
+		int i = 0;
+		boolean encontrado = false;
+		Proveedor p = null;
+		while(i<proveedores.size() && !encontrado) {
+			if(proveedores.get(i).getCodigo().equalsIgnoreCase(valueAt)) {
+				p = proveedores.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return p;
+	}
 	
 }

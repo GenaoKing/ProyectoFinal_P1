@@ -30,6 +30,7 @@ import javax.swing.RowFilter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -57,7 +58,8 @@ public class ListadoComponentes extends JDialog {
 	private JButton btnSeleccionar;
 	private int seleccion = -1;
 	private int modelrow = -1;
-	
+	private static Combo cargar = null;
+	private int mode = -1;
 
 	/**
 	 * Launch the application.
@@ -68,8 +70,23 @@ public class ListadoComponentes extends JDialog {
 	 * Create the dialog.
 	 * @param b 
 	 */
-	public ListadoComponentes() {
-		setTitle("Listado de componentes");
+	public ListadoComponentes(Combo aux,int mode) {
+		this.cargar=aux;
+		this.mode=mode;
+		if(cargar==null) {
+			if(mode==1) {
+				setTitle("Listado de combos");
+				loadTable(5);
+			}else {	
+			setTitle("Listado de componentes");
+			}
+			}else {
+				if(mode==1) {
+				setTitle("Listado de componentes del combo: "+cargar.getNombre());
+				}else {
+					setTitle(cargar.getNombre());
+				}
+				}
 		setModal(true);
 		setResizable(false);
 		setForeground(Color.RED);
@@ -104,15 +121,18 @@ public class ListadoComponentes extends JDialog {
 				public void mouseClicked(MouseEvent arg0) {
 					seleccion = table.getSelectedRow();
 					modelrow = table.convertRowIndexToModel(seleccion);
-					if(seleccion!=-1) {
-						System.out.println(modelrow);
-						btnEliminar.setEnabled(true);
-						btnSeleccionar.setEnabled(true);
-						auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
-						
+					if(cargar==null) {
+						if(seleccion!=-1) {
+							
+							btnEliminar.setEnabled(true);
+							btnSeleccionar.setEnabled(true);
+						}else {
+							btnEliminar.setEnabled(false);
+							btnSeleccionar.setEnabled(false);
+						}
 					}else {
-						btnEliminar.setEnabled(false);
 						btnSeleccionar.setEnabled(false);
+						btnEliminar.setEnabled(false);
 					}
 				}
 			});
@@ -136,93 +156,20 @@ public class ListadoComponentes extends JDialog {
 					loadTable(cbxFiltro.getSelectedIndex());
 				}
 
-				private void loadTable(int seleccionado) {
-					
-					modelo.setRowCount(0);
-					
-					fila = new Object[modelo.getColumnCount()];
-					
-					if(seleccionado == 0) {
-						cargarTabla();
-					}
-					
-					if(seleccionado == 1) {
-						for (Componente comp : Prodacom.getInstance().getComponentes()) {
-							
-							if(comp instanceof Disco) {
-							
-							fila[0] = comp.getSerie();
-							fila[1] = "Disco Duro";
-							fila[2] = comp.getCantReal();
-							fila[3] = comp.getPrecioVenta();
-							fila[4] = comp.getModelo();
-							fila[5] = comp.getMarca();
-							
-							modelo.addRow(fila);
-						}
-						}
-					}else if(seleccionado == 2) {
-						for (Componente comp : Prodacom.getInstance().getComponentes()) {
-							if(comp instanceof MemoriaRam) {
-								
-								fila[0] = comp.getSerie();
-								fila[1] = "Memoria Ram";	
-								fila[2] = comp.getCantReal();
-								fila[3] = comp.getPrecioVenta();
-								fila[4] = comp.getModelo();
-								fila[5] = comp.getMarca();
-								
-								modelo.addRow(fila);
-								
-							}
-						}
-					}
-					else if(seleccionado == 3) {
-						for (Componente comp : Prodacom.getInstance().getComponentes()) {
-							if(comp instanceof Microprocesadores){
-							fila[0] = comp.getSerie();							
-							fila[1] = "Microprocesador";							
-							fila[2] = comp.getCantReal();
-							fila[3] = comp.getPrecioVenta();
-							fila[4] = comp.getModelo();
-							fila[5] = comp.getMarca();
-							
-							modelo.addRow(fila);
-							}
-						}
-					}
-					else if(seleccionado == 4) {
-						for (Componente comp : Prodacom.getInstance().getComponentes()) {
-							if(comp instanceof MotherBoard) {
-								fila[0] = comp.getSerie();
-								
-								fila[1] = "MotherBoard";
-								
-								fila[2] = comp.getCantReal();
-								fila[3] = comp.getPrecioVenta();
-								fila[4] = comp.getModelo();
-								fila[5] = comp.getMarca();
-								
-								modelo.addRow(fila);
-							}
-						}
-					}
-					else if(seleccionado == 5 ) {
-						for(Combo c : Prodacom.getInstance().getCombos()) {
-							fila[0] = c.getCod();
-							fila[1] = "Combo";
-							fila[2] = "Hasta Agotar Existencias";
-							fila[3] = c.calcularprecio();
-							fila[4] = c.getNombre();
-							fila[5] = "Unbranded";
-							modelo.addRow(fila);
-						}
-					}
-				}
+				
 
 			});
 			cbxFiltro.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Disco Duro", "Memoria Ram", "Microprocesador", "MotherBoard","Combos"}));
 			cbxFiltro.setBounds(691, 12, 123, 30);
+			if(cargar!=null) {
+				cbxFiltro.setEnabled(false);
+			}else {
+				if(mode==1) {
+					cbxFiltro.setEnabled(false);
+					cbxFiltro.setSelectedIndex(5);
+					loadTable(5);
+				}
+			}
 			panel.add(cbxFiltro);
 			
 			JLabel lblBuscador = new JLabel("Buscador:");
@@ -308,38 +255,85 @@ public class ListadoComponentes extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		cargarTabla();
+		if(mode==0) {
+			cargarTabla();
+		}
 	}
 
 	
 
-	
-	
-	private void cargarTabla() {
-		modelo.setRowCount(0); 
-		fila = new Object [modelo.getColumnCount()];
+	private void loadTable(int seleccionado) {
 		
-		for(Componente comp : Prodacom.getInstance().getComponentes()){
-			fila[0] = comp.getSerie();
-			if(comp instanceof Disco) {
-				fila[1] = "Disco Duro";
-			}
-			if(comp instanceof MotherBoard) {
-				fila[1] = "MotherBoard";
-			}
-			if(comp instanceof Microprocesadores) {
-				fila[1] = "Microprocesadores";
-			}
-			if(comp instanceof MemoriaRam) {
-				fila[1] = "Memoria Ram";
-			}
-			
-			fila[2] = comp.getCantReal();
-			fila[3] = comp.getPrecioVenta();
-			fila[4] = comp.getModelo();
-			fila[5] = comp.getMarca();
-			modelo.addRow(fila);
+		modelo.setRowCount(0);
+		
+		fila = new Object[modelo.getColumnCount()];
+		
+		if(seleccionado == 0) {
+			cargarTabla();
 		}
+		
+		if(seleccionado == 1) {
+			for (Componente comp : Prodacom.getInstance().getComponentes()) {
+				
+				if(comp instanceof Disco) {
+				
+				fila[0] = comp.getSerie();
+				fila[1] = "Disco Duro";
+				fila[2] = comp.getCantReal();
+				fila[3] = comp.getPrecioVenta();
+				fila[4] = comp.getModelo();
+				fila[5] = comp.getMarca();
+				
+				modelo.addRow(fila);
+			}
+			}
+		}else if(seleccionado == 2) {
+			for (Componente comp : Prodacom.getInstance().getComponentes()) {
+				if(comp instanceof MemoriaRam) {
+					
+					fila[0] = comp.getSerie();
+					fila[1] = "Memoria Ram";	
+					fila[2] = comp.getCantReal();
+					fila[3] = comp.getPrecioVenta();
+					fila[4] = comp.getModelo();
+					fila[5] = comp.getMarca();
+					
+					modelo.addRow(fila);
+					
+				}
+			}
+		}
+		else if(seleccionado == 3) {
+			for (Componente comp : Prodacom.getInstance().getComponentes()) {
+				if(comp instanceof Microprocesadores){
+				fila[0] = comp.getSerie();							
+				fila[1] = "Microprocesador";							
+				fila[2] = comp.getCantReal();
+				fila[3] = comp.getPrecioVenta();
+				fila[4] = comp.getModelo();
+				fila[5] = comp.getMarca();
+				
+				modelo.addRow(fila);
+				}
+			}
+		}
+		else if(seleccionado == 4) {
+			for (Componente comp : Prodacom.getInstance().getComponentes()) {
+				if(comp instanceof MotherBoard) {
+					fila[0] = comp.getSerie();
+					
+					fila[1] = "MotherBoard";
+					
+					fila[2] = comp.getCantReal();
+					fila[3] = comp.getPrecioVenta();
+					fila[4] = comp.getModelo();
+					fila[5] = comp.getMarca();
+					
+					modelo.addRow(fila);
+				}
+			}
+		}
+		else if(seleccionado == 5 ) {
 			for(Combo c : Prodacom.getInstance().getCombos()) {
 				fila[0] = c.getCod();
 				fila[1] = "Combo";
@@ -349,7 +343,68 @@ public class ListadoComponentes extends JDialog {
 				fila[5] = "Unbranded";
 				modelo.addRow(fila);
 			}
-			
-
 		}
+	}
+	
+	
+	private void cargarTabla() {
+		modelo.setRowCount(0); 
+		fila = new Object [modelo.getColumnCount()];
+			
+			
+		if(cargar==null) {
+			for(Componente comp : Prodacom.getInstance().getComponentes()){
+				fila[0] = comp.getSerie();
+				if(comp instanceof Disco) {
+					fila[1] = "Disco Duro";
+				}
+				if(comp instanceof MotherBoard) {
+					fila[1] = "MotherBoard";
+				}
+				if(comp instanceof Microprocesadores) {
+					fila[1] = "Microprocesadores";
+				}
+				if(comp instanceof MemoriaRam) {
+					fila[1] = "Memoria Ram";
+				}
+				
+				fila[2] = comp.getCantReal();
+				fila[3] = comp.getPrecioVenta();
+				fila[4] = comp.getModelo();
+				fila[5] = comp.getMarca();
+				modelo.addRow(fila);
+			}
+				for(Combo c : Prodacom.getInstance().getCombos()) {
+					fila[0] = c.getCod();
+					fila[1] = "Combo";
+					fila[2] = "Hasta Agotar Existencias";
+					fila[3] = c.calcularprecio();
+					fila[4] = c.getNombre();
+					fila[5] = "Unbranded";
+					modelo.addRow(fila);
+			}
+		}else {
+			for(Componente comp : cargar.getComponentes()){
+				fila[0] = comp.getSerie();
+				if(comp instanceof Disco) {
+					fila[1] = "Disco Duro";
+				}
+				if(comp instanceof MotherBoard) {
+					fila[1] = "MotherBoard";
+				}
+				if(comp instanceof Microprocesadores) {
+					fila[1] = "Microprocesadores";
+				}
+				if(comp instanceof MemoriaRam) {
+					fila[1] = "Memoria Ram";
+				}
+				
+				fila[2] = comp.getCantReal();
+				fila[3] = comp.getPrecioVenta();
+				fila[4] = comp.getModelo();
+				fila[5] = comp.getMarca();
+				modelo.addRow(fila);
+			}
+		}
+	}
 }

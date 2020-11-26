@@ -75,6 +75,7 @@ public class RegProveedores extends JDialog {
 		for(Componente c: Prodacom.getInstance().getComponentes()){
 			disponibles.add(c);
 		}
+		
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -264,10 +265,13 @@ public class RegProveedores extends JDialog {
 				okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Proveedor p = new Proveedor(agregados,txtNombre.getText(),txtCodigo.getText()
+						Proveedor p = new Proveedor(txtNombre.getText(),txtCodigo.getText()
 								,txtTelefono.getText(),txtDireccion.getText(),
 								Float.parseFloat(txtCredito.getText()));
 						Prodacom.getInstance().insertarProveedor(p);
+						for(Componente c : agregados) {
+							p.insertarcomponentes(c);
+						}
 						JOptionPane.showMessageDialog(null, "Se ha registrado correctamente el proveedor");
 						clear();
 					}
@@ -282,6 +286,7 @@ public class RegProveedores extends JDialog {
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						disponibles.removeAll(disponibles);
 						dispose();
 					}
 				});
@@ -467,6 +472,9 @@ public class RegProveedores extends JDialog {
 			disponibles.add(c);
 		}
 		agregados.removeAll(agregados);
+		
+		CargarTabla();
+		CargarTablaVendidos();
 	}
 	
 }

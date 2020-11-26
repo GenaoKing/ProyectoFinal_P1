@@ -6,9 +6,9 @@ public class Combo {
 	private ArrayList<Componente>componentes = new ArrayList<Componente>();
 	private String nombre;
 	private String cod;
-	public Combo(String nombre, String cod,ArrayList<Componente>componentes) {
+	public Combo(String nombre, String cod) {
 		super();
-		this.componentes = componentes;
+		this.componentes = new ArrayList<Componente>();
 		this.nombre = nombre;
 		this.cod = cod;
 	}
@@ -39,7 +39,9 @@ public class Combo {
 		return (res-(res*0.1f));
 	}
 
-	
+	public void insertarcomponentes(Componente c) {
+		componentes.add(c);
+	}
 	
 	
 }

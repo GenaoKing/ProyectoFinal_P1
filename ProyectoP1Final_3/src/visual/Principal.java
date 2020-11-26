@@ -105,7 +105,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Listado Componente");
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoComponentes aux = new ListadoComponentes();
+				ListadoComponentes aux = new ListadoComponentes(null,0);
 				aux.setVisible(true);
 				
 			}
@@ -139,7 +139,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Listado Combo");
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoComponentes aux = new ListadoComponentes();
+				ListadoComponentes aux = new ListadoComponentes(null,1);
 				aux.setVisible(true);
 			}
 		});

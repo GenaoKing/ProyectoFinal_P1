@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Proveedor {
 	//
-	private ArrayList<Componente>componentes = new ArrayList<Componente>();
+	private ArrayList<Componente>componentes;
 	private String nombre;
 	private String codigo;
 	private String telefono;
@@ -13,10 +13,10 @@ public class Proveedor {
 	
 
 
-	public Proveedor(ArrayList<Componente> componentes, String nombre, String codigo, String telefono, String direccion,
+	public Proveedor(String nombre, String codigo, String telefono, String direccion,
 			float limCredito) {
 		super();
-		this.componentes = componentes;
+		this.componentes   = new ArrayList<Componente>();
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.telefono = telefono;
@@ -72,6 +72,9 @@ public class Proveedor {
 		LimCredito = limCredito;
 	}
 	
+	public void insertarcomponentes(Componente c) {
+		componentes.add(c);
+	}
 	
 	
 	
