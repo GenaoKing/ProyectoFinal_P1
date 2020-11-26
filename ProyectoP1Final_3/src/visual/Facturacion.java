@@ -214,6 +214,7 @@ public class Facturacion extends JDialog {
 							btnModificar.setEnabled(false);
 							componente = null;
 							combo = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
+							cantidad = Integer.parseInt((String)modelo.getValueAt(modelrow, 2));
 						}else {
 							btnListarComponentes.setEnabled(false);
 							btnEliminar.setEnabled(true);
@@ -277,6 +278,8 @@ public class Facturacion extends JDialog {
 						componente = null;
 					}
 					modelo.removeRow(seleccion);
+					btnEliminar.setEnabled(false);
+					btnModificar.setEnabled(false);
 					CargarTotal();
 					seleccion = -1;
 				}
