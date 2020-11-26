@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class RegCombo extends JDialog {
 
@@ -62,6 +63,7 @@ public class RegCombo extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegCombo() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegCombo.class.getResource("/iconos/list.png")));
 		setModal(true);
 		setResizable(false);
 		setTitle("Registro de combo");
