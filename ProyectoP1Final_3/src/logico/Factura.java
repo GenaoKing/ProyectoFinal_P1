@@ -90,7 +90,11 @@ public class Factura {
 		this.estado = estado;
 	}
 
-	
-	
+	public void InsertarCombos(Combo c) {
+		combo.add(c);
+	}
+	public void InsertarComponente(Componente c) {
+		componentes.add(c);
+	}
 	
 }

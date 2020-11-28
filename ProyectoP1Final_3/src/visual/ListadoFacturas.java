@@ -50,15 +50,7 @@ public class ListadoFacturas extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListadoFacturas dialog = new ListadoFacturas();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
@@ -66,7 +58,10 @@ public class ListadoFacturas extends JDialog {
 	public ListadoFacturas() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoFacturas.class.getResource("/iconos/factura.png")));
 		setTitle("Listado de Facturas\r\n");
+		setModal(true);
+		setResizable(false);
 		setBounds(100, 100, 854, 466);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(UIManager.getColor("Button.focus"));
 		contentPanel.setBackground(UIManager.getColor("Button.focus"));

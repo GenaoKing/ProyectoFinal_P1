@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import logico.Cliente;
 import logico.Combo;
 import logico.Componente;
+import logico.Factura;
 import logico.Prodacom;
 
 import javax.swing.border.LineBorder;
@@ -22,6 +23,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
@@ -34,9 +36,13 @@ import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
 public class Facturacion extends JDialog {
 
@@ -70,6 +76,9 @@ public class Facturacion extends JDialog {
 	private static JLabel lblSubTotal;
 	private static JLabel lblImpuestos;
 	private static JLabel lblTotal;
+	private static float subtotal = 0;
+	private static Cliente cliente = null;
+	private static JButton btnPagar;
 
 	/**
 	 * Launch the application.
@@ -157,6 +166,12 @@ public class Facturacion extends JDialog {
 			panel_2.add(lblCodigo);
 			
 			lblFecha = new JLabel("");
+			Calendar inicio=new GregorianCalendar();
+			inicio.setTime(new Date());
+			lblFecha.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR));
+			lblFecha.setBackground(UIManager.getColor("Button.focus"));
+			lblFecha.setForeground(SystemColor.textHighlight);
+			lblFecha.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 22));
 			lblFecha.setBounds(758, 115, 228, 31);
 			panel_2.add(lblFecha);
 			
@@ -298,7 +313,7 @@ public class Facturacion extends JDialog {
 			btnListarComponentes = new JButton("Listar Componentes Combo");
 			btnListarComponentes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-				
+					
 					
 				}
 			});
@@ -338,16 +353,65 @@ public class Facturacion extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnCredito = new JButton("Pagar A Credito");
+			btnCredito.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int ok = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar la factura");
+					
+					if(cliente !=null && ok==JOptionPane.OK_OPTION) {
+						float pago = Prodacom.getInstance().CreditCliente(cliente);
+						if(pago>=(subtotal+(subtotal*0.18f))) {
+							Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, null, true);
+							for(Combo c : combos) {
+								f.InsertarCombos(c);
+							}
+							for(Componente c : componentes) {
+								f.InsertarComponente(c);
+							}
+							Prodacom.getInstance().insertarFactura(f);
+							JOptionPane.showMessageDialog(null, "El credito restante para el cliente es de: "+(pago-(subtotal+(subtotal*0.18f))));
+							btnCredito.setEnabled(false);
+							
+							clear();
+						}else {
+							JOptionPane.showMessageDialog(null, "Su credito disponible no es suficiente para pagar el total de: "+(subtotal+(subtotal*0.18f)));
+							btnCredito.setEnabled(true);
+						}
+					}
+				}
+			});
 			btnCredito.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/bille.png")));
 			btnCredito.setBackground(UIManager.getColor("Button.focus"));
 			btnCredito.setForeground(SystemColor.textHighlight);
 			buttonPane.add(btnCredito);
 			{
-				JButton btnPagar = new JButton("Pagar Ahora");
+				btnPagar = new JButton("Pagar Ahora");
+				btnPagar.setEnabled(false);
 				btnPagar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/money.png")));
 				btnPagar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					}
+						int ok = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar la factura");
+						
+						if(cliente !=null && ok==JOptionPane.OK_OPTION) {
+							float pago = Float.parseFloat(JOptionPane.showInputDialog("Digite el monto del pago"));
+							if(pago>=(subtotal+(subtotal*0.18f))) {
+								Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, null, false);
+								for(Combo c : combos) {
+									f.InsertarCombos(c);
+								}
+								for(Componente c : componentes) {
+									f.InsertarComponente(c);
+								}
+								Prodacom.getInstance().insertarFactura(f);
+								JOptionPane.showMessageDialog(null, "Su devuelta es: "+(pago-(subtotal+(subtotal*0.18f))));
+								btnPagar.setEnabled(false);
+								
+								clear();
+							}else {
+								JOptionPane.showMessageDialog(null, "Ha ingresado una cantidad inferior a la requerida, procure que pase de: "+(subtotal+(subtotal*0.18f)));
+								btnPagar.setEnabled(true);
+							}
+						}
+					}			
 				});
 				btnPagar.setBackground(UIManager.getColor("Button.focus"));
 				btnPagar.setForeground(new Color(34, 139, 34));
@@ -371,7 +435,35 @@ public class Facturacion extends JDialog {
 		}
 	}
 
+	
+	private void clear() {
+		btnSeleccionarCliente.setVisible(true);
+		lblNombre.setText("");
+		lblCedula.setText("");
+		lblDireccion.setText("");
+		lblTelefono.setText("");
+		lblCreditoDisponible.setText("");
+		lblLimiteCredito.setText("");
+		modelo.setRowCount(0);
+		cliente=null;
+		combos.removeAll(combos);
+		componentes.removeAll(componentes);
+		componente=null;
+		combo=null;
+		lblCodigo.setText("Factura #"+Prodacom.cod_facturas);	
+		Calendar inicio=new GregorianCalendar();
+		inicio.setTime(new Date());
+		lblFecha.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR));
+		lblSubTotal.setText("Sub-Total: 0.0");
+		lblImpuestos.setText("ITBIS (18%): 0.0");
+		lblTotal.setText("Total: 0.0");
+		
+	}		
+	
+	
+	
 	public static void CargarCliente(Cliente c) {
+		cliente  = c;
 		lblNombre.setText(c.getNombre());
 		lblCedula.setText(c.getCedula());
 		lblDireccion.setText(c.getDireccion());
@@ -395,14 +487,19 @@ public class Facturacion extends JDialog {
 	}
 
 	private static void CargarTotal() {
-		float subtotal = 0;
+		subtotal = 0;
 		for(int i = 0;i<table.getRowCount();i++) {
 			subtotal+=(float)modelo.getValueAt(i, 4);
 		}
-	
-		lblSubTotal.setText("Sub-Total: "+subtotal);
-		lblImpuestos.setText("ITBIS (18%): "+(subtotal*0.18f));
-		lblTotal.setText("Total: "+(subtotal+(subtotal*0.18f)));
+		DecimalFormat formato1 = new DecimalFormat("#.00");
+		lblSubTotal.setText("Sub-Total: "+formato1.format(subtotal));
+		lblImpuestos.setText("ITBIS (18%): "+formato1.format((subtotal*0.18f)));
+		lblTotal.setText("Total: "+formato1.format((subtotal+(subtotal*0.18f))));
+		if((combos.size()>=1||componentes.size()>=1) && cliente!=null) {
+			btnPagar.setEnabled(true);
+			}else {
+				btnPagar.setEnabled(false);
+			}
 	
 	}
 }
