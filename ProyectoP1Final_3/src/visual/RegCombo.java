@@ -45,7 +45,7 @@ public class RegCombo extends JDialog {
 	public static DefaultTableModel modelo;
 	public static DefaultTableModel modelo_1;
 	public static Object[] fila;
-	private int [] saber = new int[4];
+	//private int [] saber = new int[4];
 	private Componente q = null;
 	private int cont = 0;
 	private int contador = 0;
@@ -181,7 +181,7 @@ public class RegCombo extends JDialog {
 					
 					agregados.add(q);
 					cont++;
-					
+					/*
 					if(q instanceof Disco) {
 						saber[0] = 1;
 					}
@@ -195,8 +195,9 @@ public class RegCombo extends JDialog {
 						//Memoria ram
 						saber[3] = 1;
 					}
+					*/
 					CargarTablaAgregados();
-					cargarTablaExceptuando();
+					//cargarTablaExceptuando();
 					btnAgregar.setEnabled(false);
 					if(cont>=2) {
 						registrarButton.setEnabled(true);
@@ -224,7 +225,7 @@ public class RegCombo extends JDialog {
 					
 					cont--;
 					agregados.remove(q);
-					
+					/*
 					if(q instanceof Disco) {
 						saber[0] = 0;
 					}
@@ -238,8 +239,8 @@ public class RegCombo extends JDialog {
 						//Memoria ram
 						saber[3]= 0;
 					}
-					
-					cargarTablaExceptuando();
+					*/
+					//cargarTablaExceptuando();
 					CargarTablaAgregados();
 					
 					btnQuitar.setEnabled(false);
@@ -320,7 +321,7 @@ public class RegCombo extends JDialog {
 						Prodacom.getInstance().insertarCombo(aux);
 						clear();
 						registrarButton.setEnabled(false);
-						saber = new int[4];
+						//saber = new int[4];
 						contador  =0;
 					}
 
@@ -387,7 +388,7 @@ public class RegCombo extends JDialog {
 		modelo_1.setRowCount(0);
 		
 	}
-	
+	/*
 	private void cargarTablaExceptuando() {
 		modelo.setRowCount(0); 
 		fila = new Object [modelo.getColumnCount()];
@@ -447,5 +448,5 @@ public class RegCombo extends JDialog {
 		
 		
 	}
-	
+	*/
 }
