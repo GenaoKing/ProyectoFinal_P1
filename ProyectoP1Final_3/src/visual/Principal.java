@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+import java.awt.Font;
 
 public class Principal extends JFrame {
 
@@ -62,6 +63,7 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu_1 = new JMenu("Facturar");
+		mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/iconos/factura.png")));
 		mnNewMenu_1.setForeground(SystemColor.textHighlight);
 		mnNewMenu_1.setBackground(UIManager.getColor("Button.focus"));
@@ -92,6 +94,7 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		JMenu mnNewMenu = new JMenu("Componentes");
+		mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compo.png")));
 		mnNewMenu.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu.setForeground(SystemColor.textHighlight);
@@ -125,6 +128,7 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
 		JMenu mnNewMenu_2 = new JMenu("Cliente");
+		mnNewMenu_2.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		mnNewMenu_2.setIcon(new ImageIcon(Principal.class.getResource("/iconos/user.png")));
 		mnNewMenu_2.setForeground(SystemColor.textHighlight);
 		mnNewMenu_2.setBackground(UIManager.getColor("Button.focus"));
@@ -143,6 +147,7 @@ public class Principal extends JFrame {
 		mnNewMenu_2.add(mntmNewMenuItem_3);
 		
 		JMenu mnNewMenu_3 = new JMenu("Combos");
+		mnNewMenu_3.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		mnNewMenu_3.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_3.setForeground(SystemColor.textHighlight);
 		mnNewMenu_3.setIcon(new ImageIcon(Principal.class.getResource("/iconos/com.png")));
@@ -173,6 +178,7 @@ public class Principal extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_6);
 		
 		JMenu mnNewMenu_4 = new JMenu("Proveedor");
+		mnNewMenu_4.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		mnNewMenu_4.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compras.png")));
 		mnNewMenu_4.setForeground(SystemColor.textHighlight);
 		mnNewMenu_4.setBackground(UIManager.getColor("Button.focus"));
@@ -202,6 +208,55 @@ public class Principal extends JFrame {
 			}
 		});
 		mnNewMenu_4.add(mntmNewMenuItem_8);
+		
+		JMenu mnNewMenu_5 = new JMenu("Administracion");
+		mnNewMenu_5.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		menuBar.add(mnNewMenu_5);
+		
+		JMenu mnNewMenu_6 = new JMenu("Vendedores");
+		mnNewMenu_5.add(mnNewMenu_6);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegTrabajadores a = new RegTrabajadores();
+				a.setVisible(true);
+			}
+		});
+		mnNewMenu_6.add(mntmNewMenuItem_9);
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Listado");
+		mnNewMenu_6.add(mntmNewMenuItem_10);
+		
+		JMenu mnNewMenu_7 = new JMenu("Administradores");
+		mnNewMenu_5.add(mnNewMenu_7);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar");
+		mnNewMenu_7.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Listado");
+		mnNewMenu_7.add(mntmNewMenuItem_12);
+		
+		JMenu mnNewMenu_8 = new JMenu("Graficos");
+		mnNewMenu_5.add(mnNewMenu_8);
+		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Consultar");
+		mnNewMenu_8.add(mntmNewMenuItem_13);
+		
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Generar");
+		mnNewMenu_8.add(mntmNewMenuItem_14);
+		
+		JMenu mnNewMenu_9 = new JMenu("Cuentas y Ordenes de Compra");
+		mnNewMenu_5.add(mnNewMenu_9);
+		
+		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Estado de Cuentas");
+		mnNewMenu_9.add(mntmNewMenuItem_15);
+		
+		JMenuItem mntmNewMenuItem_16 = new JMenuItem("Ingresar Dinero");
+		mnNewMenu_9.add(mntmNewMenuItem_16);
+		
+		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Generar Orden De Compra");
+		mnNewMenu_9.add(mntmNewMenuItem_17);
 		contentPane = new JPanel();
 		contentPane.setForeground(UIManager.getColor("Button.focus"));
 		contentPane.setBackground(UIManager.getColor("Button.focus"));

@@ -11,12 +11,16 @@ import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.glass.ui.Window;
+
 import javafx.scene.text.Font;
 import logico.Cliente;
 import logico.Combo;
 import logico.Componente;
 import logico.Factura;
+import logico.Persona;
 import logico.Prodacom;
+import logico.Vendedor;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -34,6 +38,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,6 +48,8 @@ import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.DecimalFormat;
 
 public class Facturacion extends JDialog {
@@ -51,7 +59,7 @@ public class Facturacion extends JDialog {
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnAgregar;
-	private JButton btnCredito;
+	private static JButton btnCredito;
 	private JButton btnListarComponentes;
 	private Dimension din;
 	private static JButton btnSeleccionarCliente;
@@ -89,6 +97,60 @@ public class Facturacion extends JDialog {
 	 * Create the dialog.
 	 */
 	public Facturacion() {
+		this.addWindowListener(new WindowListener() {
+		
+			@Override
+			public void windowClosed(WindowEvent e) {
+			
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				for(int i=0;i<modelo.getRowCount();i++) {
+					if('C'==((String)modelo.getValueAt(i, 0)).charAt(0)) {
+						Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(i, 0));
+						Prodacom.getInstance().DevolverCombo(c);
+					}else {
+						Componente c = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(i, 0));
+						Prodacom.getInstance().SumarComponente(c, (int)modelo.getValueAt(i, 2));
+					}
+				}
+				cliente = null;
+			
+			
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		setForeground(UIManager.getColor("Button.focus"));
 		setBackground(UIManager.getColor("Button.focus"));
 		setModal(true);
@@ -224,6 +286,7 @@ public class Facturacion extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					seleccion = table.getSelectedRow();
 					int modelrow = table.convertRowIndexToModel(seleccion);
+					botones();
 					if(seleccion!=-1){
 						if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
 							btnListarComponentes.setEnabled(true);
@@ -237,7 +300,8 @@ public class Facturacion extends JDialog {
 							btnEliminar.setEnabled(true);
 							btnModificar.setEnabled(true);
 							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
-							cantidad = Integer.parseInt((String)modelo.getValueAt(modelrow, 2));
+							System.out.println(seleccion+"||"+modelrow);
+							cantidad = (int)modelo.getValueAt(seleccion, 2);
 							combo = null;
 						}
 						
@@ -297,6 +361,7 @@ public class Facturacion extends JDialog {
 					modelo.removeRow(seleccion);
 					btnEliminar.setEnabled(false);
 					btnModificar.setEnabled(false);
+					botones();
 					CargarTotal();
 					seleccion = -1;
 				}
@@ -353,6 +418,7 @@ public class Facturacion extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnCredito = new JButton("Pagar A Credito");
+			btnCredito.setEnabled(false);
 			btnCredito.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int ok = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar la factura");
@@ -360,7 +426,8 @@ public class Facturacion extends JDialog {
 					if(cliente !=null && ok==JOptionPane.OK_OPTION) {
 						float pago = Prodacom.getInstance().CreditCliente(cliente);
 						if(pago>=(subtotal+(subtotal*0.18f))) {
-							Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, null, true);
+							Vendedor v = new Vendedor("Santiago", "", "", "", 0,2.5f, 2000);
+							Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, true);
 							for(Combo c : combos) {
 								f.InsertarCombos(c);
 							}
@@ -394,14 +461,18 @@ public class Facturacion extends JDialog {
 						if(cliente !=null && ok==JOptionPane.OK_OPTION) {
 							float pago = Float.parseFloat(JOptionPane.showInputDialog("Digite el monto del pago"));
 							if(pago>=(subtotal+(subtotal*0.18f))) {
-								Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, null, false);
+								Vendedor v = new Vendedor("el final", "402", "809", "villa", 0, 0, 0);
+								Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, false);
 								for(Combo c : combos) {
 									f.InsertarCombos(c);
+									//Prodacom.getInstance().VenderCombo(c);
 								}
 								for(Componente c : componentes) {
 									f.InsertarComponente(c);
+									//Prodacom.getInstance().VenderComponente(c);
 								}
 								Prodacom.getInstance().insertarFactura(f);
+								
 								JOptionPane.showMessageDialog(null, "Su devuelta es: "+(pago-(subtotal+(subtotal*0.18f))));
 								btnPagar.setEnabled(false);
 								
@@ -426,6 +497,16 @@ public class Facturacion extends JDialog {
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						for(int i=0;i<modelo.getRowCount();i++) {
+							if('C'==((String)modelo.getValueAt(i, 0)).charAt(0)) {
+								Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(i, 0));
+								Prodacom.getInstance().DevolverCombo(c);
+							}else {
+								Componente c = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(i, 0));
+								Prodacom.getInstance().SumarComponente(c, (int)modelo.getValueAt(i, 2));
+							}
+						}
+						cliente = null;
 						dispose();
 					}
 				});
@@ -471,18 +552,26 @@ public class Facturacion extends JDialog {
 		lblCreditoDisponible.setText("Credito Disponible: "+Prodacom.getInstance().CreditCliente(c));
 		lblLimiteCredito.setText("Limite de Credito: "+c.getCredito());
 		btnSeleccionarCliente.setVisible(false);
+		botones();
 		
 	}
 	
 	public static void CargarTabla(Object[] fila) {
 		if('C'==fila[0].toString().charAt(0)) {
-			Combo c = Prodacom.getInstance().buscarCombo(fila[0].toString());
-			combos.add(c);
+			for(int i = 0;i<(int)fila[2];i++) {
+				Combo c = Prodacom.getInstance().buscarCombo(fila[0].toString());
+				combos.add(c);
+			}
+		
 		}else {
-			Componente c = Prodacom.getInstance().buscarComponente(fila[0].toString());
-			componentes.add(c);
+			for(int i = 0;i<(int)fila[2];i++) {
+				Componente c = Prodacom.getInstance().buscarComponente(fila[0].toString());
+				componentes.add(c);
+			}
 		}
 		modelo.addRow(fila);
+		botones();
+		
 		CargarTotal();
 	}
 
@@ -495,11 +584,17 @@ public class Facturacion extends JDialog {
 		lblSubTotal.setText("Sub-Total: "+formato1.format(subtotal));
 		lblImpuestos.setText("ITBIS (18%): "+formato1.format((subtotal*0.18f)));
 		lblTotal.setText("Total: "+formato1.format((subtotal+(subtotal*0.18f))));
-		if((combos.size()>=1||componentes.size()>=1) && cliente!=null) {
+		botones();
+	
+	}
+	
+	private static void botones() {
+		if(modelo.getRowCount()>0 && cliente!=null) {
 			btnPagar.setEnabled(true);
+			btnCredito.setEnabled(true);
 			}else {
+				btnCredito.setEnabled(false);
 				btnPagar.setEnabled(false);
 			}
-	
 	}
 }

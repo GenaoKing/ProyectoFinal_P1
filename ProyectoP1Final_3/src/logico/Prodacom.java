@@ -209,5 +209,52 @@ public class Prodacom {
 		}
 		return p;
 	}
+
+	public void VenderCombo(Combo c) {
+		Combo a = buscarCombo(c.getCod());
+		for(Componente b : c.getComponentes()) {
+			VenderComponente(b);
+		}
+		
+	}
+
+	public void VenderComponente(Componente c) {
+		Componente a = buscarComponente(c.serie);
+		a.setCantReal(a.getCantReal()-1);
+		
+	}
+
+	public boolean ChecarCombo(Combo c) {
+		boolean res = true;
+		int cantidad = 0;
+		int i = 0;
+		int j = 0;
+		while(i<c.getComponentes().size() && res) {
+			j=i+1;
+			cantidad = c.getComponentes().get(i).getCantReal()-1;
+			if(cantidad>0) {
+				while(j<c.getComponentes().size() && res) {
+					if(c.getComponentes().get(i).equals(c.getComponentes().get(j))) {
+						cantidad--;
+						if(cantidad==-1) {
+							res = false;
+						}
+					}
+					j++;
+				}
+			}else {
+				res = false;
+			}
+			i++;
+		}
+		return res;
+	}
+
+	public void DevolverCombo(Combo c) {
+		for(Componente a : c.getComponentes() ) {
+			a.setCantReal(a.getCantReal()+1);
+		}
+		
+	}
 	
 }

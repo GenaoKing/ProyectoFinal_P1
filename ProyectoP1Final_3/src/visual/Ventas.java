@@ -9,7 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import logico.Combo;
+import logico.Componente;
+import logico.Prodacom;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -171,14 +178,39 @@ public class Ventas extends JDialog {
 				okButton.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/registrer.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if('C'==codigo.charAt(0)) {
+							Combo c = Prodacom.getInstance().buscarCombo(codigo);
+							if(Prodacom.getInstance().ChecarCombo(c)) {
+								fila[0]=codigo;
+								fila[1]=nombre;
+								fila[2]=Integer.parseInt(spnCantidad.getValue().toString());
+								fila[3]=precio;
+								fila[4]=subtotal;
+								Prodacom.getInstance().VenderCombo(c);
+								dispose();
+								Facturacion.CargarTabla(fila);
+							}else {
+								JOptionPane.showMessageDialog(null, "En stock no hay items suficientes para vender el combo: "+c.getNombre()
+							, "Error", JOptionPane.WARNING_MESSAGE);
+								dispose();
+								ListadoComponentes a = new ListadoComponentes(null, 0);
+								a.setVisible(true);
+							}
+					
+					}else {
+						Componente c = Prodacom.getInstance().buscarComponente(codigo);
 						fila[0]=codigo;
 						fila[1]=nombre;
-						fila[2]=spnCantidad.getValue().toString();
+						fila[2]=Integer.parseInt(spnCantidad.getValue().toString());
 						fila[3]=precio;
 						fila[4]=subtotal;
+						int cantidad = Integer.parseInt(spnCantidad.getValue().toString());
+						for(int i = 0;i<cantidad;i++) {
+							Prodacom.getInstance().VenderComponente(c);
+						}
 						dispose();
 						Facturacion.CargarTabla(fila);
-						
+					}
 					}
 				});
 				okButton.setActionCommand("OK");
