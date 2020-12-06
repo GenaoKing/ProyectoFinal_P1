@@ -133,6 +133,7 @@ public class Facturacion extends JDialog {
 						Prodacom.getInstance().SumarComponente(c, (int)modelo.getValueAt(i, 2));
 					}
 				}
+				
 				cliente = null;
 				dispose();
 			
@@ -232,7 +233,7 @@ public class Facturacion extends JDialog {
 			lblCreditoDisponible.setBounds(423, 115, 272, 31);
 			panel_2.add(lblCreditoDisponible);
 			
-			lblCodigo = new JLabel("Factura #"+Prodacom.getInstance().cod_facturas);
+			lblCodigo = new JLabel("Factura #"+Prodacom.getInstance().getInstance().getCod_facturas());
 			lblCodigo.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/factura.png")));
 			lblCodigo.setBackground(UIManager.getColor("Button.focus"));
 			lblCodigo.setForeground(SystemColor.textHighlight);
@@ -442,13 +443,21 @@ public class Facturacion extends JDialog {
 						if(pago>=(subtotal+(subtotal*0.18f))) {
 							int end = cbxVendedores.getSelectedItem().toString().indexOf("|");
 							Vendedor v = Prodacom.getInstance().buscarVendedor(cbxVendedores.getSelectedItem().toString().substring(0, end));
-							Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, true);
+							Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, true);
 							for(Combo c : combos) {
 								f.InsertarCombos(c);
 							}
 							for(Componente c : componentes) {
 								f.InsertarComponente(c);
 							}
+							
+							try {
+								GenerarFactura(f);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
 							Prodacom.getInstance().insertarFactura(f);
 							JOptionPane.showMessageDialog(null, "El credito restante para el cliente es de: "+(pago-(subtotal+(subtotal*0.18f))));
 							btnCredito.setEnabled(false);
@@ -476,18 +485,19 @@ public class Facturacion extends JDialog {
 						if(cliente !=null && ok==JOptionPane.OK_OPTION) {
 							float pago = Float.parseFloat(JOptionPane.showInputDialog("Digite el monto del pago"));
 							if(pago>=(subtotal+(subtotal*0.18f))) {
-								Vendedor v = new Vendedor("el final", "402", "809", "villa", 0, 0, 0);
-								Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, false);
+								int end = cbxVendedores.getSelectedItem().toString().indexOf("|");
+								Vendedor v = Prodacom.getInstance().buscarVendedor(cbxVendedores.getSelectedItem().toString().substring(0, end));
+								Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, false);
 								
 						
 								
 								for(Combo c : combos) {
 									f.InsertarCombos(c);
-									Prodacom.getInstance().VenderCombo(c);
+									
 								}
 								for(Componente c : componentes) {
 									f.InsertarComponente(c);
-									Prodacom.getInstance().VenderComponente(c);
+									
 								}
 								
 								try {
@@ -534,6 +544,7 @@ public class Facturacion extends JDialog {
 							}
 						}
 						cliente = null;
+						
 						dispose();
 					}
 				});
@@ -554,11 +565,12 @@ public class Facturacion extends JDialog {
 		lblLimiteCredito.setText("");
 		modelo.setRowCount(0);
 		cliente=null;
-		combos.removeAll(combos);
-		componentes.removeAll(componentes);
+		combos.clear();//
+	
+		componentes.clear();//
 		componente=null;
 		combo=null;
-		lblCodigo.setText("Factura #"+Prodacom.cod_facturas);	
+		lblCodigo.setText("Factura #"+Prodacom.getInstance().getCod_facturas());	
 		Calendar inicio=new GregorianCalendar();
 		inicio.setTime(new Date());
 		lblFecha.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR));
@@ -630,7 +642,7 @@ private void GenerarFactura(Factura f) throws IOException {
 		DecimalFormat formato1 = new DecimalFormat("#.00");
 		Calendar inicio=new GregorianCalendar();
 		inicio.setTime(f.getFecha());
-		File fichero = new File("Factura-"+Prodacom.getInstance().cod_facturas+".txt");
+		File fichero = new File("Factura-"+Prodacom.getInstance().getCod_facturas()+".txt");
 		FileOutputStream fos = new FileOutputStream(fichero);
 	 
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
@@ -674,6 +686,8 @@ private void GenerarFactura(Factura f) throws IOException {
 		bw.write("Gracias por preferirnos, recuerde que no aceptamos devoluciones");
 		bw.newLine();
 		bw.close();
+		fos.close();
+		
 		
 	}	
 }

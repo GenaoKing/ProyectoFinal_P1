@@ -104,7 +104,7 @@ public class RegProveedores extends JDialog {
 			txtCodigo.setBackground(UIManager.getColor("Button.focus"));
 			txtCodigo.setEditable(false);
 			txtCodigo.setBounds(12, 42, 116, 26);
-			txtCodigo.setText("P-"+Prodacom.cod_proveedores);
+			txtCodigo.setText("P-"+Prodacom.getInstance().getCod_proveedores());
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 			
@@ -519,7 +519,7 @@ public class RegProveedores extends JDialog {
 	}
 	
 	private void clear() {
-		txtCodigo.setText("P-"+Prodacom.cod_proveedores);
+		txtCodigo.setText("P-"+Prodacom.getInstance().getCod_proveedores());
 		txtNombre.setText("");
 		txtDireccion.setText("");
 		txtTelefono.setText("");

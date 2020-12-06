@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------------
+Cliente: Diana                                     F-2                                               
+Cedula: 096                                        Fecha: 5/12/2020                                  
+Telefono: 829                                      Vendedor: xavier                                  
+Direccion: Jacagua                                 Vendedor: xavier                                  
+--------------------------------------------------------------------------------------
+Codigo               Articulo             Cantidad             Precio               Importe             
+S-1                  Prueba Prueba        2                    10.0                 20.0                
+
+Total: 23.60
+--------------------------------------------------------------------------------------
+Gracias por preferirnos, recuerde que no aceptamos devoluciones

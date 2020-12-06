@@ -13,10 +13,12 @@ public class Prodacom implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 7398652231878450639L;
-	public static int cod_componente = 1;
-	public static int cod_proveedores = 1;
-	public static int cod_combos = 1;
-	public static int cod_facturas = 1;
+	private int cod_componente = 1;
+	private int cod_proveedores = 1;
+	private int cod_combos = 1;
+	private int cod_facturas = 1;
+	
+	
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
@@ -46,7 +48,7 @@ public class Prodacom implements Serializable{
 
 	public void insertarCombo(Combo combo) {
 		combos.add(combo);
-		cod_combos++;
+		setCod_combos(getCod_combos()+1);
 	}
 
 	public ArrayList<Componente> getComponentes() {
@@ -55,7 +57,7 @@ public class Prodacom implements Serializable{
 
 	public void insertarComponente(Componente componente) {
 		this.componentes.add(componente); 
-		cod_componente++;
+		setCod_componente(getCod_componente()+1);
 	}
 
 	public ArrayList<Factura> getFacturas() {
@@ -64,7 +66,7 @@ public class Prodacom implements Serializable{
 
 	public void insertarFactura(Factura factura) {
 		this.facturas.add(factura); 
-		cod_facturas++;
+		setCod_facturas(getCod_facturas()+1);
 	}
 
 	public ArrayList<Persona> getPersonas() {
@@ -83,6 +85,37 @@ public class Prodacom implements Serializable{
 		this.personas.add(persona);
 	}
 	
+	public int getCod_componente() {
+		return cod_componente;
+	}
+
+	public void setCod_componente(int cod_componente) {
+		this.cod_componente = cod_componente;
+	}
+
+	public int getCod_proveedores() {
+		return cod_proveedores;
+	}
+
+	public void setCod_proveedores(int cod_proveedores) {
+		this.cod_proveedores = cod_proveedores;
+	}
+
+	public int getCod_combos() {
+		return cod_combos;
+	}
+
+	public void setCod_combos(int cod_combos) {
+		this.cod_combos = cod_combos;
+	}
+
+	public int getCod_facturas() {
+		return cod_facturas;
+	}
+
+	public void setCod_facturas(int cod_facturas) {
+		this.cod_facturas = cod_facturas;
+	}
 
 
 
@@ -200,7 +233,7 @@ public class Prodacom implements Serializable{
 
 	public void insertarProveedor(Proveedor p) {
 		proveedores.add(p);
-		cod_proveedores++;
+		setCod_proveedores(getCod_proveedores()+1);
 		
 	}
 
