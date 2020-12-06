@@ -250,7 +250,8 @@ public class Facturacion extends JDialog {
 			lblFecha.setBounds(758, 115, 228, 31);
 			panel_2.add(lblFecha);
 			
-			cbxVendedores = new JComboBox();
+		
+			cbxVendedores = new JComboBox(Prodacom.getInstance().NombresVendedores().toArray());
 			cbxVendedores.setBackground(UIManager.getColor("Button.focus"));
 			cbxVendedores.setForeground(SystemColor.textHighlight);
 			cbxVendedores.setBounds(764, 185, 222, 31);
@@ -439,7 +440,8 @@ public class Facturacion extends JDialog {
 					if(cliente !=null && ok==JOptionPane.OK_OPTION) {
 						float pago = Prodacom.getInstance().CreditCliente(cliente);
 						if(pago>=(subtotal+(subtotal*0.18f))) {
-							Vendedor v = new Vendedor("Santiago", "", "", "", 0,2.5f, 2000);
+							int end = cbxVendedores.getSelectedItem().toString().indexOf("|");
+							Vendedor v = Prodacom.getInstance().buscarVendedor(cbxVendedores.getSelectedItem().toString().substring(0, end));
 							Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, true);
 							for(Combo c : combos) {
 								f.InsertarCombos(c);
@@ -481,11 +483,11 @@ public class Facturacion extends JDialog {
 								
 								for(Combo c : combos) {
 									f.InsertarCombos(c);
-									//Prodacom.getInstance().VenderCombo(c);
+									Prodacom.getInstance().VenderCombo(c);
 								}
 								for(Componente c : componentes) {
 									f.InsertarComponente(c);
-									//Prodacom.getInstance().VenderComponente(c);
+									Prodacom.getInstance().VenderComponente(c);
 								}
 								Prodacom.getInstance().insertarFactura(f);
 								
