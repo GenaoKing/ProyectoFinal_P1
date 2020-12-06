@@ -479,7 +479,7 @@ public class Facturacion extends JDialog {
 								Vendedor v = new Vendedor("el final", "402", "809", "villa", 0, 0, 0);
 								Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, false);
 								
-								//GenerarFactura(f);
+						
 								
 								for(Combo c : combos) {
 									f.InsertarCombos(c);
@@ -488,6 +488,13 @@ public class Facturacion extends JDialog {
 								for(Componente c : componentes) {
 									f.InsertarComponente(c);
 									Prodacom.getInstance().VenderComponente(c);
+								}
+								
+								try {
+									GenerarFactura(f);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
 								}
 								Prodacom.getInstance().insertarFactura(f);
 								
@@ -617,66 +624,56 @@ public class Facturacion extends JDialog {
 				btnPagar.setEnabled(false);
 			}
 	}
-	/*
-	private void GenerarFactura(Factura f) {
-		//File fout = new File("factura"+f.getCod() .txt");
-		FileOutputStream fos = new FileOutputStream(fout);
-		
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-		bw.write("-------------------------------------------------------------");
-		bw.newLine();
-		bw.write("Cliente: "+f.getCliente().getNombre());
-		bw.newLine();
-		bw.write("Telefono: "+f.getCliente().getTelefono());
-		bw.newLine();
-		bw.write("------------------------------------------------------------");
-		bw.newLine();
-		bw.write(String.format("%-20s %-20s %-20s %-20s","Producto","Tipo","Volumen","Precio"));//10,7,7,
-		bw.newLine();
-		
-		for(Componente pub : f.getComponentes()) {
-		String tipo = "";
-		if(pub instanceof Disco) {
-			tipo = "Disco";
-		}
-			if(pub instanceof MemoriaRam ){
-				tipo = "M.Ram";
-			}
-			if(pub instanceof Microprocesadores) {
-				tipo = "Mic.Proce";
-			}
-			if(pub instanceof MotherBoard) {
-				tipo = "Mo.Board";
-			}
-			bw.write(String.format("%-20s %-20s %-20s %-20s", pub.getNombre(),tipo,pub.volumen(),pub.calcularPrecio()));
-			bw.newLine();
-			
-			
-		}
 
-		bw.write("Total: "+f.getTotal());
+private void GenerarFactura(Factura f) throws IOException {
+		
+		DecimalFormat formato1 = new DecimalFormat("#.00");
+		Calendar inicio=new GregorianCalendar();
+		inicio.setTime(f.getFecha());
+		File fichero = new File("Factura-"+Prodacom.getInstance().cod_facturas+".txt");
+		FileOutputStream fos = new FileOutputStream(fichero);
+	 
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+		bw.write("--------------------------------------------------------------------------------------");
 		bw.newLine();
-		bw.write("------------------------------------------------------------");
+		bw.write(String.format("%-50s %-50s",("Cliente: "+f.getCliente().getNombre()),f.getCod()));
+		bw.newLine();
+		bw.write(String.format("%-50s %-50s",("Cedula: "+f.getCliente().getCedula()),"Fecha: "+inicio.get(Calendar
+				.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR)));
+		bw.newLine();
+		
+		bw.write(String.format("%-50s %-50s",("Telefono: "+f.getCliente().getTelefono()),"Vendedor: "+f.getVendedor().getNombre()));
+		bw.newLine();
+		bw.write(String.format("%-50s %-50s",("Direccion: "+f.getCliente().getDireccion()),"Vendedor: "+f.getVendedor().getNombre()));// Si da tiempo en el ultimo
+		//Para metro de esta linea ponerle la cantidad de dias a partir del de facturacion se vence.
+		bw.newLine();
+		bw.write("--------------------------------------------------------------------------------------");
+		bw.newLine();
+		bw.write(String.format("%-20s %-20s %-20s %-20s %-20s","Codigo","Articulo","Cantidad","Precio","Importe"));//10,7,7,
+		bw.newLine();
+		for(int i = 0;i<modelo.getRowCount();i++) {
+			String codigo = (String)modelo.getValueAt(i, 0); 
+			String nombre =(String)modelo.getValueAt(i, 1); 
+			int cantidad = (int)modelo.getValueAt(i, 2); 
+			float precio = (float)modelo.getValueAt(i, 3);
+			float importe = (float)modelo.getValueAt(i, 4); 
+			if(nombre.length()<=20) {
+			bw.write(String.format("%-20s %-20s %-20s %-20s %-20s",codigo,nombre,cantidad,precio,importe));
+			
+			bw.newLine();
+			}else {
+				bw.write(String.format("%-20s %-20s %-20s %-20s %-20s",codigo, nombre.substring(0, 20),cantidad,precio,importe));
+				bw.newLine();
+			}
+		}
+		bw.newLine();
+		bw.write("Total: "+formato1.format(f.getTotal()));
+		bw.newLine();
+		bw.write("--------------------------------------------------------------------------------------");
+		bw.newLine();
+		bw.write("Gracias por preferirnos, recuerde que no aceptamos devoluciones");
 		bw.newLine();
 		bw.close();
-
-		}
-		private void EnviarFactura() throws IOException, IOException {
-			//System.out.println("Entro al envio de factura");
-			InputStream entrada = new FileInputStream("factura.txt");
-
-			Socket socket = null;
-			socket = new Socket("127.0.0.1",7777);
-			OutputStream salida = socket.getOutputStream();
-			byte []info=new byte[16*1024];
-			int i;
-			while ((i = entrada.read(info)) > 0) {
-			salida.write(info, 0, i);
-			}
-			salida.close();
-			entrada.close();
-			socket.close();
 		
-	}
-	*/
+	}	
 }
