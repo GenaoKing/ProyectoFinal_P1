@@ -2,6 +2,8 @@ package logico;
 
 import java.util.ArrayList;
 
+import javax.swing.ComboBoxModel;
+
 
 public class Prodacom {
 	//probando.
@@ -255,6 +257,30 @@ public class Prodacom {
 			a.setCantReal(a.getCantReal()+1);
 		}
 		
+	}
+
+	public ArrayList<String> NombresVendedores() {
+		ArrayList<String>nombres = new ArrayList<String>();
+		for(Persona p : personas) {
+			if(p instanceof Vendedor) {
+				nombres.add(p.getCedula()+"| |"+p.getNombre());
+			}
+		}
+		return nombres;
+	}
+
+	public Vendedor buscarVendedor(String substring) {
+		Vendedor v = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(i<personas.size() && !encontrado) {
+			if(personas.get(i) instanceof Vendedor && personas.get(i).getCedula().equalsIgnoreCase(substring) ) {
+				encontrado = true;
+				v = (Vendedor)personas.get(i);
+			}
+			i++;
+		}
+		return v;
 	}
 	
 }
