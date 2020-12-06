@@ -306,6 +306,7 @@ public class RegTrabajadores extends JDialog {
 		spnSueldo_admin.setValue(new Integer(0));
 		
 		spnComision_vendedor.setValue(new Integer(0));
+		spnSueldo_vendedor.setValue(new Integer(0));
 		
 	}
 }
