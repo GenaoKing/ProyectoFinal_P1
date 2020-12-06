@@ -121,7 +121,7 @@ public class Facturacion extends JDialog {
 					}
 				}
 				cliente = null;
-			
+				dispose();
 			
 				
 			}
