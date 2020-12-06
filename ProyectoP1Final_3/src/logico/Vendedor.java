@@ -2,6 +2,10 @@ package logico;
 
 public class Vendedor extends Persona {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8701753345005896347L;
 	private float totalventas;
 	private float comision;
 	private float sueldo;

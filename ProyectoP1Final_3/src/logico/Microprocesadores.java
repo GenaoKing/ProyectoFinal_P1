@@ -2,6 +2,10 @@ package logico;
 
 public class Microprocesadores extends Componente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4391055141576634470L;
 	private String conector;
 	private float velocidad;
 	private boolean GHz;

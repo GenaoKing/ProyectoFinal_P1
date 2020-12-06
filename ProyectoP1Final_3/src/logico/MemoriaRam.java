@@ -2,6 +2,10 @@ package logico;
 
 public class MemoriaRam extends Componente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1291379523504350008L;
 	private float cantidadMem;
 	private String tipo;
 	private boolean Gb;

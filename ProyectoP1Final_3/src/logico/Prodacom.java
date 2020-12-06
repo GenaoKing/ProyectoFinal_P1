@@ -1,12 +1,18 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ComboBoxModel;
 
 
-public class Prodacom {
+public class Prodacom implements Serializable{
 	//probando.
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7398652231878450639L;
 	public static int cod_componente = 1;
 	public static int cod_proveedores = 1;
 	public static int cod_combos = 1;
@@ -16,7 +22,7 @@ public class Prodacom {
 	private ArrayList<Factura>facturas;
 	private ArrayList<Persona>personas;
 	private ArrayList<Proveedor>proveedores;
-	private static Prodacom prodacom = null;
+	public static Prodacom prodacom = null;
 	
 	private Prodacom() {
 		super();

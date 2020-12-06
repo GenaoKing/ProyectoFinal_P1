@@ -2,6 +2,10 @@ package logico;
 
 public class Administrativo extends Persona {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 837664958781032234L;
 	private String user;
 	private String pass;
 	private float sueldo;

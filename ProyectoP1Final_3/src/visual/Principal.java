@@ -6,10 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.Prodacom;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,6 +46,18 @@ public class Principal extends JFrame {
 					frame.getContentPane().add(d);
 					frame.setVisible(true);
 					
+					try {
+						File f = new File("prodacom.dat");
+						FileInputStream fileIn = new FileInputStream(f);
+						ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+						Prodacom.prodacom =(Prodacom) objectIn.readObject();
+						System.out.println("Se ha leido la informacion");
+						objectIn.close();
+
+						} catch (Exception ex) {
+						ex.printStackTrace();
+						}
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,6 +69,55 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		
+		this.addWindowListener(new WindowListener() {
+
+			 @Override
+			public void windowOpened(WindowEvent e) {
+			// TODO Auto-generated method stub			 
+			}
+
+			 @Override
+			public void windowClosing(WindowEvent e) {
+			try {
+			File f = new File("prodacom.dat");
+			FileOutputStream fileOut = new FileOutputStream(f);
+			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+			objectOut.writeObject(Prodacom.getInstance());
+			objectOut.close();
+			System.out.println("Se ha guardado la informacion");
+			} catch (Exception ex) {
+			ex.printStackTrace();
+			}
+
+			}
+
+			 @Override
+			public void windowClosed(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowIconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowDeiconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowActivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowDeactivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+			});
+		
 		setTitle("PRODACOM");
 		
 		setBackground(UIManager.getColor("Button.focus"));
@@ -213,7 +284,7 @@ public class Principal extends JFrame {
 		mnNewMenu_5.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		menuBar.add(mnNewMenu_5);
 		
-		JMenu mnNewMenu_6 = new JMenu("Vendedores");
+		JMenu mnNewMenu_6 = new JMenu("Empleados");
 		mnNewMenu_5.add(mnNewMenu_6);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar");
@@ -227,15 +298,6 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Listado");
 		mnNewMenu_6.add(mntmNewMenuItem_10);
-		
-		JMenu mnNewMenu_7 = new JMenu("Administradores");
-		mnNewMenu_5.add(mnNewMenu_7);
-		
-		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar");
-		mnNewMenu_7.add(mntmNewMenuItem_11);
-		
-		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Listado");
-		mnNewMenu_7.add(mntmNewMenuItem_12);
 		
 		JMenu mnNewMenu_8 = new JMenu("Graficos");
 		mnNewMenu_5.add(mnNewMenu_8);

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class MotherBoard extends Componente {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3632202469402410404L;
 	private String conector;
 	private String tipoRam;
 	private ArrayList<String>conexiones;

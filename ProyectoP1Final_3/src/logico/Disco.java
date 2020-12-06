@@ -3,6 +3,10 @@ package logico;
 public class Disco extends Componente {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4086607373202877928L;
 	private float almacenamiento;
 	private boolean Gb;
 	private String conexion;

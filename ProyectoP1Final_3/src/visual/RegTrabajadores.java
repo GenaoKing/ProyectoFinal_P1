@@ -45,6 +45,8 @@ public class RegTrabajadores extends JDialog {
 	private JSpinner spnComision_vendedor;
 	private JRadioButton rdbAdministrativo;
 	private JRadioButton rdbVendedor;
+	private JLabel lblSueldo_vendedor;
+	private JSpinner spnSueldo_vendedor;
 
 	/**
 	 * Launch the application.
@@ -137,7 +139,8 @@ public class RegTrabajadores extends JDialog {
 					lblComision_vendedor.setVisible(true);
 					lblFavor_vendedor.setVisible(true);
 					spnComision_vendedor.setVisible(true);
-					
+					spnSueldo_vendedor.setVisible(true);
+					lblSueldo_vendedor.setVisible(true);
 					
 				}
 			});
@@ -163,7 +166,8 @@ public class RegTrabajadores extends JDialog {
 					lblComision_vendedor.setVisible(false);
 					lblFavor_vendedor.setVisible(false);
 					spnComision_vendedor.setVisible(false);
-					
+					spnSueldo_vendedor.setVisible(false);
+					lblSueldo_vendedor.setVisible(false);
 					
 				}
 			});
@@ -177,18 +181,27 @@ public class RegTrabajadores extends JDialog {
 			panel_Vendedor.setLayout(null);
 			
 			lblComision_vendedor = new JLabel("Comisi\u00F3n:");
-			lblComision_vendedor.setBounds(10, 39, 75, 14);
+			lblComision_vendedor.setBounds(10, 22, 75, 14);
 			panel_Vendedor.add(lblComision_vendedor);
 			
 			spnComision_vendedor = new JSpinner();
 			spnComision_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), new Float(100), new Float(1)));
-			spnComision_vendedor.setBounds(69, 36, 119, 20);
+			spnComision_vendedor.setBounds(69, 18, 119, 20);
 			panel_Vendedor.add(spnComision_vendedor);
 			
 			lblFavor_vendedor = new JLabel("(Favor de ingresar el porciento que tendr\u00E1 de comisi\u00F3n por venta.)");
 			lblFavor_vendedor.setEnabled(false);
-			lblFavor_vendedor.setBounds(198, 39, 383, 14);
+			lblFavor_vendedor.setBounds(198, 22, 383, 14);
 			panel_Vendedor.add(lblFavor_vendedor);
+			
+			lblSueldo_vendedor = new JLabel("Sueldo:");
+			lblSueldo_vendedor.setBounds(10, 58, 75, 14);
+			panel_Vendedor.add(lblSueldo_vendedor);
+			
+			spnSueldo_vendedor = new JSpinner();
+			spnSueldo_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
+			spnSueldo_vendedor.setBounds(69, 56, 119, 20);
+			panel_Vendedor.add(spnSueldo_vendedor);
 			
 			panel_Administrativo = new JPanel();
 			panel_Administrativo.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n Espec\u00EDfica", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -223,7 +236,7 @@ public class RegTrabajadores extends JDialog {
 			panel_Administrativo.add(lblSueldo);
 			
 			spnSueldo_admin = new JSpinner();
-			spnSueldo_admin.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+			spnSueldo_admin.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
 			spnSueldo_admin.setBounds(423, 27, 106, 20);
 			spnSueldo_admin.setVisible(false);
 			panel_Administrativo.add(spnSueldo_admin);
@@ -247,9 +260,9 @@ public class RegTrabajadores extends JDialog {
 						}else {
 						if(rdbVendedor.isSelected()) {
 							float comision = Float.parseFloat(spnComision_vendedor.getValue().toString());
-							aux = new Vendedor(nombre, cedula, telefono, direccion, 0, comision, 0);
-							Prodacom.getInstance().insertarPersona(aux);
+							aux = new Vendedor(nombre, cedula, telefono, direccion, 0, comision, Float.parseFloat(spnSueldo_vendedor.getValue().toString()));
 							//aux = new Vendedor(nombre, cedula, telefono, direccion, totalventas, comision, sueldo)
+							Prodacom.getInstance().insertarPersona(aux);
 						}
 						
 						if(rdbAdministrativo.isSelected()) {
