@@ -262,7 +262,6 @@ public class RegTrabajadores extends JDialog {
 						clear();
 						JOptionPane.showMessageDialog(null, "Se ha ingresado correctamente al empleado!!", "Información", JOptionPane.INFORMATION_MESSAGE);
 						}
-						
 					}
 
 	

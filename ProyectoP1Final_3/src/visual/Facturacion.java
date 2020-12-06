@@ -17,7 +17,11 @@ import javafx.scene.text.Font;
 import logico.Cliente;
 import logico.Combo;
 import logico.Componente;
+import logico.Disco;
 import logico.Factura;
+import logico.MemoriaRam;
+import logico.Microprocesadores;
+import logico.MotherBoard;
 import logico.Persona;
 import logico.Prodacom;
 import logico.Vendedor;
@@ -50,6 +54,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
 import java.text.DecimalFormat;
 
 public class Facturacion extends JDialog {
@@ -463,6 +476,9 @@ public class Facturacion extends JDialog {
 							if(pago>=(subtotal+(subtotal*0.18f))) {
 								Vendedor v = new Vendedor("el final", "402", "809", "villa", 0, 0, 0);
 								Factura f = new Factura("F-"+Prodacom.cod_facturas, subtotal+(subtotal*0.18f), cliente, v, false);
+								
+								//GenerarFactura(f);
+								
 								for(Combo c : combos) {
 									f.InsertarCombos(c);
 									//Prodacom.getInstance().VenderCombo(c);
@@ -482,7 +498,9 @@ public class Facturacion extends JDialog {
 								btnPagar.setEnabled(true);
 							}
 						}
-					}			
+					}
+
+			
 				});
 				btnPagar.setBackground(UIManager.getColor("Button.focus"));
 				btnPagar.setForeground(new Color(34, 139, 34));
@@ -597,4 +615,66 @@ public class Facturacion extends JDialog {
 				btnPagar.setEnabled(false);
 			}
 	}
+	/*
+	private void GenerarFactura(Factura f) {
+		//File fout = new File("factura"+f.getCod() .txt");
+		FileOutputStream fos = new FileOutputStream(fout);
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+		bw.write("-------------------------------------------------------------");
+		bw.newLine();
+		bw.write("Cliente: "+f.getCliente().getNombre());
+		bw.newLine();
+		bw.write("Telefono: "+f.getCliente().getTelefono());
+		bw.newLine();
+		bw.write("------------------------------------------------------------");
+		bw.newLine();
+		bw.write(String.format("%-20s %-20s %-20s %-20s","Producto","Tipo","Volumen","Precio"));//10,7,7,
+		bw.newLine();
+		
+		for(Componente pub : f.getComponentes()) {
+		String tipo = "";
+		if(pub instanceof Disco) {
+			tipo = "Disco";
+		}
+			if(pub instanceof MemoriaRam ){
+				tipo = "M.Ram";
+			}
+			if(pub instanceof Microprocesadores) {
+				tipo = "Mic.Proce";
+			}
+			if(pub instanceof MotherBoard) {
+				tipo = "Mo.Board";
+			}
+			bw.write(String.format("%-20s %-20s %-20s %-20s", pub.getNombre(),tipo,pub.volumen(),pub.calcularPrecio()));
+			bw.newLine();
+			
+			
+		}
+
+		bw.write("Total: "+f.getTotal());
+		bw.newLine();
+		bw.write("------------------------------------------------------------");
+		bw.newLine();
+		bw.close();
+
+		}
+		private void EnviarFactura() throws IOException, IOException {
+			//System.out.println("Entro al envio de factura");
+			InputStream entrada = new FileInputStream("factura.txt");
+
+			Socket socket = null;
+			socket = new Socket("127.0.0.1",7777);
+			OutputStream salida = socket.getOutputStream();
+			byte []info=new byte[16*1024];
+			int i;
+			while ((i = entrada.read(info)) > 0) {
+			salida.write(info, 0, i);
+			}
+			salida.close();
+			entrada.close();
+			socket.close();
+		
+	}
+	*/
 }
