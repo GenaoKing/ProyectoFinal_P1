@@ -152,6 +152,7 @@ public class ListadoEmpleados extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnSeleccionar = new JButton("Ventas");
+				btnSeleccionar.setEnabled(false);
 				btnSeleccionar.setIcon(new ImageIcon(ListadoEmpleados.class.getResource("/iconos/ventas.png")));
 				btnSeleccionar.setForeground(new Color(0, 255, 0));
 				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
@@ -161,13 +162,17 @@ public class ListadoEmpleados extends JDialog {
 						a.setVisible(true);
 					}
 				});
-				btnSeleccionar.setEnabled(false);
 				btnSeleccionar.setActionCommand("OK");
 				buttonPane.add(btnSeleccionar);
 				getRootPane().setDefaultButton(btnSeleccionar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.setForeground(new Color(128, 0, 0));
 				cancelButton.setIcon(new ImageIcon(ListadoEmpleados.class.getResource("/iconos/cancel.png")));

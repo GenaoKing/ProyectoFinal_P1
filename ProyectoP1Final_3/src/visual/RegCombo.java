@@ -37,6 +37,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegCombo extends JDialog {
 
@@ -59,6 +60,7 @@ public class RegCombo extends JDialog {
 	private JLabel lblNombre;
 	private JTextField txtNombre;
 	private JTextField txtCodigo;
+	private JComboBox cbxFiltro;
 
 	/**
 	 * Launch the application.
@@ -262,11 +264,125 @@ public class RegCombo extends JDialog {
 			lblNewLabel.setBounds(10, 71, 88, 14);
 			panel.add(lblNewLabel);
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setForeground(new Color(0, 0, 255));
-			comboBox.setBackground(UIManager.getColor("Button.focus"));
-			comboBox.setBounds(108, 68, 150, 20);
-			panel.add(comboBox);
+			cbxFiltro = new JComboBox();
+			cbxFiltro.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Disco Duro", "Memoria Ram", "Microprocesadores", "Motherboard"}));
+			cbxFiltro.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					loadTable(cbxFiltro.getSelectedIndex());
+				}
+
+				private void loadTable(int seleccionado) {
+					
+					
+					modelo.setRowCount(0);
+					
+					fila = new Object[modelo.getColumnCount()];
+					
+					if(seleccionado == 0) {
+						cargarTabla();
+					}
+					
+					if(seleccionado == 1) {
+						for (Componente comp : Prodacom.getInstance().getComponentes()) {
+							
+							if(comp instanceof Disco) {
+							
+								fila[0] = comp.getSerie();	
+								fila[1] = comp.getMarca();
+								fila[2] = comp.getModelo();
+								fila[3] = comp.getPrecioVenta();
+							/*	
+							fila[0] = comp.getSerie();
+							fila[1] = "Disco Duro";
+							fila[2] = comp.getCantReal();
+							fila[3] = comp.getPrecioVenta();
+							fila[4] = comp.getModelo();
+							fila[5] = comp.getMarca();
+							*/
+							modelo.addRow(fila);
+						}
+						}
+					}else if(seleccionado == 2) {
+						for (Componente comp : Prodacom.getInstance().getComponentes()) {
+							if(comp instanceof MemoriaRam) {
+								
+								fila[0] = comp.getSerie();	
+								fila[1] = comp.getMarca();
+								fila[2] = comp.getModelo();
+								fila[3] = comp.getPrecioVenta();
+								/*
+								fila[0] = comp.getSerie();
+								fila[1] = "Memoria Ram";	
+								fila[2] = comp.getCantReal();
+								fila[3] = comp.getPrecioVenta();
+								fila[4] = comp.getModelo();
+								fila[5] = comp.getMarca();
+								*/
+								modelo.addRow(fila);
+								
+							}
+						}
+					}
+					else if(seleccionado == 3) {
+						for (Componente comp : Prodacom.getInstance().getComponentes()) {
+							if(comp instanceof Microprocesadores){
+								fila[0] = comp.getSerie();	
+								fila[1] = comp.getMarca();
+								fila[2] = comp.getModelo();
+								fila[3] = comp.getPrecioVenta();
+								/*
+							fila[0] = comp.getSerie();							
+							fila[1] = "Microprocesador";							
+							fila[2] = comp.getCantReal();
+							fila[3] = comp.getPrecioVenta();
+							fila[4] = comp.getModelo();
+							fila[5] = comp.getMarca();
+							*/
+							modelo.addRow(fila);
+							}
+						}
+					}
+					else if(seleccionado == 4) {
+						for (Componente comp : Prodacom.getInstance().getComponentes()) {
+							if(comp instanceof MotherBoard) {
+								
+								fila[0] = comp.getSerie();	
+								fila[1] = comp.getMarca();
+								fila[2] = comp.getModelo();
+								fila[3] = comp.getPrecioVenta();
+								/*
+								fila[0] = comp.getSerie();
+								
+								fila[1] = "MotherBoard";
+								
+								fila[2] = comp.getCantReal();
+								fila[3] = comp.getPrecioVenta();
+								fila[4] = comp.getModelo();
+								fila[5] = comp.getMarca();
+								*/
+								modelo.addRow(fila);
+							}
+						}
+					}
+					/*
+					else if(seleccionado == 5 ) {
+						for(Combo c : Prodacom.getInstance().getCombos()) {
+							fila[0] = c.getCod();
+							fila[1] = "Combo";
+							fila[2] = "Hasta Agotar Existencias";
+							fila[3] = c.calcularprecio();
+							fila[4] = c.getNombre();
+							fila[5] = "Unbranded";
+							modelo.addRow(fila);
+						}
+					}
+					*/
+				}
+			});
+			cbxFiltro.setForeground(new Color(0, 0, 255));
+			cbxFiltro.setBackground(UIManager.getColor("Button.focus"));
+			cbxFiltro.setBounds(108, 68, 150, 20);
+			panel.add(cbxFiltro);
 			
 			lblNombre = new JLabel("Nombre:");
 			lblNombre.setBackground(UIManager.getColor("Button.focus"));

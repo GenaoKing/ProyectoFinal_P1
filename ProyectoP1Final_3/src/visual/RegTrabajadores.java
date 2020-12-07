@@ -168,6 +168,7 @@ public class RegTrabajadores extends JDialog {
 					lblContrasena_admin.setVisible(false);
 					lblCorreo_admin.setVisible(false);
 					spnSueldo_admin.setVisible(false);
+					lblSueldo.setVisible(false);
 					txtContrasenna_admin.setVisible(false);
 					txtUsuario_admin.setVisible(false);
 					
@@ -197,6 +198,7 @@ public class RegTrabajadores extends JDialog {
 					lblContrasena_admin.setVisible(true);
 					lblCorreo_admin.setVisible(true);
 					spnSueldo_admin.setVisible(true);
+					lblSueldo.setVisible(true);
 					txtContrasenna_admin.setVisible(true);
 					txtUsuario_admin.setVisible(true);
 					
@@ -297,7 +299,7 @@ public class RegTrabajadores extends JDialog {
 			lblSueldo.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/bille.png")));
 			lblSueldo.setForeground(new Color(250, 250, 210));
 			lblSueldo.setBackground(UIManager.getColor("Button.focus"));
-			lblSueldo.setBounds(361, 30, 106, 14);
+			lblSueldo.setBounds(361, 30, 85, 14);
 			lblSueldo.setVisible(false);
 			panel_Administrativo.add(lblSueldo);
 			
@@ -305,7 +307,7 @@ public class RegTrabajadores extends JDialog {
 			spnSueldo_admin.setForeground(new Color(250, 250, 210));
 			spnSueldo_admin.setBackground(UIManager.getColor("Button.focus"));
 			spnSueldo_admin.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
-			spnSueldo_admin.setBounds(490, 27, 91, 20);
+			spnSueldo_admin.setBounds(440, 27, 99, 20);
 			spnSueldo_admin.setVisible(false);
 			panel_Administrativo.add(spnSueldo_admin);
 		}

@@ -321,6 +321,7 @@ public class RegProveedores extends JDialog {
 				okButton.setBackground(UIManager.getColor("Button.focus"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						//if(!(txtNombre.getText().isEmpty()) && ) {
 						Proveedor p = new Proveedor(txtNombre.getText(),txtCodigo.getText()
 								,txtTelefono.getText(),txtDireccion.getText(),
 								Float.parseFloat(txtCredito.getText()));
@@ -330,6 +331,7 @@ public class RegProveedores extends JDialog {
 						}
 						JOptionPane.showMessageDialog(null, "Se ha registrado correctamente el proveedor");
 						clear();
+					//}
 					}
 
 				});
