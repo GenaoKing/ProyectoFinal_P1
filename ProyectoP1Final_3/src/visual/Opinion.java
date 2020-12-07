@@ -172,6 +172,9 @@ public class Opinion extends JDialog {
 						}
 						if(Integer.valueOf(spnPregA.getValue().toString())==3) {
 							
+							
+							
+							
 						}
 						
 						
