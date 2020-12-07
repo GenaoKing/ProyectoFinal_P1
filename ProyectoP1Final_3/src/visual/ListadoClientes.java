@@ -205,7 +205,7 @@ public class ListadoClientes extends JDialog {
 			{
 				btnSeleccionar = new JButton("Seleccionar");
 				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
-				btnSeleccionar.setForeground(new Color(0, 102, 0));
+				btnSeleccionar.setForeground(new Color(0, 255, 0));
 				btnSeleccionar.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/select.png")));
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -221,7 +221,7 @@ public class ListadoClientes extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
-				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/cancel.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

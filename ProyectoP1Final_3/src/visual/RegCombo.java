@@ -307,8 +307,8 @@ public class RegCombo extends JDialog {
 			{
 				registrarButton = new JButton("Registrar");
 				registrarButton.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/registrer.png")));
-				registrarButton.setBackground(new Color(0, 128, 0));
-				registrarButton.setForeground(new Color(184, 134, 11));
+				registrarButton.setBackground(UIManager.getColor("Button.focus"));
+				registrarButton.setForeground(new Color(0, 255, 0));
 				registrarButton.setEnabled(false);
 				registrarButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -332,10 +332,10 @@ public class RegCombo extends JDialog {
 				getRootPane().setDefaultButton(registrarButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setIcon(new ImageIcon(RegCombo.class.getResource("/iconos/delete.png")));
-				cancelButton.setBackground(new Color(128, 0, 0));
-				cancelButton.setForeground(new Color(184, 134, 11));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

@@ -317,7 +317,7 @@ public class RegProveedores extends JDialog {
 			{
 				okButton = new JButton("Registrar");
 				okButton.setIcon(new ImageIcon(RegProveedores.class.getResource("/iconos/registrer.png")));
-				okButton.setForeground(new Color(0, 128, 0));
+				okButton.setForeground(new Color(0, 255, 0));
 				okButton.setBackground(UIManager.getColor("Button.focus"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -341,7 +341,7 @@ public class RegProveedores extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
-				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.setIcon(new ImageIcon(RegProveedores.class.getResource("/iconos/cancel.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

@@ -32,6 +32,7 @@ public class Prodacom implements Serializable{
 	private int mal [] = new int[3];
 	private int intermedio [] = new int[3];
 	private int excelente [] = new int[3];
+	private ArrayList<Integer>malx;
 	
 	private Prodacom() {
 		super();
@@ -181,8 +182,6 @@ public class Prodacom implements Serializable{
 		this.cod_facturas = cod_facturas;
 	}
 
-
-
 	public boolean HacerPedido(String serie) {
 		boolean res = false;
 		Componente componente = buscarComponente(serie);
@@ -195,7 +194,6 @@ public class Prodacom implements Serializable{
 		return res;
 	}
 
-	
 	public Cliente buscarCliente(String cedula) {
 		Cliente cliente = null;
 		int i = 0;

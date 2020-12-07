@@ -211,8 +211,8 @@ public class ListadoComponentes extends JDialog {
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/delete.png")));
 				btnEliminar.setEnabled(false);
-				btnEliminar.setForeground(UIManager.getColor("Button.focus"));
-				btnEliminar.setBackground(Color.RED);
+				btnEliminar.setForeground(new Color(255, 0, 0));
+				btnEliminar.setBackground(UIManager.getColor("Button.focus"));
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(auxiliar!=null) {
@@ -230,7 +230,8 @@ public class ListadoComponentes extends JDialog {
 				});
 				
 				btnSeleccionar = new JButton("Seleccionar");
-				btnSeleccionar.setForeground(new Color(0, 128, 0));
+				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
+				btnSeleccionar.setForeground(new Color(0, 255, 0));
 				btnSeleccionar.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/select.png")));
 				btnSeleccionar.setEnabled(false);
 				btnSeleccionar.addActionListener(new ActionListener() {
@@ -256,8 +257,8 @@ public class ListadoComponentes extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/cancel.png")));
-				cancelButton.setBackground(new Color(178, 34, 34));
-				cancelButton.setForeground(UIManager.getColor("Button.focus"));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

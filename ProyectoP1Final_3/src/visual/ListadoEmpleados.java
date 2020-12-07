@@ -29,6 +29,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
+import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
 
 public class ListadoEmpleados extends JDialog {
 
@@ -48,30 +55,47 @@ public class ListadoEmpleados extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoEmpleados() {
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoEmpleados.class.getResource("/iconos/iu.png")));
 		setTitle("Listado De Empleados");
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 859, 462);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBorder(new LineBorder(new Color(184, 134, 11)));
+			panel.setForeground(UIManager.getColor("Button.focus"));
+			panel.setBackground(UIManager.getColor("Button.focus"));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
 			JPanel panel_1 = new JPanel();
+			panel_1.setForeground(UIManager.getColor("Button.focus"));
+			panel_1.setBackground(UIManager.getColor("Button.focus"));
 			panel_1.setBounds(12, 13, 807, 47);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
 			JLabel lblNewLabel = new JLabel("Buscador:");
-			lblNewLabel.setBounds(12, 13, 77, 21);
+			lblNewLabel.setIcon(new ImageIcon(ListadoEmpleados.class.getResource("/iconos/busca.png")));
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNewLabel.setForeground(SystemColor.textHighlight);
+			lblNewLabel.setBackground(Color.BLACK);
+			lblNewLabel.setBounds(12, 13, 122, 21);
 			panel_1.add(lblNewLabel);
 			
 			txtBusqueda = new JTextField();
+			txtBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			txtBusqueda.setForeground(new Color(0, 0, 255));
+			txtBusqueda.setBackground(UIManager.getColor("Button.focus"));
 			txtBusqueda.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
@@ -81,7 +105,7 @@ public class ListadoEmpleados extends JDialog {
 					tr.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText().trim()));
 				}
 			});
-			txtBusqueda.setBounds(87, 12, 214, 22);
+			txtBusqueda.setBounds(144, 12, 157, 22);
 			panel_1.add(txtBusqueda);
 			txtBusqueda.setColumns(10);
 			
@@ -121,10 +145,16 @@ public class ListadoEmpleados extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnSeleccionar = new JButton("Ventas");
+				btnSeleccionar.setIcon(new ImageIcon(ListadoEmpleados.class.getResource("/iconos/ventas.png")));
+				btnSeleccionar.setForeground(new Color(0, 255, 0));
+				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ListadoFacturas a = new ListadoFacturas(aux);
@@ -138,6 +168,9 @@ public class ListadoEmpleados extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
+				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setIcon(new ImageIcon(ListadoEmpleados.class.getResource("/iconos/cancel.png")));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

@@ -573,7 +573,7 @@ public class Facturacion extends JDialog {
 			
 				});
 				btnPagar.setBackground(UIManager.getColor("Button.focus"));
-				btnPagar.setForeground(new Color(34, 139, 34));
+				btnPagar.setForeground(new Color(0, 255, 0));
 				btnPagar.setActionCommand("OK");
 				buttonPane.add(btnPagar);
 				getRootPane().setDefaultButton(btnPagar);
@@ -581,7 +581,7 @@ public class Facturacion extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/delete.png")));
-				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

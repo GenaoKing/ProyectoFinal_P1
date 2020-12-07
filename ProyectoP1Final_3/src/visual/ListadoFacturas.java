@@ -63,6 +63,8 @@ public class ListadoFacturas extends JDialog {
 	 * @param aux 
 	 */
 	public ListadoFacturas(Vendedor aux) {
+		setForeground(new Color(0, 100, 0));
+		setBackground(UIManager.getColor("Button.focus"));
 		this.v=aux;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoFacturas.class.getResource("/iconos/factura.png")));
 		setTitle("Listado de Facturas\r\n");

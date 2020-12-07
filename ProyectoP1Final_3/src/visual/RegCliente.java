@@ -201,7 +201,7 @@ public class RegCliente extends JDialog {
 			
 			btnSeleccionar = new JButton("Seleccionar De Clientes Guardados");
 			btnSeleccionar.setIcon(new ImageIcon(RegCliente.class.getResource("/iconos/clien.png")));
-			btnSeleccionar.setForeground(new Color(0, 128, 0));
+			btnSeleccionar.setForeground(new Color(0, 255, 0));
 			btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
 			btnSeleccionar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -215,7 +215,7 @@ public class RegCliente extends JDialog {
 			{
 				JButton okButton = new JButton("Registrar");
 				okButton.setBackground(UIManager.getColor("Button.focus"));
-				okButton.setForeground(new Color(50, 205, 50));
+				okButton.setForeground(new Color(0, 255, 0));
 				okButton.setIcon(new ImageIcon(RegCliente.class.getResource("/iconos/registrer.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -243,7 +243,7 @@ public class RegCliente extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
-				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.setIcon(new ImageIcon(RegCliente.class.getResource("/iconos/cancel.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

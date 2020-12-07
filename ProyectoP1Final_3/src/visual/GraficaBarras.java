@@ -14,6 +14,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import logico.Prodacom;
+import java.awt.Toolkit;
 
 public class GraficaBarras extends JFrame {
 
@@ -24,11 +25,12 @@ public class GraficaBarras extends JFrame {
 		ChartPanel panel = Barras3d();
 		
 		JFrame ventana = new JFrame("Grafica");
+		ventana.setIconImage(Toolkit.getDefaultToolkit().getImage(GraficaBarras.class.getResource("/iconos/Bar-Chart-icon.png")));
         ventana.setVisible(true);
         ventana.setSize(800, 600);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
-        ventana.add(panel);
+        ventana.getContentPane().add(panel, BorderLayout.EAST);
         
 	
 	

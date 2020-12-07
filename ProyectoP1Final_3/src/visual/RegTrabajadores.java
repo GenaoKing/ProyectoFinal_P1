@@ -24,6 +24,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class RegTrabajadores extends JDialog {
 
@@ -57,69 +59,102 @@ public class RegTrabajadores extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegTrabajadores() {
+		setForeground(UIManager.getColor("Button.focus"));
+		setBackground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegTrabajadores.class.getResource("/iconos/name.png")));
 		setModal(false);
 		setResizable(false);
 		setTitle("Registrar Trabajador");
 		setBounds(100, 100, 637, 428);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(0, 128, 128));
+			panel.setForeground(UIManager.getColor("Button.focus"));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
 			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_1.setForeground(Color.DARK_GRAY);
+			panel_1.setBackground(Color.BLACK);
+			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 			panel_1.setBounds(10, 11, 591, 133);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
 			JLabel lblNewLabel = new JLabel("C\u00E9dula:");
-			lblNewLabel.setBounds(10, 35, 46, 14);
+			lblNewLabel.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/cedu.png")));
+			lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
+			lblNewLabel.setForeground(new Color(250, 250, 210));
+			lblNewLabel.setBounds(10, 35, 87, 14);
 			panel_1.add(lblNewLabel);
 			
 			JLabel label = new JLabel("Nombre:");
+			label.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/nombre.png")));
+			label.setForeground(new Color(250, 250, 210));
+			label.setBackground(UIManager.getColor("Button.focus"));
 			label.setBounds(10, 84, 73, 14);
 			panel_1.add(label);
 			
 			JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-			lblDireccin.setBounds(338, 35, 66, 14);
+			lblDireccin.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/ju.png")));
+			lblDireccin.setForeground(new Color(250, 250, 210));
+			lblDireccin.setBackground(UIManager.getColor("Button.focus"));
+			lblDireccin.setBounds(338, 35, 107, 14);
 			panel_1.add(lblDireccin);
 			
 			JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
-			lblTelfono.setBounds(338, 84, 66, 14);
+			lblTelfono.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/tel.png")));
+			lblTelfono.setForeground(new Color(250, 250, 210));
+			lblTelfono.setBackground(UIManager.getColor("Button.focus"));
+			lblTelfono.setBounds(338, 84, 107, 14);
 			panel_1.add(lblTelfono);
 			
 			txtCedula = new JTextField();
-			txtCedula.setBounds(66, 32, 167, 20);
+			txtCedula.setForeground(new Color(250, 250, 210));
+			txtCedula.setBackground(UIManager.getColor("Button.focus"));
+			txtCedula.setBounds(107, 32, 126, 20);
 			panel_1.add(txtCedula);
 			txtCedula.setColumns(10);
 			
 			txtNombre = new JTextField();
+			txtNombre.setBackground(UIManager.getColor("Button.focus"));
+			txtNombre.setForeground(new Color(250, 250, 210));
 			txtNombre.setColumns(10);
-			txtNombre.setBounds(66, 81, 167, 20);
+			txtNombre.setBounds(107, 81, 126, 20);
 			panel_1.add(txtNombre);
 			
 			txtDireccion = new JTextField();
+			txtDireccion.setForeground(new Color(250, 250, 210));
+			txtDireccion.setBackground(UIManager.getColor("Button.focus"));
 			txtDireccion.setColumns(10);
-			txtDireccion.setBounds(414, 32, 167, 20);
+			txtDireccion.setBounds(455, 32, 126, 20);
 			panel_1.add(txtDireccion);
 			
 			txtTelefono = new JTextField();
+			txtTelefono.setBackground(UIManager.getColor("Button.focus"));
+			txtTelefono.setForeground(new Color(250, 250, 210));
 			txtTelefono.setColumns(10);
-			txtTelefono.setBounds(414, 81, 167, 20);
+			txtTelefono.setBounds(455, 81, 126, 20);
 			panel_1.add(txtTelefono);
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seleccione el tipo de trabajador", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_2.setForeground(Color.DARK_GRAY);
+			panel_2.setBackground(Color.BLACK);
+			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seleccione el tipo de trabajador", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 			panel_2.setBounds(10, 155, 591, 74);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			
 			rdbVendedor = new JRadioButton("Vendedor");
+			rdbVendedor.setBackground(UIManager.getColor("Button.focus"));
+			rdbVendedor.setForeground(new Color(250, 250, 210));
 			rdbVendedor.setSelected(true);
 			rdbVendedor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -148,6 +183,8 @@ public class RegTrabajadores extends JDialog {
 			panel_2.add(rdbVendedor);
 			
 			rdbAdministrativo = new JRadioButton("Administrativo");
+			rdbAdministrativo.setForeground(new Color(250, 250, 210));
+			rdbAdministrativo.setBackground(UIManager.getColor("Button.focus"));
 			rdbAdministrativo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
@@ -175,78 +212,114 @@ public class RegTrabajadores extends JDialog {
 			panel_2.add(rdbAdministrativo);
 			
 			panel_Vendedor = new JPanel();
-			panel_Vendedor.setBorder(new TitledBorder(null, "Informaci\u00F3n Espec\u00EDfica", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_Vendedor.setForeground(Color.DARK_GRAY);
+			panel_Vendedor.setBackground(Color.BLACK);
+			panel_Vendedor.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n Espec\u00EDfica", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 			panel_Vendedor.setBounds(10, 240, 591, 95);
 			panel.add(panel_Vendedor);
 			panel_Vendedor.setLayout(null);
 			
 			lblComision_vendedor = new JLabel("Comisi\u00F3n:");
-			lblComision_vendedor.setBounds(10, 22, 75, 14);
+			lblComision_vendedor.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/bille.png")));
+			lblComision_vendedor.setForeground(new Color(250, 250, 210));
+			lblComision_vendedor.setBackground(UIManager.getColor("Button.focus"));
+			lblComision_vendedor.setBounds(10, 22, 93, 14);
 			panel_Vendedor.add(lblComision_vendedor);
 			
 			spnComision_vendedor = new JSpinner();
+			spnComision_vendedor.setForeground(new Color(250, 250, 210));
+			spnComision_vendedor.setBackground(UIManager.getColor("Button.focus"));
 			spnComision_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), new Float(100), new Float(1)));
-			spnComision_vendedor.setBounds(69, 18, 119, 20);
+			spnComision_vendedor.setBounds(113, 18, 75, 20);
 			panel_Vendedor.add(spnComision_vendedor);
 			
 			lblFavor_vendedor = new JLabel("(Favor de ingresar el porciento que tendr\u00E1 de comisi\u00F3n por venta.)");
+			lblFavor_vendedor.setForeground(new Color(250, 250, 210));
+			lblFavor_vendedor.setBackground(UIManager.getColor("Button.focus"));
 			lblFavor_vendedor.setEnabled(false);
 			lblFavor_vendedor.setBounds(198, 22, 383, 14);
 			panel_Vendedor.add(lblFavor_vendedor);
 			
 			lblSueldo_vendedor = new JLabel("Sueldo:");
-			lblSueldo_vendedor.setBounds(10, 58, 75, 14);
+			lblSueldo_vendedor.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/dinero.png")));
+			lblSueldo_vendedor.setBackground(UIManager.getColor("Button.focus"));
+			lblSueldo_vendedor.setForeground(new Color(250, 250, 210));
+			lblSueldo_vendedor.setBounds(10, 58, 93, 14);
 			panel_Vendedor.add(lblSueldo_vendedor);
 			
 			spnSueldo_vendedor = new JSpinner();
+			spnSueldo_vendedor.setBackground(UIManager.getColor("Button.focus"));
+			spnSueldo_vendedor.setForeground(new Color(250, 250, 210));
 			spnSueldo_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
-			spnSueldo_vendedor.setBounds(69, 56, 119, 20);
+			spnSueldo_vendedor.setBounds(113, 56, 75, 20);
 			panel_Vendedor.add(spnSueldo_vendedor);
 			
 			panel_Administrativo = new JPanel();
-			panel_Administrativo.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n Espec\u00EDfica", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_Administrativo.setForeground(Color.DARK_GRAY);
+			panel_Administrativo.setBackground(Color.BLACK);
+			panel_Administrativo.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n Espec\u00EDfica", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(184, 134, 11)));
 			panel_Administrativo.setBounds(10, 240, 591, 95);
 			panel.add(panel_Administrativo);
 			panel_Administrativo.setLayout(null);
 			
 			lblCorreo_admin = new JLabel("Nombre usuario:");
-			lblCorreo_admin.setBounds(10, 30, 98, 14);
+			lblCorreo_admin.setBackground(UIManager.getColor("Button.focus"));
+			lblCorreo_admin.setForeground(new Color(250, 250, 210));
+			lblCorreo_admin.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/nombre.png")));
+			lblCorreo_admin.setBounds(10, 30, 119, 14);
 			lblCorreo_admin.setVisible(false);
 			panel_Administrativo.add(lblCorreo_admin);
 			lblContrasena_admin = new JLabel("Contrase\u00F1a:");
-			lblContrasena_admin.setBounds(10, 70, 98, 14);
+			lblContrasena_admin.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/marca.png")));
+			lblContrasena_admin.setForeground(new Color(250, 250, 210));
+			lblContrasena_admin.setBackground(UIManager.getColor("Button.focus"));
+			lblContrasena_admin.setBounds(10, 70, 119, 14);
 			lblContrasena_admin.setVisible(false);
 			panel_Administrativo.add(lblContrasena_admin);
 			
 			txtUsuario_admin = new JTextField();
-			txtUsuario_admin.setBounds(118, 27, 162, 20);
+			txtUsuario_admin.setForeground(new Color(250, 250, 210));
+			txtUsuario_admin.setBackground(UIManager.getColor("Button.focus"));
+			txtUsuario_admin.setBounds(139, 27, 141, 20);
 			txtUsuario_admin.setVisible(false);
 			panel_Administrativo.add(txtUsuario_admin);
 			txtUsuario_admin.setColumns(10);
 			
 			txtContrasenna_admin = new JTextField();
+			txtContrasenna_admin.setForeground(new Color(250, 250, 210));
+			txtContrasenna_admin.setBackground(UIManager.getColor("Button.focus"));
 			txtContrasenna_admin.setColumns(10);
-			txtContrasenna_admin.setBounds(118, 67, 162, 20);
+			txtContrasenna_admin.setBounds(139, 67, 141, 20);
 			txtContrasenna_admin.setVisible(false);
 			panel_Administrativo.add(txtContrasenna_admin);
 			
 			lblSueldo = new JLabel("Sueldo:");
-			lblSueldo.setBounds(361, 30, 69, 14);
+			lblSueldo.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/bille.png")));
+			lblSueldo.setForeground(new Color(250, 250, 210));
+			lblSueldo.setBackground(UIManager.getColor("Button.focus"));
+			lblSueldo.setBounds(361, 30, 106, 14);
 			lblSueldo.setVisible(false);
 			panel_Administrativo.add(lblSueldo);
 			
 			spnSueldo_admin = new JSpinner();
+			spnSueldo_admin.setForeground(new Color(250, 250, 210));
+			spnSueldo_admin.setBackground(UIManager.getColor("Button.focus"));
 			spnSueldo_admin.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
-			spnSueldo_admin.setBounds(423, 27, 106, 20);
+			spnSueldo_admin.setBounds(490, 27, 91, 20);
 			spnSueldo_admin.setVisible(false);
 			panel_Administrativo.add(spnSueldo_admin);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
+			buttonPane.setBackground(new Color(0, 128, 128));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/registrer.png")));
+				okButton.setForeground(new Color(0, 255, 0));
+				okButton.setBackground(UIManager.getColor("Button.focus"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -285,6 +358,9 @@ public class RegTrabajadores extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/cancel.png")));
+				cancelButton.setForeground(new Color(255, 0, 0));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

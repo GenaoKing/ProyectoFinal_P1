@@ -15,6 +15,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import logico.Prodacom;
+import java.awt.Toolkit;
 
 public class GraficOpinion extends JDialog {
 
@@ -22,6 +23,7 @@ public class GraficOpinion extends JDialog {
 
 
 	public GraficOpinion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GraficOpinion.class.getResource("/iconos/Data-Meter-icon.png")));
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);

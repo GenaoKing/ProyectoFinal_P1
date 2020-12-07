@@ -174,7 +174,7 @@ public class Ventas extends JDialog {
 			{
 				JButton okButton = new JButton("Agregar");
 				okButton.setBackground(UIManager.getColor("Button.focus"));
-				okButton.setForeground(new Color(0, 102, 0));
+				okButton.setForeground(new Color(0, 255, 0));
 				okButton.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/registrer.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -220,7 +220,7 @@ public class Ventas extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
-				cancelButton.setForeground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/cancel.png")));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

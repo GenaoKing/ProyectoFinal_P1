@@ -14,12 +14,17 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 import logico.Prodacom;
+import javax.swing.UIManager;
+import java.awt.Toolkit;
 
 public class testeo2 extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
 	public testeo2() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(testeo2.class.getResource("/iconos/Bar-Chart-icon.png")));
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
 		setModal(true);
 		setBounds(100, 100, 815, 506);
 		setLocationRelativeTo(null);
@@ -52,6 +57,8 @@ public class testeo2 extends JDialog {
         
         
         ChartPanel panel= new ChartPanel(chart);
+        panel.setForeground(UIManager.getColor("Button.focus"));
+        panel.setBackground(UIManager.getColor("Button.focus"));
 		
 		return panel;
 	}

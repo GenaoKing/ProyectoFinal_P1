@@ -15,12 +15,17 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import logico.Prodacom;
+import java.awt.Toolkit;
+import javax.swing.UIManager;
 
 public class testeo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
 	public testeo() {
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(testeo.class.getResource("/iconos/Data-Meter-icon.png")));
 		setModal(true);
 		setBounds(100, 100, 802, 493);
 		setLocationRelativeTo(null);
@@ -74,6 +79,8 @@ private ChartPanel Barras3d() {
                 false);
  
         ChartPanel panel = new ChartPanel(barChart);
+        panel.setForeground(UIManager.getColor("Button.focus"));
+        panel.setBackground(UIManager.getColor("Button.focus"));
        // panel.setlocati;
         return panel;
 	}

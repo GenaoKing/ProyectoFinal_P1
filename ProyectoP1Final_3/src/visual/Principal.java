@@ -281,13 +281,22 @@ public class Principal extends JFrame {
 		mnNewMenu_4.add(mntmNewMenuItem_8);
 		
 		JMenu mnNewMenu_5 = new JMenu("Administracion");
+		mnNewMenu_5.setIcon(new ImageIcon(Principal.class.getResource("/iconos/folder-data-icon.png")));
+		mnNewMenu_5.setForeground(SystemColor.textHighlight);
+		mnNewMenu_5.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_5.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		menuBar.add(mnNewMenu_5);
 		
 		JMenu mnNewMenu_6 = new JMenu("Empleados");
+		mnNewMenu_6.setIcon(new ImageIcon(Principal.class.getResource("/iconos/user.png")));
+		mnNewMenu_6.setForeground(SystemColor.textHighlight);
+		mnNewMenu_6.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_5.add(mnNewMenu_6);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar");
+		mntmNewMenuItem_9.setIcon(new ImageIcon(Principal.class.getResource("/iconos/list.png")));
+		mntmNewMenuItem_9.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_9.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegTrabajadores a = new RegTrabajadores();
@@ -297,6 +306,9 @@ public class Principal extends JFrame {
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Listado");
+		mntmNewMenuItem_10.setIcon(new ImageIcon(Principal.class.getResource("/iconos/name.png")));
+		mntmNewMenuItem_10.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_10.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListadoEmpleados a = new ListadoEmpleados();
@@ -306,9 +318,15 @@ public class Principal extends JFrame {
 		mnNewMenu_6.add(mntmNewMenuItem_10);
 		
 		JMenu mnNewMenu_8 = new JMenu("Graficos");
+		mnNewMenu_8.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Data-Meter-icon.png")));
+		mnNewMenu_8.setBackground(UIManager.getColor("Button.focus"));
+		mnNewMenu_8.setForeground(SystemColor.textHighlight);
 		mnNewMenu_5.add(mnNewMenu_8);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("pastel");
+		mntmNewMenuItem_13.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Bar-Chart-icon.png")));
+		mntmNewMenuItem_13.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_13.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				testeo2 x = new testeo2();
@@ -318,6 +336,9 @@ public class Principal extends JFrame {
 		mnNewMenu_8.add(mntmNewMenuItem_13);
 		
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("barras");
+		mntmNewMenuItem_14.setIcon(new ImageIcon(Principal.class.getResource("/iconos/chart-bar-chart-icon.png")));
+		mntmNewMenuItem_14.setBackground(UIManager.getColor("Button.focus"));
+		mntmNewMenuItem_14.setForeground(SystemColor.textHighlight);
 		mntmNewMenuItem_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				testeo aux = new testeo();
@@ -327,21 +348,40 @@ public class Principal extends JFrame {
 		mnNewMenu_8.add(mntmNewMenuItem_14);
 		
 		JMenu mnNewMenu_9 = new JMenu("Cuentas y Ordenes de Compra");
+		mnNewMenu_9.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Graphics-Pen-icon.png")));
+		mnNewMenu_9.setForeground(SystemColor.textHighlight);
+		mnNewMenu_9.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_5.add(mnNewMenu_9);
 		
 		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Estado de Cuentas");
+		mntmNewMenuItem_15.setIcon(new ImageIcon(Principal.class.getResource("/iconos/lip.png")));
+		mntmNewMenuItem_15.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_15.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_15);
 		
 		JMenuItem mntmNewMenuItem_16 = new JMenuItem("Ingresar Dinero");
+		mntmNewMenuItem_16.setIcon(new ImageIcon(Principal.class.getResource("/iconos/dollar.png")));
+		mntmNewMenuItem_16.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_16.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_16);
 		
 		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Generar Orden De Compra");
+		mntmNewMenuItem_17.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compras.png")));
+		mntmNewMenuItem_17.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_17.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_17);
 		
 		JMenu mnNewMenu_7 = new JMenu("Opini\u00F3n");
+		mnNewMenu_7.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
+		mnNewMenu_7.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnNewMenu_7.setBackground(UIManager.getColor("Button.focus"));
+		mnNewMenu_7.setForeground(SystemColor.textHighlight);
 		menuBar.add(mnNewMenu_7);
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Opini\u00F3n Empresa");
+		mntmNewMenuItem_11.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Paper-icon.png")));
+		mntmNewMenuItem_11.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_11.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Opinion x = new Opinion();

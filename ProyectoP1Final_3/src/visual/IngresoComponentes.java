@@ -810,8 +810,8 @@ public class IngresoComponentes extends JDialog {
 			{
 				okButton = new JButton("Registrar");
 				okButton.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/registrer.png")));
-				okButton.setForeground(new Color(51, 51, 51));
-				okButton.setBackground(new Color(0, 153, 0));
+				okButton.setForeground(new Color(0, 255, 0));
+				okButton.setBackground(UIManager.getColor("Button.focus"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -904,8 +904,8 @@ public class IngresoComponentes extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setIcon(new ImageIcon(IngresoComponentes.class.getResource("/iconos/delete.png")));
-				cancelButton.setForeground(new Color(51, 51, 51));
-				cancelButton.setBackground(Color.RED);
+				cancelButton.setForeground(new Color(255, 0, 0));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						for(String s:agregados) {
