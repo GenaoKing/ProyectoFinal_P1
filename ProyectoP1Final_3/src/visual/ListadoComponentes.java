@@ -126,7 +126,7 @@ public class ListadoComponentes extends JDialog {
 					seleccion = table.getSelectedRow();
 					modelrow = table.convertRowIndexToModel(seleccion);
 					if(cargar==null) {
-						if(seleccion!=-1) {
+						if(seleccion!=-1 && (int)modelo.getValueAt(modelrow, 2)>0) {
 							
 							btnEliminar.setEnabled(true);
 							btnSeleccionar.setEnabled(true);
@@ -234,11 +234,17 @@ public class ListadoComponentes extends JDialog {
 				btnSeleccionar.setForeground(new Color(0, 255, 0));
 				btnSeleccionar.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/select.png")));
 				btnSeleccionar.setEnabled(false);
+				if(mode==0) {
+					btnSeleccionar.setVisible(true);
+				}else {
+					btnSeleccionar.setVisible(false);
+				}
+				
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
 							Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
-							Ventas a = new Ventas(c.getCod(),c.getNombre(),c.calcularprecio(),100);
+							Ventas a = new Ventas(c.getCod(),c.getNombre(),c.calcularprecio(),1);
 							dispose();
 							a.setVisible(true);
 						}else {

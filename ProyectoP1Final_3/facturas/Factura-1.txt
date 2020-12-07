@@ -1,15 +1,15 @@
 --------------------------------------------------------------------------------------
-Cliente: dinny                                     F-1                                               
-Cedula: enferma                                    Fecha: 7/12/2020                                  
-Telefono: 124542                                   Vendedor: xav                                     
-Direccion: su casa                                 Vendedor: xav                                     
+Cliente: Diana                                     F-1                                               
+Cedula: 033                                        Fecha: 7/12/2020                                  
+Telefono: 849                                      Vendedor: Xavier                                  
+Direccion: jacagua                                 Vence: 8/12/2020                                  
 --------------------------------------------------------------------------------------
 Codigo               Articulo             Cantidad             Precio               Importe             
-S-5                  gdfgd hgfd           1                    2.0                  2.0                 
-S-6                  gfdg das             1                    2.0                  2.0                 
-S-7                  gdfgf ydfg           1                    2.0                  2.0                 
-S-9                  coger este           1                    2.0                  2.0                 
+S-1                  2070 RTX             5                    20.0                 100.0               
+S-2                  AMD GigaForce        5                    21.0                 105.0               
+Sub-Total: 205.00
 
-Total: 9.44
+ITBIS 18%: 36.90
+Total: 241.90
 --------------------------------------------------------------------------------------
 Gracias por preferirnos, recuerde que no aceptamos devoluciones

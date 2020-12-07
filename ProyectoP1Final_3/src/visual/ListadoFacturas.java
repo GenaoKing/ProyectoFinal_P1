@@ -38,6 +38,8 @@ import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import javax.swing.border.LineBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ListadoFacturas extends JDialog {
 
@@ -52,6 +54,7 @@ public class ListadoFacturas extends JDialog {
 	private Vendedor v = null;
 	private Factura auxiliar = null;
 	private JButton informacionButton;
+	private JComboBox cbxFiltro;
 
 	/**
 	 * Launch the application.
@@ -119,11 +122,11 @@ public class ListadoFacturas extends JDialog {
 				}
 			}
 			{
-				JLabel lblNewLabel = new JLabel("Filtro:");
+				JLabel lblNewLabel = new JLabel("Buscador:");
 				lblNewLabel.setForeground(SystemColor.textHighlight);
 				lblNewLabel.setBackground(UIManager.getColor("Button.focus"));
 				lblNewLabel.setIcon(new ImageIcon(ListadoFacturas.class.getResource("/iconos/ll.png")));
-				lblNewLabel.setBounds(10, 14, 63, 14);
+				lblNewLabel.setBounds(10, 14, 93, 14);
 				panel.add(lblNewLabel);
 			}
 			{
@@ -139,10 +142,26 @@ public class ListadoFacturas extends JDialog {
 						tr.setRowFilter(RowFilter.regexFilter(txtFiltro.getText().trim()));
 					}
 				});
-				txtFiltro.setBounds(83, 11, 176, 20);
+				txtFiltro.setBounds(115, 11, 176, 20);
 				panel.add(txtFiltro);
 				txtFiltro.setColumns(10);
 			}
+			
+			JLabel lblNewLabel_1 = new JLabel("Filtro:");
+			lblNewLabel_1.setForeground(Color.BLUE);
+			lblNewLabel_1.setBounds(378, 13, 56, 16);
+			panel.add(lblNewLabel_1);
+			
+			cbxFiltro = new JComboBox();
+			cbxFiltro.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cargarTabla();
+					
+				}
+			});
+			cbxFiltro.setModel(new DefaultComboBoxModel(new String[] {"<Todas>", "Pagadas", "Por Cobrar", "Vencidas"}));
+			cbxFiltro.setBounds(446, 10, 117, 21);
+			panel.add(cbxFiltro);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -185,35 +204,145 @@ public class ListadoFacturas extends JDialog {
 	private void cargarTabla() {
 		
 		if(v==null) {
-			modelo.setRowCount(0); 
-			fila = new Object [modelo.getColumnCount()];
-			
-			for(Factura fact : Prodacom.getInstance().getFacturas()){
+			switch(cbxFiltro.getSelectedIndex()) {
+			case 0:
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
 				
-					fila[0] = fact.getCod();
-					fila[1] = fact.getCliente().getNombre();
-					fila[2] = fact.getVendedor().getNombre();
-					fila[3] = fact.getTotal();
-					fila[4] = fact.getFecha();
-					fila[5] = fact.getComponentes().size()+fact.getCombo().size();
-					modelo.addRow(fila);
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
+				break;
+			case 1:
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					if(!fact.isEstado()) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
 				}
+				break;
+			case 2:
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					if(fact.isEstado() && !fact.vencida() ) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
+				}
+				break;
+			case 3:
+				
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					if(fact.isEstado() && fact.vencida() ) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
+				}
+				break;
+				
+		}
+		
 		}else {
-			modelo.setRowCount(0); 
-			fila = new Object [modelo.getColumnCount()];
 			
-			for(Factura fact : Prodacom.getInstance().getFacturas()){
-				if(fact.getVendedor().equals(v)) {
-					fila[0] = fact.getCod();
-					fila[1] = fact.getCliente().getNombre();
-					fila[2] = fact.getVendedor().getNombre();
-					fila[3] = fact.getTotal();
-					fila[4] = fact.getFecha();
-					fila[5] = fact.getComponentes().size()+fact.getCombo().size();
-					modelo.addRow(fila);
+			switch(cbxFiltro.getSelectedIndex()) {
+			case 0:
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					if(fact.getVendedor().equals(v)) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
+					}
+				break;
+			case 1:
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					if(!fact.isEstado() && fact.getVendedor().equals(v)) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
 				}
+				break;
+			case 2:
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas()){
+					if(fact.isEstado() && !fact.vencida() && fact.getVendedor().equals(v) ) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
 				}
+				break;
+			case 3:
+				
+				modelo.setRowCount(0); 
+				fila = new Object [modelo.getColumnCount()];
+				
+				for(Factura fact : Prodacom.getInstance().getFacturas() ){
+					if(fact.isEstado() && fact.vencida() && fact.getVendedor().equals(v)) {
+						fila[0] = fact.getCod();
+						fila[1] = fact.getCliente().getNombre();
+						fila[2] = fact.getVendedor().getNombre();
+						fila[3] = fact.getTotal();
+						fila[4] = fact.getFecha();
+						fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+						modelo.addRow(fila);
+					}
+				}
+				break;
+				
+		}
+			
 		}
 	}
-
 }

@@ -1,8 +1,11 @@
 package logico;
 
 import java.io.Serializable;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -226,6 +229,28 @@ public class Factura implements Serializable{
 			}
 		}
 		return tot;
+	}
+
+
+
+
+
+
+
+	public boolean vencida() {
+		boolean vencida = false;
+		Date hoy= new Date();
+		Calendar cal1 = new GregorianCalendar();
+	    Calendar cal2 = new GregorianCalendar();
+	    cal1.setTime(fecha);
+	    cal2.setTime(hoy);
+	    
+		int dias =  (int)( (cal2.getTime().getTime() - cal1.getTime().getTime()) / (1000 * 60 * 60 * 24));
+		
+		if(dias>=((Cliente)cliente).getDiasCredito()) {
+			vencida = true;
+		}
+		return vencida;
 	}
 
 

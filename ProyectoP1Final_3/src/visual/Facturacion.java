@@ -486,6 +486,18 @@ public class Facturacion extends JDialog {
 							int end = cbxVendedores.getSelectedItem().toString().indexOf("|");
 							Vendedor v = Prodacom.getInstance().buscarVendedor(cbxVendedores.getSelectedItem().toString().substring(0, end));
 							Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, true,modelo.getRowCount());
+							
+							for(int i= 0;i<modelo.getRowCount();i++) {
+								fila[0]=modelo.getValueAt(i, 0).toString();
+								fila[1]=modelo.getValueAt(i, 1).toString();
+								fila[2]=Integer.parseInt(modelo.getValueAt(i, 2).toString());
+								fila[3]=Float.parseFloat(modelo.getValueAt(i, 3).toString());
+								fila[4]=Float.parseFloat(modelo.getValueAt(i, 4).toString());
+								System.out.println(modelo.getValueAt(i, 0).toString());
+								f.InsertarFilas(i,fila);
+							
+							}
+							
 							for(Combo c : combos) {
 								f.InsertarCombos(c);
 							}
@@ -720,8 +732,15 @@ private void GenerarFactura(Factura f) throws IOException {
 			
 			bw.write(String.format("%-50s %-50s",("Telefono: "+f.getCliente().getTelefono()),"Vendedor: "+f.getVendedor().getNombre()));
 			bw.newLine();
-			bw.write(String.format("%-50s %-50s",("Direccion: "+f.getCliente().getDireccion()),"Vendedor: "+f.getVendedor().getNombre()));// Si da tiempo en el ultimo
-			//Para metro de esta linea ponerle la cantidad de dias a partir del de facturacion se vence.
+			if(f.isEstado()) {
+				inicio.add(Calendar.DAY_OF_YEAR, ((Cliente)f.getCliente()).getDiasCredito());
+				bw.write(String.format("%-50s %-50s",("Direccion: "+f.getCliente().getDireccion()),"Vence: "
+						+inicio.get(Calendar
+								.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR)));// 
+			
+			}else {
+				bw.write(String.format("%-50s %-50s",("Direccion: "+f.getCliente().getDireccion()),"Vence: Pago al contado"));
+			}
 			bw.newLine();
 			bw.write("--------------------------------------------------------------------------------------");
 			bw.newLine();
@@ -742,6 +761,10 @@ private void GenerarFactura(Factura f) throws IOException {
 					bw.newLine();
 				}
 			}
+			bw.write("Sub-Total: "+formato1.format((f.getTotal()/1.18f)));
+			bw.newLine();
+			bw.newLine();
+			bw.write("ITBIS 18%: "+formato1.format((f.getTotal()/1.18f)*0.18));
 			bw.newLine();
 			bw.write("Total: "+formato1.format(f.getTotal()));
 			bw.newLine();
@@ -784,8 +807,8 @@ private void cargarfactura() {
 		modelo.addRow(fila);
 	}
 	DecimalFormat formato1 = new DecimalFormat("#.00");
-	lblSubTotal.setText("Sub-Total: "+formato1.format(auxiliar.getTotal()-(auxiliar.getTotal()*0.18f)));
-	lblImpuestos.setText("ITBIS (18%): "+formato1.format((auxiliar.getTotal()*0.18f)));
+	lblSubTotal.setText("Sub-Total: "+formato1.format(auxiliar.getTotal()/1.18f));
+	lblImpuestos.setText("ITBIS (18%): "+formato1.format((auxiliar.getTotal()/1.18f)*0.18f));
 	lblTotal.setText("Total: "+formato1.format(auxiliar.getTotal()));
 	}
 }	
