@@ -163,6 +163,27 @@ public class Opinion extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
+						if(Integer.valueOf(spnPregA.getValue().toString())==1) {
+							//Prodacom.getInstance().setMal[0](Prodacom.getInstance().getMal()[0]);
+							//Prodacom.getInstance().setMal(Prodacom.getInstance().getMal()[0]+1);
+						}
+						if(Integer.valueOf(spnPregA.getValue().toString())==2) {
+							Prodacom.getInstance().setMal(Prodacom.getInstance().getMal());
+						}
+						if(Integer.valueOf(spnPregA.getValue().toString())==3) {
+							
+						}
+						
+						
+						if(Integer.valueOf(spnPregA.getValue().toString())==1) {
+							
+						}
+						if(Integer.valueOf(spnPregA.getValue().toString())==2) {
+							
+						}
+						
+						
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -170,7 +191,12 @@ public class Opinion extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

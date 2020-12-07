@@ -308,7 +308,7 @@ public class Principal extends JFrame {
 		JMenu mnNewMenu_8 = new JMenu("Graficos");
 		mnNewMenu_5.add(mnNewMenu_8);
 		
-		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Consultar");
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("pastel");
 		mntmNewMenuItem_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				testeo2 x = new testeo2();
@@ -317,7 +317,7 @@ public class Principal extends JFrame {
 		});
 		mnNewMenu_8.add(mntmNewMenuItem_13);
 		
-		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Generar");
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("barras");
 		mntmNewMenuItem_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				testeo aux = new testeo();
@@ -337,6 +337,18 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Generar Orden De Compra");
 		mnNewMenu_9.add(mntmNewMenuItem_17);
+		
+		JMenu mnNewMenu_7 = new JMenu("Opini\u00F3n");
+		menuBar.add(mnNewMenu_7);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Opini\u00F3n Empresa");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Opinion x = new Opinion();
+				x.setVisible(true);
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_11);
 		contentPane = new JPanel();
 		contentPane.setForeground(UIManager.getColor("Button.focus"));
 		contentPane.setBackground(UIManager.getColor("Button.focus"));

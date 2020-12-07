@@ -13,6 +13,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class GraficaPastel extends JFrame {
+	public GraficaPastel() {
+	}
 	/*
 	private JPanel contentPane;
 
@@ -70,7 +72,7 @@ public class GraficaPastel extends JFrame {
 	        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        
 	        
-	        ventana.add(panel);
+	        ventana.getContentPane().add(panel);
 	        
 	 
 	    }

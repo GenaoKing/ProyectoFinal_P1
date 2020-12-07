@@ -1,9 +1,10 @@
 package visual;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -13,65 +14,80 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
-
 import logico.Prodacom;
 
-public class GraficOpinion extends JFrame {
+public class GraficOpinion extends JDialog {
 
-	private JPanel contentPane;
+	private final JPanel contentPanel = new JPanel();
 
+
+	public GraficOpinion() {
+		setModal(true);
+		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setLayout(new FlowLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		ChartPanel panel = Barras3d();
+		getContentPane().add(panel);
+		
+		/*
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
+		*/
+	}
 	
-	public static void main(String[] args) 
-    {       
-        ChartPanel panel=Barras3d();
-        //ChartPanel panel=Pastel3d();
+private ChartPanel Barras3d() {
+		
+	String A = "A) Que tan satisfecho se encuentra de la empresa en general.";
+    String B = "B) Cuan probable es que recomiende nuestros servicios.";
+    String C = "C) Como calificaria la calidad de la atencion recibida?";
         
-        // Creamos la ventana
-        JFrame ventana = new JFrame("Grafica");
-        ventana.setVisible(true);
-        ventana.setSize(800, 600);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-        ventana.add(panel);
- 
-    }
- 
-    static ChartPanel Barras3d() 
-    {
+    String mal = "Mal";
+    String Excelente = "Excelente";
+    String Intermedio = "Intermedio";
         
-        String A = "A) Que tan satisfecho se encuentra de la empresa en general.";
-        String B = "B) Cuan probable es que recomiende nuestros servicios.";
-        String C = "C) Como calificaria la calidad de la atencion recibida?";
- 
-        String vel = "Mal";
-        String millas = "Excelente";
-        String usuarios = "Intermedio";
- 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        dataset.addValue(0.0d, A, mal);
+        dataset.addValue(0.0d, B, Excelente);
+        dataset.addValue(0.0d, C, Intermedio);
+        
+        
+        dataset.addValue(5.0, A, mal);
+        dataset.addValue(6.0, B, Excelente);
+        dataset.addValue(10.0, C, Intermedio);
  
-        dataset.addValue(1.0, A, vel);
-        dataset.addValue(3.0, A, usuarios);
-        dataset.addValue(5.0, A, millas);
- 
-        dataset.addValue(5.0, B, vel);
-        dataset.addValue(6.0, B, usuarios);
-        dataset.addValue(10.0, B, millas);
- 
-        dataset.addValue(4.0, C, vel);
-        dataset.addValue(2.0, C, usuarios);
-        dataset.addValue(3.0, C, millas);
- 
+        dataset.addValue(4.0, A, mal);
+        dataset.addValue(2.0, B, Excelente);
+        dataset.addValue(3.0, C, Intermedio);
+        
+        
+        /*
+        dataset.addValue(Prodacom.getInstance().getTotDisco(), A, vel);
+        dataset.addValue(Prodacom.getInstance().getTotMotherboard(), B, vel);
+        dataset.addValue(Prodacom.getInstance().getTotMemoriaRam(), C, vel);
+        dataset.addValue(Prodacom.getInstance().getTotMicroprocesadores(), D, vel);
+ 		*/
         JFreeChart barChart = ChartFactory.createBarChart3D(
-                "Grafica de opiniones", 
+                "Grafica ventas componentes", 
                 "Categoria", 
-                "Puntuacion", 
+                "Vendidos", 
                 dataset,
                 PlotOrientation.VERTICAL, 
                 true, 
@@ -79,11 +95,8 @@ public class GraficOpinion extends JFrame {
                 false);
  
         ChartPanel panel = new ChartPanel(barChart);
- 
+       // panel.setlocati;
         return panel;
- 
-    }
-	
-	
-	
+	}
+
 }

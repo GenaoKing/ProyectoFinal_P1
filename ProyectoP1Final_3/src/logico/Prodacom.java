@@ -29,7 +29,9 @@ public class Prodacom implements Serializable{
 	private int totMemoriaRam = 0;
 	private int totMicroprocesadores = 0;
 	
-	
+	private int mal [] = new int[3];
+	private int intermedio [] = new int[3];
+	private int excelente [] = new int[3];
 	
 	private Prodacom() {
 		super();
@@ -48,6 +50,30 @@ public class Prodacom implements Serializable{
 	}
 	
 	
+	public int[] getMal() {
+		return mal;
+	}
+
+	public void setMal(int[] mal) {
+		this.mal = mal;
+	}
+
+	public int[] getIntermedio() {
+		return intermedio;
+	}
+
+	public void setIntermedio(int[] intermedio) {
+		this.intermedio = intermedio;
+	}
+
+	public int[] getExcelente() {
+		return excelente;
+	}
+
+	public void setExcelente(int[] excelente) {
+		this.excelente = excelente;
+	}
+
 	public int getTotDisco() {
 		return totDisco;
 	}
