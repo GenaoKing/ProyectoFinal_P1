@@ -16,7 +16,6 @@ public class Administrativo extends Persona {
 		this.pass = pass;
 		this.sueldo = sueldo;
 	}
-
 	public String getUser() {
 		return user;
 	}

@@ -1,0 +1,15 @@
+--------------------------------------------------------------------------------------
+Cliente: dinny                                     F-1                                               
+Cedula: enferma                                    Fecha: 7/12/2020                                  
+Telefono: 124542                                   Vendedor: xav                                     
+Direccion: su casa                                 Vendedor: xav                                     
+--------------------------------------------------------------------------------------
+Codigo               Articulo             Cantidad             Precio               Importe             
+S-5                  gdfgd hgfd           1                    2.0                  2.0                 
+S-6                  gfdg das             1                    2.0                  2.0                 
+S-7                  gdfgf ydfg           1                    2.0                  2.0                 
+S-9                  coger este           1                    2.0                  2.0                 
+
+Total: 9.44
+--------------------------------------------------------------------------------------
+Gracias por preferirnos, recuerde que no aceptamos devoluciones

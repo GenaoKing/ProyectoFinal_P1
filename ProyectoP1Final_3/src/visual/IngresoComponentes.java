@@ -814,6 +814,9 @@ public class IngresoComponentes extends JDialog {
 				okButton.setBackground(new Color(0, 153, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
+						
+						
 						Componente aux = null;
 						String serie = txtSerie.getText();
 						String modelo= txtModelo.getText();
@@ -823,7 +826,9 @@ public class IngresoComponentes extends JDialog {
 						int cantMin = Integer.parseInt(spnCantMinima.getValue().toString());
 						int cantMax = Integer.parseInt(spnCantMaxima.getValue().toString());
 						int cantReal = Integer.parseInt(spnCantReal.getValue().toString());	
-						
+						if( (cantReal<=cantMax && cantReal>=cantMin) && (venta>=(compra+compra*0.10f)) ) {
+							if(!txtMarca.getText().isEmpty() || !txtModelo.getText().isEmpty() ) {
+								
 						if(rdbtnDisco.isSelected()) {
 							float almacenamiento = Float.parseFloat(spnCantAlmacenamiento_DiscoDuro.getValue().toString());
 							String conexion = cbxTipoDeConexion_DiscoDuro.getSelectedItem().toString();
@@ -833,6 +838,8 @@ public class IngresoComponentes extends JDialog {
 							}
 							aux = new Disco(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, almacenamiento, Gb, conexion);
 							Prodacom.getInstance().insertarComponente(aux);
+							JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	
+
 						}
 						if(rdbtnMemoriaRam.isSelected()) {
 							float cantidadMem = Float.parseFloat(spnCantidadDeMemoria_MemoriaRam.getValue().toString());
@@ -843,8 +850,12 @@ public class IngresoComponentes extends JDialog {
 							}
 							aux = new MemoriaRam(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, cantidadMem, tipo, Gb);
 							Prodacom.getInstance().insertarComponente(aux);
+							JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	
+
 						}
 						if(rdbtnMicroprocesadores.isSelected()) {
+							if(!txtTipoDeConexion_Microprocesadores.getText().isEmpty()) {
+							
 							String conector = txtTipoDeConexion_Microprocesadores.getText();
 							float velocidad = Float.parseFloat(spnVelocidad_Microprocesadores.getValue().toString());
 							boolean GHz = true;
@@ -853,19 +864,38 @@ public class IngresoComponentes extends JDialog {
 							}
 								aux = new Microprocesadores(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, velocidad, GHz);
 								Prodacom.getInstance().insertarComponente(aux);
+								JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	
+
+						}else {
+							JOptionPane.showMessageDialog(null, "Recuerde que debe de llenar el apartado de Tipo de conexion para el microprocesador.", "Información", JOptionPane.INFORMATION_MESSAGE);
+
 						}
-						if(rdbtnMotherboard.isSelected()) {
+						}
+						
+						if(rdbtnMotherboard.isSelected() ) {
+							if(!txtConexion_MotherBoard.getText().isEmpty() || !txtTipoRam_MotherBoard.getText().isEmpty() || modelo_1.getRowCount()>0){
 							String conector = txtConexion_MotherBoard.getText();
 							String tipoRam = txtTipoRam_MotherBoard.getText();
 							
 							aux = new MotherBoard(txtSerie.getText(), modelo, marca, venta, compra, cantMin, cantMax, cantReal, conector, tipoRam, conexiones);
 							Prodacom.getInstance().insertarComponente(aux);
-						}
-						JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	
-						LIMPIAR();
-						
-					}
+							JOptionPane.showMessageDialog(null, "El Componente ha sido registrado con exito. ", "información", JOptionPane.INFORMATION_MESSAGE);	
 
+						}else {
+							JOptionPane.showMessageDialog(null, "Recuerde que debe de llenar los apartados de la seccion Motherboard.\nTambien debe verificar que la tabla tenga al menos 1 conexión agregada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+						}
+							//Prodacom.getInstance().insertarComponente(aux);
+						}
+						
+						LIMPIAR();
+						}else {
+							JOptionPane.showMessageDialog(null,"Debe llenar la informacion general!!!","ERROR",JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "El precio de venta debe de ser al menos un 10% mas alto que el precio de compra.\nPOR POLITICA DE LA EMPRESA.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+				
+				}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);

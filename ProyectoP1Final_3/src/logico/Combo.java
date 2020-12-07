@@ -47,6 +47,13 @@ public class Combo implements Serializable{
 	public void insertarcomponentes(Componente c) {
 		componentes.add(c);
 	}
+	public float calCompra() {
+		float total = 0.0f;
+		for(Componente x : componentes) {
+			total += x.getPrecioCompra();
+		}
+		return total;
+	}
 	
 	
 }

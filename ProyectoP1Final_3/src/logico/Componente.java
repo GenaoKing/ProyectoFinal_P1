@@ -102,6 +102,12 @@ public abstract class Componente implements Serializable{
 		
 		return res;
 	}
+
+	public float Calbeneficio() {
+		
+		
+		return precioVenta - precioCompra;
+	}
 	
 
 }

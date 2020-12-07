@@ -146,7 +146,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/iconos/name.png")));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Facturacion aux = new Facturacion();
+				Facturacion aux = new Facturacion(null);
 				aux.setVisible(true);
 			}
 		});
@@ -158,7 +158,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_2.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoFacturas aux = new ListadoFacturas();
+				ListadoFacturas aux = new ListadoFacturas(null);
 				aux.setVisible(true);
 			}
 		});
@@ -211,7 +211,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_3.setIcon(new ImageIcon(Principal.class.getResource("/iconos/clien.png")));
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoClientes aux = new ListadoClientes();
+				ListadoClientes aux = new ListadoClientes(1);
 				aux.setVisible(true);
 			}
 		});
@@ -297,15 +297,33 @@ public class Principal extends JFrame {
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Listado");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoEmpleados a = new ListadoEmpleados();
+				a.setVisible(true);
+			}
+		});
 		mnNewMenu_6.add(mntmNewMenuItem_10);
 		
 		JMenu mnNewMenu_8 = new JMenu("Graficos");
 		mnNewMenu_5.add(mnNewMenu_8);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Consultar");
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				testeo2 x = new testeo2();
+				x.setVisible(true);
+			}
+		});
 		mnNewMenu_8.add(mntmNewMenuItem_13);
 		
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Generar");
+		mntmNewMenuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				testeo aux = new testeo();
+				aux.setVisible(true);
+			}
+		});
 		mnNewMenu_8.add(mntmNewMenuItem_14);
 		
 		JMenu mnNewMenu_9 = new JMenu("Cuentas y Ordenes de Compra");

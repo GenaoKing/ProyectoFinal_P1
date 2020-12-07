@@ -1,0 +1,13 @@
+--------------------------------------------------------------------------------------
+Cliente: dinny                                     F-2                                               
+Cedula: enferma                                    Fecha: 7/12/2020                                  
+Telefono: 124542                                   Vendedor: xav                                     
+Direccion: su casa                                 Vendedor: xav                                     
+--------------------------------------------------------------------------------------
+Codigo               Articulo             Cantidad             Precio               Importe             
+S-2                  f f                  1                    1.0                  1.0                 
+S-11                 fd gf                1                    32.0                 32.0                
+
+Total: 38.94
+--------------------------------------------------------------------------------------
+Gracias por preferirnos, recuerde que no aceptamos devoluciones

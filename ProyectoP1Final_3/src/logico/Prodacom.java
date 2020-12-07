@@ -9,9 +9,7 @@ import javax.swing.ComboBoxModel;
 public class Prodacom implements Serializable{
 	//probando.
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 7398652231878450639L;
 	private int cod_componente = 1;
 	private int cod_proveedores = 1;
@@ -25,6 +23,13 @@ public class Prodacom implements Serializable{
 	private ArrayList<Persona>personas;
 	private ArrayList<Proveedor>proveedores;
 	public static Prodacom prodacom = null;
+	
+	private int totDisco = 0;
+	private int totMotherboard = 0;
+	private int totMemoriaRam = 0;
+	private int totMicroprocesadores = 0;
+	
+	
 	
 	private Prodacom() {
 		super();
@@ -40,6 +45,39 @@ public class Prodacom implements Serializable{
 			prodacom = new Prodacom();
 		}
 		return prodacom;
+	}
+	
+	
+	public int getTotDisco() {
+		return totDisco;
+	}
+
+	public void setTotDisco(int totDisco) {
+		this.totDisco = totDisco;
+	}
+
+	public int getTotMotherboard() {
+		return totMotherboard;
+	}
+
+	public void setTotMotherboard(int totMotherboard) {
+		this.totMotherboard = totMotherboard;
+	}
+
+	public int getTotMemoriaRam() {
+		return totMemoriaRam;
+	}
+
+	public void setTotMemoriaRam(int totMemoriaRam) {
+		this.totMemoriaRam = totMemoriaRam;
+	}
+
+	public int getTotMicroprocesadores() {
+		return totMicroprocesadores;
+	}
+
+	public void setTotMicroprocesadores(int totMicroprocesadores) {
+		this.totMicroprocesadores = totMicroprocesadores;
 	}
 
 	public ArrayList<Combo> getCombos() {
@@ -226,8 +264,26 @@ public class Prodacom implements Serializable{
 		for(Componente c : componentes) {
 			if(c.equals(componente)) {
 				c.cantReal+=cantidad;
-			}
+				
+				if( c instanceof Disco) {
+					setTotDisco(getTotDisco() - cantidad);
+				}
+				
+				if( c instanceof MotherBoard) {
+					setTotMotherboard(getTotMotherboard() - cantidad);
+				}
+				if( c instanceof Microprocesadores) {
+					setTotMicroprocesadores(getTotMicroprocesadores() - cantidad);
+				}
+				
+				if( c instanceof MemoriaRam) {
+					setTotMicroprocesadores(getTotMemoriaRam() - cantidad);
+				}
+				
+			}			
 		}
+		
+
 		
 	}
 
@@ -263,6 +319,21 @@ public class Prodacom implements Serializable{
 		Componente a = buscarComponente(c.serie);
 		a.setCantReal(a.getCantReal()-1);
 		
+		if( c instanceof Disco) {
+			setTotDisco(getTotDisco()+1);
+		}
+		
+		if( c instanceof MotherBoard) {
+			setTotMotherboard(getTotMotherboard()+1);
+		}
+		if( c instanceof Microprocesadores) {
+			setTotMicroprocesadores(getTotMicroprocesadores()+1);
+		}
+		
+		if( c instanceof MemoriaRam) {
+			setTotMemoriaRam(getTotMemoriaRam()+1);
+		}
+			
 	}
 
 	public boolean ChecarCombo(Combo c) {
@@ -294,6 +365,22 @@ public class Prodacom implements Serializable{
 	public void DevolverCombo(Combo c) {
 		for(Componente a : c.getComponentes() ) {
 			a.setCantReal(a.getCantReal()+1);
+			
+			if( a instanceof Disco) {
+				setTotDisco(getTotDisco()-1);
+			}
+			
+			if( a instanceof MotherBoard) {
+				setTotMotherboard(getTotMotherboard()-1);
+			}
+			if( a instanceof Microprocesadores) {
+				setTotMicroprocesadores(getTotMicroprocesadores()-1);
+			}
+			
+			if( a instanceof MemoriaRam) {
+				setTotMemoriaRam(getTotMemoriaRam()-1);
+			}
+			
 		}
 		
 	}
@@ -321,5 +408,34 @@ public class Prodacom implements Serializable{
 		}
 		return v;
 	}
+	
+	public float []CalcBeneficios_T(){
+		
+		float x[] = new  float [4]; 
+		float total = 0.0f;
+		
+		for(Factura aux : facturas) {
+			total += aux.calcualBenf();
+			float z[] = aux.Benef_tipo();
+			x[0] += z[0];
+			x[1] += z[1];
+			x[2] += z[2];
+			x[3] += z[3];
+			
+		}
+		//disco
+		x[0] /= total;
+		//motherboard
+		x[1] /= total;
+		//microprocesadores
+		x[2] /= total;
+		//memoriaRam
+		x[3] /= total;
+		
+		return x;
+	}
+	
+	
+	
 	
 }
