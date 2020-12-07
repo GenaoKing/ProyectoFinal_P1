@@ -49,6 +49,10 @@ public class RegTrabajadores extends JDialog {
 	private JRadioButton rdbVendedor;
 	private JLabel lblSueldo_vendedor;
 	private JSpinner spnSueldo_vendedor;
+	private JTextField txtUsuario_vendedor;
+	private JTextField txtContrasenna_Vendedor;
+	private JLabel lblContrasenna_vendedor;
+	private JLabel lblUsuario_vendedor;
 
 	/**
 	 * Launch the application.
@@ -178,6 +182,11 @@ public class RegTrabajadores extends JDialog {
 					spnSueldo_vendedor.setVisible(true);
 					lblSueldo_vendedor.setVisible(true);
 					
+					lblUsuario_vendedor.setVisible(true);
+					txtUsuario_vendedor.setVisible(true);
+					lblContrasenna_vendedor.setVisible(true);
+					txtContrasenna_Vendedor.setVisible(true);
+					
 				}
 			});
 			rdbVendedor.setBounds(124, 30, 109, 23);
@@ -207,6 +216,11 @@ public class RegTrabajadores extends JDialog {
 					spnComision_vendedor.setVisible(false);
 					spnSueldo_vendedor.setVisible(false);
 					lblSueldo_vendedor.setVisible(false);
+					
+					lblUsuario_vendedor.setVisible(false);
+					txtUsuario_vendedor.setVisible(false);
+					lblContrasenna_vendedor.setVisible(false);
+					txtContrasenna_Vendedor.setVisible(false);
 					
 				}
 			});
@@ -255,6 +269,28 @@ public class RegTrabajadores extends JDialog {
 			spnSueldo_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
 			spnSueldo_vendedor.setBounds(113, 56, 75, 20);
 			panel_Vendedor.add(spnSueldo_vendedor);
+			
+			lblUsuario_vendedor = new JLabel("Usuario:");
+			lblUsuario_vendedor.setForeground(new Color(250, 250, 210));
+			lblUsuario_vendedor.setBackground(Color.BLACK);
+			lblUsuario_vendedor.setBounds(225, 58, 93, 14);
+			panel_Vendedor.add(lblUsuario_vendedor);
+			
+			txtUsuario_vendedor = new JTextField();
+			txtUsuario_vendedor.setBounds(282, 55, 99, 20);
+			panel_Vendedor.add(txtUsuario_vendedor);
+			txtUsuario_vendedor.setColumns(10);
+			
+			txtContrasenna_Vendedor = new JTextField();
+			txtContrasenna_Vendedor.setColumns(10);
+			txtContrasenna_Vendedor.setBounds(482, 55, 99, 20);
+			panel_Vendedor.add(txtContrasenna_Vendedor);
+			
+			lblContrasenna_vendedor = new JLabel("Contrase\u00F1a:");
+			lblContrasenna_vendedor.setForeground(new Color(250, 250, 210));
+			lblContrasenna_vendedor.setBackground(Color.BLACK);
+			lblContrasenna_vendedor.setBounds(401, 58, 93, 14);
+			panel_Vendedor.add(lblContrasenna_vendedor);
 			
 			panel_Administrativo = new JPanel();
 			panel_Administrativo.setForeground(Color.DARK_GRAY);
@@ -335,8 +371,7 @@ public class RegTrabajadores extends JDialog {
 						}else {
 						if(rdbVendedor.isSelected()) {
 							float comision = Float.parseFloat(spnComision_vendedor.getValue().toString());
-							aux = new Vendedor(nombre, cedula, telefono, direccion, 0, comision, Float.parseFloat(spnSueldo_vendedor.getValue().toString()));
-							//aux = new Vendedor(nombre, cedula, telefono, direccion, totalventas, comision, sueldo)
+							aux = new Vendedor(nombre, cedula, telefono, direccion, 0, comision, Float.parseFloat(spnSueldo_vendedor.getValue().toString()), txtUsuario_vendedor.getText(), txtContrasenna_Vendedor.getText());
 							Prodacom.getInstance().insertarPersona(aux);
 						}
 						
@@ -381,10 +416,12 @@ public class RegTrabajadores extends JDialog {
 		
 		txtContrasenna_admin.setText("");
 		txtUsuario_admin.setText("");
-		spnSueldo_admin.setValue(new Integer(0));
+		spnSueldo_admin.setValue(new Integer(1));
 		
-		spnComision_vendedor.setValue(new Integer(0));
-		spnSueldo_vendedor.setValue(new Integer(0));
+		spnComision_vendedor.setValue(new Integer(1));
+		spnSueldo_vendedor.setValue(new Integer(1));
+		txtContrasenna_Vendedor.setText("");
+		txtUsuario_vendedor.setText("");
 		
 	}
 }

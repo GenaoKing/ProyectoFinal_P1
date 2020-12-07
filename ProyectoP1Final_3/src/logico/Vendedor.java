@@ -9,14 +9,40 @@ public class Vendedor extends Persona {
 	private float totalventas;
 	private float comision;
 	private float sueldo;
+	private String usuario;
+	private String contrasenna;
 	
 	public Vendedor(String nombre, String cedula, String telefono, String direccion, float totalventas, float comision,
-			float sueldo) {
+			float sueldo, String usuario, String contrasenna) {
 		super(nombre, cedula, telefono, direccion);
 		this.totalventas = 0;
 		this.comision = comision/100;
 		this.sueldo = sueldo;
+		this.usuario = usuario;
+		this.contrasenna = contrasenna;
 	}
+	
+	
+	public String getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public String getContrasenna() {
+		return contrasenna;
+	}
+
+
+	public void setContrasenna(String contrasenna) {
+		this.contrasenna = contrasenna;
+	}
+
+
 	public float getTotalventas() {
 		return totalventas;
 	}

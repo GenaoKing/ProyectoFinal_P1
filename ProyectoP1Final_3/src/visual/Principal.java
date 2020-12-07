@@ -366,6 +366,12 @@ public class Principal extends JFrame {
 		mnNewMenu_9.add(mntmNewMenuItem_16);
 		
 		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Generar Orden De Compra");
+		mntmNewMenuItem_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoPedido aux = new ListadoPedido();
+				aux.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_17.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compras.png")));
 		mntmNewMenuItem_17.setForeground(SystemColor.textHighlight);
 		mntmNewMenuItem_17.setBackground(UIManager.getColor("Button.focus"));

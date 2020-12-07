@@ -892,7 +892,7 @@ public class IngresoComponentes extends JDialog {
 							JOptionPane.showMessageDialog(null,"Debe llenar la informacion general!!!","ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 					}else {
-						JOptionPane.showMessageDialog(null, "El precio de venta debe de ser al menos un 10% mas alto que el precio de compra.\nPOR POLITICA DE LA EMPRESA.", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El precio de venta debe de ser al menos un 10% mas alto que el precio de compra.\nPOR POLITICA DE LA EMPRESA.\nRecuerde que la cantidad real debe ser mayor que la míninma y menor que la cantidad máxima del componente.", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				
 				}
