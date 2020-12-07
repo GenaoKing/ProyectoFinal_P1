@@ -8,6 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Prodacom;
+
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -16,6 +19,8 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Opinion extends JDialog {
 
@@ -155,6 +160,11 @@ public class Opinion extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Finalizar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
