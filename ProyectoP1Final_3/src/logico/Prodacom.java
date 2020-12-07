@@ -15,13 +15,17 @@ public class Prodacom implements Serializable{
 	private int cod_proveedores = 1;
 	private int cod_combos = 1;
 	private int cod_facturas = 1;
+	private int cod_OC = 1;
+	private Administrativo admin = null;
 	
 	
+
 	private ArrayList<Combo>combos;
 	private ArrayList<Componente>componentes;
 	private ArrayList<Factura>facturas;
 	private ArrayList<Persona>personas;
 	private ArrayList<Proveedor>proveedores;
+	private ArrayList<OrdenCompra>ordenes;
 	public static Prodacom prodacom = null;
 	
 	private int totDisco = 0;
@@ -41,8 +45,26 @@ public class Prodacom implements Serializable{
 		this.facturas = new ArrayList<Factura>();
 		this.personas = new ArrayList<Persona>();
 		this.proveedores = new ArrayList<Proveedor>();
+		this.ordenes = new ArrayList<OrdenCompra>();
 	}
 	
+	public int getCod_OC() {
+		return cod_OC;
+	}
+
+	public void setCod_OC(int cod_OC) {
+		this.cod_OC = cod_OC;
+	}
+
+	public ArrayList<OrdenCompra> getOrdenes() {
+		return ordenes;
+	}
+
+	public void InsertarOrden(OrdenCompra ordene) {
+		this.ordenes.add(ordene);
+		setCod_OC(getCod_OC()+1);
+	}
+
 	public static Prodacom getInstance() {
 		if(prodacom == null) {
 			prodacom = new Prodacom();
@@ -459,7 +481,13 @@ public class Prodacom implements Serializable{
 		return x;
 	}
 	
-	
+	public Administrativo getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Administrativo admin) {
+		this.admin = admin;
+	}
 	
 	
 }

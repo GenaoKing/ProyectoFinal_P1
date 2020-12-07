@@ -763,7 +763,6 @@ private void GenerarFactura(Factura f) throws IOException {
 			}
 			bw.write("Sub-Total: "+formato1.format((f.getTotal()/1.18f)));
 			bw.newLine();
-			bw.newLine();
 			bw.write("ITBIS 18%: "+formato1.format((f.getTotal()/1.18f)*0.18));
 			bw.newLine();
 			bw.write("Total: "+formato1.format(f.getTotal()));
