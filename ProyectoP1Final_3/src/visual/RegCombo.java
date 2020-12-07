@@ -294,7 +294,7 @@ public class RegCombo extends JDialog {
 			txtCodigo.setForeground(new Color(0, 0, 255));
 			txtCodigo.setEditable(false);
 			txtCodigo.setColumns(10);
-			txtCodigo.setText("C-"+Prodacom.cod_combos);
+			txtCodigo.setText("C-"+Prodacom.getInstance().getCod_combos());
 			txtCodigo.setBounds(436, 18, 141, 20);
 			panel.add(txtCodigo);
 		}
@@ -380,7 +380,7 @@ public class RegCombo extends JDialog {
 	}
 }
 	private void clear() {
-		txtCodigo.setText("C-"+Prodacom.cod_combos);
+		txtCodigo.setText("C-"+Prodacom.getInstance().getCod_combos());
 		txtNombre.setText("");
 		
 		agregados.removeAll(agregados);

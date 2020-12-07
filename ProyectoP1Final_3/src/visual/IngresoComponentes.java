@@ -158,7 +158,7 @@ public class IngresoComponentes extends JDialog {
 		txtSerie = new JTextField();
 		txtSerie.setEnabled(false);
 		txtSerie.setBounds(81, 22, 58, 20);
-		txtSerie.setText("S-"+Prodacom.cod_componente);
+		txtSerie.setText("S-"+Prodacom.getInstance().getCod_componente());
 		panel.add(txtSerie);
 		txtSerie.setColumns(10);
 		
@@ -894,7 +894,7 @@ public class IngresoComponentes extends JDialog {
 	
 	private void LIMPIAR() {
 		
-		txtSerie.setText("S-"+Prodacom.cod_componente);
+		txtSerie.setText("S-"+Prodacom.getInstance().getCod_componente());
 		txtModelo.setText("");
 		txtMarca.setText("");
 		spnCompra.setValue(new Integer(1));

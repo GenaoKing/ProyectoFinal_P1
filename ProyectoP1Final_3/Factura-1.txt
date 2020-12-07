@@ -1,0 +1,13 @@
+--------------------------------------------------------------------------------------
+Cliente: Diana                                     F-1                                               
+Cedula: 5                                          Fecha: 5/12/2020                                  
+Telefono: 5                                        Vendedor: Xavier                                  
+Direccion: 5                                       Vendedor: Xavier                                  
+--------------------------------------------------------------------------------------
+Codigo               Articulo             Cantidad             Precio               Importe             
+C-1                  Combo Gaming A       1                    1.8                  1.8                 
+S-1                  15 Santiago          1                    1.0                  1.0                 
+
+Total: 3.30
+--------------------------------------------------------------------------------------
+Gracias por preferirnos, recuerde que no aceptamos devoluciones
