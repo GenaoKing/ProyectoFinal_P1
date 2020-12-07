@@ -205,7 +205,7 @@ public class RegCliente extends JDialog {
 			btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
 			btnSeleccionar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ListadoClientes a = new ListadoClientes();
+					ListadoClientes a = new ListadoClientes(0);
 					dispose();
 					a.setVisible(true);
 					

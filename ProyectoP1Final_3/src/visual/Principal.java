@@ -146,7 +146,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/iconos/name.png")));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Facturacion aux = new Facturacion();
+				Facturacion aux = new Facturacion(null);
 				aux.setVisible(true);
 			}
 		});
@@ -158,7 +158,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_2.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoFacturas aux = new ListadoFacturas();
+				ListadoFacturas aux = new ListadoFacturas(null);
 				aux.setVisible(true);
 			}
 		});
@@ -211,7 +211,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_3.setIcon(new ImageIcon(Principal.class.getResource("/iconos/clien.png")));
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoClientes aux = new ListadoClientes();
+				ListadoClientes aux = new ListadoClientes(1);
 				aux.setVisible(true);
 			}
 		});
@@ -297,6 +297,12 @@ public class Principal extends JFrame {
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Listado");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoEmpleados a = new ListadoEmpleados();
+				a.setVisible(true);
+			}
+		});
 		mnNewMenu_6.add(mntmNewMenuItem_10);
 		
 		JMenu mnNewMenu_8 = new JMenu("Graficos");

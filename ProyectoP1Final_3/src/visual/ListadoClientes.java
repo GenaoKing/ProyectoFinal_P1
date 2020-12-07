@@ -48,7 +48,7 @@ public class ListadoClientes extends JDialog {
 	private JButton btnSeleccionar;
 	private int boton = 1;
 	public static int cantidad=0;
-
+	private int mode = -1;
 	/**
 	 * Launch the application.
 	 */
@@ -57,7 +57,8 @@ public class ListadoClientes extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListadoClientes() {
+	public ListadoClientes(int b ) {
+		this.mode=b;
 		setBackground(UIManager.getColor("Button.focus"));
 		setForeground(UIManager.getColor("Button.focus"));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoClientes.class.getResource("/iconos/btnAgregarClienteIcono.png")));
@@ -150,6 +151,7 @@ public class ListadoClientes extends JDialog {
 							public void mouseClicked(MouseEvent e) {
 								int seleccion = table.getSelectedRow();
 								int modelrow = table.convertRowIndexToModel(seleccion);
+								if(mode==0) {
 								if(seleccion!=-1){
 									btnSeleccionar.setEnabled(true);
 									btnCrear.setEnabled(false);
@@ -160,7 +162,10 @@ public class ListadoClientes extends JDialog {
 									btnSeleccionar.setEnabled(false);
 									btnCrear.setEnabled(true);
 									}
-								
+								}else {
+									btnSeleccionar.setEnabled(false);
+									btnCrear.setEnabled(false);
+								}
 							}
 						});
 						table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -179,6 +184,11 @@ public class ListadoClientes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnCrear = new JButton("Nuevo Cliente");
+				if(mode==0) {
+					btnCrear.setEnabled(true);
+				}else {
+					btnCrear.setEnabled(false);
+				}
 				btnCrear.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/name.png")));
 				btnCrear.setBackground(UIManager.getColor("Button.focus"));
 				btnCrear.setForeground(new Color(0, 0, 255));

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.table.DefaultTableModel;
+
 public class Factura implements Serializable{
 	/**
 	 * 
@@ -17,9 +19,11 @@ public class Factura implements Serializable{
 	private Persona cliente;
 	private Vendedor vendedor;
 	private boolean estado;
+	private Object[][]filas;
+	private int cantidad = -1;
 	
 	public Factura(String cod, float total, Persona cliente,
-			Vendedor vendedor,boolean estado) {
+			Vendedor vendedor,boolean estado,int c) {
 		super();
 		this.cod = cod;
 		this.fecha = new Date();
@@ -29,7 +33,56 @@ public class Factura implements Serializable{
 		this.cliente = cliente;
 		this.vendedor = vendedor;
 		this.estado=estado;
+		this.cantidad=c;
+		this.filas=new Object[100][5];
+		
 	}
+
+
+
+
+
+
+
+	public Object[][] getFilas() {
+		return filas;
+	}
+
+
+
+
+
+
+
+	public void setFilas(Object[][] filas) {
+		this.filas = filas;
+	}
+
+
+
+
+
+
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+
+
+
+
+
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+
+
+
+
 
 	public ArrayList<Combo> getCombo() {
 		return combo;
@@ -100,6 +153,15 @@ public class Factura implements Serializable{
 	}
 	public void InsertarComponente(Componente c) {
 		componentes.add(c);
+	}
+
+
+
+	public void InsertarFilas(int pos,Object[] o) {
+		for(int i = 0; i<5;i++) {
+			filas[pos][i]=o[i];
+		}
+		
 	}
 	
 }

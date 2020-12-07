@@ -11,9 +11,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
+
 import logico.Factura;
 import logico.Prodacom;
 import logico.Proveedor;
+import logico.Vendedor;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -46,6 +49,9 @@ public class ListadoFacturas extends JDialog {
 	public static DefaultTableModel modelo;
 	public static Object [] fila;
 	private JTextField txtFiltro;
+	private Vendedor v = null;
+	private Factura auxiliar = null;
+	private JButton informacionButton;
 
 	/**
 	 * Launch the application.
@@ -54,8 +60,10 @@ public class ListadoFacturas extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param aux 
 	 */
-	public ListadoFacturas() {
+	public ListadoFacturas(Vendedor aux) {
+		this.v=aux;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoFacturas.class.getResource("/iconos/factura.png")));
 		setTitle("Listado de Facturas\r\n");
 		setModal(true);
@@ -94,11 +102,11 @@ public class ListadoFacturas extends JDialog {
 							modelrow = table.convertRowIndexToModel(seleccion);
 							if(seleccion!=-1) {
 							
-								//informacionButton.setEnabled(true);
-								//auxiliar = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
+								informacionButton.setEnabled(true);
+								auxiliar = Prodacom.getInstance().buscarFactura((String)modelo.getValueAt(modelrow, 0));
 								
 							}else {
-								//informacionButton.setEnabled(false);
+								informacionButton.setEnabled(false);
 								
 							}
 						}
@@ -142,10 +150,18 @@ public class ListadoFacturas extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				informacionButton = new JButton("Informacion");
+				informacionButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Facturacion a = new Facturacion(auxiliar);
+						a.setVisible(true);
+						
+					}
+				});
+				informacionButton.setEnabled(false);
+				informacionButton.setActionCommand("OK");
+				buttonPane.add(informacionButton);
+				getRootPane().setDefaultButton(informacionButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -165,20 +181,37 @@ public class ListadoFacturas extends JDialog {
 	}
 
 	private void cargarTabla() {
-		modelo.setRowCount(0); 
-		fila = new Object [modelo.getColumnCount()];
 		
-		for(Factura fact : Prodacom.getInstance().getFacturas()){
+		if(v==null) {
+			modelo.setRowCount(0); 
+			fila = new Object [modelo.getColumnCount()];
 			
-				fila[0] = fact.getCod();
-				fila[1] = fact.getCliente().getNombre();
-				fila[2] = fact.getVendedor().getNombre();
-				fila[3] = fact.getTotal();
-				fila[4] = fact.getFecha();
-				fila[5] = fact.getComponentes().size();
-				modelo.addRow(fila);
-			}
-		
+			for(Factura fact : Prodacom.getInstance().getFacturas()){
+				
+					fila[0] = fact.getCod();
+					fila[1] = fact.getCliente().getNombre();
+					fila[2] = fact.getVendedor().getNombre();
+					fila[3] = fact.getTotal();
+					fila[4] = fact.getFecha();
+					fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+					modelo.addRow(fila);
+				}
+		}else {
+			modelo.setRowCount(0); 
+			fila = new Object [modelo.getColumnCount()];
+			
+			for(Factura fact : Prodacom.getInstance().getFacturas()){
+				if(fact.getVendedor().equals(v)) {
+					fila[0] = fact.getCod();
+					fila[1] = fact.getCliente().getNombre();
+					fila[2] = fact.getVendedor().getNombre();
+					fila[3] = fact.getTotal();
+					fila[4] = fact.getFecha();
+					fila[5] = fact.getComponentes().size()+fact.getCombo().size();
+					modelo.addRow(fila);
+				}
+				}
+		}
 	}
 
 }

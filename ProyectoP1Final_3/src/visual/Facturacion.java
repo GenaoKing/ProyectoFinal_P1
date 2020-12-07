@@ -82,17 +82,17 @@ public class Facturacion extends JDialog {
 	private static JLabel lblDireccion;
 	private static JLabel lblLimiteCredito;
 	private static JLabel lblCreditoDisponible;
-	private JLabel lblCodigo;
-	private JLabel lblFecha;
-	private JComboBox cbxVendedores;
-	private JLabel lblVendedor;
+	private static JLabel lblCodigo;
+	private static JLabel lblFecha;
+	private static JComboBox cbxVendedores;
+	private static JLabel lblVendedor;
 	private static Combo combo = null;
 	private static Componente componente = null;
 	private static ArrayList<Combo>combos = new ArrayList<Combo>(); 
 	private static ArrayList<Componente>componentes = new ArrayList<Componente>(); 
 	private static int cantidad = 0;
 	public static DefaultTableModel modelo;
-	public static Object[] fila;
+	public static Object[] fila =new Object [5];
 	private int seleccion = -1;
 	private static JLabel lblSubTotal;
 	private static JLabel lblImpuestos;
@@ -101,6 +101,8 @@ public class Facturacion extends JDialog {
 	private static Cliente cliente = null;
 	private static JButton btnPagar;
 
+	private static Factura auxiliar = null;
+
 	/**
 	 * Launch the application.
 	 */
@@ -108,8 +110,11 @@ public class Facturacion extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param b 
 	 */
-	public Facturacion() {
+	public Facturacion(Factura q) {
+		this.auxiliar=q;
+		
 		this.addWindowListener(new WindowListener() {
 		
 			@Override
@@ -124,6 +129,7 @@ public class Facturacion extends JDialog {
 
 			@Override
 			public void windowClosing(WindowEvent e) {
+				if(auxiliar==null) {
 				for(int i=0;i<modelo.getRowCount();i++) {
 					if('C'==((String)modelo.getValueAt(i, 0)).charAt(0)) {
 						Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(i, 0));
@@ -133,7 +139,8 @@ public class Facturacion extends JDialog {
 						Prodacom.getInstance().SumarComponente(c, (int)modelo.getValueAt(i, 2));
 					}
 				}
-				
+				}
+				clear();
 				cliente = null;
 				dispose();
 			
@@ -253,12 +260,22 @@ public class Facturacion extends JDialog {
 			
 		
 			cbxVendedores = new JComboBox(Prodacom.getInstance().NombresVendedores().toArray());
+			if(auxiliar!=null) {
+				cbxVendedores.setVisible(false);
+			}else {
+				cbxVendedores.setVisible(true);
+			}
 			cbxVendedores.setBackground(UIManager.getColor("Button.focus"));
 			cbxVendedores.setForeground(SystemColor.textHighlight);
 			cbxVendedores.setBounds(764, 185, 222, 31);
 			panel_2.add(cbxVendedores);
 			
 			btnSeleccionarCliente = new JButton("Seleccionar Cliente");
+			if(auxiliar!=null) {
+				btnSeleccionarCliente.setVisible(false);
+			}else {
+				btnSeleccionarCliente.setVisible(true);
+			}
 			btnSeleccionarCliente.setBackground(UIManager.getColor("Button.focus"));
 			btnSeleccionarCliente.setForeground(new Color(184, 134, 11));
 			btnSeleccionarCliente.addActionListener(new ActionListener() {
@@ -296,6 +313,11 @@ public class Facturacion extends JDialog {
 			String[] columns = {"Codigo","Articulo","Cantidad","Precio","Importe"}; 
 			modelo.setColumnIdentifiers(columns);
 			table = new JTable();
+			if(auxiliar!=null) {
+				table.setRowSelectionAllowed(false);
+			}else {
+				table.setRowSelectionAllowed(true);
+			}
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -340,6 +362,11 @@ public class Facturacion extends JDialog {
 			panel_3.setLayout(null);
 			
 			btnAgregar = new JButton("Agregar Articulo");
+			if(auxiliar!=null) {
+				btnAgregar.setVisible(false);
+			}else {
+				btnAgregar.setVisible(true);
+			}
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ListadoComponentes a = new ListadoComponentes(null,0);
@@ -355,6 +382,11 @@ public class Facturacion extends JDialog {
 			
 			btnModificar = new JButton("Modificar");
 			btnModificar.setEnabled(false);
+			if(auxiliar!=null) {
+				btnModificar.setVisible(false);
+			}else {
+				btnModificar.setVisible(true);
+			}
 			btnModificar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
 			btnModificar.setBackground(new Color(184, 134, 11));
 			btnModificar.setForeground(Color.BLACK);
@@ -363,6 +395,11 @@ public class Facturacion extends JDialog {
 			panel_3.add(btnModificar);
 			
 			btnEliminar = new JButton("Eliminar");
+			if(auxiliar!=null) {
+				btnEliminar.setVisible(false);
+			}else {
+				btnEliminar.setVisible(true);
+			}
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(combo!=null) {
@@ -391,6 +428,11 @@ public class Facturacion extends JDialog {
 			panel_3.add(btnEliminar);
 			
 			btnListarComponentes = new JButton("Listar Componentes Combo");
+			if(auxiliar!=null) {
+				btnListarComponentes.setVisible(false);
+			}else {
+				btnListarComponentes.setVisible(true);
+			}
 			btnListarComponentes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -443,7 +485,7 @@ public class Facturacion extends JDialog {
 						if(pago>=(subtotal+(subtotal*0.18f))) {
 							int end = cbxVendedores.getSelectedItem().toString().indexOf("|");
 							Vendedor v = Prodacom.getInstance().buscarVendedor(cbxVendedores.getSelectedItem().toString().substring(0, end));
-							Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, true);
+							Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, true,modelo.getRowCount());
 							for(Combo c : combos) {
 								f.InsertarCombos(c);
 							}
@@ -487,9 +529,18 @@ public class Facturacion extends JDialog {
 							if(pago>=(subtotal+(subtotal*0.18f))) {
 								int end = cbxVendedores.getSelectedItem().toString().indexOf("|");
 								Vendedor v = Prodacom.getInstance().buscarVendedor(cbxVendedores.getSelectedItem().toString().substring(0, end));
-								Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, false);
+								Factura f = new Factura("F-"+Prodacom.getInstance().getCod_facturas(), subtotal+(subtotal*0.18f), cliente, v, false,modelo.getRowCount());
 								
-						
+								for(int i= 0;i<modelo.getRowCount();i++) {
+									fila[0]=modelo.getValueAt(i, 0).toString();
+									fila[1]=modelo.getValueAt(i, 1).toString();
+									fila[2]=Integer.parseInt(modelo.getValueAt(i, 2).toString());
+									fila[3]=Float.parseFloat(modelo.getValueAt(i, 3).toString());
+									fila[4]=Float.parseFloat(modelo.getValueAt(i, 4).toString());
+									System.out.println(modelo.getValueAt(i, 0).toString());
+									f.InsertarFilas(i,fila);
+								
+								}
 								
 								for(Combo c : combos) {
 									f.InsertarCombos(c);
@@ -552,6 +603,10 @@ public class Facturacion extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		if(auxiliar!=null) {
+		
+			cargarfactura();
+		}
 	}
 
 	
@@ -566,7 +621,7 @@ public class Facturacion extends JDialog {
 		modelo.setRowCount(0);
 		cliente=null;
 		combos.clear();//
-	
+
 		componentes.clear();//
 		componente=null;
 		combo=null;
@@ -596,6 +651,7 @@ public class Facturacion extends JDialog {
 	}
 	
 	public static void CargarTabla(Object[] fila) {
+		
 		if('C'==fila[0].toString().charAt(0)) {
 			for(int i = 0;i<(int)fila[2];i++) {
 				Combo c = Prodacom.getInstance().buscarCombo(fila[0].toString());
@@ -608,6 +664,8 @@ public class Facturacion extends JDialog {
 				componentes.add(c);
 			}
 		}
+		
+		
 		modelo.addRow(fila);
 		botones();
 		
@@ -642,52 +700,93 @@ private void GenerarFactura(Factura f) throws IOException {
 		DecimalFormat formato1 = new DecimalFormat("#.00");
 		Calendar inicio=new GregorianCalendar();
 		inicio.setTime(f.getFecha());
-		File fichero = new File("Factura-"+Prodacom.getInstance().getCod_facturas()+".txt");
-		FileOutputStream fos = new FileOutputStream(fichero);
-	 
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-		bw.write("--------------------------------------------------------------------------------------");
-		bw.newLine();
-		bw.write(String.format("%-50s %-50s",("Cliente: "+f.getCliente().getNombre()),f.getCod()));
-		bw.newLine();
-		bw.write(String.format("%-50s %-50s",("Cedula: "+f.getCliente().getCedula()),"Fecha: "+inicio.get(Calendar
-				.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR)));
-		bw.newLine();
-		
-		bw.write(String.format("%-50s %-50s",("Telefono: "+f.getCliente().getTelefono()),"Vendedor: "+f.getVendedor().getNombre()));
-		bw.newLine();
-		bw.write(String.format("%-50s %-50s",("Direccion: "+f.getCliente().getDireccion()),"Vendedor: "+f.getVendedor().getNombre()));// Si da tiempo en el ultimo
-		//Para metro de esta linea ponerle la cantidad de dias a partir del de facturacion se vence.
-		bw.newLine();
-		bw.write("--------------------------------------------------------------------------------------");
-		bw.newLine();
-		bw.write(String.format("%-20s %-20s %-20s %-20s %-20s","Codigo","Articulo","Cantidad","Precio","Importe"));//10,7,7,
-		bw.newLine();
-		for(int i = 0;i<modelo.getRowCount();i++) {
-			String codigo = (String)modelo.getValueAt(i, 0); 
-			String nombre =(String)modelo.getValueAt(i, 1); 
-			int cantidad = (int)modelo.getValueAt(i, 2); 
-			float precio = (float)modelo.getValueAt(i, 3);
-			float importe = (float)modelo.getValueAt(i, 4); 
-			if(nombre.length()<=20) {
-			bw.write(String.format("%-20s %-20s %-20s %-20s %-20s",codigo,nombre,cantidad,precio,importe));
-			
-			bw.newLine();
-			}else {
-				bw.write(String.format("%-20s %-20s %-20s %-20s %-20s",codigo, nombre.substring(0, 20),cantidad,precio,importe));
-				bw.newLine();
+		try {
+			File carpeta = new File("facturas");
+			if(!carpeta.isDirectory()) {
+				carpeta.mkdir();
 			}
+			
+			File fichero = new File("facturas","Factura-"+Prodacom.getInstance().getCod_facturas()+".txt");
+			FileOutputStream fos = new FileOutputStream(fichero);
+		 
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+			bw.write("--------------------------------------------------------------------------------------");
+			bw.newLine();
+			bw.write(String.format("%-50s %-50s",("Cliente: "+f.getCliente().getNombre()),f.getCod()));
+			bw.newLine();
+			bw.write(String.format("%-50s %-50s",("Cedula: "+f.getCliente().getCedula()),"Fecha: "+inicio.get(Calendar
+					.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR)));
+			bw.newLine();
+			
+			bw.write(String.format("%-50s %-50s",("Telefono: "+f.getCliente().getTelefono()),"Vendedor: "+f.getVendedor().getNombre()));
+			bw.newLine();
+			bw.write(String.format("%-50s %-50s",("Direccion: "+f.getCliente().getDireccion()),"Vendedor: "+f.getVendedor().getNombre()));// Si da tiempo en el ultimo
+			//Para metro de esta linea ponerle la cantidad de dias a partir del de facturacion se vence.
+			bw.newLine();
+			bw.write("--------------------------------------------------------------------------------------");
+			bw.newLine();
+			bw.write(String.format("%-20s %-20s %-20s %-20s %-20s","Codigo","Articulo","Cantidad","Precio","Importe"));//10,7,7,
+			bw.newLine();
+			for(int i = 0;i<modelo.getRowCount();i++) {
+				String codigo = (String)modelo.getValueAt(i, 0); 
+				String nombre =(String)modelo.getValueAt(i, 1); 
+				int cantidad = (int)modelo.getValueAt(i, 2); 
+				float precio = (float)modelo.getValueAt(i, 3);
+				float importe = (float)modelo.getValueAt(i, 4); 
+				if(nombre.length()<=20) {
+				bw.write(String.format("%-20s %-20s %-20s %-20s %-20s",codigo,nombre,cantidad,precio,importe));
+				
+				bw.newLine();
+				}else {
+					bw.write(String.format("%-20s %-20s %-20s %-20s %-20s",codigo, nombre.substring(0, 20),cantidad,precio,importe));
+					bw.newLine();
+				}
+			}
+			bw.newLine();
+			bw.write("Total: "+formato1.format(f.getTotal()));
+			bw.newLine();
+			bw.write("--------------------------------------------------------------------------------------");
+			bw.newLine();
+			bw.write("Gracias por preferirnos, recuerde que no aceptamos devoluciones");
+			bw.newLine();
+			bw.close();
+			fos.close();
+}catch (IOException e) {
+	JOptionPane.showMessageDialog(null, "Ha ocurrido un error por favor compruebe que la carpeta -facturas- se encuentra creada en la ruta del programa");
+}
+		
+	}
+
+
+private void cargarfactura() {
+	if(auxiliar!=null) {
+	btnSeleccionarCliente.setVisible(false);
+	cbxVendedores.setVisible(false);
+	btnCredito.setVisible(false);
+	btnPagar.setVisible(false);
+	lblCedula.setText("Cedula: "+auxiliar.getCliente().getCedula());
+	lblNombre.setText("Nombre: "+auxiliar.getCliente().getNombre());
+	lblTelefono.setText("Telefono: "+auxiliar.getCliente().getTelefono());
+	lblDireccion.setText("Direccion: "+auxiliar.getCliente().getDireccion());
+	lblVendedor.setText("Vendedor: "+auxiliar.getVendedor().getNombre());
+	lblCodigo.setText("Factura #"+auxiliar.getCod().subSequence(2, auxiliar.getCod().length()));
+	Calendar inicio=new GregorianCalendar();
+	inicio.setTime(auxiliar.getFecha());
+	lblFecha.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR));
+	modelo.setRowCount(0);
+	Object [][]filas=auxiliar.getFilas();
+	for(int i = 0;i<auxiliar.getCantidad();i++) {
+		int j =0;
+		for(j=0;j<5;j++) {
+			fila[j]=filas[i][j];
 		}
-		bw.newLine();
-		bw.write("Total: "+formato1.format(f.getTotal()));
-		bw.newLine();
-		bw.write("--------------------------------------------------------------------------------------");
-		bw.newLine();
-		bw.write("Gracias por preferirnos, recuerde que no aceptamos devoluciones");
-		bw.newLine();
-		bw.close();
-		fos.close();
 		
-		
-	}	
+		modelo.addRow(fila);
+	}
+	DecimalFormat formato1 = new DecimalFormat("#.00");
+	lblSubTotal.setText("Sub-Total: "+formato1.format(auxiliar.getTotal()-(auxiliar.getTotal()*0.18f)));
+	lblImpuestos.setText("ITBIS (18%): "+formato1.format((auxiliar.getTotal()*0.18f)));
+	lblTotal.setText("Total: "+formato1.format(auxiliar.getTotal()));
+	}
+}	
 }
