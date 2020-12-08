@@ -14,7 +14,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import logico.Administrativo;
 import logico.Prodacom;
+import logico.Vendedor;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -45,6 +47,13 @@ public class Principal extends JFrame {
 	private Dimension din;
 	private static JPanel panel_1;
 	private static JPanel panel_3;
+	private JMenu mnComponente;
+	private JMenu mnFactura;
+	private JMenu mnCliente;
+	private JMenu mnCombos;
+	private JMenu mnProveedor;
+	private JMenu mnAdministracion;
+	private JMenu mnOpinion;
 	/**
 	 * Launch the application.
 	 */
@@ -59,7 +68,8 @@ public class Principal extends JFrame {
 
 			 @Override
 			public void windowOpened(WindowEvent e) {
-			// TODO Auto-generated method stub			 
+				 
+				 
 			}
 
 			 @Override
@@ -120,12 +130,12 @@ public class Principal extends JFrame {
 		menuBar.setForeground(UIManager.getColor("Button.focus"));
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu_1 = new JMenu("Facturar");
-		mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/iconos/factura.png")));
-		mnNewMenu_1.setForeground(SystemColor.textHighlight);
-		mnNewMenu_1.setBackground(UIManager.getColor("Button.focus"));
-		menuBar.add(mnNewMenu_1);
+		mnFactura = new JMenu("Facturar");
+		mnFactura.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnFactura.setIcon(new ImageIcon(Principal.class.getResource("/iconos/factura.png")));
+		mnFactura.setForeground(SystemColor.textHighlight);
+		mnFactura.setBackground(UIManager.getColor("Button.focus"));
+		menuBar.add(mnFactura);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Facturaci\u00F3n");
 		mntmNewMenuItem_1.setBackground(UIManager.getColor("Button.focus"));
@@ -137,7 +147,7 @@ public class Principal extends JFrame {
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		mnFactura.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Listado Facturas");
 		mntmNewMenuItem_2.setIcon(new ImageIcon(Principal.class.getResource("/iconos/factu.png")));
@@ -149,14 +159,14 @@ public class Principal extends JFrame {
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_2);
+		mnFactura.add(mntmNewMenuItem_2);
 		
-		JMenu mnNewMenu = new JMenu("Componentes");
-		mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compo.png")));
-		mnNewMenu.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu.setForeground(SystemColor.textHighlight);
-		menuBar.add(mnNewMenu);
+		mnComponente = new JMenu("Componentes");
+		mnComponente.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnComponente.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compo.png")));
+		mnComponente.setBackground(UIManager.getColor("Button.focus"));
+		mnComponente.setForeground(SystemColor.textHighlight);
+		menuBar.add(mnComponente);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Ingreso");
 		mntmNewMenuItem.setIcon(new ImageIcon(Principal.class.getResource("/iconos/ingreso.png")));
@@ -170,7 +180,7 @@ public class Principal extends JFrame {
 			}
 		});
 		
-		mnNewMenu.add(mntmNewMenuItem);
+		mnComponente.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Listado Componente");
 		mntmNewMenuItem_4.setBackground(UIManager.getColor("Button.focus"));
@@ -183,14 +193,14 @@ public class Principal extends JFrame {
 				
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_4);
+		mnComponente.add(mntmNewMenuItem_4);
 		
-		JMenu mnNewMenu_2 = new JMenu("Cliente");
-		mnNewMenu_2.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		mnNewMenu_2.setIcon(new ImageIcon(Principal.class.getResource("/iconos/user.png")));
-		mnNewMenu_2.setForeground(SystemColor.textHighlight);
-		mnNewMenu_2.setBackground(UIManager.getColor("Button.focus"));
-		menuBar.add(mnNewMenu_2);
+		mnCliente = new JMenu("Cliente");
+		mnCliente.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnCliente.setIcon(new ImageIcon(Principal.class.getResource("/iconos/user.png")));
+		mnCliente.setForeground(SystemColor.textHighlight);
+		mnCliente.setBackground(UIManager.getColor("Button.focus"));
+		menuBar.add(mnCliente);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado Cliente");
 		mntmNewMenuItem_3.setBackground(UIManager.getColor("Button.focus"));
@@ -202,14 +212,14 @@ public class Principal extends JFrame {
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_3);
+		mnCliente.add(mntmNewMenuItem_3);
 		
-		JMenu mnNewMenu_3 = new JMenu("Combos");
-		mnNewMenu_3.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		mnNewMenu_3.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu_3.setForeground(SystemColor.textHighlight);
-		mnNewMenu_3.setIcon(new ImageIcon(Principal.class.getResource("/iconos/com.png")));
-		menuBar.add(mnNewMenu_3);
+		mnCombos = new JMenu("Combos");
+		mnCombos.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnCombos.setBackground(UIManager.getColor("Button.focus"));
+		mnCombos.setForeground(SystemColor.textHighlight);
+		mnCombos.setIcon(new ImageIcon(Principal.class.getResource("/iconos/com.png")));
+		menuBar.add(mnCombos);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Registrar Combo");
 		mntmNewMenuItem_5.setBackground(UIManager.getColor("Button.focus"));
@@ -221,7 +231,7 @@ public class Principal extends JFrame {
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(mntmNewMenuItem_5);
+		mnCombos.add(mntmNewMenuItem_5);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Listado Combo");
 		mntmNewMenuItem_6.setIcon(new ImageIcon(Principal.class.getResource("/iconos/ju.png")));
@@ -233,14 +243,14 @@ public class Principal extends JFrame {
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(mntmNewMenuItem_6);
+		mnCombos.add(mntmNewMenuItem_6);
 		
-		JMenu mnNewMenu_4 = new JMenu("Proveedor");
-		mnNewMenu_4.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		mnNewMenu_4.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compras.png")));
-		mnNewMenu_4.setForeground(SystemColor.textHighlight);
-		mnNewMenu_4.setBackground(UIManager.getColor("Button.focus"));
-		menuBar.add(mnNewMenu_4);
+		mnProveedor = new JMenu("Proveedor");
+		mnProveedor.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnProveedor.setIcon(new ImageIcon(Principal.class.getResource("/iconos/compras.png")));
+		mnProveedor.setForeground(SystemColor.textHighlight);
+		mnProveedor.setBackground(UIManager.getColor("Button.focus"));
+		menuBar.add(mnProveedor);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Registrar Proveedor");
 		mntmNewMenuItem_7.setBackground(UIManager.getColor("Button.focus"));
@@ -252,7 +262,7 @@ public class Principal extends JFrame {
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_4.add(mntmNewMenuItem_7);
+		mnProveedor.add(mntmNewMenuItem_7);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Listado Proveedores");
 		mntmNewMenuItem_8.setIcon(new ImageIcon(Principal.class.getResource("/iconos/name.png")));
@@ -265,20 +275,20 @@ public class Principal extends JFrame {
 				
 			}
 		});
-		mnNewMenu_4.add(mntmNewMenuItem_8);
+		mnProveedor.add(mntmNewMenuItem_8);
 		
-		JMenu mnNewMenu_5 = new JMenu("Administracion");
-		mnNewMenu_5.setIcon(new ImageIcon(Principal.class.getResource("/iconos/folder-data-icon.png")));
-		mnNewMenu_5.setForeground(SystemColor.textHighlight);
-		mnNewMenu_5.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu_5.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		menuBar.add(mnNewMenu_5);
+		mnAdministracion = new JMenu("Administracion");
+		mnAdministracion.setIcon(new ImageIcon(Principal.class.getResource("/iconos/folder-data-icon.png")));
+		mnAdministracion.setForeground(SystemColor.textHighlight);
+		mnAdministracion.setBackground(UIManager.getColor("Button.focus"));
+		mnAdministracion.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		menuBar.add(mnAdministracion);
 		
 		JMenu mnNewMenu_6 = new JMenu("Empleados");
 		mnNewMenu_6.setIcon(new ImageIcon(Principal.class.getResource("/iconos/user.png")));
 		mnNewMenu_6.setForeground(SystemColor.textHighlight);
 		mnNewMenu_6.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu_5.add(mnNewMenu_6);
+		mnAdministracion.add(mnNewMenu_6);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar");
 		mntmNewMenuItem_9.setIcon(new ImageIcon(Principal.class.getResource("/iconos/list.png")));
@@ -308,7 +318,7 @@ public class Principal extends JFrame {
 		mnNewMenu_8.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Data-Meter-icon.png")));
 		mnNewMenu_8.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_8.setForeground(SystemColor.textHighlight);
-		mnNewMenu_5.add(mnNewMenu_8);
+		mnAdministracion.add(mnNewMenu_8);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("pastel");
 		mntmNewMenuItem_13.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Bar-Chart-icon.png")));
@@ -338,7 +348,7 @@ public class Principal extends JFrame {
 		mnNewMenu_9.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Graphics-Pen-icon.png")));
 		mnNewMenu_9.setForeground(SystemColor.textHighlight);
 		mnNewMenu_9.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu_5.add(mnNewMenu_9);
+		mnAdministracion.add(mnNewMenu_9);
 		
 		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Estado de Cuentas");
 		mntmNewMenuItem_15.setIcon(new ImageIcon(Principal.class.getResource("/iconos/lip.png")));
@@ -364,12 +374,12 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_17.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_17);
 		
-		JMenu mnNewMenu_7 = new JMenu("Opini\u00F3n");
-		mnNewMenu_7.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
-		mnNewMenu_7.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		mnNewMenu_7.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu_7.setForeground(SystemColor.textHighlight);
-		menuBar.add(mnNewMenu_7);
+		mnOpinion = new JMenu("Opini\u00F3n");
+		mnOpinion.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
+		mnOpinion.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		mnOpinion.setBackground(UIManager.getColor("Button.focus"));
+		mnOpinion.setForeground(SystemColor.textHighlight);
+		menuBar.add(mnOpinion);
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Opini\u00F3n Empresa");
 		mntmNewMenuItem_11.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Paper-icon.png")));
@@ -381,7 +391,7 @@ public class Principal extends JFrame {
 				x.setVisible(true);
 			}
 		});
-		mnNewMenu_7.add(mntmNewMenuItem_11);
+		mnOpinion.add(mntmNewMenuItem_11);
 		
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Encuesta");
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
@@ -391,7 +401,7 @@ public class Principal extends JFrame {
 				
 			}
 		});
-		mnNewMenu_7.add(mntmNewMenuItem_12);
+		mnOpinion.add(mntmNewMenuItem_12);
 		contentPane = new JPanel();
 		contentPane.setForeground(UIManager.getColor("Button.focus"));
 		contentPane.setBackground(UIManager.getColor("Button.focus"));
@@ -412,6 +422,31 @@ public class Principal extends JFrame {
 		setLocationRelativeTo(null);
 		
 		cargargraficos();
+		CargarMenu();
+		
+	}
+	private void CargarMenu() {
+		if(Prodacom.getInstance().getUser() instanceof Vendedor) {
+			mnComponente.setEnabled(false);
+			mnCliente.setEnabled(false);
+			mnCombos.setEnabled(false);
+			mnProveedor.setEnabled(false);
+			mnAdministracion.setEnabled(false);
+			
+			mnFactura.setEnabled(true);
+			mnOpinion.setEnabled(true);
+		}
+		
+		if(Prodacom.getInstance().getUser() instanceof Administrativo) {
+			//mnComponente.setEnabled(true);
+			mnCliente.setEnabled(true);
+			mnCombos.setEnabled(true);
+			mnProveedor.setEnabled(true);
+			mnAdministracion.setEnabled(true);
+			
+			mnFactura.setEnabled(true);
+			mnOpinion.setEnabled(true);
+		}
 		
 	}
 	public static void cargargraficos() {
