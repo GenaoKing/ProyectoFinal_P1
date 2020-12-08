@@ -395,6 +395,16 @@ public class Principal extends JFrame {
 			}
 		});
 		mnNewMenu_7.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Encuesta");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GraficOpinion x = new GraficOpinion();
+				x.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_12);
 		contentPane = new JPanel();
 		contentPane.setForeground(UIManager.getColor("Button.focus"));
 		contentPane.setBackground(UIManager.getColor("Button.focus"));

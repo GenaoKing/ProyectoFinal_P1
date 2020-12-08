@@ -73,28 +73,29 @@ public class Prodacom implements Serializable{
 	}
 	
 	
-	public int[] getMal() {
-		return mal;
+	public int getMal(int posicion) {
+		return mal[posicion];
 	}
 
-	public void setMal(int[] mal) {
-		this.mal = mal;
+	public void setMal(int mal, int posicion) {
+		this.mal[posicion] = mal;
+		
 	}
 
-	public int[] getIntermedio() {
-		return intermedio;
+	public int getIntermedio(int posicion) {
+		return intermedio[posicion];
 	}
 
-	public void setIntermedio(int[] intermedio) {
-		this.intermedio = intermedio;
+	public void setIntermedio(int intermedio, int posicion) {
+		this.intermedio[posicion] = intermedio;
 	}
 
-	public int[] getExcelente() {
-		return excelente;
+	public int getExcelente(int posicion) {
+		return excelente[posicion];
 	}
 
-	public void setExcelente(int[] excelente) {
-		this.excelente = excelente;
+	public void setExcelente(int excelente,int posicion) {
+		this.excelente[posicion] = excelente;
 	}
 
 	public int getTotDisco() {

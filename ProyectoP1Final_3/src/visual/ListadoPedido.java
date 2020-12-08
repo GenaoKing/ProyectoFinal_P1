@@ -60,7 +60,7 @@ public class ListadoPedido extends JDialog {
 				{
 					
 					modelo = new DefaultTableModel();
-					String columns[] = {"Tipo","Cant.Mínina","Cant. Real","Cant. Máxima","Precio Unitario","modelo","Marca"};
+					String columns[] = {"Tipo","Cant.Mínina","Cant. Real","Cant. Máxima","Serie","modelo","Marca"};
 					modelo.setColumnIdentifiers(columns);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -72,7 +72,7 @@ public class ListadoPedido extends JDialog {
 								if(seleccion!=-1 ) {
 									
 									btnSeleccionar.setEnabled(true);
-									component = Prodacom.getInstance().buscarComponente(modelo.getValueAt(seleccion, 0).toString());
+									component = Prodacom.getInstance().buscarComponente(modelo.getValueAt(seleccion, 4).toString());
 									//btnSeleccionar.setEnabled(true);
 								}else {
 									btnSeleccionar.setEnabled(false);
@@ -99,7 +99,7 @@ public class ListadoPedido extends JDialog {
 						
 						proveedor  = Prodacom.getInstance().buscarProveedores(component.getSerie());
 						
-						RegOrden a = new RegOrden(component,proveedor);
+						RegPedido a = new RegPedido(component,proveedor);
 						dispose();
 						a.setVisible(true);
 						
@@ -146,9 +146,9 @@ public class ListadoPedido extends JDialog {
 			fila[1]=c.getCantMinima();
 			fila[2]=c.getCantReal();
 			fila[3]=c.getCantMaxima();
-			fila[4]=c.getPrecioVenta();
+			fila[4]=c.getSerie();
 			fila[5] = c.getModelo();
-			fila[6] = c.getModelo();
+			fila[6] = c.getMarca();
 			modelo.addRow(fila);
 		}
 		

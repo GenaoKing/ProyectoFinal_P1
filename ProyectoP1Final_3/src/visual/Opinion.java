@@ -14,6 +14,8 @@ import logico.Prodacom;
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
@@ -52,6 +54,7 @@ public class Opinion extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Opinion.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
 		setTitle("Opiniones Empresa\r\n");
 		setBounds(100, 100, 622, 490);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(Color.DARK_GRAY);
 		contentPanel.setBackground(Color.BLACK);
@@ -211,32 +214,42 @@ public class Opinion extends JDialog {
 				okButton.setForeground(new Color(0, 255, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						//mal
 						if(Integer.valueOf(spnPregA.getValue().toString())==1) {
-							//Prodacom.getInstance().setMal[0](Prodacom.getInstance().getMal()[0]);
-							//Prodacom.getInstance().setMal(Prodacom.getInstance().getMal()[0]+1);
-							
+							Prodacom.getInstance().setMal(Prodacom.getInstance().getMal(0)+1, 0);
+								
 						}
 						if(Integer.valueOf(spnPregA.getValue().toString())==2) {
-							Prodacom.getInstance().setMal(Prodacom.getInstance().getMal());
+							Prodacom.getInstance().setMal(Prodacom.getInstance().getMal(1)+1, 1);
 						}
 						if(Integer.valueOf(spnPregA.getValue().toString())==3) {
-							
-							
-							
-							
+							Prodacom.getInstance().setMal(Prodacom.getInstance().getMal(2)+1, 2);
 						}
 						
-						
-						if(Integer.valueOf(spnPregA.getValue().toString())==1) {
-							
+						//intermedio
+						if(Integer.valueOf(spnPregB.getValue().toString())==1) {
+							Prodacom.getInstance().setIntermedio(Prodacom.getInstance().getIntermedio(0)+1, 0);
 						}
-						if(Integer.valueOf(spnPregA.getValue().toString())==2) {
-							
+						if(Integer.valueOf(spnPregB.getValue().toString())==2) {
+							Prodacom.getInstance().setIntermedio(Prodacom.getInstance().getIntermedio(1)+1, 1);
+						}
+						if(Integer.valueOf(spnPregB.getValue().toString())==3) {
+							Prodacom.getInstance().setIntermedio(Prodacom.getInstance().getIntermedio(2)+1, 2);
 						}
 						
+						//excelente
+						if(Integer.valueOf(spnPregC.getValue().toString())==1) {
+							Prodacom.getInstance().setExcelente(Prodacom.getInstance().getExcelente(0)+1, 0);
+						}
+						if(Integer.valueOf(spnPregC.getValue().toString())==2) {
+							Prodacom.getInstance().setExcelente(Prodacom.getInstance().getExcelente(1)+1, 1);
+						}
+						if(Integer.valueOf(spnPregC.getValue().toString())==3) {
+							Prodacom.getInstance().setExcelente(Prodacom.getInstance().getExcelente(2)+1, 2);
+						}
 						
-						
+						JOptionPane.showMessageDialog(null, "Gracias por su opinión", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");

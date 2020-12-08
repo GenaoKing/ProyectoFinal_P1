@@ -103,15 +103,7 @@ public class Facturacion extends JDialog {
 
 	private static Factura auxiliar = null;
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the dialog.
-	 * @param b 
-	 */
+	
 	public Facturacion(Factura q) {
 		this.auxiliar=q;
 		

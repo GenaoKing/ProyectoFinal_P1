@@ -25,7 +25,7 @@ public class GraficOpinion extends JDialog {
 	public GraficOpinion() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GraficOpinion.class.getResource("/iconos/Data-Meter-icon.png")));
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 816, 482);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -57,39 +57,31 @@ public class GraficOpinion extends JDialog {
 private ChartPanel Barras3d() {
 		
 	String A = "A) Que tan satisfecho se encuentra de la empresa en general.";
-    String B = "B) Cuan probable es que recomiende nuestros servicios.";
-    String C = "C) Como calificaria la calidad de la atencion recibida?";
+    String B = "C) Como calificaria la calidad de la atencion recibida?"; 
+    String C = "B) Cuan probable es que recomiende nuestros servicios.";
         
     String mal = "Mal";
     String Excelente = "Excelente";
     String Intermedio = "Intermedio";
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+     
+        dataset.addValue(Prodacom.getInstance().getMal(0), A, mal);
+        dataset.addValue(Prodacom.getInstance().getMal(1), A, Intermedio);
+        dataset.addValue(Prodacom.getInstance().getMal(2), A, Excelente);
         
-        dataset.addValue(0.0d, A, mal);
-        dataset.addValue(0.0d, B, Excelente);
-        dataset.addValue(0.0d, C, Intermedio);
+        dataset.addValue(Prodacom.getInstance().getIntermedio(0), C, mal);
+        dataset.addValue(Prodacom.getInstance().getIntermedio(1), C, Intermedio);
+        dataset.addValue(Prodacom.getInstance().getIntermedio(2), C, Excelente);
         
+        dataset.addValue(Prodacom.getInstance().getExcelente(0), B, mal);
+        dataset.addValue(Prodacom.getInstance().getExcelente(1), B, Intermedio);
+        dataset.addValue(Prodacom.getInstance().getExcelente(2), B, Excelente);
         
-        dataset.addValue(5.0, A, mal);
-        dataset.addValue(6.0, B, Excelente);
-        dataset.addValue(10.0, C, Intermedio);
- 
-        dataset.addValue(4.0, A, mal);
-        dataset.addValue(2.0, B, Excelente);
-        dataset.addValue(3.0, C, Intermedio);
-        
-        
-        /*
-        dataset.addValue(Prodacom.getInstance().getTotDisco(), A, vel);
-        dataset.addValue(Prodacom.getInstance().getTotMotherboard(), B, vel);
-        dataset.addValue(Prodacom.getInstance().getTotMemoriaRam(), C, vel);
-        dataset.addValue(Prodacom.getInstance().getTotMicroprocesadores(), D, vel);
- 		*/
         JFreeChart barChart = ChartFactory.createBarChart3D(
-                "Grafica ventas componentes", 
+                "Ópinion de nuestros clientes", 
                 "Categoria", 
-                "Vendidos", 
+                "Votos", 
                 dataset,
                 PlotOrientation.VERTICAL, 
                 true, 
