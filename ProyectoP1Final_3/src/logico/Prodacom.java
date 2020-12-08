@@ -16,7 +16,7 @@ public class Prodacom implements Serializable{
 	private int cod_combos = 1;
 	private int cod_facturas = 1;
 	private int cod_OC = 1;
-	private Administrativo admin = null;
+	private Persona user= null;
 	
 	
 
@@ -73,6 +73,14 @@ public class Prodacom implements Serializable{
 	}
 	
 	
+	public Persona getUser() {
+		return user;
+	}
+
+	public void setUser(Persona user) {
+		this.user = user;
+	}
+
 	public int[] getMal() {
 		return mal;
 	}
@@ -480,13 +488,28 @@ public class Prodacom implements Serializable{
 		
 		return x;
 	}
-	
-	public Administrativo getAdmin() {
-		return admin;
-	}
 
-	public void setAdmin(Administrativo admin) {
-		this.admin = admin;
+
+	public boolean IniciarSesion(String text, String text2) {
+		boolean res = false;
+		int i = 0;
+		while(i<personas.size() && !res) {
+			if(personas.get(i) instanceof Administrativo) {
+				if(((Administrativo)personas.get(i)).getUser().equalsIgnoreCase(text)
+						&& ((Administrativo)personas.get(i)).getPass().equalsIgnoreCase(text2)){
+							res = true;
+							Prodacom.getInstance().setUser(personas.get(i));
+						}
+			}else if(personas.get(i) instanceof Vendedor) {
+				if(((Vendedor)personas.get(i)).getUsuario().equalsIgnoreCase(text)
+						&& ((Vendedor)personas.get(i)).getContrasenna().equalsIgnoreCase(text2)) {
+					res = true;
+					Prodacom.getInstance().setUser(personas.get(i));
+				}
+			}
+			i++;
+		}
+		return res;
 	}
 	
 	

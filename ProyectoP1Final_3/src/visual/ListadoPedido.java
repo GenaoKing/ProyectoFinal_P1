@@ -99,7 +99,7 @@ public class ListadoPedido extends JDialog {
 						
 						proveedor  = Prodacom.getInstance().buscarProveedores(component.getSerie());
 						
-						RegOrden a = new RegOrden(component,proveedor);
+						RegPedido a = new RegPedido(component,proveedor);
 						dispose();
 						a.setVisible(true);
 						
