@@ -192,10 +192,10 @@ public class ListadoClientes extends JDialog {
 				btnCrear = new JButton("Nuevo Cliente");
 				if(mode==0) {
 					btnCrear.setVisible(true);
-					btnPagar.setVisible(false);
+				
 				}else {
-					btnCrear.setEnabled(false);
-					btnPagar.setVisible(true);
+					btnCrear.setVisible(false);
+					
 				}
 				btnCrear.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/name.png")));
 				btnCrear.setBackground(UIManager.getColor("Button.focus"));
@@ -210,6 +210,14 @@ public class ListadoClientes extends JDialog {
 				});
 				{
 					btnPagar = new JButton("Pagar Deuda");
+					btnPagar.setEnabled(false);
+					if(mode==0) {
+						btnPagar.setVisible(false);
+					
+					}else {
+						btnPagar.setEnabled(true);
+						
+					}
 					btnPagar.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/dollar.png")));
 					btnPagar.setForeground(new Color(50, 205, 50));
 					btnPagar.setBackground(UIManager.getColor("Button.focus"));
