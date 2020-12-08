@@ -16,7 +16,7 @@ public class OrdenCompra implements Serializable{
 	private int cantidad;
 	private float total;
 	private Administrativo admin;
-	
+	private boolean estado;
 	
 	public OrdenCompra(String codigo, Date fecha, Componente componente, Proveedor proveedor, int cantidad, float total,
 			Administrativo admin) {
@@ -28,8 +28,17 @@ public class OrdenCompra implements Serializable{
 		this.cantidad = cantidad;
 		this.total = total;
 		this.admin = admin;
+		this.estado = true;
 	}
 	
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}

@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import logico.Administrativo;
+import logico.Movimientos;
 import logico.Persona;
 import logico.Prodacom;
 import logico.Vendedor;
@@ -23,9 +24,11 @@ import javax.swing.RowFilter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -46,6 +49,9 @@ public class ListadoEmpleados extends JDialog {
 	private JButton btnSeleccionar;
 	private Vendedor aux = null;
 	private JTextField txtBusqueda;
+	private JButton btnPagar;
+	private Administrativo a = null;
+	private int modelrow = -1;
 
 	/**
 	 * Launch the application.
@@ -126,16 +132,21 @@ public class ListadoEmpleados extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					int seleccion = table.getSelectedRow();
-					int modelrow = table.convertRowIndexToModel(seleccion);
-					if(seleccion!=-1 && modelo.getValueAt(modelrow, 1).toString().equalsIgnoreCase("Vendedor")){
-						btnSeleccionar.setEnabled(true);
-					
-						aux = Prodacom.getInstance().buscarVendedor((String)modelo.getValueAt(modelrow, 0));
-						
+					 modelrow = table.convertRowIndexToModel(seleccion);
+					if(seleccion!=-1 ){
+						btnPagar.setEnabled(true);
+						if(modelo.getValueAt(modelrow, 1).toString().equalsIgnoreCase("Vendedor")) {
+							btnSeleccionar.setEnabled(true);
+							
+							aux = Prodacom.getInstance().buscarVendedor((String)modelo.getValueAt(modelrow, 0));
+						}else {
+							btnSeleccionar.setEnabled(false);
+							a = Prodacom.getInstance().BuscarAdmin((String)modelo.getValueAt(modelrow, 0));
+						}
 						
 					}else{	
 						btnSeleccionar.setEnabled(false);
-				
+						btnPagar.setEnabled(false);
 						}
 				}
 			});
@@ -162,6 +173,35 @@ public class ListadoEmpleados extends JDialog {
 						a.setVisible(true);
 					}
 				});
+				
+				btnPagar = new JButton("Pagar Mes");
+				btnPagar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(modelo.getValueAt(modelrow, 1).toString().equalsIgnoreCase("Administrativo")) {
+							if(Prodacom.getInstance().getBalance()>=a.getSueldo()) {
+							Prodacom.getInstance().setBalance(Prodacom.getInstance().getBalance()-a.getSueldo());
+							Movimientos m = new Movimientos("Pago Salario", "R-"+Prodacom.getInstance().getCod_mov(), "Administrativo: "+a.getNombre(), 
+									new Date(), a.getSueldo(), Prodacom.getInstance().getUser().getNombre(), Prodacom.getInstance().getBalance());
+							Prodacom.getInstance().insertar(m);
+							JOptionPane.showMessageDialog(null, "El pago se ha realizado con exito");
+							}else {
+								JOptionPane.showMessageDialog(null, "No hay suficiente dinero en caja, por favor deposite el dinero o espere a que se realizen ventas");
+							}
+						}else {
+							if(Prodacom.getInstance().getBalance()>=Prodacom.getInstance().SueldoVendedor(aux)){
+							Prodacom.getInstance().setBalance(Prodacom.getInstance().getBalance()-Prodacom.getInstance().SueldoVendedor(aux));
+							Movimientos m = new Movimientos("Pago Salario", "R-"+Prodacom.getInstance().getCod_mov(), "Vendedor: "+a.getNombre(), 
+									new Date(), Prodacom.getInstance().SueldoVendedor(aux), Prodacom.getInstance().getUser().getNombre(), Prodacom.getInstance().getBalance());
+							Prodacom.getInstance().insertar(m);
+							JOptionPane.showMessageDialog(null, "El pago se ha realizado con exito");
+						}else {
+							JOptionPane.showMessageDialog(null, "No hay suficiente dinero en caja, por favor deposite el dinero o espere a que se realizen ventas");
+						}
+						}
+					}
+				});
+				btnPagar.setEnabled(false);
+				buttonPane.add(btnPagar);
 				btnSeleccionar.setActionCommand("OK");
 				buttonPane.add(btnSeleccionar);
 				getRootPane().setDefaultButton(btnSeleccionar);
@@ -188,7 +228,7 @@ public class ListadoEmpleados extends JDialog {
 		fila = new Object [modelo.getColumnCount()];
 		for(Persona p : Prodacom.getInstance().getPersonas()) {
 			if((p instanceof Vendedor) || (p instanceof Administrativo)) {
-				fila[0]=p.getNombre();
+				fila[0]=p.getCedula();
 				if(p instanceof Vendedor) {
 					fila[1]="Vendedor";
 					fila[5]=((Vendedor) p).getSueldo();
