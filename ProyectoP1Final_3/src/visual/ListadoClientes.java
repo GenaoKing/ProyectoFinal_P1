@@ -55,6 +55,7 @@ public class ListadoClientes extends JDialog {
 	 * Launch the application.
 	 */
 	
+	
 
 	/**
 	 * Create the dialog.
