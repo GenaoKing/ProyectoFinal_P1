@@ -556,6 +556,7 @@ public class Prodacom implements Serializable{
 		return res;
 	}
 	
+
 	public void Deposito(double monto) {
 		setBalance(getBalance()+monto);
 		Movimientos m = new Movimientos("Deposito", "D-"+getCod_mov(), "Deposito de efectivo a caja", new Date(), monto, getUser().getNombre(), Prodacom.getInstance().balance);
@@ -605,6 +606,19 @@ public class Prodacom implements Serializable{
 		}
 		
 	}
+
+
+	public boolean ExisteVendedor() {
+		boolean aux = false;
+		
+		for(Persona x : personas) {
+			if(x instanceof Vendedor) {
+				aux = true;
+			}
+		}
+		return aux;
+	}
+	
 
 	
 }

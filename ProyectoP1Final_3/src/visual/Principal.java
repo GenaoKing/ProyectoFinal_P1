@@ -21,6 +21,8 @@ import logico.Vendedor;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -143,8 +145,12 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/iconos/name.png")));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(Prodacom.getInstance().ExisteVendedor() == true){
 				Facturacion aux = new Facturacion(null);
 				aux.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Debe existir almenos 1 vendedor para realizar la factura", "Informacion", JOptionPane.INFORMATION_MESSAGE);;
+				}
 			}
 		});
 		mnFactura.add(mntmNewMenuItem_1);
@@ -374,6 +380,15 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_17.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_17);
 		
+		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Listado Ordenes De Compra");
+		mntmNewMenuItem_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListadoPedidosYa a = new ListadoPedidosYa();
+				a.setVisible(true);
+			}
+		});
+		mnNewMenu_9.add(mntmNewMenuItem_18);
+		
 		mnOpinion = new JMenu("Opini\u00F3n");
 		mnOpinion.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
 		mnOpinion.setFont(new Font("Segoe UI", Font.PLAIN, 24));
@@ -394,6 +409,9 @@ public class Principal extends JFrame {
 		mnOpinion.add(mntmNewMenuItem_11);
 		
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Encuesta");
+		mntmNewMenuItem_12.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Surveys-icon.png")));
+		mntmNewMenuItem_12.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_12.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GraficOpinion x = new GraficOpinion();

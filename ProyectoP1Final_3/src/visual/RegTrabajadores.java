@@ -271,25 +271,27 @@ public class RegTrabajadores extends JDialog {
 			panel_Vendedor.add(spnSueldo_vendedor);
 			
 			lblUsuario_vendedor = new JLabel("Usuario:");
+			lblUsuario_vendedor.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/user.png")));
 			lblUsuario_vendedor.setForeground(new Color(250, 250, 210));
 			lblUsuario_vendedor.setBackground(Color.BLACK);
 			lblUsuario_vendedor.setBounds(225, 58, 93, 14);
 			panel_Vendedor.add(lblUsuario_vendedor);
 			
 			txtUsuario_vendedor = new JTextField();
-			txtUsuario_vendedor.setBounds(282, 55, 99, 20);
+			txtUsuario_vendedor.setBounds(298, 55, 93, 20);
 			panel_Vendedor.add(txtUsuario_vendedor);
 			txtUsuario_vendedor.setColumns(10);
 			
 			txtContrasenna_Vendedor = new JTextField();
 			txtContrasenna_Vendedor.setColumns(10);
-			txtContrasenna_Vendedor.setBounds(482, 55, 99, 20);
+			txtContrasenna_Vendedor.setBounds(495, 55, 86, 20);
 			panel_Vendedor.add(txtContrasenna_Vendedor);
 			
 			lblContrasenna_vendedor = new JLabel("Contrase\u00F1a:");
+			lblContrasenna_vendedor.setIcon(new ImageIcon(RegTrabajadores.class.getResource("/iconos/ll.png")));
 			lblContrasenna_vendedor.setForeground(new Color(250, 250, 210));
 			lblContrasenna_vendedor.setBackground(Color.BLACK);
-			lblContrasenna_vendedor.setBounds(401, 58, 93, 14);
+			lblContrasenna_vendedor.setBounds(401, 58, 99, 14);
 			panel_Vendedor.add(lblContrasenna_vendedor);
 			
 			panel_Administrativo = new JPanel();
