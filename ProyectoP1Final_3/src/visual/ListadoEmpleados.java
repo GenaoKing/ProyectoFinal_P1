@@ -190,7 +190,7 @@ public class ListadoEmpleados extends JDialog {
 						}else {
 							if(Prodacom.getInstance().getBalance()>=Prodacom.getInstance().SueldoVendedor(aux)){
 							Prodacom.getInstance().setBalance(Prodacom.getInstance().getBalance()-Prodacom.getInstance().SueldoVendedor(aux));
-							Movimientos m = new Movimientos("Pago Salario", "R-"+Prodacom.getInstance().getCod_mov(), "Vendedor: "+a.getNombre(), 
+							Movimientos m = new Movimientos("Pago Salario", "R-"+Prodacom.getInstance().getCod_mov(), "Vendedor: "+aux.getNombre(), 
 									new Date(), Prodacom.getInstance().SueldoVendedor(aux), Prodacom.getInstance().getUser().getNombre(), Prodacom.getInstance().getBalance());
 							Prodacom.getInstance().insertar(m);
 							JOptionPane.showMessageDialog(null, "El pago se ha realizado con exito");
