@@ -205,14 +205,7 @@ public class Prodacom implements Serializable{
 		this.facturas.add(factura); 
 		setCod_facturas(getCod_facturas()+1);
 		Principal.cargargraficos();
-		if(!factura.isEstado()) {
-			setBalance(getBalance()+factura.calcualBenf());
-			Movimientos m = new Movimientos("Deposito", "D-"+getCod_mov(), "Ganacia de la factura: "+factura.getCod(), new Date(), factura.calcualBenf(),getUser().getNombre(), getBalance());
-			movimientos.add(m);
-			setCod_mov(getCod_mov()+1);
-			EstadoCuenta.CargarTabla();
-			
-		}
+		
 	}
 
 	public ArrayList<Persona> getPersonas() {

@@ -22,6 +22,7 @@ import logico.Factura;
 import logico.MemoriaRam;
 import logico.Microprocesadores;
 import logico.MotherBoard;
+import logico.Movimientos;
 import logico.Persona;
 import logico.Prodacom;
 import logico.Vendedor;
@@ -549,6 +550,13 @@ public class Facturacion extends JDialog {
 								}
 								Prodacom.getInstance().insertarFactura(f);
 								
+									Prodacom.getInstance().setBalance(Prodacom.getInstance().getBalance()+f.calcualBenf());
+									Movimientos m = new Movimientos("Deposito", "D-"+Prodacom.getInstance().getCod_mov(), "Ganacia de la factura: "+f.getCod(),
+											new Date(), f.calcualBenf(),Prodacom.getInstance().getUser().getNombre(), Prodacom.getInstance().getBalance());
+									Prodacom.getInstance().insertar(m);
+									
+									
+								
 								JOptionPane.showMessageDialog(null, "Su devuelta es: "+(pago-(subtotal+(subtotal*0.18f))));
 								btnPagar.setEnabled(false);
 								
@@ -611,7 +619,8 @@ public class Facturacion extends JDialog {
 		modelo.setRowCount(0);
 		cliente=null;
 		combos.clear();//
-
+		btnCredito.setEnabled(false);
+		btnPagar.setEnabled(false);
 		componentes.clear();//
 		componente=null;
 		combo=null;
