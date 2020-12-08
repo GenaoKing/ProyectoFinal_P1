@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.ComboBoxModel;
 
+import visual.Principal;
+
 
 public class Prodacom implements Serializable{
 	//probando.
@@ -168,6 +170,7 @@ public class Prodacom implements Serializable{
 	public void insertarFactura(Factura factura) {
 		this.facturas.add(factura); 
 		setCod_facturas(getCod_facturas()+1);
+		Principal.cargargraficos();
 	}
 
 	public ArrayList<Persona> getPersonas() {

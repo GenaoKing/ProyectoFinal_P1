@@ -37,11 +37,14 @@ import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class Principal extends JFrame {
 
-	private JPanel contentPane;
+	private static JPanel contentPane;
 	private Dimension din;
+	private static JPanel panel_1;
+	private static JPanel panel_3;
 	/**
 	 * Launch the application.
 	 */
@@ -394,26 +397,33 @@ public class Principal extends JFrame {
 		contentPane.setBackground(UIManager.getColor("Button.focus"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBounds(10, 11, din.width/2-40, din.height-140);
-		panel.add(Barras3d());
-		contentPane.add(panel);
+		panel_3 = new JPanel();
+		panel_3.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel_3.setLayout(new BorderLayout(0, 0));
+		panel_3.add(Barras3d());
+		contentPane.add(panel_3);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(690, 11, din.width/2-40, din.height-140);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		panel_1 = new JPanel();
+		panel_1.setLayout(new BorderLayout(0, 0));
 		panel_1.add(crear());
+		contentPane.add(panel_1);
 		setLocationRelativeTo(null);
 		
-		
+		cargargraficos();
 		
 	}
+	public static void cargargraficos() {
+		
+		panel_3.add(Barras3d());
+		panel_1.add(crear());
+		panel_3.doLayout();
+		panel_1.doLayout();
+
+	}
 	
-	private ChartPanel crear() {
+	private static ChartPanel crear() {
 		float total[] = new float [4];
 		total = Prodacom.getInstance().CalcBeneficios_T();
 	
@@ -433,13 +443,12 @@ public class Principal extends JFrame {
         
         
         ChartPanel panel= new ChartPanel(chart);
-        panel.setBounds(-18, 5, 680, 420);
         panel.setForeground(UIManager.getColor("Button.focus"));
         panel.setBackground(UIManager.getColor("Button.focus"));
 		
 		return panel;
 	}
-private ChartPanel Barras3d() {
+private static ChartPanel Barras3d() {
 		
 		String A = "Disco Duro";
         String B = "Motherboard";
