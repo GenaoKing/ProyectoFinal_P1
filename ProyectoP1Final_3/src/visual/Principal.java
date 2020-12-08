@@ -357,16 +357,16 @@ public class Principal extends JFrame {
 		mnAdministracion.add(mnNewMenu_9);
 		
 		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Estado de Cuentas");
+		mntmNewMenuItem_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EstadoCuenta a = new EstadoCuenta();
+				a.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_15.setIcon(new ImageIcon(Principal.class.getResource("/iconos/lip.png")));
 		mntmNewMenuItem_15.setForeground(SystemColor.textHighlight);
 		mntmNewMenuItem_15.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_15);
-		
-		JMenuItem mntmNewMenuItem_16 = new JMenuItem("Ingresar Dinero");
-		mntmNewMenuItem_16.setIcon(new ImageIcon(Principal.class.getResource("/iconos/dollar.png")));
-		mntmNewMenuItem_16.setForeground(SystemColor.textHighlight);
-		mntmNewMenuItem_16.setBackground(UIManager.getColor("Button.focus"));
-		mnNewMenu_9.add(mntmNewMenuItem_16);
 		
 		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Generar Orden De Compra");
 		mntmNewMenuItem_17.addActionListener(new ActionListener() {

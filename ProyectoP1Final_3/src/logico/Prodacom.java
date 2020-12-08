@@ -2,7 +2,9 @@ package logico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.ComboBoxModel;
 
@@ -205,6 +207,11 @@ public class Prodacom implements Serializable{
 		Principal.cargargraficos();
 		if(!factura.isEstado()) {
 			setBalance(getBalance()+factura.calcualBenf());
+			Movimientos m = new Movimientos("Deposito", "D-"+getCod_mov(), "Ganacia de la factura: "+factura.getCod(), new Date(), factura.calcualBenf(),getUser().getNombre(), getBalance());
+			movimientos.add(m);
+			setCod_mov(getCod_mov()+1);
+			EstadoCuenta.CargarTabla();
+			
 		}
 	}
 
@@ -586,7 +593,7 @@ public class Prodacom implements Serializable{
 			if(f.getCliente().equals(aux) && f.isEstado()) {
 				s.add(f.getCod());
 				f.setEstado(false);
-				total+=f.getTotal();
+				total+=f.calcualBenf();
 			}
 		}
 		setBalance(getBalance()+total);
@@ -600,10 +607,18 @@ public class Prodacom implements Serializable{
 		double total=0;
 		ArrayList<String>s=new ArrayList<String>();
 		for(OrdenCompra o: ordenes) {
-			if(o.getProveedor().equals(p)) {
+			if(o.getProveedor().equals(p) && o.isEstado()) {
 				total+=o.getTotal();
+				o.setEstado(false);
+				s.add(o.getCodigo());
 			}
 		}
+		p.setLimCredito((float) (p.getLimCredito()+total));
+		setBalance(getBalance()-total);
+		Movimientos m = new Movimientos("Retiro", "R-"+getCod_mov(), "Ordenes: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
+		movimientos.add(m);
+		setCod_mov(getCod_mov()+1);
+		EstadoCuenta.CargarTabla();
 		
 	}
 
@@ -617,6 +632,38 @@ public class Prodacom implements Serializable{
 			}
 		}
 		return aux;
+	}
+
+	public Administrativo BuscarAdmin(String valueAt) {
+		Administrativo a = null;
+		int i = 0;
+		boolean encontrado = false;
+		while(i<personas.size() && !encontrado) {
+			if(personas.get(i) instanceof Administrativo && personas.get(i).getCedula().equalsIgnoreCase(valueAt)) {
+				a = (Administrativo) personas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return a;
+	}
+
+	public double SueldoVendedor(Vendedor aux) {
+		double total = 0;
+		Date hoy= new Date();
+		
+		Calendar cal1 = new GregorianCalendar();
+	    Calendar cal2 = new GregorianCalendar();
+	    cal2.setTime(hoy);
+		for(Factura f : facturas) {
+			  cal1.setTime(f.getFecha());
+			  
+			if(f.getVendedor().equals(aux) && !f.isEstado() && (cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH ))){
+				total+=f.getTotal();
+			}
+		}
+		
+		return (total*aux.getComision())+aux.getSueldo();
 	}
 	
 

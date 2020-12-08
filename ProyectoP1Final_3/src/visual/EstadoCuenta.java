@@ -23,6 +23,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.border.EtchedBorder;
 
 public class EstadoCuenta extends JDialog {
 
@@ -64,6 +66,7 @@ public class EstadoCuenta extends JDialog {
 				String columns[] = {"Codigo","Transaccion","Fecha","Monto","Descripcion","Usuario","Balance"};
 				modelo.setColumnIdentifiers(columns);
 				table = new JTable();
+				table.setFont(new Font("Arial", Font.PLAIN, 15));
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				table.setModel(modelo);
 				scrollPane.setViewportView(table);
@@ -71,6 +74,7 @@ public class EstadoCuenta extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -84,7 +88,7 @@ public class EstadoCuenta extends JDialog {
 					btnDepositar = new JButton("Depositar");
 					btnDepositar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							double monto = Double.parseDouble(JOptionPane.showInputDialog("Digite el monto del retiro"));
+							double monto = Double.parseDouble(JOptionPane.showInputDialog("Digite el monto del deposito"));
 							if(monto<=0) {
 								JOptionPane.showMessageDialog(null, "Maldito mongolo a quien se le ocurre hacer un deposito de 0? o negativo");
 							}else {
@@ -129,6 +133,7 @@ public class EstadoCuenta extends JDialog {
 			fila[4]=m.getDescripcion();
 			fila[5]=m.getUsuario();
 			fila[6]=m.getBalance();
+			modelo.addRow(fila);
 		}
 		
 	}

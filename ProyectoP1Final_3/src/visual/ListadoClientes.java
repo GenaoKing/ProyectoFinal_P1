@@ -191,10 +191,10 @@ public class ListadoClientes extends JDialog {
 				btnCrear = new JButton("Nuevo Cliente");
 				if(mode==0) {
 					btnCrear.setVisible(true);
-					btnPagar.setVisible(false);
+					
 				}else {
-					btnCrear.setEnabled(false);
-					btnPagar.setVisible(true);
+					btnCrear.setVisible(false);
+					
 				}
 				btnCrear.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/name.png")));
 				btnCrear.setBackground(UIManager.getColor("Button.focus"));
@@ -209,6 +209,14 @@ public class ListadoClientes extends JDialog {
 				});
 				{
 					btnPagar = new JButton("Pagar Deuda");
+					if(mode==0) {
+						btnPagar.setVisible(false);
+						
+					}else {
+						btnPagar.setVisible(true);
+						
+					}
+					btnPagar.setEnabled(false);
 					btnPagar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							int opcion = JOptionPane.showConfirmDialog(null, "Seguro que desea realizar el pago total de sus facturas");

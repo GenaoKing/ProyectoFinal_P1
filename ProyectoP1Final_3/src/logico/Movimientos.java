@@ -1,9 +1,14 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Movimientos {
+public class Movimientos implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2363822339843919567L;
 	private String transaccion;
 	private String cod;
 	private String descripcion;

@@ -240,10 +240,11 @@ public class RegPedido extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(total<=proveedor.getLimCredito()) {
-							Administrativo a = new Administrativo("Santiago", "", "", "", "", "", 50);
-							OrdenCompra oc = new OrdenCompra("O-"+Prodacom.getInstance().getCod_OC(), new Date(), c, p, Integer.parseInt(spnCantidad.getValue().toString()), total, a);//Prodacom.getInstance().getAdmin());
+							
+							OrdenCompra oc = new OrdenCompra("O-"+Prodacom.getInstance().getCod_OC(), new Date(), c, p, Integer.parseInt(spnCantidad.getValue().toString()), total,(Administrativo)Prodacom.getInstance().getUser());
 							Prodacom.getInstance().InsertarOrden(oc);
 							proveedor.setLimCredito(proveedor.getLimCredito()-total);
+							c.setCantReal(c.getCantReal()+Integer.parseInt(spnCantidad.getValue().toString()));
 							JOptionPane.showMessageDialog(null, "Se ha creado la orden de compra, por favor recuerde pagar a los proveedores");
 							dispose();
 						}else {
