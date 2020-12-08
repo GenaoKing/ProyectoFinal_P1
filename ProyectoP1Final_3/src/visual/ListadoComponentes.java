@@ -54,14 +54,15 @@ public class ListadoComponentes extends JDialog {
 	
 	public static DefaultTableModel modelo;
 	public static Object[] fila;
-	private JButton btnEliminar;
 	private JComboBox cbxFiltro;
 	private JTextField txtBusqueda;
 	private JButton btnSeleccionar;
 	private int seleccion = -1;
 	private int modelrow = -1;
 	private static Combo cargar = null;
-	private int mode = -1;
+	private static int mode = -1;
+	private JButton btnInformacion;
+	private Combo c = null;
 
 	/**
 	 * Launch the application.
@@ -75,6 +76,7 @@ public class ListadoComponentes extends JDialog {
 	public ListadoComponentes(Combo aux,int mode) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoComponentes.class.getResource("/iconos/tecno.png")));
 		setTitle("Listado de Componentes\r\n");
+		
 		this.cargar=aux;
 		this.mode=mode;
 		if(cargar==null) {
@@ -84,13 +86,14 @@ public class ListadoComponentes extends JDialog {
 			}else {	
 			setTitle("Listado de componentes");
 			}
-			}else {
+		}else {
 				if(mode==1) {
 				setTitle("Listado de componentes del combo: "+cargar.getNombre());
 				}else {
 					setTitle(cargar.getNombre());
 				}
 				}
+		
 		setModal(true);
 		setResizable(false);
 		setForeground(Color.RED);
@@ -127,16 +130,20 @@ public class ListadoComponentes extends JDialog {
 					modelrow = table.convertRowIndexToModel(seleccion);
 					if(cargar==null) {
 						if(seleccion!=-1 && (int)modelo.getValueAt(modelrow, 2)>0) {
-							
-							btnEliminar.setEnabled(true);
 							btnSeleccionar.setEnabled(true);
+							if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
+								btnInformacion.setEnabled(true);
+								c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
+							}else {
+								btnInformacion.setEnabled(false);
+							}
 						}else {
-							btnEliminar.setEnabled(false);
+							btnInformacion.setEnabled(false);
 							btnSeleccionar.setEnabled(false);
 						}
 					}else {
 						btnSeleccionar.setEnabled(false);
-						btnEliminar.setEnabled(false);
+						btnInformacion.setEnabled(false);
 					}
 				}
 			});
@@ -208,26 +215,6 @@ public class ListadoComponentes extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnEliminar = new JButton("Eliminar");
-				btnEliminar.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/delete.png")));
-				btnEliminar.setEnabled(false);
-				btnEliminar.setForeground(new Color(255, 0, 0));
-				btnEliminar.setBackground(UIManager.getColor("Button.focus"));
-				btnEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(auxiliar!=null) {
-							int option = JOptionPane.showConfirmDialog(null, "Seguro que quiere eliminar el componente:"+auxiliar.getSerie()+ "Marca:"+auxiliar.getMarca(),"Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-							if(option == JOptionPane.OK_OPTION) {
-								Prodacom.getInstance().getComponentes().remove(auxiliar);
-								cargarTabla();
-								btnEliminar.setEnabled(false);
-								auxiliar = null;
-								JOptionPane.showMessageDialog(null, "Se ha eliminado con exito el componente.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-
-							}
-						}
-					}
-				});
 				
 				btnSeleccionar = new JButton("Seleccionar");
 				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
@@ -243,7 +230,7 @@ public class ListadoComponentes extends JDialog {
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
-							Combo c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
+							c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
 							Ventas a = new Ventas(c.getCod(),c.getNombre(),c.calcularprecio(),1);
 							dispose();
 							a.setVisible(true);
@@ -255,10 +242,17 @@ public class ListadoComponentes extends JDialog {
 						}
 					}
 				});
+				
+				btnInformacion = new JButton("Informacion");
+				btnInformacion.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ListadoComponentes a = new ListadoComponentes(c, 0);
+						a.setVisible(true);
+					}
+				});
+				btnInformacion.setEnabled(false);
+				buttonPane.add(btnInformacion);
 				buttonPane.add(btnSeleccionar);
-				btnEliminar.setActionCommand("OK");
-				buttonPane.add(btnEliminar);
-				getRootPane().setDefaultButton(btnEliminar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -274,15 +268,30 @@ public class ListadoComponentes extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		if(mode==0) {
+		if(mode!=1) {
 			cargarTabla();
 		}
 		if(mode==1) {
 			loadTable(5);
 		}
+		
+		botones(mode);
 	}
 
 	
+
+	private void botones(int mode2) {
+		if(mode2!=5) {
+			btnSeleccionar.setVisible(false);
+			btnInformacion.setVisible(true);
+		}else {
+			btnSeleccionar.setVisible(true);
+			btnInformacion.setVisible(false);
+		}
+		
+	}
+
+
 
 	private void loadTable(int seleccionado) {
 		
@@ -359,7 +368,7 @@ public class ListadoComponentes extends JDialog {
 			for(Combo c : Prodacom.getInstance().getCombos()) {
 				fila[0] = c.getCod();
 				fila[1] = "Combo";
-				fila[2] = "Hasta Agotar Existencias";
+				fila[2] = 1;
 				fila[3] = c.calcularprecio();
 				fila[4] = c.getNombre();
 				fila[5] = "Unbranded";
@@ -399,7 +408,7 @@ public class ListadoComponentes extends JDialog {
 				for(Combo c : Prodacom.getInstance().getCombos()) {
 					fila[0] = c.getCod();
 					fila[1] = "Combo";
-					fila[2] = "Hasta Agotar Existencias";
+					fila[2] = 1;
 					fila[3] = c.calcularprecio();
 					fila[4] = c.getNombre();
 					fila[5] = "Unbranded";
