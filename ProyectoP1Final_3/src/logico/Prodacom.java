@@ -597,7 +597,7 @@ public class Prodacom implements Serializable{
 			}
 		}
 		setBalance(getBalance()+total);
-		Movimientos m = new Movimientos("Deposito", "D-"+getCod_mov(), "Facturas: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
+		Movimientos m = new Movimientos("Pago deuda cliente: "+aux.getNombre(), "D-"+getCod_mov(), "Facturas: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
 		movimientos.add(m);
 		setCod_mov(getCod_mov()+1);
 		EstadoCuenta.CargarTabla();
@@ -615,7 +615,7 @@ public class Prodacom implements Serializable{
 		}
 		p.setLimCredito((float) (p.getLimCredito()+total));
 		setBalance(getBalance()-total);
-		Movimientos m = new Movimientos("Retiro", "R-"+getCod_mov(), "Ordenes: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
+		Movimientos m = new Movimientos("Pago a Proveedor: "+p.getNombre(), "R-"+getCod_mov(), "Ordenes: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
 		movimientos.add(m);
 		setCod_mov(getCod_mov()+1);
 		EstadoCuenta.CargarTabla();

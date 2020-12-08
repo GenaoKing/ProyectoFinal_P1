@@ -170,7 +170,7 @@ public class ListadoClientes extends JDialog {
 								}else {
 									btnSeleccionar.setEnabled(false);
 									btnCrear.setEnabled(false);
-									btnPagar.setEnabled(false);
+									btnPagar.setEnabled(true);
 								}
 							}
 						});
@@ -215,7 +215,7 @@ public class ListadoClientes extends JDialog {
 						btnPagar.setVisible(false);
 					
 					}else {
-						btnPagar.setEnabled(true);
+						btnPagar.setVisible(true);
 						
 					}
 					btnPagar.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/dollar.png")));

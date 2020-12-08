@@ -1,13 +1,13 @@
 --------------------------------------------------------------------------------------
-Cliente: Diana                                     F-1                                               
-Cedula: 096                                        Fecha: 8/12/2020                                  
-Telefono: 849                                      Vendedor: Xavier                                  
-Direccion: villa                                   Vence: Pago al contado                            
+Cliente: santiago                                  F-1                                               
+Cedula: 402                                        Fecha: 8/12/2020                                  
+Telefono: 809                                      Vendedor: santiago                                
+Direccion: 5555                                    Vence: Pago al contado                            
 --------------------------------------------------------------------------------------
 Codigo               Articulo             Cantidad             Precio               Importe             
-S-1                  intel I-7            5                    21.0                 105.0               
-Sub-Total: 105.00
-ITBIS 18%: 18.90
-Total: 123.90
+S-1                  nvidia rtx 207       10                   10.0                 100.0               
+Sub-Total: 100.00
+ITBIS 18%: 18.00
+Total: 118.00
 --------------------------------------------------------------------------------------
 Gracias por preferirnos, recuerde que no aceptamos devoluciones
