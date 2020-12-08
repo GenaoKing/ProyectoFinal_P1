@@ -187,7 +187,7 @@ public class RegPedido extends JDialog {
 			panel.add(separator_2);
 			
 			spnCantidad = new JSpinner();
-			spnCantidad.setForeground(new Color(250, 250, 210));
+			spnCantidad.setForeground(new Color(0, 0, 255));
 			spnCantidad.setBackground(UIManager.getColor("Button.focus"));
 			spnCantidad.addChangeListener(new ChangeListener() {
 				  @Override

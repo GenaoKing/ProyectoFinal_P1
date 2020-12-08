@@ -213,6 +213,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_3.setForeground(SystemColor.textHighlight);
 		mntmNewMenuItem_3.setIcon(new ImageIcon(Principal.class.getResource("/iconos/clien.png")));
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				ListadoClientes aux = new ListadoClientes(1);
 				aux.setVisible(true);

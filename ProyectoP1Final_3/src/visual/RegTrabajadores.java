@@ -121,7 +121,7 @@ public class RegTrabajadores extends JDialog {
 			panel_1.add(lblTelfono);
 			
 			txtCedula = new JTextField();
-			txtCedula.setForeground(new Color(250, 250, 210));
+			txtCedula.setForeground(new Color(0, 0, 255));
 			txtCedula.setBackground(UIManager.getColor("Button.focus"));
 			txtCedula.setBounds(107, 32, 126, 20);
 			panel_1.add(txtCedula);
@@ -129,13 +129,13 @@ public class RegTrabajadores extends JDialog {
 			
 			txtNombre = new JTextField();
 			txtNombre.setBackground(UIManager.getColor("Button.focus"));
-			txtNombre.setForeground(new Color(250, 250, 210));
+			txtNombre.setForeground(new Color(0, 0, 255));
 			txtNombre.setColumns(10);
 			txtNombre.setBounds(107, 81, 126, 20);
 			panel_1.add(txtNombre);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setForeground(new Color(250, 250, 210));
+			txtDireccion.setForeground(new Color(0, 0, 255));
 			txtDireccion.setBackground(UIManager.getColor("Button.focus"));
 			txtDireccion.setColumns(10);
 			txtDireccion.setBounds(455, 32, 126, 20);
@@ -143,7 +143,7 @@ public class RegTrabajadores extends JDialog {
 			
 			txtTelefono = new JTextField();
 			txtTelefono.setBackground(UIManager.getColor("Button.focus"));
-			txtTelefono.setForeground(new Color(250, 250, 210));
+			txtTelefono.setForeground(new Color(0, 0, 255));
 			txtTelefono.setColumns(10);
 			txtTelefono.setBounds(455, 81, 126, 20);
 			panel_1.add(txtTelefono);
@@ -243,7 +243,7 @@ public class RegTrabajadores extends JDialog {
 			panel_Vendedor.add(lblComision_vendedor);
 			
 			spnComision_vendedor = new JSpinner();
-			spnComision_vendedor.setForeground(new Color(250, 250, 210));
+			spnComision_vendedor.setForeground(new Color(0, 0, 255));
 			spnComision_vendedor.setBackground(UIManager.getColor("Button.focus"));
 			spnComision_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), new Float(100), new Float(1)));
 			spnComision_vendedor.setBounds(113, 18, 75, 20);
@@ -265,7 +265,7 @@ public class RegTrabajadores extends JDialog {
 			
 			spnSueldo_vendedor = new JSpinner();
 			spnSueldo_vendedor.setBackground(UIManager.getColor("Button.focus"));
-			spnSueldo_vendedor.setForeground(new Color(250, 250, 210));
+			spnSueldo_vendedor.setForeground(new Color(0, 0, 255));
 			spnSueldo_vendedor.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
 			spnSueldo_vendedor.setBounds(113, 56, 75, 20);
 			panel_Vendedor.add(spnSueldo_vendedor);
@@ -278,11 +278,15 @@ public class RegTrabajadores extends JDialog {
 			panel_Vendedor.add(lblUsuario_vendedor);
 			
 			txtUsuario_vendedor = new JTextField();
+			txtUsuario_vendedor.setForeground(new Color(0, 0, 255));
+			txtUsuario_vendedor.setBackground(UIManager.getColor("Button.focus"));
 			txtUsuario_vendedor.setBounds(298, 55, 93, 20);
 			panel_Vendedor.add(txtUsuario_vendedor);
 			txtUsuario_vendedor.setColumns(10);
 			
 			txtContrasenna_Vendedor = new JTextField();
+			txtContrasenna_Vendedor.setForeground(new Color(0, 0, 255));
+			txtContrasenna_Vendedor.setBackground(UIManager.getColor("Button.focus"));
 			txtContrasenna_Vendedor.setColumns(10);
 			txtContrasenna_Vendedor.setBounds(495, 55, 86, 20);
 			panel_Vendedor.add(txtContrasenna_Vendedor);
@@ -318,7 +322,7 @@ public class RegTrabajadores extends JDialog {
 			panel_Administrativo.add(lblContrasena_admin);
 			
 			txtUsuario_admin = new JTextField();
-			txtUsuario_admin.setForeground(new Color(250, 250, 210));
+			txtUsuario_admin.setForeground(new Color(0, 0, 255));
 			txtUsuario_admin.setBackground(UIManager.getColor("Button.focus"));
 			txtUsuario_admin.setBounds(139, 27, 141, 20);
 			txtUsuario_admin.setVisible(false);
@@ -326,7 +330,7 @@ public class RegTrabajadores extends JDialog {
 			txtUsuario_admin.setColumns(10);
 			
 			txtContrasenna_admin = new JTextField();
-			txtContrasenna_admin.setForeground(new Color(250, 250, 210));
+			txtContrasenna_admin.setForeground(new Color(0, 0, 255));
 			txtContrasenna_admin.setBackground(UIManager.getColor("Button.focus"));
 			txtContrasenna_admin.setColumns(10);
 			txtContrasenna_admin.setBounds(139, 67, 141, 20);
@@ -342,7 +346,7 @@ public class RegTrabajadores extends JDialog {
 			panel_Administrativo.add(lblSueldo);
 			
 			spnSueldo_admin = new JSpinner();
-			spnSueldo_admin.setForeground(new Color(250, 250, 210));
+			spnSueldo_admin.setForeground(new Color(0, 0, 255));
 			spnSueldo_admin.setBackground(UIManager.getColor("Button.focus"));
 			spnSueldo_admin.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
 			spnSueldo_admin.setBounds(440, 27, 99, 20);

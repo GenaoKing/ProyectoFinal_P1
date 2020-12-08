@@ -172,6 +172,9 @@ public class ListadoProveedores extends JDialog {
 				});
 				{
 					btnPagar = new JButton("Pagar Deuda");
+					btnPagar.setIcon(new ImageIcon(ListadoProveedores.class.getResource("/iconos/money.png")));
+					btnPagar.setForeground(new Color(127, 255, 0));
+					btnPagar.setBackground(UIManager.getColor("Button.focus"));
 					btnPagar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							int opcion = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar el pago a este proveedor: "+p.getNombre());

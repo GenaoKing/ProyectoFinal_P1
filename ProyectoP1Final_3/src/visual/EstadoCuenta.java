@@ -25,6 +25,11 @@ import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
+import java.awt.Toolkit;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class EstadoCuenta extends JDialog {
 
@@ -45,6 +50,9 @@ public class EstadoCuenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public EstadoCuenta() {
+		setBackground(UIManager.getColor("Button.focus"));
+		setForeground(UIManager.getColor("Button.focus"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EstadoCuenta.class.getResource("/iconos/iu.png")));
 		setTitle("Estado De Cuenta General");
 		setResizable(false);
 		setModal(true);
@@ -52,7 +60,9 @@ public class EstadoCuenta extends JDialog {
 		din = getToolkit().getScreenSize();  
 		super.setSize(din.width,din.height-90);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		setLocationRelativeTo(null);
@@ -74,11 +84,16 @@ public class EstadoCuenta extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(EstadoCuenta.class.getResource("/iconos/cancel.png")));
+				cancelButton.setForeground(new Color(255, 0, 0));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -86,6 +101,9 @@ public class EstadoCuenta extends JDialog {
 				});
 				{
 					btnDepositar = new JButton("Depositar");
+					btnDepositar.setIcon(new ImageIcon(EstadoCuenta.class.getResource("/iconos/dinero.png")));
+					btnDepositar.setForeground(new Color(0, 255, 0));
+					btnDepositar.setBackground(UIManager.getColor("Button.focus"));
 					btnDepositar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							double monto = Double.parseDouble(JOptionPane.showInputDialog("Digite el monto del deposito"));
@@ -101,6 +119,9 @@ public class EstadoCuenta extends JDialog {
 				}
 				{
 					btnRetirar = new JButton("Retirar");
+					btnRetirar.setIcon(new ImageIcon(EstadoCuenta.class.getResource("/iconos/dollar.png")));
+					btnRetirar.setForeground(new Color(128, 0, 0));
+					btnRetirar.setBackground(UIManager.getColor("Button.focus"));
 					btnRetirar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							double monto = Double.parseDouble(JOptionPane.showInputDialog("Digite el monto del retiro"));

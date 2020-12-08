@@ -279,7 +279,7 @@ public class IngresoComponentes extends JDialog {
 		panel_DiscoDuro.add(lblTipoDeConexion_DiscoDuro);
 		
 		spnCantAlmacenamiento_DiscoDuro = new JSpinner();
-		spnCantAlmacenamiento_DiscoDuro.setForeground(SystemColor.textHighlight);
+		spnCantAlmacenamiento_DiscoDuro.setForeground(new Color(0, 0, 255));
 		spnCantAlmacenamiento_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
 		spnCantAlmacenamiento_DiscoDuro.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spnCantAlmacenamiento_DiscoDuro.setBounds(222, 51, 131, 20);
@@ -288,14 +288,14 @@ public class IngresoComponentes extends JDialog {
 		
 		cbxUnidadDeAlmacenamiento_DiscoDuro = new JComboBox();
 		cbxUnidadDeAlmacenamiento_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
-		cbxUnidadDeAlmacenamiento_DiscoDuro.setForeground(SystemColor.textHighlight);
+		cbxUnidadDeAlmacenamiento_DiscoDuro.setForeground(new Color(0, 0, 255));
 		cbxUnidadDeAlmacenamiento_DiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"Gb", "Tb"}));
 		cbxUnidadDeAlmacenamiento_DiscoDuro.setBounds(222, 119, 131, 20);
 		//cbxUnidadDeAlmacenamiento_DiscoDuro.setVisible(false);
 		panel_DiscoDuro.add(cbxUnidadDeAlmacenamiento_DiscoDuro);
 		
 		cbxTipoDeConexion_DiscoDuro = new JComboBox();
-		cbxTipoDeConexion_DiscoDuro.setForeground(SystemColor.textHighlight);
+		cbxTipoDeConexion_DiscoDuro.setForeground(new Color(0, 0, 255));
 		cbxTipoDeConexion_DiscoDuro.setBackground(UIManager.getColor("Button.focus"));
 		cbxTipoDeConexion_DiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"IDE", "SATA ", "SATA-2 ", "SATA-3"}));
 		cbxTipoDeConexion_DiscoDuro.setBounds(222, 187, 131, 20);
@@ -335,7 +335,7 @@ public class IngresoComponentes extends JDialog {
 		panel_Microprocesadores.add(lblTipo_Microprocesadores);
 		
 		txtTipoDeConexion_Microprocesadores = new JTextField();
-		txtTipoDeConexion_Microprocesadores.setForeground(SystemColor.textHighlight);
+		txtTipoDeConexion_Microprocesadores.setForeground(new Color(0, 0, 255));
 		txtTipoDeConexion_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
 		txtTipoDeConexion_Microprocesadores.setBounds(191, 55, 199, 20);
 		txtTipoDeConexion_Microprocesadores.setVisible(false);
@@ -343,7 +343,7 @@ public class IngresoComponentes extends JDialog {
 		txtTipoDeConexion_Microprocesadores.setColumns(10);
 		
 		spnVelocidad_Microprocesadores = new JSpinner();
-		spnVelocidad_Microprocesadores.setForeground(SystemColor.textHighlight);
+		spnVelocidad_Microprocesadores.setForeground(new Color(0, 0, 255));
 		spnVelocidad_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
 		spnVelocidad_Microprocesadores.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spnVelocidad_Microprocesadores.setBounds(191, 132, 199, 20);
@@ -352,7 +352,7 @@ public class IngresoComponentes extends JDialog {
 		
 		cbxTipo_Microprocesadores = new JComboBox();
 		cbxTipo_Microprocesadores.setBackground(UIManager.getColor("Button.focus"));
-		cbxTipo_Microprocesadores.setForeground(new Color(250, 250, 210));
+		cbxTipo_Microprocesadores.setForeground(new Color(0, 0, 255));
 		cbxTipo_Microprocesadores.setModel(new DefaultComboBoxModel(new String[] {"MHz", "GHz"}));
 		cbxTipo_Microprocesadores.setBounds(191, 198, 199, 20);
 		cbxTipo_Microprocesadores.setVisible(false);
@@ -383,14 +383,14 @@ public class IngresoComponentes extends JDialog {
 		
 		txtConexion_MotherBoard = new JTextField();
 		txtConexion_MotherBoard.setBackground(UIManager.getColor("Button.focus"));
-		txtConexion_MotherBoard.setForeground(SystemColor.textHighlight);
+		txtConexion_MotherBoard.setForeground(new Color(0, 0, 255));
 		txtConexion_MotherBoard.setBounds(87, 46, 125, 20);
 		txtConexion_MotherBoard.setVisible(false);
 		panel_MotherBoard.add(txtConexion_MotherBoard);
 		txtConexion_MotherBoard.setColumns(10);
 		
 		txtTipoRam_MotherBoard = new JTextField();
-		txtTipoRam_MotherBoard.setForeground(SystemColor.textHighlight);
+		txtTipoRam_MotherBoard.setForeground(new Color(0, 0, 255));
 		txtTipoRam_MotherBoard.setBackground(UIManager.getColor("Button.focus"));
 		txtTipoRam_MotherBoard.setColumns(10);
 		txtTipoRam_MotherBoard.setBounds(87, 109, 125, 20);
@@ -559,7 +559,7 @@ public class IngresoComponentes extends JDialog {
 		panel_MemoriaRam.add(lblMemoria_MemoriaRam);
 		
 		spnCantidadDeMemoria_MemoriaRam = new JSpinner();
-		spnCantidadDeMemoria_MemoriaRam.setForeground(SystemColor.textHighlight);
+		spnCantidadDeMemoria_MemoriaRam.setForeground(new Color(0, 0, 255));
 		spnCantidadDeMemoria_MemoriaRam.setBackground(UIManager.getColor("Button.focus"));
 		spnCantidadDeMemoria_MemoriaRam.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spnCantidadDeMemoria_MemoriaRam.setBounds(140, 51, 111, 20);
@@ -567,7 +567,7 @@ public class IngresoComponentes extends JDialog {
 		panel_MemoriaRam.add(spnCantidadDeMemoria_MemoriaRam);
 		
 		cbxTipoDeMemoria_MemoriaRam = new JComboBox();
-		cbxTipoDeMemoria_MemoriaRam.setForeground(SystemColor.textHighlight);
+		cbxTipoDeMemoria_MemoriaRam.setForeground(new Color(0, 0, 255));
 		cbxTipoDeMemoria_MemoriaRam.setBackground(UIManager.getColor("Button.focus"));
 		cbxTipoDeMemoria_MemoriaRam.setModel(new DefaultComboBoxModel(new String[] {"DDR", "DDR-2", "DDR-3 "}));
 		cbxTipoDeMemoria_MemoriaRam.setBounds(140, 119, 111, 20);
@@ -576,7 +576,7 @@ public class IngresoComponentes extends JDialog {
 		
 		cbxMemoria_MemoriaRam = new JComboBox();
 		cbxMemoria_MemoriaRam.setBackground(UIManager.getColor("Button.focus"));
-		cbxMemoria_MemoriaRam.setForeground(SystemColor.textHighlight);
+		cbxMemoria_MemoriaRam.setForeground(new Color(0, 0, 255));
 		cbxMemoria_MemoriaRam.setModel(new DefaultComboBoxModel(new String[] {"Gb", "Mb"}));
 		cbxMemoria_MemoriaRam.setBounds(140, 187, 111, 20);
 		cbxMemoria_MemoriaRam.setVisible(false);

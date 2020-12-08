@@ -175,6 +175,9 @@ public class ListadoEmpleados extends JDialog {
 				});
 				
 				btnPagar = new JButton("Pagar Mes");
+				btnPagar.setIcon(new ImageIcon(ListadoEmpleados.class.getResource("/iconos/dollar.png")));
+				btnPagar.setForeground(new Color(124, 252, 0));
+				btnPagar.setBackground(UIManager.getColor("Button.focus"));
 				btnPagar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(modelo.getValueAt(modelrow, 1).toString().equalsIgnoreCase("Administrativo")) {
