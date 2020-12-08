@@ -593,7 +593,7 @@ public class Prodacom implements Serializable{
 		Movimientos m = new Movimientos("Pago deuda cliente: "+aux.getNombre(), "D-"+getCod_mov(), "Facturas: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
 		movimientos.add(m);
 		setCod_mov(getCod_mov()+1);
-		EstadoCuenta.CargarTabla();
+		
 	}
 
 	public void PagarDeudaProveedor(Proveedor p) {
@@ -611,7 +611,7 @@ public class Prodacom implements Serializable{
 		Movimientos m = new Movimientos("Pago a Proveedor: "+p.getNombre(), "R-"+getCod_mov(), "Ordenes: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
 		movimientos.add(m);
 		setCod_mov(getCod_mov()+1);
-		EstadoCuenta.CargarTabla();
+		
 		
 	}
 
