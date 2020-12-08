@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -53,6 +54,7 @@ public class ListadoPedido extends JDialog {
 		setForeground(UIManager.getColor("Button.focus"));
 		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 754, 461);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(UIManager.getColor("Button.focus"));
 		contentPanel.setBackground(UIManager.getColor("Button.focus"));
@@ -113,11 +115,13 @@ public class ListadoPedido extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						
 						proveedor  = Prodacom.getInstance().buscarProveedores(component.getSerie());
-						
+						if(proveedor !=null) {
 						RegPedido a = new RegPedido(component,proveedor);
 						dispose();
 						a.setVisible(true);
-						
+					}else {
+						JOptionPane.showMessageDialog(null, "No se ha encontrado un proveedor para el componente.\nDebe registrar al menos un proveedor que suministre dicho componente. ", "Información", JOptionPane.INFORMATION_MESSAGE);
+					}
 					}
 				});
 				btnSeleccionar.setEnabled(false);

@@ -521,5 +521,16 @@ public class Prodacom implements Serializable{
 		return res;
 	}
 	
+	public boolean ExisteVendedor() {
+		boolean aux = false;
+		
+		for(Persona x : personas) {
+			if(x instanceof Vendedor) {
+				aux = true;
+			}
+		}
+		return aux;
+	}
+	
 	
 }

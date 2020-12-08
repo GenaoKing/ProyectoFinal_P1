@@ -1,13 +1,13 @@
 --------------------------------------------------------------------------------------
-Cliente: diana                                     F-1                                               
-Cedula: 4029535                                    Fecha: 7/12/2020                                  
-Telefono: 809554232                                Vendedor: santiago                                
-Direccion: su casa                                 Vence: Pago al contado                            
+Cliente: dianne                                    F-1                                               
+Cedula: 354645                                     Fecha: 8/12/2020                                  
+Telefono: 764554                                   Vendedor: xavier                                  
+Direccion: gurabo                                  Vence: Pago al contado                            
 --------------------------------------------------------------------------------------
 Codigo               Articulo             Cantidad             Precio               Importe             
-S-1                  probando prueba      3                    3.0                  9.0                 
-Sub-Total: 9.00
-ITBIS 18%: 1.62
-Total: 10.62
+S-1                  prueba PruebaF       1                    5.0                  5.0                 
+Sub-Total: 5.00
+ITBIS 18%: .90
+Total: 5.90
 --------------------------------------------------------------------------------------
 Gracias por preferirnos, recuerde que no aceptamos devoluciones

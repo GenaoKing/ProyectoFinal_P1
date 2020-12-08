@@ -18,6 +18,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListadoPedidosYa extends JDialog {
 
@@ -32,6 +36,7 @@ public class ListadoPedidosYa extends JDialog {
 
 	public ListadoPedidosYa() {
 		setBounds(100, 100, 946, 491);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -49,7 +54,14 @@ public class ListadoPedidosYa extends JDialog {
 					String columns[] = {"Código","Total","Proveedor","Admin","Cantidad Pedida","Fecha"};
 					modelo.setColumnIdentifiers(columns);
 					table = new JTable();
+					table.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							
+						}
+					});
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					table.setModel(modelo);
 					scrollPane.setViewportView(table);
 				}
 			}
@@ -60,6 +72,11 @@ public class ListadoPedidosYa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -71,7 +88,6 @@ public class ListadoPedidosYa extends JDialog {
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
 		for(OrdenCompra c : Prodacom.getInstance().getOrdenes()){
-			
 			
 			fila[0]=c.getCodigo();
 			fila[1]=c.getTotal();

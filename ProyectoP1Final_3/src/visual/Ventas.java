@@ -219,6 +219,11 @@ public class Ventas extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.setForeground(new Color(255, 0, 0));
 				cancelButton.setIcon(new ImageIcon(Ventas.class.getResource("/iconos/cancel.png")));

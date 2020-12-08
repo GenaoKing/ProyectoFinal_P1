@@ -21,6 +21,8 @@ import logico.Vendedor;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -143,8 +145,12 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/iconos/name.png")));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(Prodacom.getInstance().ExisteVendedor() == true){
 				Facturacion aux = new Facturacion(null);
 				aux.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Debe existir almenos 1 vendedor para realizar la factura", "Informacion", JOptionPane.INFORMATION_MESSAGE);;
+				}
 			}
 		});
 		mnFactura.add(mntmNewMenuItem_1);
