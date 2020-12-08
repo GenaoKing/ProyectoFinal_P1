@@ -381,6 +381,9 @@ public class Principal extends JFrame {
 		mnNewMenu_9.add(mntmNewMenuItem_17);
 		
 		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Listado Ordenes De Compra");
+		mntmNewMenuItem_18.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Paper-icon.png")));
+		mntmNewMenuItem_18.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_18.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ListadoPedidosYa a = new ListadoPedidosYa();

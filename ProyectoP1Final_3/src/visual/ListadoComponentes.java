@@ -75,7 +75,7 @@ public class ListadoComponentes extends JDialog {
 	 */
 	public ListadoComponentes(Combo aux,int mode) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoComponentes.class.getResource("/iconos/tecno.png")));
-		setTitle("Listado de Componentes\r\n");
+		setTitle("Listado de Componentes");
 		
 		this.cargar=aux;
 		this.mode=mode;
@@ -244,6 +244,9 @@ public class ListadoComponentes extends JDialog {
 				});
 				
 				btnInformacion = new JButton("Informacion");
+				btnInformacion.setIcon(new ImageIcon(ListadoComponentes.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
+				btnInformacion.setForeground(new Color(0, 0, 205));
+				btnInformacion.setBackground(UIManager.getColor("Button.focus"));
 				btnInformacion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ListadoComponentes a = new ListadoComponentes(c, 0);

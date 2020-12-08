@@ -70,7 +70,7 @@ public class ListadoFacturas extends JDialog {
 		setBackground(UIManager.getColor("Button.focus"));
 		this.v=aux;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoFacturas.class.getResource("/iconos/factura.png")));
-		setTitle("Listado de Facturas\r\n");
+		setTitle("Listado de Facturas");
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 854, 466);
@@ -172,6 +172,9 @@ public class ListadoFacturas extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				informacionButton = new JButton("Informacion");
+				informacionButton.setIcon(new ImageIcon(ListadoFacturas.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
+				informacionButton.setForeground(new Color(0, 0, 205));
+				informacionButton.setBackground(UIManager.getColor("Button.focus"));
 				informacionButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Facturacion a = new Facturacion(auxiliar);

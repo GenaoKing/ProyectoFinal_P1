@@ -209,6 +209,9 @@ public class ListadoClientes extends JDialog {
 				});
 				{
 					btnPagar = new JButton("Pagar Deuda");
+					btnPagar.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/dollar.png")));
+					btnPagar.setForeground(new Color(50, 205, 50));
+					btnPagar.setBackground(UIManager.getColor("Button.focus"));
 					btnPagar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							int opcion = JOptionPane.showConfirmDialog(null, "Seguro que desea realizar el pago total de sus facturas");

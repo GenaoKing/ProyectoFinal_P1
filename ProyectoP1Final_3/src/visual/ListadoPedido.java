@@ -32,6 +32,7 @@ import javax.swing.UIManager;
 import java.awt.Toolkit;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
 
 public class ListadoPedido extends JDialog {
 
@@ -58,7 +59,7 @@ public class ListadoPedido extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setForeground(UIManager.getColor("Button.focus"));
 		contentPanel.setBackground(UIManager.getColor("Button.focus"));
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
@@ -102,6 +103,7 @@ public class ListadoPedido extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
 			buttonPane.setBackground(UIManager.getColor("Button.focus"));
 			buttonPane.setForeground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

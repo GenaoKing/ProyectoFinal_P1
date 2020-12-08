@@ -22,6 +22,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
+import java.awt.Toolkit;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
 
 public class ListadoPedidosYa extends JDialog {
 
@@ -35,10 +40,16 @@ public class ListadoPedidosYa extends JDialog {
 	private int modelrow = -1;
 
 	public ListadoPedidosYa() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoPedidosYa.class.getResource("/iconos/lip.png")));
+		setTitle("LIstado de Pedidos");
+		setForeground(UIManager.getColor("Button.focus"));
+		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 946, 491);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
+		contentPanel.setBorder(new LineBorder(new Color(184, 134, 11)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
@@ -68,10 +79,16 @@ public class ListadoPedidosYa extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new LineBorder(new Color(184, 134, 11)));
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListadoPedidosYa.class.getResource("/iconos/cancel.png")));
+				cancelButton.setForeground(new Color(255, 0, 0));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
