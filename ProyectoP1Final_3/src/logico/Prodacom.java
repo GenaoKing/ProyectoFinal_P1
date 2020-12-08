@@ -73,10 +73,11 @@ public class Prodacom implements Serializable{
 	}
 	
 	
-<<<<<<< HEAD
+
 	public int getMal(int posicion) {
 		return mal[posicion];
-=======
+	}
+
 	public Persona getUser() {
 		return user;
 	}
@@ -87,7 +88,6 @@ public class Prodacom implements Serializable{
 
 	public int[] getMal() {
 		return mal;
->>>>>>> branch 'master' of https://github.com/GenaoKing/ProyectoFinal_P1.git
 	}
 
 	public void setMal(int mal, int posicion) {

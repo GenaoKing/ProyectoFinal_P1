@@ -7,6 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 import logico.Prodacom;
 
 import javax.swing.JMenuBar;
@@ -29,6 +36,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Font;
+import java.awt.FlowLayout;
 
 public class Principal extends JFrame {
 
@@ -385,10 +393,97 @@ public class Principal extends JFrame {
 		contentPane.setForeground(UIManager.getColor("Button.focus"));
 		contentPane.setBackground(UIManager.getColor("Button.focus"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setBounds(10, 11, din.width/2-40, din.height-140);
+		panel.add(Barras3d());
+		contentPane.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(690, 11, din.width/2-40, din.height-140);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		panel_1.add(crear());
 		setLocationRelativeTo(null);
 		
+		
+		
 	}
-
+	
+	private ChartPanel crear() {
+		float total[] = new float [4];
+		total = Prodacom.getInstance().CalcBeneficios_T();
+	
+		DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("Disco Duro", total[0]);
+        dataset.setValue("MotherBoard", total[1]);
+        dataset.setValue("Microprocesadores", total[2]);
+        dataset.setValue("MemoriaRam", total[3]);
+ 
+        
+        JFreeChart chart = ChartFactory.createPieChart(// char t
+                
+                "Porciento de ganancias por tipo.",// title                                                                     
+                dataset, // data
+                true, // include legend
+                true, false);
+        
+        
+        ChartPanel panel= new ChartPanel(chart);
+        panel.setBounds(-18, 5, 680, 420);
+        panel.setForeground(UIManager.getColor("Button.focus"));
+        panel.setBackground(UIManager.getColor("Button.focus"));
+		
+		return panel;
+	}
+private ChartPanel Barras3d() {
+		
+		String A = "Disco Duro";
+        String B = "Motherboard";
+        String C = "MemoriaRam";
+        String D = "Microprocesador";
+        
+        String vel = "Ventas";
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        /*
+        dataset.addValue(0.0d, A, vel);
+        dataset.addValue(0.0d, B, vel);
+        dataset.addValue(0.0d, C, vel);
+        dataset.addValue(0.0d, D, vel);
+        
+        
+        dataset.addValue(5.0, B, vel);
+        dataset.addValue(6.0, B, vel);
+        dataset.addValue(10.0, B, vel);
+ 
+        dataset.addValue(4.0, C, vel);
+        dataset.addValue(2.0, C, vel);
+        dataset.addValue(3.0, C, vel);
+        */
+        dataset.addValue(Prodacom.getInstance().getTotDisco(), A, vel);
+        dataset.addValue(Prodacom.getInstance().getTotMotherboard(), B, vel);
+        dataset.addValue(Prodacom.getInstance().getTotMemoriaRam(), C, vel);
+        dataset.addValue(Prodacom.getInstance().getTotMicroprocesadores(), D, vel);
+ 		
+        JFreeChart barChart = ChartFactory.createBarChart3D(
+                "Grafica ventas componentes", 
+                "Categoria", 
+                "Vendidos", 
+                dataset,
+                PlotOrientation.VERTICAL, 
+                true, 
+                true, 
+                false);
+ 
+        ChartPanel panel = new ChartPanel(barChart);
+        panel.setForeground(UIManager.getColor("Button.focus"));
+        panel.setBackground(UIManager.getColor("Button.focus"));
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+       // panel.setlocati;
+        return panel;
+	}
 }
