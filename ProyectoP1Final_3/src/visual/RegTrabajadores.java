@@ -26,6 +26,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegTrabajadores extends JDialog {
 
@@ -121,6 +123,15 @@ public class RegTrabajadores extends JDialog {
 			panel_1.add(lblTelfono);
 			
 			txtCedula = new JTextField();
+			txtCedula.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char carac = e.getKeyChar();
+					if(((carac<'0') || (carac>'9')) && ((carac!='-') && (carac!='\b'))) {
+						e.consume();
+					}
+				}
+			});
 			txtCedula.setForeground(new Color(0, 0, 255));
 			txtCedula.setBackground(UIManager.getColor("Button.focus"));
 			txtCedula.setBounds(107, 32, 126, 20);
@@ -142,6 +153,15 @@ public class RegTrabajadores extends JDialog {
 			panel_1.add(txtDireccion);
 			
 			txtTelefono = new JTextField();
+			txtTelefono.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char carac = e.getKeyChar();
+					if(((carac<'0') || (carac>'9')) && ((carac!='(') && (carac!='\b') && (carac!=')') && (carac!='-') && (carac!='+'))) {
+						e.consume();
+					}
+				}
+			});
 			txtTelefono.setBackground(UIManager.getColor("Button.focus"));
 			txtTelefono.setForeground(new Color(0, 0, 255));
 			txtTelefono.setColumns(10);

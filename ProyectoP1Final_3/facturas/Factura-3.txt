@@ -1,13 +1,13 @@
 --------------------------------------------------------------------------------------
-Cliente: diana                                     F-3                                               
-Cedula: 4029535                                    Fecha: 7/12/2020                                  
-Telefono: 809554232                                Vendedor: santiago                                
-Direccion: su casa                                 Vence: Pago al contado                            
+Cliente: Diana                                     F-3                                               
+Cedula: 489                                        Fecha: 8/12/2020                                  
+Telefono: 849                                      Vendedor: xav                                     
+Direccion: jacagua                                 Vence: 9/12/2020                                  
 --------------------------------------------------------------------------------------
 Codigo               Articulo             Cantidad             Precio               Importe             
-S-1                  probando prueba      6                    3.0                  18.0                
-Sub-Total: 18.00
-ITBIS 18%: 3.24
-Total: 21.24
+S-1                  700 MDX              1                    11.0                 11.0                
+Sub-Total: 11.00
+ITBIS 18%: 1.98
+Total: 12.98
 --------------------------------------------------------------------------------------
 Gracias por preferirnos, recuerde que no aceptamos devoluciones

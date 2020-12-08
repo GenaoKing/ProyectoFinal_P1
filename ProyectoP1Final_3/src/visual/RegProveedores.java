@@ -38,6 +38,8 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegProveedores extends JDialog {
 
@@ -130,6 +132,15 @@ public class RegProveedores extends JDialog {
 			panel.add(lblTelefono);
 			
 			txtTelefono = new JTextField();
+			txtTelefono.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char carac = e.getKeyChar();
+					if(((carac<'0') || (carac>'9')) && ((carac!='(') && (carac!='\b') && (carac!=')') && (carac!='-') && (carac!='+'))) {
+						e.consume();
+					}
+				}
+			});
 			txtTelefono.setBackground(UIManager.getColor("Button.focus"));
 			txtTelefono.setForeground(new Color(0, 0, 255));
 			txtTelefono.setBounds(220, 114, 474, 26);
@@ -144,6 +155,15 @@ public class RegProveedores extends JDialog {
 			panel.add(lblCredito);
 			
 			txtCredito = new JTextField();
+			txtCredito.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char carac = e.getKeyChar();
+					if(((carac<'0') || (carac>'9')) && ((carac!='.') && (carac!='\b'))) {
+						e.consume();
+					}
+				}
+			});
 			txtCredito.setBackground(UIManager.getColor("Button.focus"));
 			txtCredito.setForeground(new Color(0, 0, 255));
 			txtCredito.setBounds(12, 114, 116, 26);

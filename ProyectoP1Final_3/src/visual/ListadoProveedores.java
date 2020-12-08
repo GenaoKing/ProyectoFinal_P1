@@ -180,6 +180,7 @@ public class ListadoProveedores extends JDialog {
 							int opcion = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar el pago a este proveedor: "+p.getNombre());
 							if(opcion==JOptionPane.OK_OPTION) {
 								Prodacom.getInstance().PagarDeudaProveedor(p);
+								JOptionPane.showMessageDialog(null, "Pago realizado, gracias.");
 							}
 						}
 					});
