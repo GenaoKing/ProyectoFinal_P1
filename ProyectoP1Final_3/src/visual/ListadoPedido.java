@@ -27,6 +27,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
+import java.awt.Toolkit;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class ListadoPedido extends JDialog {
 
@@ -44,8 +48,14 @@ public class ListadoPedido extends JDialog {
 	private Proveedor proveedor = null;
 	
 	public ListadoPedido() {
+		setTitle("Generar Orden de Compra");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoPedido.class.getResource("/iconos/lip.png")));
+		setForeground(UIManager.getColor("Button.focus"));
+		setBackground(UIManager.getColor("Button.focus"));
 		setBounds(100, 100, 754, 461);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setForeground(UIManager.getColor("Button.focus"));
+		contentPanel.setBackground(UIManager.getColor("Button.focus"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
@@ -90,10 +100,15 @@ public class ListadoPedido extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(UIManager.getColor("Button.focus"));
+			buttonPane.setForeground(UIManager.getColor("Button.focus"));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnSeleccionar = new JButton("Seleccionar");
+				btnSeleccionar.setIcon(new ImageIcon(ListadoPedido.class.getResource("/iconos/select.png")));
+				btnSeleccionar.setForeground(new Color(0, 255, 0));
+				btnSeleccionar.setBackground(UIManager.getColor("Button.focus"));
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -112,6 +127,9 @@ public class ListadoPedido extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListadoPedido.class.getResource("/iconos/cancel.png")));
+				cancelButton.setForeground(new Color(255, 0, 0));
+				cancelButton.setBackground(UIManager.getColor("Button.focus"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

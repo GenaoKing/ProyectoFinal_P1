@@ -394,6 +394,9 @@ public class Principal extends JFrame {
 		mnOpinion.add(mntmNewMenuItem_11);
 		
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Encuesta");
+		mntmNewMenuItem_12.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Surveys-icon.png")));
+		mntmNewMenuItem_12.setForeground(SystemColor.textHighlight);
+		mntmNewMenuItem_12.setBackground(UIManager.getColor("Button.focus"));
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GraficOpinion x = new GraficOpinion();
