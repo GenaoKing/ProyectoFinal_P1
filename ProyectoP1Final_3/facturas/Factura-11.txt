@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------
-Cliente: Diana                                     F-10                                              
+Cliente: Diana                                     F-11                                              
 Cedula: 489                                        Fecha: 8/12/2020                                  
 Telefono: 849                                      Vendedor: xav                                     
 Direccion: jacagua                                 Vence: Pago al contado                            
