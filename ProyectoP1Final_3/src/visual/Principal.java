@@ -37,33 +37,7 @@ public class Principal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal frame = new Principal();
-					fondito d = new fondito ("/visual/ty.jpg");
-					frame.getContentPane().add(d);
-					frame.setVisible(true);
-					
-					try {
-						File f = new File("prodacom.dat");
-						FileInputStream fileIn = new FileInputStream(f);
-						ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-						Prodacom.prodacom =(Prodacom) objectIn.readObject();
-						System.out.println("Se ha leido la informacion");
-						objectIn.close();
-
-						} catch (Exception ex) {
-						ex.printStackTrace();
-						}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -85,13 +59,15 @@ public class Principal extends JFrame {
 			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 			objectOut.writeObject(Prodacom.getInstance());
 			objectOut.close();
-			System.out.println("Se ha guardado la informacion");
+			
 			} catch (Exception ex) {
 			ex.printStackTrace();
 			}
 
 			}
-
+			 
+			 
+			 
 			 @Override
 			public void windowClosed(WindowEvent e) {
 			// TODO Auto-generated method stub

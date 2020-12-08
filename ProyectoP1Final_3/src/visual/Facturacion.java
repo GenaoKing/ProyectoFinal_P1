@@ -329,7 +329,7 @@ public class Facturacion extends JDialog {
 							btnEliminar.setEnabled(true);
 							btnModificar.setEnabled(true);
 							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
-							System.out.println(seleccion+"||"+modelrow);
+							
 							cantidad = (int)modelo.getValueAt(seleccion, 2);
 							combo = null;
 						}
@@ -485,7 +485,7 @@ public class Facturacion extends JDialog {
 								fila[2]=Integer.parseInt(modelo.getValueAt(i, 2).toString());
 								fila[3]=Float.parseFloat(modelo.getValueAt(i, 3).toString());
 								fila[4]=Float.parseFloat(modelo.getValueAt(i, 4).toString());
-								System.out.println(modelo.getValueAt(i, 0).toString());
+								
 								f.InsertarFilas(i,fila);
 							
 							}
@@ -541,7 +541,7 @@ public class Facturacion extends JDialog {
 									fila[2]=Integer.parseInt(modelo.getValueAt(i, 2).toString());
 									fila[3]=Float.parseFloat(modelo.getValueAt(i, 3).toString());
 									fila[4]=Float.parseFloat(modelo.getValueAt(i, 4).toString());
-									System.out.println(modelo.getValueAt(i, 0).toString());
+									
 									f.InsertarFilas(i,fila);
 								
 								}

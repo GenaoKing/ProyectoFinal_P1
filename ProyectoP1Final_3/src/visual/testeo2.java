@@ -40,7 +40,7 @@ public class testeo2 extends JDialog {
 	private ChartPanel crear() {
 		float total[] = new float [4];
 		total = Prodacom.getInstance().CalcBeneficios_T();
-		System.out.println(total[0]);
+	
 		DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Disco Duro", total[0]);
         dataset.setValue("MotherBoard", total[1]);
