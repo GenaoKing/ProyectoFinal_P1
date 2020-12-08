@@ -1,13 +1,13 @@
 --------------------------------------------------------------------------------------
-Cliente: diana                                     F-2                                               
+Cliente: diana                                     F-4                                               
 Cedula: 4029535                                    Fecha: 7/12/2020                                  
 Telefono: 809554232                                Vendedor: santiago                                
 Direccion: su casa                                 Vence: Pago al contado                            
 --------------------------------------------------------------------------------------
 Codigo               Articulo             Cantidad             Precio               Importe             
-S-2                  700 MDX              1                    51.0                 51.0                
-Sub-Total: 51.00
-ITBIS 18%: 9.18
-Total: 60.18
+S-3                  Intel amd            2                    21.0                 42.0                
+Sub-Total: 42.00
+ITBIS 18%: 7.56
+Total: 49.56
 --------------------------------------------------------------------------------------
 Gracias por preferirnos, recuerde que no aceptamos devoluciones

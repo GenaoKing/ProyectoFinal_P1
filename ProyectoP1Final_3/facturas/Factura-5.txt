@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------
-Cliente: diana                                     F-2                                               
+Cliente: diana                                     F-5                                               
 Cedula: 4029535                                    Fecha: 7/12/2020                                  
 Telefono: 809554232                                Vendedor: santiago                                
 Direccion: su casa                                 Vence: Pago al contado                            

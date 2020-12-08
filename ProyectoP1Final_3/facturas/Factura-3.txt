@@ -1,14 +1,13 @@
 --------------------------------------------------------------------------------------
-Cliente: Diana                                     F-3                                               
-Cedula: 033                                        Fecha: 7/12/2020                                  
-Telefono: 849                                      Vendedor: Xavier                                  
-Direccion: jacagua                                 Vence: Pago al contado                            
+Cliente: diana                                     F-3                                               
+Cedula: 4029535                                    Fecha: 7/12/2020                                  
+Telefono: 809554232                                Vendedor: santiago                                
+Direccion: su casa                                 Vence: Pago al contado                            
 --------------------------------------------------------------------------------------
 Codigo               Articulo             Cantidad             Precio               Importe             
-S-4                  mvasdf ujfgsd        3                    4.0                  12.0                
-Sub-Total: 12.00
-
-ITBIS 18%: 2.16
-Total: 14.16
+S-1                  probando prueba      6                    3.0                  18.0                
+Sub-Total: 18.00
+ITBIS 18%: 3.24
+Total: 21.24
 --------------------------------------------------------------------------------------
 Gracias por preferirnos, recuerde que no aceptamos devoluciones
