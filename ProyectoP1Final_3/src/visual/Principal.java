@@ -374,6 +374,15 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_17.setBackground(UIManager.getColor("Button.focus"));
 		mnNewMenu_9.add(mntmNewMenuItem_17);
 		
+		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Listado Ordenes De Compra");
+		mntmNewMenuItem_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListadoPedidosYa a = new ListadoPedidosYa();
+				a.setVisible(true);
+			}
+		});
+		mnNewMenu_9.add(mntmNewMenuItem_18);
+		
 		mnOpinion = new JMenu("Opini\u00F3n");
 		mnOpinion.setIcon(new ImageIcon(Principal.class.getResource("/iconos/Notepad-Bloc-notes-2-icon.png")));
 		mnOpinion.setFont(new Font("Segoe UI", Font.PLAIN, 24));

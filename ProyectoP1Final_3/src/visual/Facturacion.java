@@ -69,7 +69,6 @@ public class Facturacion extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static JTable table;
-	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnAgregar;
 	private static JButton btnCredito;
@@ -320,14 +319,14 @@ public class Facturacion extends JDialog {
 						if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
 							btnListarComponentes.setEnabled(true);
 							btnEliminar.setEnabled(true);
-							btnModificar.setEnabled(false);
+						
 							componente = null;
 							combo = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
-							cantidad = Integer.parseInt((String)modelo.getValueAt(modelrow, 2));
+							cantidad = (int)modelo.getValueAt(modelrow, 2);
 						}else {
 							btnListarComponentes.setEnabled(false);
 							btnEliminar.setEnabled(true);
-							btnModificar.setEnabled(true);
+						
 							componente = Prodacom.getInstance().buscarComponente((String)modelo.getValueAt(modelrow, 0));
 							
 							cantidad = (int)modelo.getValueAt(seleccion, 2);
@@ -337,7 +336,7 @@ public class Facturacion extends JDialog {
 					}else{	
 						btnListarComponentes.setEnabled(false);
 						btnEliminar.setEnabled(false);
-						btnModificar.setEnabled(false);
+						
 						}
 				}
 			});
@@ -361,7 +360,7 @@ public class Facturacion extends JDialog {
 			}
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ListadoComponentes a = new ListadoComponentes(null,0);
+					ListadoComponentes a = new ListadoComponentes(null,5);
 					a.setVisible(true);
 				}
 			});
@@ -371,20 +370,7 @@ public class Facturacion extends JDialog {
 			btnAgregar.setBackground(new Color(50, 205, 50));
 			btnAgregar.setBounds(385, 13, 271, 124);
 			panel_3.add(btnAgregar);
-			
-			btnModificar = new JButton("Modificar");
-			btnModificar.setEnabled(false);
-			if(auxiliar!=null) {
-				btnModificar.setVisible(false);
-			}else {
-				btnModificar.setVisible(true);
-			}
-			btnModificar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
-			btnModificar.setBackground(new Color(184, 134, 11));
-			btnModificar.setForeground(Color.BLACK);
-			btnModificar.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnModificarIcono.png")));
-			btnModificar.setBounds(12, 14, 158, 52);
-			panel_3.add(btnModificar);
+		
 			
 			btnEliminar = new JButton("Eliminar");
 			if(auxiliar!=null) {
@@ -404,7 +390,6 @@ public class Facturacion extends JDialog {
 					}
 					modelo.removeRow(seleccion);
 					btnEliminar.setEnabled(false);
-					btnModificar.setEnabled(false);
 					botones();
 					CargarTotal();
 					seleccion = -1;
@@ -416,7 +401,7 @@ public class Facturacion extends JDialog {
 			btnEliminar.setForeground(Color.BLACK);
 			btnEliminar.setBackground(new Color(128, 0, 0));
 			btnEliminar.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));
-			btnEliminar.setBounds(198, 15, 158, 52);
+			btnEliminar.setBounds(12, 15, 344, 52);
 			panel_3.add(btnEliminar);
 			
 			btnListarComponentes = new JButton("Listar Componentes Combo");
@@ -427,12 +412,13 @@ public class Facturacion extends JDialog {
 			}
 			btnListarComponentes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					ListadoComponentes a = new ListadoComponentes(combo, 0);
+					a.setVisible(true);
 					
 				}
 			});
 			btnListarComponentes.setEnabled(false);
-			btnListarComponentes.setBackground(new Color(0, 128, 128));
+			btnListarComponentes.setBackground(Color.WHITE);
 			btnListarComponentes.setIcon(new ImageIcon(Facturacion.class.getResource("/iconos/btnListarComponentes.png")));
 			btnListarComponentes.setForeground(new Color(0, 128, 0));
 			btnListarComponentes.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 18));

@@ -21,6 +21,7 @@ import logico.Prodacom;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
@@ -428,9 +429,9 @@ public class RegCombo extends JDialog {
 				registrarButton.setEnabled(false);
 				registrarButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						if(!txtNombre.getText().isEmpty()) {
 						Combo aux  =  new Combo(txtNombre.getText(), txtCodigo.getText());
-					
+						
 						for(Componente c : agregados) {
 							aux.insertarcomponentes(c);
 						}
@@ -439,9 +440,12 @@ public class RegCombo extends JDialog {
 						registrarButton.setEnabled(false);
 						//saber = new int[4];
 						contador  =0;
+						JOptionPane.showMessageDialog(null, "Se ha registrado correctamente el combo.");
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre al combo","Error",JOptionPane.ERROR_MESSAGE);
 					}
-
-				
+					}
 				});
 				registrarButton.setActionCommand("OK");
 				buttonPane.add(registrarButton);
