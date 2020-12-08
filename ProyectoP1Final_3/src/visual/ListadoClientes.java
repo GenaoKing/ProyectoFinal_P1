@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +50,7 @@ public class ListadoClientes extends JDialog {
 	private int boton = 1;
 	public static int cantidad=0;
 	private int mode = -1;
+	private JButton btnPagar;
 	/**
 	 * Launch the application.
 	 */
@@ -143,7 +145,7 @@ public class ListadoClientes extends JDialog {
 					panel_1.add(scrollPane, BorderLayout.CENTER);
 					{
 						modelo = new DefaultTableModel();
-						String[] columns = {"Cedula","Nombre","Telefono","Direccion"}; 
+						String[] columns = {"Cedula","Nombre","Telefono","Direccion","Deuda"}; 
 						modelo.setColumnIdentifiers(columns);
 						table = new JTable();
 						table.addMouseListener(new MouseAdapter() {
@@ -155,16 +157,19 @@ public class ListadoClientes extends JDialog {
 								if(seleccion!=-1){
 									btnSeleccionar.setEnabled(true);
 									btnCrear.setEnabled(false);
+									btnPagar.setEnabled(true);
 									aux = Prodacom.getInstance().buscarCliente((String)modelo.getValueAt(modelrow, 0));
 									
 									
 								}else{	
 									btnSeleccionar.setEnabled(false);
+									btnPagar.setEnabled(false);
 									btnCrear.setEnabled(true);
 									}
 								}else {
 									btnSeleccionar.setEnabled(false);
 									btnCrear.setEnabled(false);
+									btnPagar.setEnabled(false);
 								}
 							}
 						});
@@ -185,9 +190,11 @@ public class ListadoClientes extends JDialog {
 			{
 				btnCrear = new JButton("Nuevo Cliente");
 				if(mode==0) {
-					btnCrear.setEnabled(true);
+					btnCrear.setVisible(true);
+					btnPagar.setVisible(false);
 				}else {
 					btnCrear.setEnabled(false);
+					btnPagar.setVisible(true);
 				}
 				btnCrear.setIcon(new ImageIcon(ListadoClientes.class.getResource("/iconos/name.png")));
 				btnCrear.setBackground(UIManager.getColor("Button.focus"));
@@ -200,6 +207,23 @@ public class ListadoClientes extends JDialog {
 						
 					}
 				});
+				{
+					btnPagar = new JButton("Pagar Deuda");
+					btnPagar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							int opcion = JOptionPane.showConfirmDialog(null, "Seguro que desea realizar el pago total de sus facturas");
+							if(opcion==JOptionPane.OK_OPTION) {
+								Prodacom.getInstance().PagarDeudaCliente(aux);
+								JOptionPane.showMessageDialog(null, "Pago realizado");
+								CargarTabla();
+							}else {
+								CargarTabla();
+							}
+							
+						}
+					});
+					buttonPane.add(btnPagar);
+				}
 				buttonPane.add(btnCrear);
 			}
 			{
@@ -245,6 +269,7 @@ public class ListadoClientes extends JDialog {
 			fila[1]=c.getNombre();
 			fila[2]=c.getTelefono();
 			fila[3]=c.getDireccion();
+			fila[4]=c.getCredito()-Prodacom.getInstance().CreditCliente(c);
 			modelo.addRow(fila);
 		}
 		

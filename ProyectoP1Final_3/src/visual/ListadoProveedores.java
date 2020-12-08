@@ -33,6 +33,7 @@ import javax.swing.RowFilter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -53,6 +54,7 @@ public class ListadoProveedores extends JDialog {
 	private JButton informacionButton;
 	private JTextField txtFiltro;
 	private Proveedor p  = null; 
+	private JButton btnPagar;
 
 	/**
 	 * Launch the application.
@@ -103,11 +105,12 @@ public class ListadoProveedores extends JDialog {
 							if(seleccion!=-1) {
 								
 								informacionButton.setEnabled(true);
-								
+								btnPagar.setEnabled(true);
 								p = Prodacom.getInstance().buscarProveedor((String)modelo.getValueAt(modelrow, 0));
 								
 							}else {
 								informacionButton.setEnabled(false);
+								btnPagar.setEnabled(false);
 								
 							}
 						}
@@ -167,6 +170,19 @@ public class ListadoProveedores extends JDialog {
 		
 					}
 				});
+				{
+					btnPagar = new JButton("Pagar Deuda");
+					btnPagar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							int opcion = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar el pago a este proveedor: "+p.getNombre());
+							if(opcion==JOptionPane.OK_OPTION) {
+								Prodacom.getInstance().PagarDeudaProveedor(p);
+							}
+						}
+					});
+					btnPagar.setEnabled(false);
+					buttonPane.add(btnPagar);
+				}
 				informacionButton.setEnabled(false);
 				informacionButton.setActionCommand("OK");
 				buttonPane.add(informacionButton);

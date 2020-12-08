@@ -2,9 +2,11 @@ package logico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ComboBoxModel;
 
+import visual.EstadoCuenta;
 import visual.Principal;
 
 
@@ -18,6 +20,15 @@ public class Prodacom implements Serializable{
 	private int cod_combos = 1;
 	private int cod_facturas = 1;
 	private int cod_OC = 1;
+	private int cod_mov = 1;
+	public int getCod_mov() {
+		return cod_mov;
+	}
+
+	public void setCod_mov(int cod_mov) {
+		this.cod_mov = cod_mov;
+	}
+
 	private Persona user= null;
 	
 	
@@ -28,6 +39,7 @@ public class Prodacom implements Serializable{
 	private ArrayList<Persona>personas;
 	private ArrayList<Proveedor>proveedores;
 	private ArrayList<OrdenCompra>ordenes;
+	private ArrayList<Movimientos>movimientos;
 	public static Prodacom prodacom = null;
 	
 	private int totDisco = 0;
@@ -40,6 +52,16 @@ public class Prodacom implements Serializable{
 	private int excelente [] = new int[3];
 	private ArrayList<Integer>malx;
 	
+	private double balance = 0;
+	
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
 	private Prodacom() {
 		super();
 		this.combos = new ArrayList<Combo>();
@@ -48,8 +70,18 @@ public class Prodacom implements Serializable{
 		this.personas = new ArrayList<Persona>();
 		this.proveedores = new ArrayList<Proveedor>();
 		this.ordenes = new ArrayList<OrdenCompra>();
+		this.movimientos = new ArrayList<Movimientos>();
 	}
 	
+	public ArrayList<Movimientos> getMovimientos() {
+		return movimientos;
+	}
+
+	public void insertar(Movimientos movimiento) {
+		this.movimientos.add(movimiento);
+		setCod_mov(getCod_mov()+1);
+	}
+
 	public int getCod_OC() {
 		return cod_OC;
 	}
@@ -171,6 +203,9 @@ public class Prodacom implements Serializable{
 		this.facturas.add(factura); 
 		setCod_facturas(getCod_facturas()+1);
 		Principal.cargargraficos();
+		if(!factura.isEstado()) {
+			setBalance(getBalance()+factura.calcualBenf());
+		}
 	}
 
 	public ArrayList<Persona> getPersonas() {
@@ -521,5 +556,55 @@ public class Prodacom implements Serializable{
 		return res;
 	}
 	
+	public void Deposito(double monto) {
+		setBalance(getBalance()+monto);
+		Movimientos m = new Movimientos("Deposito", "D-"+getCod_mov(), "Deposito de efectivo a caja", new Date(), monto, getUser().getNombre(), Prodacom.getInstance().balance);
+		movimientos.add(m);
+		setCod_mov(getCod_mov()+1);
+		EstadoCuenta.CargarTabla();
+	}
+	
+	public boolean Retiro(double monto) {
+		boolean res = false;
+		if(monto<=getBalance()) {
+			setBalance(getBalance()-monto);
+			res = true;
+			Movimientos m = new Movimientos("Retiro", "R-"+getCod_mov(), "Retiro de efectivo desde la caja", new Date(), monto, getUser().getNombre(), Prodacom.getInstance().balance);
+			movimientos.add(m);
+			setCod_mov(getCod_mov()+1);
+			EstadoCuenta.CargarTabla();
+		}
+		
+		return res;
+	}
+
+	public void PagarDeudaCliente(Cliente aux) {
+		double total=0;
+		ArrayList<String>s=new ArrayList<String>();
+		for(Factura f : facturas) {
+			if(f.getCliente().equals(aux) && f.isEstado()) {
+				s.add(f.getCod());
+				f.setEstado(false);
+				total+=f.getTotal();
+			}
+		}
+		setBalance(getBalance()+total);
+		Movimientos m = new Movimientos("Deposito", "D-"+getCod_mov(), "Facturas: "+s, new Date(), total, getUser().getNombre(), Prodacom.getInstance().balance);
+		movimientos.add(m);
+		setCod_mov(getCod_mov()+1);
+		EstadoCuenta.CargarTabla();
+	}
+
+	public void PagarDeudaProveedor(Proveedor p) {
+		double total=0;
+		ArrayList<String>s=new ArrayList<String>();
+		for(OrdenCompra o: ordenes) {
+			if(o.getProveedor().equals(p)) {
+				total+=o.getTotal();
+			}
+		}
+		
+	}
+
 	
 }

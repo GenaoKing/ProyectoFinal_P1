@@ -12,6 +12,7 @@ public class OrdenCompra {
 	private float total;
 	private Administrativo admin;
 	
+	
 	public OrdenCompra(String codigo, Date fecha, Componente componente, Proveedor proveedor, int cantidad, float total,
 			Administrativo admin) {
 		super();

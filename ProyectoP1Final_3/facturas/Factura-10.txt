@@ -1,0 +1,13 @@
+--------------------------------------------------------------------------------------
+Cliente: diana                                     F-10                                              
+Cedula: 4029535                                    Fecha: 8/12/2020                                  
+Telefono: 809554232                                Vendedor: santiago                                
+Direccion: su casa                                 Vence: Pago al contado                            
+--------------------------------------------------------------------------------------
+Codigo               Articulo             Cantidad             Precio               Importe             
+C-2                  prueba               1                    64.8                 64.8                
+Sub-Total: 64.80
+ITBIS 18%: 11.66
+Total: 76.46
+--------------------------------------------------------------------------------------
+Gracias por preferirnos, recuerde que no aceptamos devoluciones
